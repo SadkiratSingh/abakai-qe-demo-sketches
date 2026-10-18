@@ -35,7 +35,6 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <a href="line-overview.html">Line</a>
 <a href="rca-packet.html">Investigations</a>
 <a href="containment.html">Containment</a>
-<a href="8d-draft.html">8D reports</a>
 <a class="on" href="manager-overview.html">Overview</a>
 <a href="failure-library.html">Failure Library</a>
 </nav>
@@ -52,17 +51,17 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 </div>
 
 <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px" aria-label="Key figures">
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Open investigations</div><div class="mono" style="font-size: 32px; font-weight: 500">5</div><div style="font-size: 13px; color: #5B6169">6 8D reports · 1 opened this week</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Open investigations</div><div class="mono" style="font-size: 32px; font-weight: 500">5</div><div style="font-size: 13px; color: #5B6169">1 opened this week</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Median time to root cause</div><div class="mono" style="font-size: 32px; font-weight: 500">3.2 h</div><div style="font-size: 13px; color: #5B6169">Baseline before rollout: [your figure]</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Repeat root causes</div><div class="mono" style="font-size: 32px; font-weight: 500">3</div><div style="font-size: 13px; color: #5B6169">Root causes seen in 2+ 8D reports</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0; background: #FFF8F7"><div class="eyebrow" style="color: #9B1C12">Overdue actions</div><div class="mono" style="font-size: 32px; font-weight: 500; color: #9B1C12">2</div><div style="font-size: 13px; color: #7E160E; font-weight: 600">8D-0139-A and 8D-0135-A</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Repeat root causes</div><div class="mono" style="font-size: 32px; font-weight: 500">3</div><div style="font-size: 13px; color: #5B6169">Root causes seen in 2+ investigations</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0; background: #FFF8F7"><div class="eyebrow" style="color: #9B1C12">Overdue actions</div><div class="mono" style="font-size: 32px; font-weight: 500; color: #9B1C12">2</div><div style="font-size: 13px; color: #7E160E; font-weight: 600">INV-0139 and INV-0135</div></div>
 </section>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
 <section class="card" style="flex: 1 1 420px; min-width: 0; padding: 24px; display: flex; flex-direction: column; gap: 16px" aria-label="Recurring root causes">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Repeat root causes</h2>
-<div style="font-size: 14px; color: #5B6169">8D reports per confirmed root cause</div>
+<div style="font-size: 14px; color: #5B6169">Investigations per confirmed root cause</div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 14px">
 
@@ -106,76 +105,65 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 </div>
 
 <section class="card" style="overflow: hidden" aria-label="Open investigations">
-<div style="padding: 20px 24px 8px; display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Open investigations</h2><div style="font-size: 14px; color: #5B6169">One investigation per batch excursion, one 8D report per defect.</div></div>
+<div style="padding: 20px 24px 8px; display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Open investigations</h2><div style="font-size: 14px; color: #5B6169">One investigation per batch excursion, with the recommended report.</div></div>
 <div style="overflow-x: auto">
 <table>
-<thead><tr><th>Investigation · batch</th><th>8D report</th><th>Defect</th><th>Product · line</th><th>Owner</th><th>Age</th><th>Stage</th><th>Root cause</th></tr></thead>
+<thead><tr><th>Investigation · batch</th><th>Defects</th><th>Product · line</th><th>Owner</th><th>Age</th><th>Stage</th><th>Linked root causes</th><th>Recommended report</th></tr></thead>
 <tbody>
 
 <tr>
-<td class="mono"><a href="rca-packet.html">INV-0142</a> · stg-B0003</td>
-<td class="mono"><a href="8d-draft.html">8D-0142-A</a></td>
-<td>Solder bridging</td>
-<td>CTRL-BRD-A · Line 2</td>
-<td>Priya S.</td>
-<td class="mono">6 h</td>
-<td><span class="chip info">D4 root cause</span></td>
-<td>High peak reflow temperature</td>
+<td class="mono" style="white-space: nowrap"><a href="rca-packet.html">INV-0142</a> · stg-B0003</td>
+<td>Solder bridging, open circuit</td>
+<td style="white-space: nowrap">CTRL-BRD-A · Line 2</td>
+<td style="white-space: nowrap">Priya S.</td>
+<td class="mono" style="white-space: nowrap">6 h</td>
+<td><span class="chip info">Root cause</span></td>
+<td>High peak reflow temperature; high paste viscosity</td>
+<td style="white-space: nowrap"><span class="chip crit">8D</span></td>
 </tr>
 
 <tr>
-<td class="mono"></td>
-<td class="mono"><a href="8d-draft-open-circuit.html">8D-0142-B</a></td>
-<td>Open circuit</td>
-<td>CTRL-BRD-A · Line 2</td>
-<td>Priya S.</td>
-<td class="mono">6 h</td>
-<td><span class="chip info">D4 root cause</span></td>
-<td>High paste viscosity</td>
-</tr>
-
-<tr>
-<td class="mono"><a href="rca-packet.html">INV-0139</a> · stg-C0211</td>
-<td class="mono"><a href="8d-draft.html">8D-0139-A</a></td>
+<td class="mono" style="white-space: nowrap"><a href="rca-packet.html">INV-0139</a> · stg-C0211</td>
 <td>Solder bridging</td>
-<td>PWR-BRD-C · Line 1</td>
-<td>Marco L.</td>
-<td class="mono">4 d</td>
-<td><span class="chip crit">D5 action overdue</span></td>
+<td style="white-space: nowrap">PWR-BRD-C · Line 1</td>
+<td style="white-space: nowrap">Marco L.</td>
+<td class="mono" style="white-space: nowrap">4 d</td>
+<td><span class="chip crit">Action overdue</span></td>
 <td>High stencil thickness</td>
+<td style="white-space: nowrap"><span class="chip crit">8D</span></td>
 </tr>
 
 <tr>
-<td class="mono"><a href="rca-packet.html">INV-0137</a> · stg-A0185</td>
-<td class="mono"><a href="8d-draft.html">8D-0137-A</a></td>
+<td class="mono" style="white-space: nowrap"><a href="rca-packet.html">INV-0137</a> · stg-A0185</td>
 <td>Solder bridging</td>
-<td>CTRL-BRD-A · Line 2</td>
-<td>Wei C.</td>
-<td class="mono">6 d</td>
-<td><span class="chip warn">D6 verification</span></td>
+<td style="white-space: nowrap">CTRL-BRD-A · Line 2</td>
+<td style="white-space: nowrap">Wei C.</td>
+<td class="mono" style="white-space: nowrap">6 d</td>
+<td><span class="chip warn">Verification</span></td>
 <td>Low squeegee speed</td>
+<td style="white-space: nowrap"><span class="chip muted">Internal corrective action</span></td>
 </tr>
 
 <tr>
-<td class="mono"><a href="rca-packet.html">INV-0135</a> · stg-I0092</td>
-<td class="mono"><a href="8d-draft.html">8D-0135-A</a></td>
+<td class="mono" style="white-space: nowrap"><a href="rca-packet.html">INV-0135</a> · stg-I0092</td>
 <td>Solder bridging</td>
-<td>IO-BRD-B · Line 2</td>
-<td>Wei C.</td>
-<td class="mono">9 d</td>
-<td><span class="chip crit">D5 action overdue</span></td>
+<td style="white-space: nowrap">IO-BRD-B · Line 2</td>
+<td style="white-space: nowrap">Wei C.</td>
+<td class="mono" style="white-space: nowrap">9 d</td>
+<td><span class="chip crit">Action overdue</span></td>
 <td>High peak reflow temperature</td>
+<td style="white-space: nowrap"><span class="chip crit">8D</span></td>
 </tr>
 
 <tr>
-<td class="mono"><a href="rca-packet.html">INV-0131</a> · stg-C0198</td>
-<td class="mono"><a href="8d-draft-open-circuit.html">8D-0131-A</a></td>
+<td class="mono" style="white-space: nowrap"><a href="rca-packet.html">INV-0131</a> · stg-C0198</td>
 <td>Open circuit</td>
-<td>PWR-BRD-C · Line 1</td>
-<td>Marco L.</td>
-<td class="mono">12 d</td>
-<td><span class="chip ok">D7 prevention</span></td>
+<td style="white-space: nowrap">PWR-BRD-C · Line 1</td>
+<td style="white-space: nowrap">Marco L.</td>
+<td class="mono" style="white-space: nowrap">12 d</td>
+<td><span class="chip ok">Prevention</span></td>
 <td>High paste viscosity</td>
+<td style="white-space: nowrap"><span class="chip muted">Internal corrective action</span></td>
 </tr>
 
 </tbody>

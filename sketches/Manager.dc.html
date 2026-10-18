@@ -37,7 +37,6 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <a href="Main.dc.html">Line</a>
 <a href="RcaPacket.dc.html">Investigations</a>
 <a href="Containment.dc.html">Containment</a>
-<a href="Report8D.dc.html">8D reports</a>
 <a class="on" href="Manager.dc.html">Overview</a>
 <a href="Library.dc.html">Failure Library</a>
 </nav>
@@ -54,17 +53,17 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 </div>
 
 <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px" aria-label="Key figures">
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Open investigations</div><div class="mono" style="font-size: 32px; font-weight: 500">5</div><div style="font-size: 13px; color: #5B6169">6 8D reports · 1 opened this week</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Open investigations</div><div class="mono" style="font-size: 32px; font-weight: 500">5</div><div style="font-size: 13px; color: #5B6169">1 opened this week</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Median time to root cause</div><div class="mono" style="font-size: 32px; font-weight: 500">3.2 h</div><div style="font-size: 13px; color: #5B6169">Baseline before rollout: [your figure]</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Repeat root causes</div><div class="mono" style="font-size: 32px; font-weight: 500">3</div><div style="font-size: 13px; color: #5B6169">Root causes seen in 2+ 8D reports</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0; background: #FFF8F7"><div class="eyebrow" style="color: #9B1C12">Overdue actions</div><div class="mono" style="font-size: 32px; font-weight: 500; color: #9B1C12">2</div><div style="font-size: 13px; color: #7E160E; font-weight: 600">8D-0139-A and 8D-0135-A</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Repeat root causes</div><div class="mono" style="font-size: 32px; font-weight: 500">3</div><div style="font-size: 13px; color: #5B6169">Root causes seen in 2+ investigations</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0; background: #FFF8F7"><div class="eyebrow" style="color: #9B1C12">Overdue actions</div><div class="mono" style="font-size: 32px; font-weight: 500; color: #9B1C12">2</div><div style="font-size: 13px; color: #7E160E; font-weight: 600">INV-0139 and INV-0135</div></div>
 </section>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
 <section class="card" style="flex: 1 1 420px; min-width: 0; padding: 24px; display: flex; flex-direction: column; gap: 16px" aria-label="Recurring root causes">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Repeat root causes</h2>
-<div style="font-size: 14px; color: #5B6169">8D reports per confirmed root cause</div>
+<div style="font-size: 14px; color: #5B6169">Investigations per confirmed root cause</div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 14px">
 <sc-for list="{{causes}}" as="c" hint-placeholder-count="5">
@@ -88,21 +87,21 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 </div>
 
 <section class="card" style="overflow: hidden" aria-label="Open investigations">
-<div style="padding: 20px 24px 8px; display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Open investigations</h2><div style="font-size: 14px; color: #5B6169">One investigation per batch excursion, one 8D report per defect.</div></div>
+<div style="padding: 20px 24px 8px; display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Open investigations</h2><div style="font-size: 14px; color: #5B6169">One investigation per batch excursion, with the recommended report.</div></div>
 <div style="overflow-x: auto">
 <table>
-<thead><tr><th>Investigation · batch</th><th>8D report</th><th>Defect</th><th>Product · line</th><th>Owner</th><th>Age</th><th>Stage</th><th>Root cause</th></tr></thead>
+<thead><tr><th>Investigation · batch</th><th>Defects</th><th>Product · line</th><th>Owner</th><th>Age</th><th>Stage</th><th>Linked root causes</th><th>Recommended report</th></tr></thead>
 <tbody>
-<sc-for list="{{invs}}" as="r" hint-placeholder-count="6">
+<sc-for list="{{invs}}" as="r" hint-placeholder-count="5">
 <tr>
-<td class="mono"><sc-if value="{{r.first}}" hint-placeholder-val="{{ true }}"><a href="RcaPacket.dc.html">{{r.id}}</a> · {{r.batch}}</sc-if></td>
-<td class="mono"><a href="{{r.href}}">{{r.eightD}}</a></td>
-<td>{{r.defect}}</td>
-<td>{{r.prod}}</td>
-<td>{{r.owner}}</td>
-<td class="mono">{{r.age}}</td>
+<td class="mono" style="white-space: nowrap"><a href="RcaPacket.dc.html">{{r.id}}</a> · {{r.batch}}</td>
+<td>{{r.defects}}</td>
+<td style="white-space: nowrap">{{r.prod}}</td>
+<td style="white-space: nowrap">{{r.owner}}</td>
+<td class="mono" style="white-space: nowrap">{{r.age}}</td>
 <td><span class="{{r.cls}}">{{r.stage}}</span></td>
-<td>{{r.cause}}</td>
+<td>{{r.causes}}</td>
+<td style="white-space: nowrap"><span class="{{r.repCls}}">{{r.report}}</span></td>
 </tr>
 </sc-for>
 </tbody>
@@ -118,14 +117,13 @@ class Component extends DCLogic {
     const raw = [['High peak reflow temperature', 5], ['High paste viscosity', 4], ['High stencil thickness', 3], ['Low squeegee speed', 2], ['High ambient RH', 1]];
     const causes = raw.map((c, i) => ({ name: c[0], n: c[1], w: (c[1] / 5 * 100) + '%', color: i === 0 ? '#1A4F9C' : '#8FA9D3' }));
     const inv = [
-      ['INV-0142', 'stg-B0003', true, '8D-0142-A', 'Report8D.dc.html', 'Solder bridging', 'CTRL-BRD-A · Line 2', 'Priya S.', '6 h', 'D4 root cause', 'High peak reflow temperature', 'chip info'],
-      ['INV-0142', 'stg-B0003', false, '8D-0142-B', 'Report8DOpen.dc.html', 'Open circuit', 'CTRL-BRD-A · Line 2', 'Priya S.', '6 h', 'D4 root cause', 'High paste viscosity', 'chip info'],
-      ['INV-0139', 'stg-C0211', true, '8D-0139-A', 'Report8D.dc.html', 'Solder bridging', 'PWR-BRD-C · Line 1', 'Marco L.', '4 d', 'D5 action overdue', 'High stencil thickness', 'chip crit'],
-      ['INV-0137', 'stg-A0185', true, '8D-0137-A', 'Report8D.dc.html', 'Solder bridging', 'CTRL-BRD-A · Line 2', 'Wei C.', '6 d', 'D6 verification', 'Low squeegee speed', 'chip warn'],
-      ['INV-0135', 'stg-I0092', true, '8D-0135-A', 'Report8D.dc.html', 'Solder bridging', 'IO-BRD-B · Line 2', 'Wei C.', '9 d', 'D5 action overdue', 'High peak reflow temperature', 'chip crit'],
-      ['INV-0131', 'stg-C0198', true, '8D-0131-A', 'Report8DOpen.dc.html', 'Open circuit', 'PWR-BRD-C · Line 1', 'Marco L.', '12 d', 'D7 prevention', 'High paste viscosity', 'chip ok']
+      ['INV-0142', 'stg-B0003', 'Solder bridging, open circuit', 'CTRL-BRD-A · Line 2', 'Priya S.', '6 h', 'Root cause', 'chip info', 'High peak reflow temperature; high paste viscosity', '8D'],
+      ['INV-0139', 'stg-C0211', 'Solder bridging', 'PWR-BRD-C · Line 1', 'Marco L.', '4 d', 'Action overdue', 'chip crit', 'High stencil thickness', '8D'],
+      ['INV-0137', 'stg-A0185', 'Solder bridging', 'CTRL-BRD-A · Line 2', 'Wei C.', '6 d', 'Verification', 'chip warn', 'Low squeegee speed', 'Internal corrective action'],
+      ['INV-0135', 'stg-I0092', 'Solder bridging', 'IO-BRD-B · Line 2', 'Wei C.', '9 d', 'Action overdue', 'chip crit', 'High peak reflow temperature', '8D'],
+      ['INV-0131', 'stg-C0198', 'Open circuit', 'PWR-BRD-C · Line 1', 'Marco L.', '12 d', 'Prevention', 'chip ok', 'High paste viscosity', 'Internal corrective action']
     ];
-    const invs = inv.map(r => ({ id: r[0], batch: r[1], first: r[2], notFirst: !r[2], eightD: r[3], href: r[4], defect: r[5], prod: r[6], owner: r[7], age: r[8], stage: r[9], cause: r[10], cls: r[11], rowStyle: r[2] ? 'border-top: 1px solid #E1E4E0' : '' }));
+    const invs = inv.map(r => ({ id: r[0], batch: r[1], defects: r[2], prod: r[3], owner: r[4], age: r[5], stage: r[6], cls: r[7], causes: r[8], report: r[9], repCls: r[9] === '8D' ? 'chip crit' : 'chip muted' }));
     return { causes, invs };
   }
 }

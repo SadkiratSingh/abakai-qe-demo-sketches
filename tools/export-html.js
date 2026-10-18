@@ -14,8 +14,6 @@ const NAMES = {
   'RcaPacket.dc.html': 'rca-packet.html',
   'Containment.dc.html': 'containment.html',
   'Board.dc.html': 'board-detail.html',
-  'Report8D.dc.html': '8d-draft.html',
-  'Report8DOpen.dc.html': '8d-draft-open-circuit.html',
   'Manager.dc.html': 'manager-overview.html',
   'Library.dc.html': 'failure-library.html',
 };
@@ -27,8 +25,6 @@ const PAGES = [
   { src: 'RcaPacket.dc.html', out: 'rca-packet-open-circuit.html', label: '2 · RCA packet: open circuit', desc: 'Same screen with the open circuit tab selected', state: { tab: 'open' } },
   { src: 'Containment.dc.html', out: 'containment.html', label: '3 · Containment', desc: 'Boards that passed inspection but were built out of spec' },
   { src: 'Board.dc.html', out: 'board-detail.html', label: '3a · Board detail', desc: 'One board: linked root cause, parameter fingerprint, disposition, history' },
-  { src: 'Report8D.dc.html', out: '8d-draft.html', label: '4a · 8D-0142-A: solder bridging', desc: 'D1–D8 for solder bridging, with the steps filled from the investigation marked' },
-  { src: 'Report8DOpen.dc.html', out: '8d-draft-open-circuit.html', label: '4b · 8D-0142-B: open circuit', desc: 'D1–D8 for open circuit, with the steps filled from the investigation marked' },
   { src: 'Manager.dc.html', out: 'manager-overview.html', label: '5 · Manager overview', desc: 'Open investigations, recurring root causes, overdue actions' },
   { src: 'Library.dc.html', out: 'failure-library.html', label: '6 · Failure Library: solder bridging', desc: 'Root cause → mechanism → defect, with specs and fixes' },
   { src: 'Library.dc.html', out: 'failure-library-open-circuit.html', label: '6 · Failure Library: open circuit', desc: 'Same screen with open circuit selected', state: { d: 'o' } },

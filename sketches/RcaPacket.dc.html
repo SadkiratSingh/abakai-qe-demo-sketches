@@ -59,7 +59,6 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <a href="Main.dc.html">Line</a>
 <a class="on" href="RcaPacket.dc.html">Investigations</a>
 <a href="Containment.dc.html">Containment</a>
-<a href="Report8D.dc.html">8D reports</a>
 <a href="Manager.dc.html">Overview</a>
 <a href="Library.dc.html">Failure Library</a>
 </nav>
@@ -73,9 +72,24 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <a class="btn" href="Containment.dc.html">View containment</a>
-<a class="btn primary" href="{{c.eightDHref}}">Open {{c.eightD}}</a>
 </div>
 </div>
+
+<section class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 16px 32px" aria-label="Recommended report">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px">
+<div class="eyebrow">Recommended report for INV-0142</div>
+<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span style="font-size: 22px; font-weight: 600">{{rec.report}}</span><span class="{{rec.cls}}">{{rec.summary}}</span></div>
+<div style="font-size: 14px; color: #5B6169; line-height: 1.5">{{rec.scope}}</div>
+</div>
+<ul style="flex: 2 1 480px; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<sc-for list="{{rec.triggers}}" as="t" hint-placeholder-count="3">
+<li style="display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #EEF0ED; font-size: 14px">
+<span class="{{t.cls}}" style="min-width: 64px; justify-content: center">{{t.state}}</span>
+<span><span style="font-weight: 600">{{t.label}}:</span> {{t.value}}</span>
+</li>
+</sc-for>
+</ul>
+</section>
 
 <div role="tablist" aria-label="Defect" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E1E4E0">
 <button role="tab" class="{{bridgeTabClass}}" aria-selected="{{isBridge}}" onClick="{{showBridge}}">Solder bridging · 47 boards</button>
@@ -261,7 +275,7 @@ class Component extends DCLogic {
     const outRow = (root, mech, status, reason) => ({ root, mech, status, reason, cls: 'chip warn' });
     const cases = {
       bridge: {
-        title: 'Solder bridging', defLower: 'solder bridging', batchLabel: 'stg-B0003 boards', atRisk: 112, eightD: '8D-0142-A', eightDHref: 'Report8D.dc.html',
+        title: 'Solder bridging', defLower: 'solder bridging', batchLabel: 'stg-B0003 boards', atRisk: 112,
         summary: T.summary('Peak reflow temperature', 'above USL', '02:00–02:40', 44, 47, 'solder bridging'),
         checkedLine: T.checked(8, 1),
         param: 'Peak reflow temperature (°C)', lsl: 245, usl: 255, window: '02:00–02:40',
@@ -288,7 +302,7 @@ class Component extends DCLogic {
         ]
       },
       open: {
-        title: 'Open circuit', defLower: 'open circuit', batchLabel: 'stg-B0003 boards', atRisk: 165, eightD: '8D-0142-B', eightDHref: 'Report8DOpen.dc.html',
+        title: 'Open circuit', defLower: 'open circuit', batchLabel: 'stg-B0003 boards', atRisk: 165,
         summary: T.summary('Paste viscosity', 'above USL', '03:40–04:30', 28, 31, 'open circuit'),
         checkedLine: T.checked(3, 2),
         param: 'Paste viscosity (Pa·s)', lsl: 180, usl: 220, window: '03:40–04:30',
@@ -316,6 +330,17 @@ class Component extends DCLogic {
         ]
       }
     };
+    // Report recommendation: one per investigation. 8D when any trigger is met, else internal corrective action.
+    const trig = (label, value, met) => ({ label, value, state: met ? 'Met' : 'Not met', cls: met ? 'chip crit' : 'chip muted', met });
+    const triggers = [
+      trig('Boards shipped', '8 at-risk boards shipped before containment', true),
+      trig('Customer complaint', 'none', false),
+      trig('Same root cause on line 2 in the last 90 days', 'High peak reflow temperature, INV-0135 (9 days ago)', true)
+    ];
+    const met = triggers.filter(t => t.met).length;
+    const rec = met > 0
+      ? { report: '8D', summary: met + ' of ' + triggers.length + ' triggers met', cls: 'chip crit', scope: 'Covers both defects in INV-0142, with a root cause and action section for each linked root cause.', triggers }
+      : { report: 'Internal corrective action', summary: 'No triggers met', cls: 'chip ok', scope: 'Record the root causes and actions in the quality system; no customer report needed.', triggers };
     const key = this.state.tab;
     const raw = cases[key];
     const linked = raw.linked.map((h, i) => {
@@ -327,6 +352,7 @@ class Component extends DCLogic {
     });
     const c = Object.assign({}, raw, { linked, ruledCount: raw.ruled.length });
     return {
+      rec,
       c,
       ch: this.chart(raw.vals, raw.lsl, raw.usl, raw.w0, raw.w1),
       isBridge: key === 'bridge', isOpen: key === 'open',
