@@ -51,8 +51,8 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <div style="display: flex; flex-direction: column; gap: 8px">
 <a href="RcaPacket.dc.html" style="font-size: 14px; text-decoration: none">← INV-0142 root cause analysis</a>
 <div class="eyebrow">Containment · stg-B0003</div>
-<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">274 boards passed inspection but were built out of spec</h1>
-<div style="font-size: 15px; color: #4A4F56">The other 2,208 boards in stg-B0003 were built in spec and can be released.</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">277 boards passed inspection but were built out of spec</h1>
+<div style="font-size: 15px; color: #4A4F56">The other 2,205 boards in stg-B0003 were built in spec and can be released.</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <button class="btn" type="button">Export list (CSV)</button>
@@ -61,10 +61,10 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </div>
 
 <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px" aria-label="Where the boards are">
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">In WIP</div><div class="mono" style="font-size: 32px; font-weight: 500">150</div><div style="font-size: 13px; color: #5B6169">Hold at next station</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">In WIP</div><div class="mono" style="font-size: 32px; font-weight: 500">153</div><div style="font-size: 13px; color: #5B6169">Hold at next station</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Finished goods</div><div class="mono" style="font-size: 32px; font-weight: 500">116</div><div style="font-size: 13px; color: #5B6169">Quarantine and re-inspect</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0; background: #FFF8F7"><div class="eyebrow" style="color: #9B1C12">Shipped</div><div class="mono" style="font-size: 32px; font-weight: 500; color: #9B1C12">8</div><div style="font-size: 13px; color: #7E160E; font-weight: 600">Customer notification needed</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">By root cause</div><div style="font-size: 14px; line-height: 1.6"><span style="font-weight: 600">112</span> · High peak reflow temperature · 02:00–02:40<br><span style="font-weight: 600">162</span> · High paste viscosity · 03:40–04:30<br><span style="color: #5B6169">No board has both</span></div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">By root cause</div><div style="font-size: 14px; line-height: 1.6"><span style="font-weight: 600">112</span> · High peak reflow temperature · 02:00–02:40<br><span style="font-weight: 600">162</span> · High paste viscosity · 03:40–04:30<br><span style="font-weight: 600">3</span> · Low paste volume per aperture<br><span style="color: #5B6169">Each board counted once, under its first linked root cause</span></div></div>
 </section>
 
 <section class="card" style="overflow: hidden" aria-label="Boards at risk">
@@ -72,7 +72,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Boards at risk</h2>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Root cause
-<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>High peak reflow temperature</option><option>High paste viscosity</option></select>
+<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>High peak reflow temperature</option><option>High paste viscosity</option><option>Low paste volume per aperture</option></select>
 </label>
 <label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Location
 <select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>WIP</option><option>Finished goods</option><option>Shipped</option></select>
@@ -99,7 +99,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </table>
 </div>
 <div style="padding: 16px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; color: #5B6169">
-<span>Showing 10 of 274 boards · select a board to see why it was flagged</span>
+<span>Showing 10 of 277 boards · select a board to see why it was flagged</span>
 <div style="display: flex; gap: 8px"><button class="btn" type="button">Previous</button><button class="btn" type="button">Next</button></div>
 </div>
 </section>
@@ -119,7 +119,7 @@ class Component extends DCLogic {
       ['PCB-0006988', 'stg-B0003-P0468', '03:55', 'High paste viscosity', '241 Pa·s', '71%', 'WIP'],
       ['PCB-0007064', 'stg-B0003-P0487', '04:08', 'High paste viscosity', '244 Pa·s', '74%', 'WIP'],
       ['PCB-0007133', 'stg-B0003-P0504', '04:19', 'High paste viscosity', '246 Pa·s', '77%', 'WIP'],
-      ['PCB-0007190', 'stg-B0003-P0518', '04:28', 'High paste viscosity', '239 Pa·s', '60%', 'WIP']
+      ['PCB-0007402', 'stg-B0003-P0571', '05:12', 'Low paste volume per aperture', '0.034 mm³', '60%', 'WIP']
     ];
     const rows = data.map(d => ({
       id: d[0], panel: d[1], time: d[2], sig: d[3], meas: d[4], risk: d[5], loc: d[6],

@@ -252,6 +252,7 @@ class Component extends DCLogic {
       overlap: (x, n, dir, param) => `${x} of these ${n} boards were also ${low(dir)} on ${param}. Likely an effect of #1, not a separate root cause.`,
       chartNote: (param, mean, win, max) => `${param} averaged ${mean} outside ${win} and reached ${max} during it.`,
       contain: (n, win, insp, dir, param) => `${n} boards built ${win} passed ${insp} but were ${low(dir)} on ${param}.`,
+      containMore: (n, insp, dir, param) => `${n} more boards passed ${insp} but were ${low(dir)} on ${param}.`,
       failRate: (D, a, b, rr) => `${D} rate, out of spec vs in spec: ${a} vs ${b} (${rr}). Needs 2× or more.`,
       failCov: (d, k, K, pct) => `Boards with ${d} that were out of spec: ${k} of ${K} (${pct}). Needs 20% or more.`,
       inSpec: (range, where, spec) => `Measured ${range} on ${where} (spec ${spec}).`
@@ -287,14 +288,14 @@ class Component extends DCLogic {
         ]
       },
       open: {
-        title: 'Open circuit', defLower: 'open circuit', batchLabel: 'stg-B0003 boards', atRisk: 162,
+        title: 'Open circuit', defLower: 'open circuit', batchLabel: 'stg-B0003 boards', atRisk: 165,
         summary: T.summary('Paste viscosity', 'above USL', '03:40–04:30', 28, 31, 'open circuit'),
         checkedLine: T.checked(3, 2),
         param: 'Paste viscosity (Pa·s)', lsl: 180, usl: 220, window: '03:40–04:30',
         vals: [205, 207, 204, 208, 206, 203, 207, 205, 206, 204, 208, 206, 205, 207, 204, 206, 205, 238, 243, 240, 206, 204, 207, 205], w0: 17, w1: 19,
         chartLabel: 'Paste viscosity is above USL only during 03:40–04:30',
         chartNote: T.chartNote('Paste viscosity', '206 Pa·s', '03:40–04:30', '246 Pa·s'),
-        containNote: T.contain(162, '03:40–04:30', 'electrical test', 'Above USL', 'paste viscosity'),
+        containNote: T.contain(162, '03:40–04:30', 'electrical test', 'Above USL', 'paste viscosity') + ' ' + T.containMore(3, 'electrical test', 'Below LSL', 'paste volume per aperture'),
         linked: [
           { id: 'o1', root: 'High paste viscosity', mech: 'Poor paste transfer', equip: 'Solder paste', status: T.status('Above USL', 190),
             cov: '28 of 31', covPct: '90%', rr: '116×', p: '< 0.001', expLabel: 'Above USL',
