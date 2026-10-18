@@ -18,7 +18,18 @@ Clickable screen sketches for a root cause analysis (RCA) demo aimed at quality 
 
 ## Opening the sketches
 
-The `.dc.html` files are Design Component artboards. They render inside the Claude Design canvas, which supplies `support.js`; opened directly in a browser they show unstyled template markup. The live canvas is the Claude artifact "RCA Studio – QE Screens".
+There are two copies of the screens:
+
+- **`sketches/`** is the source. The `.dc.html` files are Design Component artboards that render inside the Claude Design canvas, which supplies `support.js`; opened directly in a browser they show unstyled template markup. The live canvas is the Claude artifact "RCA Studio – QE Screens".
+- **`html/`** holds standalone static pages generated from the sketches. Open `html/index.html` in any browser to click through every screen, or import the pages into Figma with an HTML-import plugin such as html.to.design. Interactive states are exported as separate pages (for example `rca-packet-open-circuit.html`), and the tabs link between them.
+
+Edit `sketches/`, never `html/`. After changing the sketches, regenerate the pages:
+
+```
+cd tools
+npm install
+npm run export
+```
 
 ## Placeholders and assumptions
 

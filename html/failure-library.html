@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Failure Library: solder bridging · RCA Studio</title>
+<!-- Static export of sketches/Library.dc.html. Regenerate from the sketches; do not edit by hand. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'IBM Plex Sans',sans-serif;color:#16191D;background:#F4F5F3}
+a{color:#1A4F9C}a:hover{color:#123A73}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:24px;padding:8px 32px;background:#16191D;color:#fff}
+.brand{font-weight:600;font-size:17px;letter-spacing:-.01em;color:#fff}
+.nav{display:flex;flex-wrap:wrap;gap:4px}
+.nav a{color:#C9CDD2;text-decoration:none;font-size:14px;padding:12px 14px;border-radius:6px}
+.nav a:hover{color:#fff;background:#2A2F35}
+.nav a.on{color:#fff;background:#2A2F35}
+.wrap{max-width:1280px;margin:0 auto;padding:32px}
+.card{background:#fff;border:1px solid #E1E4E0;border-radius:10px}
+.mono{font-family:'IBM Plex Mono',monospace}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5B6169;font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.info{background:#E8EFFA;color:#1A4F9C}.muted{background:#EEF0ED;color:#4A4F56}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;text-decoration:none;border:1px solid #C9CDD2;background:#fff;color:#16191D;cursor:pointer;box-sizing:border-box}
+.btn.primary{background:#1A4F9C;border-color:#1A4F9C;color:#fff}
+.seg{min-height:44px;padding:0 18px;border:1px solid #C9CDD2;background:#fff;font:600 14px 'IBM Plex Sans',sans-serif;color:#4A4F56;cursor:pointer}
+.seg.on{background:#16191D;border-color:#16191D;color:#fff}
+.seg:first-child{border-radius:8px 0 0 8px}.seg:last-child{border-radius:0 8px 8px 0;margin-left:-1px}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: #F4F5F3">
+<header class="top">
+<div class="brand">RCA Studio</div>
+<nav class="nav" aria-label="Main">
+<a href="line-overview.html">Line</a>
+<a href="rca-packet.html">Investigations</a>
+<a href="containment.html">Containment</a>
+<a href="8d-draft.html">8D reports</a>
+<a href="manager-overview.html">Overview</a>
+<a class="on" href="failure-library.html">Failure Library</a>
+</nav>
+</header>
+<main class="wrap" style="display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px; max-width: 720px">
+<div class="eyebrow">Failure Library · Solder printing and reflow</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">What causes each defect, and how to fix it</h1>
+<div style="font-size: 15px; color: #4A4F56; line-height: 1.5">Your engineers' process knowledge, linked to your specs. Every investigation is checked against this library.</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+<div role="group" aria-label="Defect" style="display: flex">
+<a class="seg on" href="failure-library.html" style="display:inline-flex;align-items:center;text-decoration:none">Solder bridging</a>
+<a class="seg" href="failure-library-open-circuit.html" style="display:inline-flex;align-items:center;text-decoration:none">Open circuit</a>
+</div>
+<button type="button" class="btn primary">Add root cause</button>
+</div>
+</div>
+
+<div class="card" style="padding: 16px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 14px">
+<span style="padding: 6px 12px; border-radius: 6px; background: #F4F5F3; border: 1px solid #C9CDD2; font-weight: 600">Root cause</span>
+<span aria-hidden="true" style="color: #5B6169">→</span>
+<span style="padding: 6px 12px; border-radius: 6px; background: #E8EFFA; border: 1px solid #B7CBEA; color: #123A73; font-weight: 600">Mechanism</span>
+<span aria-hidden="true" style="color: #5B6169">→</span>
+<span style="padding: 6px 12px; border-radius: 6px; background: #FDECEA; border: 1px solid #F3C5C0; color: #7E160E; font-weight: 600">Solder bridging</span>
+<span style="margin-left: auto; color: #5B6169">8 root causes · last edited 15 Oct 2026 by Priya S.</span>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; align-items: start">
+
+<section class="card" style="overflow: hidden">
+<div style="padding: 16px 20px; background: #E8EFFA; border-bottom: 1px solid #B7CBEA; display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-size: 16px; font-weight: 600; color: #123A73">Aperture overfill</h2>
+<span class="mono" style="font-size: 13px; color: #123A73">5 causes</span>
+</div>
+<div style="display: flex; flex-direction: column">
+
+<div style="padding: 16px 20px; border-bottom: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start">
+<div style="font-weight: 600; font-size: 15px">High stencil thickness</div>
+<span class="chip info">Seen 3×</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
+<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec 100 ± 5 µm</span>
+<span>Stencil</span>
+</div>
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Use a thinner foil or step-down stencil.</div>
+</div>
+
+<div style="padding: 16px 20px; border-bottom: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start">
+<div style="font-weight: 600; font-size: 15px">Low aperture area ratio</div>
+<span class="chip muted">Not seen yet</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
+<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec ≥ 0.66</span>
+<span>Stencil</span>
+</div>
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Redesign the apertures.</div>
+</div>
+
+<div style="padding: 16px 20px; border-bottom: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start">
+<div style="font-weight: 600; font-size: 15px">High bead size of solder paste</div>
+<span class="chip info">Seen 1×</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
+<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec 4 ± 0.4 mm³</span>
+<span>Solder printer</span>
+</div>
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Reduce bead width and mass.</div>
+</div>
+
+<div style="padding: 16px 20px; border-bottom: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start">
+<div style="font-weight: 600; font-size: 15px">Low squeegee speed</div>
+<span class="chip info">Seen 2×</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
+<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec 70 ± 14 mm/s</span>
+<span>Solder printer</span>
+</div>
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Raise the speed into the window.</div>
+</div>
+
+<div style="padding: 16px 20px; border-bottom: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start">
+<div style="font-weight: 600; font-size: 15px">High paste volume per aperture</div>
+<span class="chip info">Seen 1×</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
+<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec 0.040 ± 0.004 mm³</span>
+<span>Solder printer</span>
+</div>
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Target the dominant upstream drivers.</div>
+</div>
+
+</div>
+</section>
+
+<section class="card" style="overflow: hidden">
+<div style="padding: 16px 20px; background: #E8EFFA; border-bottom: 1px solid #B7CBEA; display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-size: 16px; font-weight: 600; color: #123A73">Excess reflow spreading</h2>
+<span class="mono" style="font-size: 13px; color: #123A73">2 causes</span>
+</div>
+<div style="display: flex; flex-direction: column">
+
+<div style="padding: 16px 20px; border-bottom: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start">
+<div style="font-weight: 600; font-size: 15px">High peak reflow temperature</div>
+<span class="chip info">Seen 5×</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
+<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec 245–255 °C</span>
+<span>Reflow oven</span>
+</div>
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Restore the approved profile; check the peak-zone setpoint.</div>
+</div>
+
+<div style="padding: 16px 20px; border-bottom: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start">
+<div style="font-weight: 600; font-size: 15px">High ambient temperature</div>
+<span class="chip muted">Not seen yet</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
+<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec [your limit]</span>
+<span>Environment</span>
+</div>
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Check HVAC on the line.</div>
+</div>
+
+</div>
+</section>
+
+<section class="card" style="overflow: hidden">
+<div style="padding: 16px 20px; background: #E8EFFA; border-bottom: 1px solid #B7CBEA; display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-size: 16px; font-weight: 600; color: #123A73">Post-print spread</h2>
+<span class="mono" style="font-size: 13px; color: #123A73">1 cause</span>
+</div>
+<div style="display: flex; flex-direction: column">
+
+<div style="padding: 16px 20px; border-bottom: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start">
+<div style="font-weight: 600; font-size: 15px">High ambient RH</div>
+<span class="chip info">Seen 1×</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
+<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec [your limit]</span>
+<span>Environment</span>
+</div>
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Control humidity; check paste exposure time.</div>
+</div>
+
+</div>
+</section>
+
+</div>
+</main>
+</div>
+</body>
+</html>

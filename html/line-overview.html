@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Line overview · RCA Studio</title>
+<!-- Static export of sketches/Main.dc.html. Regenerate from the sketches; do not edit by hand. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'IBM Plex Sans',sans-serif;color:#16191D;background:#F4F5F3}
+a{color:#1A4F9C}a:hover{color:#123A73}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:24px;padding:8px 32px;background:#16191D;color:#fff}
+.brand{font-weight:600;font-size:17px;letter-spacing:-.01em;color:#fff}
+.nav{display:flex;flex-wrap:wrap;gap:4px}
+.nav a{color:#C9CDD2;text-decoration:none;font-size:14px;padding:12px 14px;border-radius:6px}
+.nav a:hover{color:#fff;background:#2A2F35}
+.nav a.on{color:#fff;background:#2A2F35}
+.wrap{max-width:1280px;margin:0 auto;padding:32px}
+.card{background:#fff;border:1px solid #E1E4E0;border-radius:10px}
+.mono{font-family:'IBM Plex Mono',monospace}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5B6169;font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.crit{background:#FDECEA;color:#9B1C12}.warn{background:#FDF0E3;color:#8A3505}.ok{background:#E7F3EC;color:#1D6B3F}.info{background:#E8EFFA;color:#1A4F9C}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#5B6169;font-weight:600;padding:12px 16px;border-bottom:1px solid #E1E4E0}
+td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;text-decoration:none;border:1px solid #C9CDD2;background:#fff;color:#16191D;cursor:pointer;box-sizing:border-box}
+.btn.primary{background:#1A4F9C;border-color:#1A4F9C;color:#fff}
+.btn.primary:hover{background:#123A73;color:#fff}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: #F4F5F3">
+<header class="top">
+<div class="brand">RCA Studio</div>
+<nav class="nav" aria-label="Main">
+<a class="on" href="line-overview.html">Line</a>
+<a href="rca-packet.html">Investigations</a>
+<a href="containment.html">Containment</a>
+<a href="8d-draft.html">8D reports</a>
+<a href="manager-overview.html">Overview</a>
+<a href="failure-library.html">Failure Library</a>
+</nav>
+</header>
+<main class="wrap" style="display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div class="eyebrow">SMT line 2 · CTRL-BRD-A</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">Night shift, 15 Oct 2026</h1>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5B6169; font-weight: 600">Shift
+<select style="min-height: 44px; padding: 0 12px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>Night · 22:00–06:00</option><option>Day · 06:00–14:00</option></select>
+</label>
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5B6169; font-weight: 600">Batch
+<select style="min-height: 44px; padding: 0 12px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All batches</option><option>stg-B0001</option><option>stg-B0002</option><option>stg-B0003</option></select>
+</label>
+</div>
+</div>
+
+<section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px" aria-label="Shift summary">
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Boards built</div><div class="mono" style="font-size: 32px; font-weight: 500">7,680</div><div style="font-size: 13px; color: #5B6169">3 batches · 1,920 panels</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">First-pass yield</div><div class="mono" style="font-size: 32px; font-weight: 500">98.9%</div><div style="font-size: 13px; color: #9B1C12; font-weight: 600">Down from 99.6% last night</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Solder bridging</div><div class="mono" style="font-size: 32px; font-weight: 500">47</div><div style="font-size: 13px; color: #5B6169">All in stg-B0003</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Open circuit</div><div class="mono" style="font-size: 32px; font-weight: 500">31</div><div style="font-size: 13px; color: #5B6169">All in stg-B0003</div></div>
+</section>
+
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px" aria-label="Alerts">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Needs attention</h2>
+<span class="chip crit">2 excursions</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px; border: 1px solid #F3C5C0; background: #FFF8F7; border-radius: 8px">
+<span class="chip crit">Critical</span>
+<div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 4px">
+<div style="font-weight: 600">Solder bridging spike in stg-B0003</div>
+<div style="font-size: 14px; color: #4A4F56">47 boards, 43 of them after 02:00. Root cause analysis is ready.</div>
+</div>
+<a class="btn primary" href="rca-packet.html">Open RCA packet</a>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px; border: 1px solid #F1D3B5; background: #FFFAF4; border-radius: 8px">
+<span class="chip warn">High</span>
+<div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 4px">
+<div style="font-weight: 600">Open circuits rising in stg-B0003</div>
+<div style="font-size: 14px; color: #4A4F56">31 boards, 28 of them after 03:00. Root cause analysis is ready.</div>
+</div>
+<a class="btn" href="rca-packet.html">Open RCA packet</a>
+</div>
+</section>
+
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 20px" aria-label="Defects by hour">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Defects by hour, stg-B0003</h2>
+<div style="font-size: 14px; color: #5B6169">Both defects climb from 02:00, so the cause started mid-shift.</div>
+</div>
+<div style="display: flex; gap: 16px; font-size: 13px; color: #4A4F56">
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 3px; background: #1A4F9C"></span>Solder bridging</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 3px; background: #E08A3C"></span>Open circuit</span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 12px; align-items: end; height: 180px; border-bottom: 1px solid #C9CDD2; padding: 0 4px">
+
+<div style="display: flex; justify-content: center; align-items: flex-end; gap: 4px; height: 100%">
+<div style="width: 40%; max-width: 22px; background: #1A4F9C; border-radius: 3px 3px 0 0; height: 17px" title="22:00 · bridging 1"></div>
+<div style="width: 40%; max-width: 22px; background: #E08A3C; border-radius: 3px 3px 0 0; height: 2px" title="22:00 · open circuit 0"></div>
+</div>
+
+<div style="display: flex; justify-content: center; align-items: flex-end; gap: 4px; height: 100%">
+<div style="width: 40%; max-width: 22px; background: #1A4F9C; border-radius: 3px 3px 0 0; height: 2px" title="23:00 · bridging 0"></div>
+<div style="width: 40%; max-width: 22px; background: #E08A3C; border-radius: 3px 3px 0 0; height: 17px" title="23:00 · open circuit 1"></div>
+</div>
+
+<div style="display: flex; justify-content: center; align-items: flex-end; gap: 4px; height: 100%">
+<div style="width: 40%; max-width: 22px; background: #1A4F9C; border-radius: 3px 3px 0 0; height: 17px" title="00:00 · bridging 1"></div>
+<div style="width: 40%; max-width: 22px; background: #E08A3C; border-radius: 3px 3px 0 0; height: 2px" title="00:00 · open circuit 0"></div>
+</div>
+
+<div style="display: flex; justify-content: center; align-items: flex-end; gap: 4px; height: 100%">
+<div style="width: 40%; max-width: 22px; background: #1A4F9C; border-radius: 3px 3px 0 0; height: 34px" title="01:00 · bridging 2"></div>
+<div style="width: 40%; max-width: 22px; background: #E08A3C; border-radius: 3px 3px 0 0; height: 17px" title="01:00 · open circuit 1"></div>
+</div>
+
+<div style="display: flex; justify-content: center; align-items: flex-end; gap: 4px; height: 100%">
+<div style="width: 40%; max-width: 22px; background: #1A4F9C; border-radius: 3px 3px 0 0; height: 136px" title="02:00 · bridging 8"></div>
+<div style="width: 40%; max-width: 22px; background: #E08A3C; border-radius: 3px 3px 0 0; height: 17px" title="02:00 · open circuit 1"></div>
+</div>
+
+<div style="display: flex; justify-content: center; align-items: flex-end; gap: 4px; height: 100%">
+<div style="width: 40%; max-width: 22px; background: #1A4F9C; border-radius: 3px 3px 0 0; height: 170px" title="03:00 · bridging 10"></div>
+<div style="width: 40%; max-width: 22px; background: #E08A3C; border-radius: 3px 3px 0 0; height: 68px" title="03:00 · open circuit 4"></div>
+</div>
+
+<div style="display: flex; justify-content: center; align-items: flex-end; gap: 4px; height: 100%">
+<div style="width: 40%; max-width: 22px; background: #1A4F9C; border-radius: 3px 3px 0 0; height: 153px" title="04:00 · bridging 9"></div>
+<div style="width: 40%; max-width: 22px; background: #E08A3C; border-radius: 3px 3px 0 0; height: 136px" title="04:00 · open circuit 8"></div>
+</div>
+
+<div style="display: flex; justify-content: center; align-items: flex-end; gap: 4px; height: 100%">
+<div style="width: 40%; max-width: 22px; background: #1A4F9C; border-radius: 3px 3px 0 0; height: 136px" title="05:00 · bridging 8"></div>
+<div style="width: 40%; max-width: 22px; background: #E08A3C; border-radius: 3px 3px 0 0; height: 153px" title="05:00 · open circuit 9"></div>
+</div>
+
+<div style="display: flex; justify-content: center; align-items: flex-end; gap: 4px; height: 100%">
+<div style="width: 40%; max-width: 22px; background: #1A4F9C; border-radius: 3px 3px 0 0; height: 136px" title="06:00 · bridging 8"></div>
+<div style="width: 40%; max-width: 22px; background: #E08A3C; border-radius: 3px 3px 0 0; height: 119px" title="06:00 · open circuit 7"></div>
+</div>
+
+</div>
+<div style="display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 12px; padding: 0 4px">
+
+<div class="mono" style="text-align: center; font-size: 12px; color: #5B6169">22:00</div>
+
+<div class="mono" style="text-align: center; font-size: 12px; color: #5B6169">23:00</div>
+
+<div class="mono" style="text-align: center; font-size: 12px; color: #5B6169">00:00</div>
+
+<div class="mono" style="text-align: center; font-size: 12px; color: #5B6169">01:00</div>
+
+<div class="mono" style="text-align: center; font-size: 12px; color: #5B6169">02:00</div>
+
+<div class="mono" style="text-align: center; font-size: 12px; color: #5B6169">03:00</div>
+
+<div class="mono" style="text-align: center; font-size: 12px; color: #5B6169">04:00</div>
+
+<div class="mono" style="text-align: center; font-size: 12px; color: #5B6169">05:00</div>
+
+<div class="mono" style="text-align: center; font-size: 12px; color: #5B6169">06:00</div>
+
+</div>
+</section>
+
+<section class="card" style="overflow: hidden" aria-label="Batches">
+<div style="padding: 20px 24px 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Batches this shift</h2></div>
+<div style="overflow-x: auto">
+<table>
+<thead><tr><th>Batch</th><th>Panels</th><th>Boards</th><th>Bridging</th><th>Open circuit</th><th>Status</th><th></th></tr></thead>
+<tbody>
+<tr><td class="mono">stg-B0001</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono">0</td><td class="mono">0</td><td><span class="chip ok">In control</span></td><td></td></tr>
+<tr><td class="mono">stg-B0002</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono">0</td><td class="mono">0</td><td><span class="chip ok">In control</span></td><td></td></tr>
+<tr><td class="mono" style="font-weight: 500">stg-B0003</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono" style="color: #9B1C12; font-weight: 500">47</td><td class="mono" style="color: #8A3505; font-weight: 500">31</td><td><span class="chip crit">Excursion</span></td><td style="text-align: right"><a href="rca-packet.html">Investigate</a></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+</div>
+</body>
+</html>
