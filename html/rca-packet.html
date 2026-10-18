@@ -110,9 +110,9 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">44 of 47</span><span class="l">bridged boards explained</span></div>
+<div class="stat"><span class="v">28.2% vs 0.125%</span><span class="l">Bridging rate, out of spec vs in spec</span></div>
 <div class="stat"><span class="v">226×</span><span class="l">more likely when out of spec</span></div>
-<div class="stat"><span class="v">44 found</span><span class="l">about 3 expected by chance</span></div>
+<div class="stat"><span class="v">44 of 47</span><span class="l">bridged boards were out of spec</span></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
@@ -131,8 +131,8 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </tbody>
 </table>
 <div style="margin-top: 10px; color: #4A4F56; line-height: 1.5">226× = 28.2% ÷ 0.125%. The causal path comes from the Failure Library rule <span class="mono" style="font-size: 13px">PeakReflowTemperature &gt; USL → ExcessReflowSpreading</span>.</div>
-<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5"><span style="font-weight: 600; color: #16191D">Expected by chance:</span> 156 of 2,560 boards (6.1%) were out of spec, so luck alone would put about 6.1% of the 47 bridges there: about 3. 44 were found.</div>
-<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5"><span style="font-weight: 600; color: #16191D">Fisher's exact test: p &lt; 0.001.</span> The chance of a split at least this lopsided if this parameter had nothing to do with the defect.</div>
+<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5">Out-of-spec boards were 6.1% of the batch (156 of 2,560) but had 94% of the bridges (44 of 47).</div>
+<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5">Fisher's exact test: p &lt; 0.001. The gap between 28.2% and 0.125% is far too large to be random variation.</div>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
 <div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Lock the approved reflow recipe and confirm how a different profile was loaded at 02:00.</div>
@@ -161,7 +161,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
 </div>
 <span class="chip warn">Out of spec · 61 boards</span>
-<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">Explains only 6 of 47 bridged boards (13%), below the 20% threshold.</span><span class="mono" style="font-size: 12px; color: #5B6169">About 1 expected by chance · 6 found</span></div>
+<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">Explains only 6 of 47 bridged boards (13%), below the 20% threshold.</span><span style="font-size: 13px; color: #5B6169">Out of spec on 2.4% of boards, which had 13% of the bridges.</span></div>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
@@ -170,7 +170,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
 </div>
 <span class="chip warn">Out of spec · 96 boards</span>
-<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">Bridging rate is about the same with or without it: 2.1% vs 1.8%.</span><span class="mono" style="font-size: 12px; color: #5B6169">About 2 expected by chance · 2 found</span></div>
+<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">Bridging rate is about the same with or without it: 2.1% vs 1.8%.</span><span style="font-size: 13px; color: #5B6169">Out of spec on 3.8% of boards, which had 4% of the bridges.</span></div>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
@@ -256,7 +256,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="font-size: 14px; line-height: 1.5; color: #4A4F56">A root cause is linked when its parameter was out of spec in this batch and all three hold:</div>
 <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6">
 <li>the defect is at least 2× more likely on out-of-spec boards</li>
-<li>luck alone would give a split this lopsided less than 1% of the time (Fisher's exact test)</li>
+<li>the gap is too large to be random variation (Fisher's exact test, p &lt; 0.01)</li>
 <li>it explains at least 20% of the defective boards</li>
 </ul>
 </section>
