@@ -30,4 +30,4 @@ All numbers are story data, not output from the backend. Before a real demo:
 
 ## Versions
 
-- `v1-baseline`: the first full set of seven screens.
+- v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
