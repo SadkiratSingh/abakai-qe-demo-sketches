@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Containment</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'IBM Plex Sans',sans-serif;color:#16191D;background:#F4F5F3}
+a{color:#1A4F9C}a:hover{color:#123A73}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:24px;padding:8px 32px;background:#16191D;color:#fff}
+.brand{font-weight:600;font-size:17px;letter-spacing:-.01em;color:#fff}
+.nav{display:flex;flex-wrap:wrap;gap:4px}
+.nav a{color:#C9CDD2;text-decoration:none;font-size:14px;padding:12px 14px;border-radius:6px}
+.nav a:hover{color:#fff;background:#2A2F35}
+.nav a.on{color:#fff;background:#2A2F35}
+.wrap{max-width:1280px;margin:0 auto;padding:32px}
+.card{background:#fff;border:1px solid #E1E4E0;border-radius:10px}
+.mono{font-family:'IBM Plex Mono',monospace}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5B6169;font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.crit{background:#FDECEA;color:#9B1C12}.warn{background:#FDF0E3;color:#8A3505}.ok{background:#E7F3EC;color:#1D6B3F}.info{background:#E8EFFA;color:#1A4F9C}.muted{background:#EEF0ED;color:#4A4F56}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#5B6169;font-weight:600;padding:12px 16px;border-bottom:1px solid #E1E4E0;white-space:nowrap}
+td{padding:12px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;text-decoration:none;border:1px solid #C9CDD2;background:#fff;color:#16191D;cursor:pointer;box-sizing:border-box}
+.btn.primary{background:#1A4F9C;border-color:#1A4F9C;color:#fff}
+.btn.danger{background:#B42318;border-color:#B42318;color:#fff}
+input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F5F3">
+<header class="top">
+<div class="brand">RCA Studio</div>
+<nav class="nav" aria-label="Main">
+<a href="Main.dc.html">Line</a>
+<a href="RcaPacket.dc.html">Investigations</a>
+<a class="on" href="Containment.dc.html">Containment</a>
+<a href="Report8D.dc.html">8D reports</a>
+<a href="Manager.dc.html">Overview</a>
+<a href="Library.dc.html">Failure Library</a>
+</nav>
+</header>
+<main class="wrap" style="display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<a href="RcaPacket.dc.html" style="font-size: 14px; text-decoration: none">← INV-0142 root cause analysis</a>
+<div class="eyebrow">Containment · stg-B0003</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">158 boards passed inspection but share the failure signature</h1>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button class="btn" type="button">Export list (CSV)</button>
+<button class="btn danger" type="button">Place hold in MES</button>
+</div>
+</div>
+
+<section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px" aria-label="Where the boards are">
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">In WIP</div><div class="mono" style="font-size: 32px; font-weight: 500">96</div><div style="font-size: 13px; color: #5B6169">Hold at next station</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Finished goods</div><div class="mono" style="font-size: 32px; font-weight: 500">54</div><div style="font-size: 13px; color: #5B6169">Quarantine and re-inspect</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0; background: #FFF8F7"><div class="eyebrow" style="color: #9B1C12">Shipped</div><div class="mono" style="font-size: 32px; font-weight: 500; color: #9B1C12">8</div><div style="font-size: 13px; color: #7E160E; font-weight: 600">Customer notification needed</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Signatures</div><div style="font-size: 14px; line-height: 1.6"><span style="font-weight: 600">112</span> high peak reflow<br><span style="font-weight: 600">64</span> high paste viscosity<br><span style="color: #5B6169">18 boards have both</span></div></div>
+</section>
+
+<section class="card" style="overflow: hidden" aria-label="Boards at risk">
+<div style="padding: 20px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Boards at risk</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Signature
+<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>High peak reflow</option><option>High paste viscosity</option></select>
+</label>
+<label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Location
+<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>WIP</option><option>Finished goods</option><option>Shipped</option></select>
+</label>
+</div>
+</div>
+<div style="overflow-x: auto">
+<table>
+<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Signature</th><th>Measured</th><th>Risk</th><th>Location</th></tr></thead>
+<tbody>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
+<tr>
+<td><input type="checkbox" aria-label="Select {{r.id}}" checked="{{r.sel}}"></td>
+<td class="mono"><a href="Board.dc.html">{{r.id}}</a></td>
+<td class="mono">{{r.panel}}</td>
+<td class="mono">{{r.time}}</td>
+<td>{{r.sig}}</td>
+<td class="mono">{{r.meas}}</td>
+<td><span class="{{r.riskCls}}">{{r.risk}}</span></td>
+<td><span class="{{r.locCls}}">{{r.loc}}</span></td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+<div style="padding: 16px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; color: #5B6169">
+<span>Showing 10 of 158 boards · select a board to see why it was flagged</span>
+<div style="display: flex; gap: 8px"><button class="btn" type="button">Previous</button><button class="btn" type="button">Next</button></div>
+</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1150}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const data = [
+      ['PCB-0006489', 'stg-B0003-P0343', '02:06', 'High peak reflow', 'Peak 258.9 °C', 'High', 'Shipped'],
+      ['PCB-0006502', 'stg-B0003-P0346', '02:09', 'High peak reflow', 'Peak 258.2 °C', 'High', 'Shipped'],
+      ['PCB-0006615', 'stg-B0003-P0374', '02:31', 'Both', 'Peak 259.4 °C · 238 Pa·s', 'High', 'Finished goods'],
+      ['PCB-0006703', 'stg-B0003-P0396', '02:52', 'High peak reflow', 'Peak 257.6 °C', 'Medium', 'Finished goods'],
+      ['PCB-0006842', 'stg-B0003-P0431', '03:14', 'High paste viscosity', '241 Pa·s', 'High', 'Finished goods'],
+      ['PCB-0006977', 'stg-B0003-P0465', '03:41', 'Both', 'Peak 258.8 °C · 244 Pa·s', 'High', 'WIP'],
+      ['PCB-0007120', 'stg-B0003-P0501', '04:07', 'High paste viscosity', '239 Pa·s', 'Medium', 'WIP'],
+      ['PCB-0007256', 'stg-B0003-P0535', '04:33', 'High peak reflow', 'Peak 259.1 °C', 'High', 'WIP'],
+      ['PCB-0007391', 'stg-B0003-P0568', '05:01', 'High paste viscosity', '246 Pa·s', 'High', 'WIP'],
+      ['PCB-0007514', 'stg-B0003-P0599', '05:27', 'High peak reflow', 'Peak 256.4 °C', 'Medium', 'WIP']
+    ];
+    const rows = data.map(d => ({
+      id: d[0], panel: d[1], time: d[2], sig: d[3], meas: d[4], risk: d[5], loc: d[6],
+      sel: d[5] === 'High',
+      riskCls: d[5] === 'High' ? 'chip crit' : 'chip warn',
+      locCls: d[6] === 'Shipped' ? 'chip crit' : (d[6] === 'WIP' ? 'chip info' : 'chip muted')
+    }));
+    return { rows };
+  }
+}
+</script>
+</body>
+</html>
