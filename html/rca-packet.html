@@ -81,9 +81,9 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
-<span class="chip info">Most likely cause</span>
-<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">The reflow oven ran above its peak temperature limit from 02:00 to 02:40. Boards built in that window account for 44 of the 47 bridges.</div>
-<div class="mono" style="font-size: 13px; color: #4A4F56">8 possible causes checked · 1 linked</div>
+<span class="chip info">Linked root cause #1</span>
+<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Peak reflow temperature was above USL 02:00–02:40. 44 of 47 boards with solder bridging were built 02:00–02:40.</div>
+<div class="mono" style="font-size: 13px; color: #4A4F56">8 root causes checked · 1 linked</div>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
@@ -91,7 +91,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked root causes">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked root causes</h2>
-<div style="font-size: 14px; color: #5B6169">Out of spec in this batch and clearly more common on bridged boards.</div>
+<div style="font-size: 14px; color: #5B6169">Out of spec in this batch and passed all three checks.</div>
 </div>
 
 <article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
@@ -99,7 +99,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; align-items: center; gap: 12px">
 <span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#1</span>
 <span class="chip info">Linked</span>
-<span class="chip crit">Out of spec · 156 boards</span>
+<span class="chip crit">Above USL · 156 boards</span>
 </div>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
@@ -110,32 +110,35 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">28.2% vs 0.125%</span><span class="l">Bridging rate, out of spec vs in spec</span></div>
+<div class="stat"><span class="v">28.2% vs 0.125%</span><span class="l">Solder bridging rate, out of spec vs in spec</span></div>
 <div class="stat"><span class="v">226×</span><span class="l">more likely when out of spec</span></div>
-<div class="stat"><span class="v">44 of 47</span><span class="l">bridged boards were out of spec</span></div>
+<div class="stat"><span class="v">44 of 47</span><span class="l">Boards with solder bridging that were out of spec</span></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
 <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>156 boards were above the upper limit, all built between 02:00 and 02:40 (peak 257.9–259.8 °C, spec 245–255 °C).</li><li>44 of the 47 bridged boards were built in that window.</li><li>Outside the window, peak reflow averaged 251.8 °C and only 3 boards bridged.</li>
+<li>156 boards were above USL 02:00–02:40: peak reflow temperature 257.9–259.8 °C (spec 245–255 °C).</li><li>44 of 47 boards with solder bridging were built 02:00–02:40.</li><li>Outside 02:00–02:40: peak reflow temperature averaged 251.8 °C; 3 boards with solder bridging.</li>
 </ul>
 </div>
 
 <details style="font-size: 14px">
 <summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
 <table class="tt">
-<thead><tr><th>stg-B0003 boards</th><th>Solder bridging</th><th>No defect</th><th>Defect rate</th></tr></thead>
+<thead><tr><th>stg-B0003 boards</th><th>Solder bridging</th><th>No solder bridging</th><th>Solder bridging rate</th></tr></thead>
 <tbody>
 <tr><td>Above USL</td><td>44</td><td>112</td><td>28.2%</td></tr>
 <tr><td>In spec</td><td>3</td><td>2,401</td><td>0.125%</td></tr>
 </tbody>
 </table>
-<div style="margin-top: 10px; color: #4A4F56; line-height: 1.5">226× = 28.2% ÷ 0.125%. The causal path comes from the Failure Library rule <span class="mono" style="font-size: 13px">PeakReflowTemperature &gt; USL → ExcessReflowSpreading</span>.</div>
-<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5">Out-of-spec boards were 6.1% of the batch (156 of 2,560) but had 94% of the bridges (44 of 47).</div>
-<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5">Fisher's exact test: p &lt; 0.001. The gap between 28.2% and 0.125% is far too large to be random variation.</div>
+<ul style="margin: 10px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
+<li>Solder bridging rate, out of spec vs in spec: 28.2% vs 0.125% (226×). Needs 2× or more.</li>
+<li>Fisher's exact test: p &lt; 0.001. Needs p &lt; 0.01.</li>
+<li>Boards with solder bridging that were out of spec: 44 of 47 (94%). Needs 20% or more.</li>
+<li>Failure Library rule: <span class="mono" style="font-size: 13px">PeakReflowTemperature &gt; USL → ExcessReflowSpreading</span></li>
+</ul>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
-<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Lock the approved reflow recipe and confirm how a different profile was loaded at 02:00.</div>
+<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Restore the approved reflow recipe; lock recipe changes behind sign-off.</div>
 
 
 <div style="display: flex; gap: 8px">
@@ -151,7 +154,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section class="card" style="overflow: hidden" aria-label="Checked and not linked">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 7</h2>
-<div style="font-size: 14px; color: #5B6169">Every other root cause in the Failure Library for solder bridging, and why it was set aside.</div>
+<div style="font-size: 14px; color: #5B6169">Every other root cause in the Failure Library for solder bridging, with the check it failed.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 
@@ -160,8 +163,8 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 14px">High paste volume per aperture</span>
 <span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
 </div>
-<span class="chip warn">Out of spec · 61 boards</span>
-<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">Explains only 6 of 47 bridged boards (13%), below the 20% threshold.</span><span style="font-size: 13px; color: #5B6169">Out of spec on 2.4% of boards, which had 13% of the bridges.</span></div>
+<span class="chip warn">Above USL · 61 boards</span>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Boards with solder bridging that were out of spec: 6 of 47 (13%). Needs 20% or more.</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
@@ -169,8 +172,8 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 14px">High ambient temperature</span>
 <span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
 </div>
-<span class="chip warn">Out of spec · 96 boards</span>
-<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">Bridging rate is about the same with or without it: 2.1% vs 1.8%.</span><span style="font-size: 13px; color: #5B6169">Out of spec on 3.8% of boards, which had 4% of the bridges.</span></div>
+<span class="chip warn">Above USL · 96 boards</span>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Solder bridging rate, out of spec vs in spec: 2.1% vs 1.8% (1.1×). Needs 2× or more.</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
@@ -179,7 +182,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
 </div>
 <span class="chip ok">In spec</span>
-<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">Stencil ST-0412 measured 100.4 µm (spec 95–105 µm).</span></div>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 100.4 µm on stencil ST-0412 (spec 95–105 µm).</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
@@ -188,7 +191,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
 </div>
 <span class="chip ok">In spec</span>
-<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">Design check 0.71 (minimum 0.66).</span></div>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 0.71 on stencil ST-0412 (spec ≥ 0.66).</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
@@ -197,7 +200,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
 </div>
 <span class="chip ok">In spec</span>
-<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">All 2,560 boards within 3.6–4.4 mm³.</span></div>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 3.7–4.3 mm³ on all 2,560 boards (spec 3.6–4.4 mm³).</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
@@ -206,7 +209,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
 </div>
 <span class="chip ok">In spec</span>
-<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">All 2,560 boards within 56–84 mm/s.</span></div>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 62–78 mm/s on all 2,560 boards (spec 56–84 mm/s).</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
@@ -215,7 +218,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 12px; color: #5B6169">via Post-print spread</span>
 </div>
 <span class="chip ok">In spec</span>
-<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">No boards above the limit.</span></div>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 38–55 %RH on all 2,560 boards (spec [your limit]).</span>
 </div>
 
 </div>
@@ -228,7 +231,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Peak reflow temperature (°C)</h2>
 <div style="font-size: 14px; color: #5B6169">20-minute averages, stg-B0003</div>
 </div>
-<svg class="trend" viewBox="0 0 520 250" width="100%" role="img" aria-label="Peak reflow temperature is above the 255 °C upper limit only between 02:00 and 02:40">
+<svg class="trend" viewBox="0 0 520 250" width="100%" role="img" aria-label="Peak reflow temperature is above USL only during 02:00–02:40">
 <rect class="win" x="276" y="30" width="40" height="184"></rect>
 <text class="wintxt" x="296" y="22" text-anchor="middle">02:00–02:40</text>
 <rect class="band" x="48" y="94" width="456" height="105" opacity="0.6"></rect>
@@ -242,22 +245,22 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <text x="286" y="236" text-anchor="middle">02:00</text>
 <text x="504" y="236" text-anchor="end">05:40</text>
 </svg>
-<div style="font-size: 14px; line-height: 1.5">Peak reflow held near 251.8 °C all shift except 02:00–02:40, when it ran about 4 °C above the upper limit.</div>
+<div style="font-size: 14px; line-height: 1.5">Peak reflow temperature averaged 251.8 °C outside 02:00–02:40 and reached 259.8 °C during it.</div>
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><span class="chip crit">112 at risk</span></div>
-<div style="font-size: 14px; line-height: 1.5">112 boards built between 02:00 and 02:40 passed AOI but went through the oven above spec.</div>
+<div style="font-size: 14px; line-height: 1.5">112 boards built 02:00–02:40 passed AOI but were above USL on peak reflow temperature.</div>
 <a class="btn" href="containment.html">Review boards to hold</a>
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
-<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a cause is linked</h2>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">A root cause is linked when its parameter was out of spec in this batch and all three hold:</div>
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a root cause is linked</h2>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Its parameter was out of spec in this batch, and it passes all three checks:</div>
 <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6">
-<li>the defect is at least 2× more likely on out-of-spec boards</li>
-<li>the gap is too large to be random variation (Fisher's exact test, p &lt; 0.01)</li>
-<li>it explains at least 20% of the defective boards</li>
+<li>Defect rate, out of spec vs in spec: 2× or more</li>
+<li>Fisher's exact test: p &lt; 0.01, so the gap is not random variation</li>
+<li>Boards with the defect that were out of spec: 20% or more</li>
 </ul>
 </section>
 </aside>

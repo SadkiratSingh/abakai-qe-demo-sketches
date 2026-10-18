@@ -76,16 +76,16 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px; border: 1px solid #F3C5C0; background: #FFF8F7; border-radius: 8px">
 <span class="chip crit">Critical</span>
 <div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 4px">
-<div style="font-weight: 600">Solder bridging spike in stg-B0003</div>
-<div style="font-size: 14px; color: #4A4F56">47 boards, 44 of them built between 02:00 and 02:40. Root cause analysis is ready.</div>
+<div style="font-weight: 600">Solder bridging excursion in stg-B0003</div>
+<div style="font-size: 14px; color: #4A4F56">47 boards with solder bridging; 44 of 47 built 02:00–02:40. Root cause analysis is ready.</div>
 </div>
 <a class="btn primary" href="RcaPacket.dc.html">Open RCA packet</a>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px; border: 1px solid #F1D3B5; background: #FFFAF4; border-radius: 8px">
 <span class="chip warn">High</span>
 <div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 4px">
-<div style="font-weight: 600">Open circuit cluster in stg-B0003</div>
-<div style="font-size: 14px; color: #4A4F56">31 boards, 28 of them printed between 03:40 and 04:30. Root cause analysis is ready.</div>
+<div style="font-weight: 600">Open circuit excursion in stg-B0003</div>
+<div style="font-size: 14px; color: #4A4F56">31 boards with open circuit; 28 of 31 built 03:40–04:30. Root cause analysis is ready.</div>
 </div>
 <a class="btn" href="RcaPacket.dc.html">Open RCA packet</a>
 </div>
@@ -123,9 +123,9 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <table>
 <thead><tr><th>Batch</th><th>Panels</th><th>Boards</th><th>Bridging</th><th>Open circuit</th><th>Status</th><th></th></tr></thead>
 <tbody>
-<tr><td class="mono">stg-B0001</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono">0</td><td class="mono">0</td><td><span class="chip ok">In control</span></td><td></td></tr>
-<tr><td class="mono">stg-B0002</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono">0</td><td class="mono">0</td><td><span class="chip ok">In control</span></td><td></td></tr>
-<tr><td class="mono" style="font-weight: 500">stg-B0003</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono" style="color: #9B1C12; font-weight: 500">47</td><td class="mono" style="color: #8A3505; font-weight: 500">31</td><td><span class="chip crit">Excursion</span></td><td style="text-align: right"><a href="RcaPacket.dc.html">Investigate</a></td></tr>
+<tr><td class="mono">stg-B0001</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono">0</td><td class="mono">0</td><td><span class="chip ok">No excursion</span></td><td></td></tr>
+<tr><td class="mono">stg-B0002</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono">0</td><td class="mono">0</td><td><span class="chip ok">No excursion</span></td><td></td></tr>
+<tr><td class="mono" style="font-weight: 500">stg-B0003</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono" style="color: #9B1C12; font-weight: 500">47</td><td class="mono" style="color: #8A3505; font-weight: 500">31</td><td><span class="chip crit">2 excursions</span></td><td style="text-align: right"><a href="RcaPacket.dc.html">Investigate</a></td></tr>
 </tbody>
 </table>
 </div>

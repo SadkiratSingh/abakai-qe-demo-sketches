@@ -64,15 +64,15 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">In WIP</div><div class="mono" style="font-size: 32px; font-weight: 500">150</div><div style="font-size: 13px; color: #5B6169">Hold at next station</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Finished goods</div><div class="mono" style="font-size: 32px; font-weight: 500">116</div><div style="font-size: 13px; color: #5B6169">Quarantine and re-inspect</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0; background: #FFF8F7"><div class="eyebrow" style="color: #9B1C12">Shipped</div><div class="mono" style="font-size: 32px; font-weight: 500; color: #9B1C12">8</div><div style="font-size: 13px; color: #7E160E; font-weight: 600">Customer notification needed</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Signatures</div><div style="font-size: 14px; line-height: 1.6"><span style="font-weight: 600">112</span> high peak reflow, 02:00–02:40<br><span style="font-weight: 600">162</span> high paste viscosity, 03:40–04:30<br><span style="color: #5B6169">No board has both</span></div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">By root cause</div><div style="font-size: 14px; line-height: 1.6"><span style="font-weight: 600">112</span> · High peak reflow temperature · 02:00–02:40<br><span style="font-weight: 600">162</span> · High paste viscosity · 03:40–04:30<br><span style="color: #5B6169">No board has both</span></div></div>
 </section>
 
 <section class="card" style="overflow: hidden" aria-label="Boards at risk">
 <div style="padding: 20px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Boards at risk</h2>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Signature
-<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>High peak reflow</option><option>High paste viscosity</option></select>
+<label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Root cause
+<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>High peak reflow temperature</option><option>High paste viscosity</option></select>
 </label>
 <label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Location
 <select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>WIP</option><option>Finished goods</option><option>Shipped</option></select>
@@ -81,7 +81,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </div>
 <div style="overflow-x: auto">
 <table>
-<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Signature</th><th>Measured</th><th>Risk</th><th>Location</th></tr></thead>
+<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Root cause</th><th>Measured</th><th>Model confidence</th><th>Location</th></tr></thead>
 <tbody>
 <sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
 <tr>
@@ -91,7 +91,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">{{r.time}}</td>
 <td>{{r.sig}}</td>
 <td class="mono">{{r.meas}}</td>
-<td><span class="{{r.riskCls}}">{{r.risk}}</span></td>
+<td class="mono">{{r.risk}}</td>
 <td><span class="{{r.locCls}}">{{r.loc}}</span></td>
 </tr>
 </sc-for>
@@ -110,21 +110,20 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 class Component extends DCLogic {
   renderVals() {
     const data = [
-      ['PCB-0006489', 'stg-B0003-P0343', '02:03', 'High peak reflow', 'Peak 258.9 °C', 'High', 'Shipped'],
-      ['PCB-0006502', 'stg-B0003-P0346', '02:07', 'High peak reflow', 'Peak 258.2 °C', 'High', 'Shipped'],
-      ['PCB-0006557', 'stg-B0003-P0360', '02:16', 'High peak reflow', 'Peak 259.6 °C', 'High', 'Finished goods'],
-      ['PCB-0006615', 'stg-B0003-P0374', '02:31', 'High peak reflow', 'Peak 259.4 °C', 'High', 'Finished goods'],
-      ['PCB-0006640', 'stg-B0003-P0381', '02:38', 'High peak reflow', 'Peak 257.9 °C', 'Medium', 'Finished goods'],
-      ['PCB-0006921', 'stg-B0003-P0451', '03:42', 'High paste viscosity', '237 Pa·s', 'Medium', 'WIP'],
-      ['PCB-0006988', 'stg-B0003-P0468', '03:55', 'High paste viscosity', '241 Pa·s', 'High', 'WIP'],
-      ['PCB-0007064', 'stg-B0003-P0487', '04:08', 'High paste viscosity', '244 Pa·s', 'High', 'WIP'],
-      ['PCB-0007133', 'stg-B0003-P0504', '04:19', 'High paste viscosity', '246 Pa·s', 'High', 'WIP'],
-      ['PCB-0007190', 'stg-B0003-P0518', '04:28', 'High paste viscosity', '239 Pa·s', 'Medium', 'WIP']
+      ['PCB-0006489', 'stg-B0003-P0343', '02:03', 'High peak reflow temperature', '258.9 °C', '84%', 'Shipped'],
+      ['PCB-0006502', 'stg-B0003-P0346', '02:07', 'High peak reflow temperature', '258.2 °C', '79%', 'Shipped'],
+      ['PCB-0006557', 'stg-B0003-P0360', '02:16', 'High peak reflow temperature', '259.6 °C', '86%', 'Finished goods'],
+      ['PCB-0006615', 'stg-B0003-P0374', '02:31', 'High peak reflow temperature', '259.4 °C', '81%', 'Finished goods'],
+      ['PCB-0006640', 'stg-B0003-P0381', '02:38', 'High peak reflow temperature', '257.9 °C', '62%', 'Finished goods'],
+      ['PCB-0006921', 'stg-B0003-P0451', '03:42', 'High paste viscosity', '237 Pa·s', '58%', 'WIP'],
+      ['PCB-0006988', 'stg-B0003-P0468', '03:55', 'High paste viscosity', '241 Pa·s', '71%', 'WIP'],
+      ['PCB-0007064', 'stg-B0003-P0487', '04:08', 'High paste viscosity', '244 Pa·s', '74%', 'WIP'],
+      ['PCB-0007133', 'stg-B0003-P0504', '04:19', 'High paste viscosity', '246 Pa·s', '77%', 'WIP'],
+      ['PCB-0007190', 'stg-B0003-P0518', '04:28', 'High paste viscosity', '239 Pa·s', '60%', 'WIP']
     ];
     const rows = data.map(d => ({
       id: d[0], panel: d[1], time: d[2], sig: d[3], meas: d[4], risk: d[5], loc: d[6],
-      sel: d[5] === 'High',
-      riskCls: d[5] === 'High' ? 'chip crit' : 'chip warn',
+      sel: true,
       locCls: d[6] === 'Shipped' ? 'chip crit' : (d[6] === 'WIP' ? 'chip info' : 'chip muted')
     }));
     return { rows };

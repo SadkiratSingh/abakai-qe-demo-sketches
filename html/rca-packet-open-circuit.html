@@ -81,9 +81,9 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
-<span class="chip info">Most likely cause</span>
-<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Solder paste viscosity was above its limit from 03:40 to 04:30, after a new paste jar was loaded. Boards printed in that window account for 28 of the 31 opens.</div>
-<div class="mono" style="font-size: 13px; color: #4A4F56">3 possible causes checked · 2 linked</div>
+<span class="chip info">Linked root cause #1</span>
+<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Paste viscosity was above USL 03:40–04:30. 28 of 31 boards with open circuit were built 03:40–04:30.</div>
+<div class="mono" style="font-size: 13px; color: #4A4F56">3 root causes checked · 2 linked</div>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
@@ -91,7 +91,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked root causes">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked root causes</h2>
-<div style="font-size: 14px; color: #5B6169">Out of spec in this batch and clearly more common on open-circuit boards.</div>
+<div style="font-size: 14px; color: #5B6169">Out of spec in this batch and passed all three checks.</div>
 </div>
 
 <article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
@@ -99,7 +99,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; align-items: center; gap: 12px">
 <span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#1</span>
 <span class="chip info">Linked</span>
-<span class="chip crit">Out of spec · 190 boards</span>
+<span class="chip crit">Above USL · 190 boards</span>
 </div>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
@@ -110,32 +110,35 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div class="node n-def">Open circuit<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">14.7% vs 0.127%</span><span class="l">Open-circuit rate, out of spec vs in spec</span></div>
+<div class="stat"><span class="v">14.7% vs 0.127%</span><span class="l">Open circuit rate, out of spec vs in spec</span></div>
 <div class="stat"><span class="v">116×</span><span class="l">more likely when out of spec</span></div>
-<div class="stat"><span class="v">28 of 31</span><span class="l">open-circuit boards were out of spec</span></div>
+<div class="stat"><span class="v">28 of 31</span><span class="l">Boards with open circuit that were out of spec</span></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
 <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>190 boards were printed with viscosity above the limit, all between 03:40 and 04:30 (236–246 Pa·s, spec 180–220 Pa·s).</li><li>28 of the 31 open-circuit boards were printed in that window.</li><li>The paste jar was replaced at 04:30 and viscosity returned to about 206 Pa·s.</li>
+<li>190 boards were above USL 03:40–04:30: paste viscosity 236–246 Pa·s (spec 180–220 Pa·s).</li><li>28 of 31 boards with open circuit were built 03:40–04:30.</li><li>Outside 03:40–04:30: paste viscosity averaged 206 Pa·s; 3 boards with open circuit.</li>
 </ul>
 </div>
 
 <details style="font-size: 14px">
 <summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
 <table class="tt">
-<thead><tr><th>stg-B0003 boards</th><th>Open circuit</th><th>No defect</th><th>Defect rate</th></tr></thead>
+<thead><tr><th>stg-B0003 boards</th><th>Open circuit</th><th>No open circuit</th><th>Open circuit rate</th></tr></thead>
 <tbody>
 <tr><td>Above USL</td><td>28</td><td>162</td><td>14.7%</td></tr>
 <tr><td>In spec</td><td>3</td><td>2,367</td><td>0.127%</td></tr>
 </tbody>
 </table>
-<div style="margin-top: 10px; color: #4A4F56; line-height: 1.5">116× = 14.7% ÷ 0.127%. The causal path comes from the Failure Library rule <span class="mono" style="font-size: 13px">PasteViscosity &gt; USL → PoorPasteTransfer</span>.</div>
-<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5">Out-of-spec boards were 7.4% of the batch (190 of 2,560) but had 90% of the opens (28 of 31).</div>
-<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5">Fisher's exact test: p &lt; 0.001. The gap between 14.7% and 0.127% is far too large to be random variation.</div>
+<ul style="margin: 10px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
+<li>Open circuit rate, out of spec vs in spec: 14.7% vs 0.127% (116×). Needs 2× or more.</li>
+<li>Fisher's exact test: p &lt; 0.001. Needs p &lt; 0.01.</li>
+<li>Boards with open circuit that were out of spec: 28 of 31 (90%). Needs 20% or more.</li>
+<li>Failure Library rule: <span class="mono" style="font-size: 13px">PasteViscosity &gt; USL → PoorPasteTransfer</span></li>
+</ul>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
-<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Quarantine the paste lot; check its age, storage temperature and floor life.</div>
+<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Replace the paste; check paste age and floor life.</div>
 
 
 <div style="display: flex; gap: 8px">
@@ -151,7 +154,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; align-items: center; gap: 12px">
 <span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#2</span>
 <span class="chip info">Linked</span>
-<span class="chip crit">Out of spec · 74 boards</span>
+<span class="chip crit">Below LSL · 74 boards</span>
 </div>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
@@ -162,34 +165,37 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div class="node n-def">Open circuit<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">29.7% vs 0.36%</span><span class="l">Open-circuit rate, out of spec vs in spec</span></div>
+<div class="stat"><span class="v">29.7% vs 0.36%</span><span class="l">Open circuit rate, out of spec vs in spec</span></div>
 <div class="stat"><span class="v">82×</span><span class="l">more likely when out of spec</span></div>
-<div class="stat"><span class="v">22 of 31</span><span class="l">open-circuit boards were out of spec</span></div>
+<div class="stat"><span class="v">22 of 31</span><span class="l">Boards with open circuit that were out of spec</span></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
 <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>74 boards had paste volume below the lower limit (spec 0.040 ± 0.004 mm³).</li><li>22 of the 31 open-circuit boards were among them.</li>
+<li>74 boards were below LSL: paste volume per aperture 0.031–0.035 mm³ (spec 0.036–0.044 mm³).</li>
 </ul>
 </div>
 
-<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #FFFAF4; border: 1px solid #F1D3B5; border-radius: 8px; color: #6B2C05">70 of these 74 boards were printed during the high-viscosity window. Low paste volume is most likely an effect of #1, not a separate cause.</div>
+<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #FFFAF4; border: 1px solid #F1D3B5; border-radius: 8px; color: #6B2C05">70 of these 74 boards were also above USL on paste viscosity. Likely an effect of #1, not a separate root cause.</div>
 
 <details style="font-size: 14px">
 <summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
 <table class="tt">
-<thead><tr><th>stg-B0003 boards</th><th>Open circuit</th><th>No defect</th><th>Defect rate</th></tr></thead>
+<thead><tr><th>stg-B0003 boards</th><th>Open circuit</th><th>No open circuit</th><th>Open circuit rate</th></tr></thead>
 <tbody>
 <tr><td>Below LSL</td><td>22</td><td>52</td><td>29.7%</td></tr>
 <tr><td>In spec</td><td>9</td><td>2,477</td><td>0.36%</td></tr>
 </tbody>
 </table>
-<div style="margin-top: 10px; color: #4A4F56; line-height: 1.5">82× = 29.7% ÷ 0.36%. The causal path comes from the Failure Library rule <span class="mono" style="font-size: 13px">PasteVolumePerAperture &lt; LSL → PoorPasteTransfer</span>.</div>
-<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5">Out-of-spec boards were 2.9% of the batch (74 of 2,560) but had 71% of the opens (22 of 31).</div>
-<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5">Fisher's exact test: p &lt; 0.001. The gap between 29.7% and 0.36% is far too large to be random variation.</div>
+<ul style="margin: 10px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
+<li>Open circuit rate, out of spec vs in spec: 29.7% vs 0.36% (82×). Needs 2× or more.</li>
+<li>Fisher's exact test: p &lt; 0.001. Needs p &lt; 0.01.</li>
+<li>Boards with open circuit that were out of spec: 22 of 31 (71%). Needs 20% or more.</li>
+<li>Failure Library rule: <span class="mono" style="font-size: 13px">PasteVolumePerAperture &lt; LSL → PoorPasteTransfer</span></li>
+</ul>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
-<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>No separate action; recheck SPI volume after the paste is replaced.</div>
+<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Clean the stencil underside; verify squeegee pressure.</div>
 
 
 <div style="display: flex; gap: 8px">
@@ -205,7 +211,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section class="card" style="overflow: hidden" aria-label="Checked and not linked">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 1</h2>
-<div style="font-size: 14px; color: #5B6169">Every other root cause in the Failure Library for open circuits, and why it was set aside.</div>
+<div style="font-size: 14px; color: #5B6169">Every other root cause in the Failure Library for open circuit, with the check it failed.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 
@@ -215,7 +221,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 12px; color: #5B6169">via Poor paste transfer</span>
 </div>
 <span class="chip ok">In spec</span>
-<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">No boards above the limit.</span></div>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 38–55 %RH on all 2,560 boards (spec [your limit]).</span>
 </div>
 
 </div>
@@ -228,7 +234,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Paste viscosity (Pa·s)</h2>
 <div style="font-size: 14px; color: #5B6169">20-minute averages, stg-B0003</div>
 </div>
-<svg class="trend" viewBox="0 0 520 250" width="100%" role="img" aria-label="Paste viscosity is above the 220 Pa·s upper limit only between 03:40 and 04:30">
+<svg class="trend" viewBox="0 0 520 250" width="100%" role="img" aria-label="Paste viscosity is above USL only during 03:40–04:30">
 <rect class="win" x="375" y="30" width="59" height="184"></rect>
 <text class="wintxt" x="405" y="22" text-anchor="middle">03:40–04:30</text>
 <rect class="band" x="48" y="106" width="456" height="93" opacity="0.6"></rect>
@@ -242,22 +248,22 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <text x="286" y="236" text-anchor="middle">02:00</text>
 <text x="504" y="236" text-anchor="end">05:40</text>
 </svg>
-<div style="font-size: 14px; line-height: 1.5">Viscosity held near 206 Pa·s except 03:40–04:30, when it rose to about 240 Pa·s until the paste jar was replaced.</div>
+<div style="font-size: 14px; line-height: 1.5">Paste viscosity averaged 206 Pa·s outside 03:40–04:30 and reached 246 Pa·s during it.</div>
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><span class="chip crit">162 at risk</span></div>
-<div style="font-size: 14px; line-height: 1.5">162 boards printed between 03:40 and 04:30 passed electrical test but used the out-of-spec paste.</div>
+<div style="font-size: 14px; line-height: 1.5">162 boards built 03:40–04:30 passed electrical test but were above USL on paste viscosity.</div>
 <a class="btn" href="containment.html">Review boards to hold</a>
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
-<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a cause is linked</h2>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">A root cause is linked when its parameter was out of spec in this batch and all three hold:</div>
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a root cause is linked</h2>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Its parameter was out of spec in this batch, and it passes all three checks:</div>
 <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6">
-<li>the defect is at least 2× more likely on out-of-spec boards</li>
-<li>the gap is too large to be random variation (Fisher's exact test, p &lt; 0.01)</li>
-<li>it explains at least 20% of the defective boards</li>
+<li>Defect rate, out of spec vs in spec: 2× or more</li>
+<li>Fisher's exact test: p &lt; 0.01, so the gap is not random variation</li>
+<li>Boards with the defect that were out of spec: 20% or more</li>
 </ul>
 </section>
 </aside>

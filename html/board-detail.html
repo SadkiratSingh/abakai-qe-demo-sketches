@@ -69,7 +69,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 
 <section class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #F1D3B5; background: #FFFAF4">
 <span class="chip warn">At risk</span>
-<div style="flex: 1 1 520px; font-size: 16px; line-height: 1.5">Passed AOI and electrical test, but it went through the reflow oven during the 02:00–02:40 excursion, when peak temperature was above spec. That is the linked root cause of this batch's bridging.</div>
+<div style="flex: 1 1 520px; font-size: 16px; line-height: 1.5">Passed AOI and electrical test, but peak reflow temperature was above USL (259.4 °C, spec 245–255 °C). Built 02:31, during 02:00–02:40: matches linked root cause #1 of INV-0142.</div>
 <a href="rca-packet.html" style="font-size: 14px; font-weight: 600">See batch analysis</a>
 </section>
 
@@ -80,7 +80,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 
 <div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid #E1E4E0; border-radius: 8px">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
-<div style="display: flex; align-items: center; gap: 10px"><span style="font-weight: 600">Solder bridging risk</span><span class="chip ok">Matches batch cause</span></div>
+<div style="display: flex; align-items: center; gap: 10px"><span style="font-weight: 600">Solder bridging</span><span class="chip ok">Matches linked root cause #1</span></div>
 <div style="display: flex; align-items: center; gap: 10px; min-width: 280px">
 <span style="font-size: 13px; color: #5B6169; white-space: nowrap">Model confidence</span>
 <div style="flex: 1; height: 8px; border-radius: 4px; background: #EEF0ED; overflow: hidden"><div style="height: 100%; width: 81%; background: #1A4F9C"></div></div>
@@ -94,7 +94,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <span aria-hidden="true" style="color: #5B6169">→</span>
 <div class="node n-def">Solder bridging</div>
 </div>
-<div style="font-size: 14px; color: #4A4F56">Same cause as the 44 bridged boards built in this window. Bridges under the QFN may not be visible to AOI.</div>
+<div style="font-size: 14px; color: #4A4F56">44 of 47 boards with solder bridging were built 02:00–02:40. Bridges under the QFN may not be visible to AOI.</div>
 <div style="font-size: 13px; color: #5B6169; line-height: 1.5; padding-top: 10px; border-top: 1px solid #EEF0ED">Model confidence is the trained model's estimate, from this board's own measurements, of how likely it is to have solder bridging through this chain. It ranks individual boards; the batch root cause comes from the board counts in the RCA packet.</div>
 </div>
 
@@ -103,7 +103,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <section class="card" style="overflow: hidden" aria-label="Parameter fingerprint">
 <div style="padding: 20px 24px 8px; display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Parameter fingerprint</h2>
-<div style="font-size: 14px; color: #5B6169">This board's measurements against spec. The shaded band is the spec window; the tick marks the batch's normal outside the excursion windows.</div>
+<div style="font-size: 14px; color: #5B6169">This board's measurements against spec. The shaded band is the spec window; the tick marks the batch average outside 02:00–02:40 and 03:40–04:30.</div>
 </div>
 <div style="overflow-x: auto">
 <table>
@@ -141,7 +141,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <tr>
 <td>Paste volume per aperture</td>
 <td class="mono" style="font-weight: 500">0.0391 mm³</td>
-<td class="mono" style="color: #4A4F56">0.040 ± 0.004 mm³</td>
+<td class="mono" style="color: #4A4F56">0.036–0.044 mm³</td>
 <td>
 <div style="position: relative; height: 20px; background: #F4F5F3; border-radius: 4px">
 <div style="position: absolute; top: 0; bottom: 0; left: 25%; width: 50%; background: #E7F3EC; border-left: 1px solid #8CC4A3; border-right: 1px solid #8CC4A3"></div>
@@ -154,13 +154,13 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 
 <tr>
 <td>Stencil thickness</td>
-<td class="mono" style="font-weight: 500">99.7 µm</td>
-<td class="mono" style="color: #4A4F56">100 ± 5 µm</td>
+<td class="mono" style="font-weight: 500">100.4 µm</td>
+<td class="mono" style="color: #4A4F56">95–105 µm</td>
 <td>
 <div style="position: relative; height: 20px; background: #F4F5F3; border-radius: 4px">
 <div style="position: absolute; top: 0; bottom: 0; left: 25%; width: 50%; background: #E7F3EC; border-left: 1px solid #8CC4A3; border-right: 1px solid #8CC4A3"></div>
-<div style="position: absolute; top: 2px; bottom: 2px; width: 2px; background: #8A9097; left: 50.49999999999997%"></div>
-<div style="position: absolute; top: 3px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; border: 2px solid #fff; box-sizing: border-box; left: 48.500000000000014%; background: #1D6B3F"></div>
+<div style="position: absolute; top: 2px; bottom: 2px; width: 2px; background: #8A9097; left: 52.00000000000003%"></div>
+<div style="position: absolute; top: 3px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; border: 2px solid #fff; box-sizing: border-box; left: 52.00000000000003%; background: #1D6B3F"></div>
 </div>
 </td>
 <td><span class="chip ok">In spec</span></td>
@@ -169,7 +169,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <tr>
 <td>Squeegee speed</td>
 <td class="mono" style="font-weight: 500">71 mm/s</td>
-<td class="mono" style="color: #4A4F56">70 ± 14 mm/s</td>
+<td class="mono" style="color: #4A4F56">56–84 mm/s</td>
 <td>
 <div style="position: relative; height: 20px; background: #F4F5F3; border-radius: 4px">
 <div style="position: absolute; top: 0; bottom: 0; left: 25%; width: 50%; background: #E7F3EC; border-left: 1px solid #8CC4A3; border-right: 1px solid #8CC4A3"></div>
@@ -205,7 +205,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <div style="font-size: 14px; color: #5B6169">Boards printed and reflowed together. One already failed AOI with bridging.</div>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
-<div style="padding: 14px; border: 1px solid #F3C5C0; background: #FFF8F7; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 1 · PCB-0006612</span><span class="chip crit" style="align-self: flex-start">Bridging at AOI</span></div>
+<div style="padding: 14px; border: 1px solid #F3C5C0; background: #FFF8F7; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 1 · PCB-0006612</span><span class="chip crit" style="align-self: flex-start">Solder bridging at AOI</span></div>
 <div style="padding: 14px; border: 1px solid #F1D3B5; background: #FFFAF4; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 2 · PCB-0006613</span><span class="chip warn" style="align-self: flex-start">At risk · on hold</span></div>
 <div style="padding: 14px; border: 1px solid #F1D3B5; background: #FFFAF4; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 3 · PCB-0006614</span><span class="chip warn" style="align-self: flex-start">At risk · on hold</span></div>
 <div style="padding: 14px; border: 2px solid #16191D; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px; font-weight: 500">Slot 4 · PCB-0006615</span><span style="font-size: 13px; color: #4A4F56">This board</span></div>
@@ -253,7 +253,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <li style="display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid #EEF0ED">
 <span class="mono" style="font-size: 13px; color: #5B6169; width: 44px; flex: none">02:31</span>
 <span style="font-size: 14px; flex: 1">Reflow · peak 259.4 °C</span>
-<span class="chip crit">Out of spec</span>
+<span class="chip crit">Above USL</span>
 </li>
 
 <li style="display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid #EEF0ED">

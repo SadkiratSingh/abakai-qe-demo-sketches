@@ -7,9 +7,9 @@ Clickable screen sketches for a root cause analysis (RCA) demo aimed at quality 
 | File | Screen | What it shows |
 | --- | --- | --- |
 | `sketches/Main.dc.html` | 1 · Line overview | Shift KPIs, excursion alerts, defects by hour, batch table |
-| `sketches/RcaPacket.dc.html` | 2 · RCA packet | Ranked root causes per defect, causal chain, evidence, spec trend, suggested action |
-| `sketches/Containment.dc.html` | 3 · Containment | Boards that passed inspection but share the failure signature, by location |
-| `sketches/Board.dc.html` | 3a · Board detail | One board's risk chains, parameter fingerprint, same-panel boards, disposition, history |
+| `sketches/RcaPacket.dc.html` | 2 · RCA packet | Linked root causes per defect with the three checks, root causes checked and not linked, spec trend, suggested action |
+| `sketches/Containment.dc.html` | 3 · Containment | Boards that passed inspection but were built out of spec, by location |
+| `sketches/Board.dc.html` | 3a · Board detail | One board's linked root cause, model confidence, parameter fingerprint, same-panel boards, disposition, history |
 | `sketches/Report8D.dc.html` | 4 · 8D draft | D1–D8 with the steps filled from the investigation marked |
 | `sketches/Manager.dc.html` | 5 · Manager overview | Open investigations, recurring root causes, overdue actions |
 | `sketches/Library.dc.html` | 6 · Failure Library | Root cause → mechanism → defect knowledge, with specs and fixes |
@@ -30,6 +30,50 @@ cd tools
 npm install
 npm run export
 ```
+
+## Wording templates
+
+Every generated sentence on the screens comes from one of these templates, so the same fact is always said the same way. `{…}` is filled from data. The RCA packet builds its text from them in code (`const T` in `sketches/RcaPacket.dc.html`).
+
+**Vocabulary**
+
+| Use | Not |
+| --- | --- |
+| `above USL` / `below LSL` for a direction; `out of spec` for either; `in spec` | above spec, above the limit, upper limit |
+| `{start}–{end}` for a time window, e.g. `02:00–02:40` | between 02:00 and 02:40, from 02:00 to 02:40 |
+| `boards with {defect}`, e.g. `boards with solder bridging` | bridged boards, bridges, opens |
+| `root cause` (the parameter cause), `mechanism`, `defect` | cause, possible cause, signature |
+| Spec as a range `{LSL}–{USL} {unit}`, or `≥ {min}` | nominal ± tolerance |
+| `linked root cause #{n}`, `checked and not linked` | most likely cause, matches batch cause |
+| `excursion` / `no excursion` | spike, cluster, in control (that is SPC language) |
+| `model confidence` for the per-board model score only | risk, probability |
+
+**Status chip:** `{Above USL | Below LSL} · {n} boards` or `In spec`
+
+**The three linking checks** (also the labels of the stat boxes):
+
+- `{Defect} rate, out of spec vs in spec: {a}% vs {b}% ({ratio}×). Needs 2× or more.`
+- `Fisher's exact test: p {value}. Needs p < 0.01.`
+- `Boards with {defect} that were out of spec: {k} of {K} ({pct}%). Needs 20% or more.`
+
+A root cause checked and not linked shows the first check it failed, in the same words. One that is in spec shows:
+`Measured {value or range} on {stencil ID | all {N} boards} (spec {spec}).`
+
+**Sentences**
+
+| Where | Template |
+| --- | --- |
+| RCA summary | `{Parameter} was {above USL} {window}. {k} of {K} boards with {defect} were built {window}.` |
+| Root causes checked | `{n} root causes checked · {m} linked` |
+| Evidence, out of spec | `{n} boards were {above USL} {window}: {parameter} {min}–{max} {unit} (spec {spec}).` |
+| Evidence, in window | `{k} of {K} boards with {defect} were built {window}.` |
+| Evidence, outside window | `Outside {window}: {parameter} averaged {mean} {unit}; {k} boards with {defect}.` |
+| Overlap note | `{x} of these {n} boards were also {above USL} on {parameter}. Likely an effect of #1, not a separate root cause.` |
+| Trend note | `{Parameter} averaged {mean} {unit} outside {window} and reached {max} {unit} during it.` |
+| Containment | `{n} boards built {window} passed {AOI | electrical test} but were {above USL} on {parameter}.` |
+| Line alert | `{K} boards with {defect}; {k} of {K} built {window}. Root cause analysis is ready.` |
+| Board banner | `Passed {inspections}, but {parameter} was {above USL} ({value}, spec {spec}). Built {time}, during {window}: matches linked root cause #{n} of {investigation}.` |
+| Suggested action, 8D D5 | The root cause's **Fix** text from the Failure Library, word for word |
 
 ## Placeholders and assumptions
 

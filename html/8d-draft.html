@@ -81,27 +81,27 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 <section id="d2" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D2 · Problem description</h2><span class="chip ok">Auto-filled</span></div>
-<div class="field">On the night shift of 15 Oct 2026, 47 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 showed solder bridging. 44 of the 47 were built between 02:00 and 02:40. Batches stg-B0001 and stg-B0002 were not affected.</div>
+<div class="field">On the night shift of 15 Oct 2026, 47 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 showed solder bridging. 44 of 47 were built 02:00–02:40. Batches stg-B0001 and stg-B0002 were not affected.</div>
 </section>
 
 <section id="d3" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D3 · Containment</h2><span class="chip ok">Auto-filled</span></div>
-<div class="field">112 boards built between 02:00 and 02:40 went through the oven above spec but passed AOI: quarantine finished goods and notify the customer about boards already shipped. The rest of the batch was built in spec and can be released. <a href="containment.html">See the board list</a>.</div>
+<div class="field">112 boards built 02:00–02:40 passed AOI but were above USL on peak reflow temperature: quarantine finished goods and notify the customer about boards already shipped. Boards built outside 02:00–02:40 were in spec on peak reflow temperature. <a href="containment.html">See the board list</a>.</div>
 </section>
 
 <section id="d4" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D4 · Root cause</h2><span class="chip ok">Auto-filled</span></div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px">
-<div style="display: flex; flex-direction: column; gap: 6px"><div class="eyebrow">Occurrence</div><div class="field">Peak reflow temperature ran above spec (257.9–259.8 °C vs 245–255 °C) from 02:00 to 02:40, causing excess solder spreading. 44 of 47 bridged boards were built in that window; bridging was 226× more likely above the limit.</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div class="eyebrow">Occurrence</div><div class="field">Peak reflow temperature was above USL 02:00–02:40 (257.9–259.8 °C, spec 245–255 °C), through the mechanism excess reflow spreading. 44 of 47 boards with solder bridging were built 02:00–02:40. Solder bridging rate, out of spec vs in spec: 28.2% vs 0.125% (226×).</div></div>
 <div style="display: flex; flex-direction: column; gap: 6px"><div class="eyebrow">Escape</div><div class="need">Why did the line run 40 minutes on the wrong profile? Confirm whether recipe changes need sign-off and whether the oven has a peak-temperature alarm.</div></div>
 </div>
-<div style="font-size: 14px; color: #5B6169">Seven other possible causes were checked and not linked. <a href="rca-packet.html">See full analysis</a></div>
+<div style="font-size: 14px; color: #5B6169">7 other root causes checked and not linked. <a href="rca-packet.html">See full analysis</a></div>
 </section>
 
 <section id="d5" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D5 · Corrective action</h2><span class="chip ok">Auto-filled</span></div>
 <ul class="field" style="margin: 0; padding-left: 32px; display: flex; flex-direction: column; gap: 6px">
-<li>Lock the approved reflow recipe and confirm how a different profile was loaded at 02:00.</li>
+<li>Restore the approved reflow recipe; lock recipe changes behind sign-off.</li>
 </ul>
 </section>
 
@@ -112,7 +112,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 <section id="d7" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D7 · Prevention</h2><span class="chip ok">Auto-filled</span></div>
-<div class="field">Add a peak reflow upper-limit alarm on line 2. This case was added to the Failure Library so the same pattern is flagged automatically next time.</div>
+<div class="field">Add a peak reflow temperature USL alarm on line 2. This case was added to the Failure Library so the same pattern is flagged automatically next time.</div>
 </section>
 
 <section id="d8" class="card sec">

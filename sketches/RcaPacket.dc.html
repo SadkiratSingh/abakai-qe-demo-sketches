@@ -83,7 +83,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
-<span class="chip info">Most likely cause</span>
+<span class="chip info">Linked root cause #1</span>
 <div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">{{c.summary}}</div>
 <div class="mono" style="font-size: 13px; color: #4A4F56">{{c.checkedLine}}</div>
 </div>
@@ -93,7 +93,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked root causes">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked root causes</h2>
-<div style="font-size: 14px; color: #5B6169">Out of spec in this batch and clearly more common on {{c.lower}} boards.</div>
+<div style="font-size: 14px; color: #5B6169">Out of spec in this batch and passed all three checks.</div>
 </div>
 <sc-for list="{{c.linked}}" as="h" hint-placeholder-count="1">
 <article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
@@ -112,9 +112,9 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div class="node n-def">{{c.title}}<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">{{h.r1}} vs {{h.r2}}</span><span class="l">{{c.rateWord}} rate, out of spec vs in spec</span></div>
+<div class="stat"><span class="v">{{h.r1}} vs {{h.r2}}</span><span class="l">{{c.title}} rate, out of spec vs in spec</span></div>
 <div class="stat"><span class="v">{{h.rr}}</span><span class="l">more likely when out of spec</span></div>
-<div class="stat"><span class="v">{{h.cov}}</span><span class="l">{{c.lower}} boards were out of spec</span></div>
+<div class="stat"><span class="v">{{h.cov}}</span><span class="l">Boards with {{c.defLower}} that were out of spec</span></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
@@ -128,15 +128,18 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <details style="font-size: 14px">
 <summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
 <table class="tt">
-<thead><tr><th>{{c.batchLabel}}</th><th>{{c.title}}</th><th>No defect</th><th>Defect rate</th></tr></thead>
+<thead><tr><th>{{c.batchLabel}}</th><th>{{c.title}}</th><th>No {{c.defLower}}</th><th>{{c.title}} rate</th></tr></thead>
 <tbody>
 <tr><td>{{h.expLabel}}</td><td>{{h.a}}</td><td>{{h.b}}</td><td>{{h.r1}}</td></tr>
 <tr><td>In spec</td><td>{{h.c2}}</td><td>{{h.d}}</td><td>{{h.r2}}</td></tr>
 </tbody>
 </table>
-<div style="margin-top: 10px; color: #4A4F56; line-height: 1.5">{{h.rr}} = {{h.r1}} ÷ {{h.r2}}. The causal path comes from the Failure Library rule <span class="mono" style="font-size: 13px">{{h.rule}}</span>.</div>
-<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5">{{h.shareLine}}</div>
-<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5">Fisher's exact test: p {{h.p}}. The gap between {{h.r1}} and {{h.r2}} is far too large to be random variation.</div>
+<ul style="margin: 10px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
+<li>{{c.title}} rate, out of spec vs in spec: {{h.r1}} vs {{h.r2}} ({{h.rr}}). Needs 2× or more.</li>
+<li>Fisher's exact test: p {{h.p}}. Needs p &lt; 0.01.</li>
+<li>Boards with {{c.defLower}} that were out of spec: {{h.cov}} ({{h.covPct}}). Needs 20% or more.</li>
+<li>Failure Library rule: <span class="mono" style="font-size: 13px">{{h.rule}}</span></li>
+</ul>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
 <div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>{{h.action}}</div>
@@ -157,7 +160,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section class="card" style="overflow: hidden" aria-label="Checked and not linked">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · {{c.ruledCount}}</h2>
-<div style="font-size: 14px; color: #5B6169">Every other root cause in the Failure Library for {{c.defLower}}, and why it was set aside.</div>
+<div style="font-size: 14px; color: #5B6169">Every other root cause in the Failure Library for {{c.defLower}}, with the check it failed.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 <sc-for list="{{c.ruled}}" as="r" hint-placeholder-count="5">
@@ -167,7 +170,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 12px; color: #5B6169">via {{r.mech}}</span>
 </div>
 <span class="{{r.cls}}">{{r.status}}</span>
-<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">{{r.reason}}</span><sc-if value="{{r.ef}}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; color: #5B6169">{{r.ef}}</span></sc-if></div>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">{{r.reason}}</span>
 </div>
 </sc-for>
 </div>
@@ -204,12 +207,12 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
-<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a cause is linked</h2>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">A root cause is linked when its parameter was out of spec in this batch and all three hold:</div>
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a root cause is linked</h2>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Its parameter was out of spec in this batch, and it passes all three checks:</div>
 <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6">
-<li>the defect is at least 2× more likely on out-of-spec boards</li>
-<li>the gap is too large to be random variation (Fisher's exact test, p &lt; 0.01)</li>
-<li>it explains at least 20% of the defective boards</li>
+<li>Defect rate, out of spec vs in spec: 2× or more</li>
+<li>Fisher's exact test: p &lt; 0.01, so the gap is not random variation</li>
+<li>Boards with the defect that were out of spec: 20% or more</li>
 </ul>
 </section>
 </aside>
@@ -236,61 +239,79 @@ class Component extends DCLogic {
     return { points, uslY, lslY, bandH: lslY - uslY, uslTy: uslY - 6, lslTy: lslY + 16, winX, winW, winTx: winX + Math.round(winW / 2), midX: X(12) };
   }
   renderVals() {
-    const ruledRow = (root, mech, status, reason, ef) => ({ root, mech, status, reason, ef: ef || '', cls: status.indexOf('Out of spec') === 0 ? 'chip warn' : 'chip ok' });
+    // Text templates (see README, "Wording templates"). Every sentence below is one of these, filled with data.
+    const low = d => d.replace('Above', 'above').replace('Below', 'below');
+    const T = {
+      summary: (param, dir, win, k, K, d) => `${param} was ${dir} ${win}. ${k} of ${K} boards with ${d} were built ${win}.`,
+      checked: (n, m) => `${n} root causes checked · ${m} linked`,
+      status: (dir, n) => `${dir} · ${n} boards`,
+      evWindow: (n, dir, win, param, range, spec) => `${n} boards were ${low(dir)} ${win}: ${param} ${range} (spec ${spec}).`,
+      evCount: (n, dir, param, range, spec) => `${n} boards were ${low(dir)}: ${param} ${range} (spec ${spec}).`,
+      evBuilt: (k, K, d, win) => `${k} of ${K} boards with ${d} were built ${win}.`,
+      evOutside: (win, param, mean, k, d) => `Outside ${win}: ${param} averaged ${mean}; ${k} boards with ${d}.`,
+      overlap: (x, n, dir, param) => `${x} of these ${n} boards were also ${low(dir)} on ${param}. Likely an effect of #1, not a separate root cause.`,
+      chartNote: (param, mean, win, max) => `${param} averaged ${mean} outside ${win} and reached ${max} during it.`,
+      contain: (n, win, insp, dir, param) => `${n} boards built ${win} passed ${insp} but were ${low(dir)} on ${param}.`,
+      failRate: (D, a, b, rr) => `${D} rate, out of spec vs in spec: ${a} vs ${b} (${rr}). Needs 2× or more.`,
+      failCov: (d, k, K, pct) => `Boards with ${d} that were out of spec: ${k} of ${K} (${pct}). Needs 20% or more.`,
+      inSpec: (range, where, spec) => `Measured ${range} on ${where} (spec ${spec}).`
+    };
+    const inSpecRow = (root, mech, reason) => ({ root, mech, status: 'In spec', reason, cls: 'chip ok' });
+    const outRow = (root, mech, status, reason) => ({ root, mech, status, reason, cls: 'chip warn' });
     const cases = {
       bridge: {
-        title: 'Solder bridging', defLower: 'solder bridging', lower: 'bridged', rateWord: 'Bridging', batchLabel: 'stg-B0003 boards', atRisk: 112,
-        summary: 'The reflow oven ran above its peak temperature limit from 02:00 to 02:40. Boards built in that window account for 44 of the 47 bridges.',
-        checkedLine: '8 possible causes checked · 1 linked',
+        title: 'Solder bridging', defLower: 'solder bridging', batchLabel: 'stg-B0003 boards', atRisk: 112,
+        summary: T.summary('Peak reflow temperature', 'above USL', '02:00–02:40', 44, 47, 'solder bridging'),
+        checkedLine: T.checked(8, 1),
         param: 'Peak reflow temperature (°C)', lsl: 245, usl: 255, window: '02:00–02:40',
         vals: [251.6, 251.9, 251.4, 252.1, 251.8, 251.5, 252.0, 251.7, 251.9, 251.6, 252.2, 251.8, 258.6, 258.9, 251.9, 251.7, 252.0, 251.5, 251.8, 252.1, 251.6, 251.9, 251.7, 251.8], w0: 12, w1: 13,
-        chartLabel: 'Peak reflow temperature is above the 255 °C upper limit only between 02:00 and 02:40',
-        chartNote: 'Peak reflow held near 251.8 °C all shift except 02:00–02:40, when it ran about 4 °C above the upper limit.',
-        containNote: '112 boards built between 02:00 and 02:40 passed AOI but went through the oven above spec.',
+        chartLabel: 'Peak reflow temperature is above USL only during 02:00–02:40',
+        chartNote: T.chartNote('Peak reflow temperature', '251.8 °C', '02:00–02:40', '259.8 °C'),
+        containNote: T.contain(112, '02:00–02:40', 'AOI', 'Above USL', 'peak reflow temperature'),
         linked: [
-          { id: 'b1', root: 'High peak reflow temperature', mech: 'Excess reflow spreading', equip: 'Reflow oven', status: 'Out of spec · 156 boards', 
-            cov: '44 of 47', rr: '226×', p: '< 0.001', shareLine: 'Out-of-spec boards were 6.1% of the batch (156 of 2,560) but had 94% of the bridges (44 of 47).', expLabel: 'Above USL',
+          { id: 'b1', root: 'High peak reflow temperature', mech: 'Excess reflow spreading', equip: 'Reflow oven', status: T.status('Above USL', 156),
+            cov: '44 of 47', covPct: '94%', rr: '226×', p: '< 0.001', expLabel: 'Above USL',
             a: '44', b: '112', c2: '3', d: '2,401', r1: '28.2%', r2: '0.125%',
-            evidence: ['156 boards were above the upper limit, all built between 02:00 and 02:40 (peak 257.9–259.8 °C, spec 245–255 °C).', '44 of the 47 bridged boards were built in that window.', 'Outside the window, peak reflow averaged 251.8 °C and only 3 boards bridged.'],
+            evidence: [T.evWindow(156, 'Above USL', '02:00–02:40', 'peak reflow temperature', '257.9–259.8 °C', '245–255 °C'), T.evBuilt(44, 47, 'solder bridging', '02:00–02:40'), T.evOutside('02:00–02:40', 'peak reflow temperature', '251.8 °C', 3, 'solder bridging')],
             rule: 'PeakReflowTemperature > USL → ExcessReflowSpreading',
-            action: 'Lock the approved reflow recipe and confirm how a different profile was loaded at 02:00.' }
+            action: 'Restore the approved reflow recipe; lock recipe changes behind sign-off.' }
         ],
         ruled: [
-          ruledRow('High paste volume per aperture', 'Aperture overfill', 'Out of spec · 61 boards', 'Explains only 6 of 47 bridged boards (13%), below the 20% threshold.', 'Out of spec on 2.4% of boards, which had 13% of the bridges.'),
-          ruledRow('High ambient temperature', 'Aperture overfill', 'Out of spec · 96 boards', 'Bridging rate is about the same with or without it: 2.1% vs 1.8%.', 'Out of spec on 3.8% of boards, which had 4% of the bridges.'),
-          ruledRow('High stencil thickness', 'Aperture overfill', 'In spec', 'Stencil ST-0412 measured 100.4 µm (spec 95–105 µm).'),
-          ruledRow('Low aperture area ratio', 'Aperture overfill', 'In spec', 'Design check 0.71 (minimum 0.66).'),
-          ruledRow('High bead size of solder paste', 'Aperture overfill', 'In spec', 'All 2,560 boards within 3.6–4.4 mm³.'),
-          ruledRow('Low squeegee speed', 'Aperture overfill', 'In spec', 'All 2,560 boards within 56–84 mm/s.'),
-          ruledRow('High ambient RH', 'Post-print spread', 'In spec', 'No boards above the limit.')
+          outRow('High paste volume per aperture', 'Aperture overfill', T.status('Above USL', 61), T.failCov('solder bridging', 6, 47, '13%')),
+          outRow('High ambient temperature', 'Aperture overfill', T.status('Above USL', 96), T.failRate('Solder bridging', '2.1%', '1.8%', '1.1×')),
+          inSpecRow('High stencil thickness', 'Aperture overfill', T.inSpec('100.4 µm', 'stencil ST-0412', '95–105 µm')),
+          inSpecRow('Low aperture area ratio', 'Aperture overfill', T.inSpec('0.71', 'stencil ST-0412', '≥ 0.66')),
+          inSpecRow('High bead size of solder paste', 'Aperture overfill', T.inSpec('3.7–4.3 mm³', 'all 2,560 boards', '3.6–4.4 mm³')),
+          inSpecRow('Low squeegee speed', 'Aperture overfill', T.inSpec('62–78 mm/s', 'all 2,560 boards', '56–84 mm/s')),
+          inSpecRow('High ambient RH', 'Post-print spread', T.inSpec('38–55 %RH', 'all 2,560 boards', '[your limit]'))
         ]
       },
       open: {
-        title: 'Open circuit', defLower: 'open circuits', lower: 'open-circuit', rateWord: 'Open-circuit', batchLabel: 'stg-B0003 boards', atRisk: 162,
-        summary: 'Solder paste viscosity was above its limit from 03:40 to 04:30, after a new paste jar was loaded. Boards printed in that window account for 28 of the 31 opens.',
-        checkedLine: '3 possible causes checked · 2 linked',
+        title: 'Open circuit', defLower: 'open circuit', batchLabel: 'stg-B0003 boards', atRisk: 162,
+        summary: T.summary('Paste viscosity', 'above USL', '03:40–04:30', 28, 31, 'open circuit'),
+        checkedLine: T.checked(3, 2),
         param: 'Paste viscosity (Pa·s)', lsl: 180, usl: 220, window: '03:40–04:30',
         vals: [205, 207, 204, 208, 206, 203, 207, 205, 206, 204, 208, 206, 205, 207, 204, 206, 205, 238, 243, 240, 206, 204, 207, 205], w0: 17, w1: 19,
-        chartLabel: 'Paste viscosity is above the 220 Pa·s upper limit only between 03:40 and 04:30',
-        chartNote: 'Viscosity held near 206 Pa·s except 03:40–04:30, when it rose to about 240 Pa·s until the paste jar was replaced.',
-        containNote: '162 boards printed between 03:40 and 04:30 passed electrical test but used the out-of-spec paste.',
+        chartLabel: 'Paste viscosity is above USL only during 03:40–04:30',
+        chartNote: T.chartNote('Paste viscosity', '206 Pa·s', '03:40–04:30', '246 Pa·s'),
+        containNote: T.contain(162, '03:40–04:30', 'electrical test', 'Above USL', 'paste viscosity'),
         linked: [
-          { id: 'o1', root: 'High paste viscosity', mech: 'Poor paste transfer', equip: 'Solder paste', status: 'Out of spec · 190 boards', 
-            cov: '28 of 31', rr: '116×', p: '< 0.001', shareLine: 'Out-of-spec boards were 7.4% of the batch (190 of 2,560) but had 90% of the opens (28 of 31).', expLabel: 'Above USL',
+          { id: 'o1', root: 'High paste viscosity', mech: 'Poor paste transfer', equip: 'Solder paste', status: T.status('Above USL', 190),
+            cov: '28 of 31', covPct: '90%', rr: '116×', p: '< 0.001', expLabel: 'Above USL',
             a: '28', b: '162', c2: '3', d: '2,367', r1: '14.7%', r2: '0.127%',
-            evidence: ['190 boards were printed with viscosity above the limit, all between 03:40 and 04:30 (236–246 Pa·s, spec 180–220 Pa·s).', '28 of the 31 open-circuit boards were printed in that window.', 'The paste jar was replaced at 04:30 and viscosity returned to about 206 Pa·s.'],
+            evidence: [T.evWindow(190, 'Above USL', '03:40–04:30', 'paste viscosity', '236–246 Pa·s', '180–220 Pa·s'), T.evBuilt(28, 31, 'open circuit', '03:40–04:30'), T.evOutside('03:40–04:30', 'paste viscosity', '206 Pa·s', 3, 'open circuit')],
             rule: 'PasteViscosity > USL → PoorPasteTransfer',
-            action: 'Quarantine the paste lot; check its age, storage temperature and floor life.' },
-          { id: 'o2', root: 'Low paste volume per aperture', mech: 'Poor paste transfer', equip: 'Solder printer', status: 'Out of spec · 74 boards', 
-            cov: '22 of 31', rr: '82×', p: '< 0.001', shareLine: 'Out-of-spec boards were 2.9% of the batch (74 of 2,560) but had 71% of the opens (22 of 31).', expLabel: 'Below LSL',
+            action: 'Replace the paste; check paste age and floor life.' },
+          { id: 'o2', root: 'Low paste volume per aperture', mech: 'Poor paste transfer', equip: 'Solder printer', status: T.status('Below LSL', 74),
+            cov: '22 of 31', covPct: '71%', rr: '82×', p: '< 0.001', expLabel: 'Below LSL',
             a: '22', b: '52', c2: '9', d: '2,477', r1: '29.7%', r2: '0.36%',
-            evidence: ['74 boards had paste volume below the lower limit (spec 0.040 ± 0.004 mm³).', '22 of the 31 open-circuit boards were among them.'],
-            hasNote: true, note: '70 of these 74 boards were printed during the high-viscosity window. Low paste volume is most likely an effect of #1, not a separate cause.',
+            evidence: [T.evCount(74, 'Below LSL', 'paste volume per aperture', '0.031–0.035 mm³', '0.036–0.044 mm³')],
+            hasNote: true, note: T.overlap(70, 74, 'Above USL', 'paste viscosity'),
             rule: 'PasteVolumePerAperture < LSL → PoorPasteTransfer',
-            action: 'No separate action; recheck SPI volume after the paste is replaced.' }
+            action: 'Clean the stencil underside; verify squeegee pressure.' }
         ],
         ruled: [
-          ruledRow('High ambient RH', 'Poor paste transfer', 'In spec', 'No boards above the limit.')
+          inSpecRow('High ambient RH', 'Poor paste transfer', T.inSpec('38–55 %RH', 'all 2,560 boards', '[your limit]'))
         ]
       }
     };
