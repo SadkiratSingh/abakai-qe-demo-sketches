@@ -68,12 +68,12 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <a href="Main.dc.html" style="font-size: 14px; text-decoration: none">← Line overview</a>
-<div class="eyebrow">Investigation INV-0142 · CTRL-BRD-A · stg-B0003 · 2,560 boards · Night shift</div>
+<div class="eyebrow">Investigation INV-0142 · CTRL-BRD-A · stg-B0003 · 2,560 boards · 2 defects · Night shift</div>
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">Root cause analysis</h1>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <a class="btn" href="Containment.dc.html">View containment</a>
-<a class="btn primary" href="Report8D.dc.html">Create 8D draft</a>
+<a class="btn primary" href="{{c.eightDHref}}">Open {{c.eightD}}</a>
 </div>
 </div>
 
@@ -261,7 +261,7 @@ class Component extends DCLogic {
     const outRow = (root, mech, status, reason) => ({ root, mech, status, reason, cls: 'chip warn' });
     const cases = {
       bridge: {
-        title: 'Solder bridging', defLower: 'solder bridging', batchLabel: 'stg-B0003 boards', atRisk: 112,
+        title: 'Solder bridging', defLower: 'solder bridging', batchLabel: 'stg-B0003 boards', atRisk: 112, eightD: '8D-0142-A', eightDHref: 'Report8D.dc.html',
         summary: T.summary('Peak reflow temperature', 'above USL', '02:00–02:40', 44, 47, 'solder bridging'),
         checkedLine: T.checked(8, 1),
         param: 'Peak reflow temperature (°C)', lsl: 245, usl: 255, window: '02:00–02:40',
@@ -288,7 +288,7 @@ class Component extends DCLogic {
         ]
       },
       open: {
-        title: 'Open circuit', defLower: 'open circuit', batchLabel: 'stg-B0003 boards', atRisk: 165,
+        title: 'Open circuit', defLower: 'open circuit', batchLabel: 'stg-B0003 boards', atRisk: 165, eightD: '8D-0142-B', eightDHref: 'Report8DOpen.dc.html',
         summary: T.summary('Paste viscosity', 'above USL', '03:40–04:30', 28, 31, 'open circuit'),
         checkedLine: T.checked(3, 2),
         param: 'Paste viscosity (Pa·s)', lsl: 180, usl: 220, window: '03:40–04:30',

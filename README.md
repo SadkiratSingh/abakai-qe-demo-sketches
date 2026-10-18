@@ -10,8 +10,9 @@ Clickable screen sketches for a root cause analysis (RCA) demo aimed at quality 
 | `sketches/RcaPacket.dc.html` | 2 · RCA packet | Linked root causes per defect with the three checks, root causes checked and not linked, spec trend, suggested action |
 | `sketches/Containment.dc.html` | 3 · Containment | Boards that passed inspection but were built out of spec, by location |
 | `sketches/Board.dc.html` | 3a · Board detail | One board's linked root cause, model confidence, parameter fingerprint, same-panel boards, disposition, history |
-| `sketches/Report8D.dc.html` | 4 · 8D draft | D1–D8 with the steps filled from the investigation marked |
-| `sketches/Manager.dc.html` | 5 · Manager overview | Open investigations, recurring root causes, overdue actions |
+| `sketches/Report8D.dc.html` | 4a · 8D-0142-A | 8D for solder bridging: D1–D8 with the steps filled from the investigation marked |
+| `sketches/Report8DOpen.dc.html` | 4b · 8D-0142-B | 8D for open circuit, same layout |
+| `sketches/Manager.dc.html` | 5 · Manager overview | Open investigations with their 8D reports, repeat root causes, overdue actions |
 | `sketches/Library.dc.html` | 6 · Failure Library | Root cause → mechanism → defect knowledge, with specs and fixes |
 
 `sketches/canvas.json` holds the canvas layout (artboard positions, sizes and order).
@@ -88,4 +89,5 @@ All numbers are story data, not output from the backend. Before a real demo:
 
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2: short-excursion story (reflow 02:00–02:40, paste viscosity 03:40–04:30). The RCA packet separates each parameter's status (out of spec, with a board count, or in spec) from whether it is linked to the defect (≥2× more likely, under 1% chance of coincidence, explains ≥20% of defective boards), lists every other root cause as checked and not linked, and the other screens use the same numbers.
+- One investigation per batch excursion (INV-0142 for stg-B0003), one 8D report per defect (8D-0142-A, 8D-0142-B).
 - Containment holds every board that was out of spec on any linked root cause and has not already failed a test, counted once under its first linked root cause.

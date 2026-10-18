@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>8D draft · RCA Studio</title>
+<title>8D-0142-A: solder bridging · RCA Studio</title>
 <!-- Static export of sketches/Report8D.dc.html. Regenerate from the sketches; do not edit by hand. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
@@ -31,6 +31,9 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .sec p{margin:0;font-size:15px;line-height:1.6}
 .field{font-size:15px;line-height:1.6;padding:12px 14px;border:1px solid #E1E4E0;border-radius:8px;background:#FBFBFA}
 .need{font-size:15px;line-height:1.6;padding:12px 14px;border:1px dashed #E08A3C;border-radius:8px;background:#FFFAF4;color:#6B2C05}
+.tab{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-bottom:3px solid transparent;font:600 15px 'IBM Plex Sans',sans-serif;color:#5B6169;text-decoration:none}
+.tab:hover{color:#16191D}
+.tab.on{color:#16191D;border-bottom-color:#1A4F9C}
 </style>
 </head>
 <body>
@@ -60,6 +63,11 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 </div>
 
+<nav aria-label="8D reports for INV-0142" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E1E4E0">
+<a class="tab on" href="8d-draft.html" aria-current="page">8D-0142-A · Solder bridging</a>
+<a class="tab" href="8d-draft-open-circuit.html">8D-0142-B · Open circuit</a>
+</nav>
+
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
 <nav class="card" aria-label="8D steps" style="flex: 1 1 240px; padding: 12px; display: flex; flex-direction: column; gap: 2px">
 <a class="step" href="#d1"><span>D1 Team</span><span class="chip warn">Needs input</span></a>
@@ -70,13 +78,13 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <a class="step" href="#d6"><span>D6 Verification</span><span class="chip warn">Needs input</span></a>
 <a class="step" href="#d7"><span>D7 Prevention</span><span class="chip ok">Auto-filled</span></a>
 <a class="step" href="#d8"><span>D8 Closure</span><span class="chip muted">Not started</span></a>
-<div style="margin-top: 8px; padding: 12px; font-size: 13px; color: #5B6169; line-height: 1.5; border-top: 1px solid #EEF0ED">Open circuits have their own draft, 8D-0142-B.</div>
+<div style="margin-top: 8px; padding: 12px; font-size: 13px; color: #5B6169; line-height: 1.5; border-top: 1px solid #EEF0ED">One 8D per defect. Investigation INV-0142 covers batch stg-B0003 and has two 8D reports.</div>
 </nav>
 
 <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
 <section id="d1" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D1 · Team</h2><span class="chip warn">Needs input</span></div>
-<div class="need">Add the team: quality engineer (owner), process engineer for reflow, line supervisor, and materials if paste is involved.</div>
+<div class="need">Add the team: quality engineer (owner), reflow process engineer, line supervisor.</div>
 </section>
 
 <section id="d2" class="card sec">
@@ -107,7 +115,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 <section id="d6" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D6 · Verification</h2><span class="chip warn">Needs input</span></div>
-<div class="need">Record the verification run: profile measurement after the fix and bridging rate over the next [N] panels.</div>
+<div class="need">Record the verification run: profile measurement after the fix and solder bridging rate over the next [N] panels.</div>
 </section>
 
 <section id="d7" class="card sec">
