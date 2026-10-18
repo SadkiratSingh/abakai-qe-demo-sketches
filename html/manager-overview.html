@@ -54,7 +54,6 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Open investigations</div><div class="mono" style="font-size: 32px; font-weight: 500">5</div><div style="font-size: 13px; color: #5B6169">1 opened this week</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Median time to root cause</div><div class="mono" style="font-size: 32px; font-weight: 500">3.2 h</div><div style="font-size: 13px; color: #5B6169">Baseline before rollout: [your figure]</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Repeat root causes</div><div class="mono" style="font-size: 32px; font-weight: 500">3</div><div style="font-size: 13px; color: #5B6169">Root causes seen in 2+ investigations</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0; background: #FFF8F7"><div class="eyebrow" style="color: #9B1C12">Overdue actions</div><div class="mono" style="font-size: 32px; font-weight: 500; color: #9B1C12">2</div><div style="font-size: 13px; color: #7E160E; font-weight: 600">INV-0139 and INV-0135</div></div>
 </section>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
@@ -105,10 +104,10 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 </div>
 
 <section class="card" style="overflow: hidden" aria-label="Open investigations">
-<div style="padding: 20px 24px 8px; display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Open investigations</h2><div style="font-size: 14px; color: #5B6169">One investigation per batch excursion, with the recommended report.</div></div>
+<div style="padding: 20px 24px 8px; display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Open investigations</h2><div style="font-size: 14px; color: #5B6169">One investigation per batch excursion.</div></div>
 <div style="overflow-x: auto">
 <table>
-<thead><tr><th>Investigation · batch</th><th>Defects</th><th>Product · line</th><th>Owner</th><th>Age</th><th>Stage</th><th>Linked root causes</th><th>Recommended report</th></tr></thead>
+<thead><tr><th>Investigation · batch</th><th>Defects</th><th>Product · line</th><th>Owner</th><th>Age</th><th>Linked root causes</th></tr></thead>
 <tbody>
 
 <tr>
@@ -117,9 +116,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <td style="white-space: nowrap">CTRL-BRD-A · Line 2</td>
 <td style="white-space: nowrap">Priya S.</td>
 <td class="mono" style="white-space: nowrap">6 h</td>
-<td><span class="chip info">Root cause</span></td>
 <td>High peak reflow temperature; high paste viscosity</td>
-<td style="white-space: nowrap"><span class="chip crit">8D</span></td>
 </tr>
 
 <tr>
@@ -128,9 +125,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <td style="white-space: nowrap">PWR-BRD-C · Line 1</td>
 <td style="white-space: nowrap">Marco L.</td>
 <td class="mono" style="white-space: nowrap">4 d</td>
-<td><span class="chip crit">Action overdue</span></td>
 <td>High stencil thickness</td>
-<td style="white-space: nowrap"><span class="chip crit">8D</span></td>
 </tr>
 
 <tr>
@@ -139,9 +134,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <td style="white-space: nowrap">CTRL-BRD-A · Line 2</td>
 <td style="white-space: nowrap">Wei C.</td>
 <td class="mono" style="white-space: nowrap">6 d</td>
-<td><span class="chip warn">Verification</span></td>
 <td>Low squeegee speed</td>
-<td style="white-space: nowrap"><span class="chip muted">Internal corrective action</span></td>
 </tr>
 
 <tr>
@@ -150,9 +143,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <td style="white-space: nowrap">IO-BRD-B · Line 2</td>
 <td style="white-space: nowrap">Wei C.</td>
 <td class="mono" style="white-space: nowrap">9 d</td>
-<td><span class="chip crit">Action overdue</span></td>
 <td>High peak reflow temperature</td>
-<td style="white-space: nowrap"><span class="chip crit">8D</span></td>
 </tr>
 
 <tr>
@@ -161,9 +152,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <td style="white-space: nowrap">PWR-BRD-C · Line 1</td>
 <td style="white-space: nowrap">Marco L.</td>
 <td class="mono" style="white-space: nowrap">12 d</td>
-<td><span class="chip ok">Prevention</span></td>
 <td>High paste viscosity</td>
-<td style="white-space: nowrap"><span class="chip muted">Internal corrective action</span></td>
 </tr>
 
 </tbody>

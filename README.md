@@ -7,10 +7,10 @@ Clickable screen sketches for a root cause analysis (RCA) demo aimed at quality 
 | File | Screen | What it shows |
 | --- | --- | --- |
 | `sketches/Main.dc.html` | 1 · Line overview | Shift KPIs, excursion alerts, defects by hour, batch table |
-| `sketches/RcaPacket.dc.html` | 2 · RCA packet | Recommended report for the investigation, linked root causes per defect with the three checks, root causes checked and not linked, spec trend, suggested action |
+| `sketches/RcaPacket.dc.html` | 2 · RCA packet | Linked root causes per defect with the three checks, root causes checked and not linked, spec trend, suggested action |
 | `sketches/Containment.dc.html` | 3 · Containment | Boards that passed inspection but were built out of spec, by location |
 | `sketches/Board.dc.html` | 3a · Board detail | One board's linked root cause, model confidence, parameter fingerprint, same-panel boards, disposition, history |
-| `sketches/Manager.dc.html` | 5 · Manager overview | Open investigations with their recommended report, repeat root causes, overdue actions |
+| `sketches/Manager.dc.html` | 5 · Manager overview | Open investigations, repeat root causes, Failure Library summary |
 | `sketches/Library.dc.html` | 6 · Failure Library | Root cause → mechanism → defect knowledge, with specs and fixes |
 
 `sketches/canvas.json` holds the canvas layout (artboard positions, sizes and order).
@@ -75,8 +75,6 @@ A root cause checked and not linked shows the first check it failed, in the same
 | Line alert | `{K} boards with {defect}; {k} of {K} built {window}. Root cause analysis is ready.` |
 | Board banner | `Passed {inspections}, but {parameter} was {above USL} ({value}, spec {spec}). Built {time}, during {window}: matches linked root cause #{n} of {investigation}.` |
 | Suggested action | The root cause's **Fix** text from the Failure Library, word for word |
-| Report trigger | `{Trigger}: {value}` with a `Met` / `Not met` chip, e.g. `Boards shipped: 8 at-risk boards shipped before containment` |
-| Recommended report | `8D` (`{k} of {n} triggers met`) or `Internal corrective action` (`No triggers met`) |
 
 ## Placeholders and assumptions
 
@@ -90,5 +88,5 @@ All numbers are story data, not output from the backend. Before a real demo:
 
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2: short-excursion story (reflow 02:00–02:40, paste viscosity 03:40–04:30). The RCA packet separates each parameter's status (out of spec, with a board count, or in spec) from whether it is linked to the defect (≥2× more likely, under 1% chance of coincidence, explains ≥20% of defective boards), lists every other root cause as checked and not linked, and the other screens use the same numbers.
-- One investigation per batch excursion (INV-0142 for stg-B0003). The 8D screens were dropped from the demo; instead each investigation gets one recommended report: 8D when any trigger is met (boards shipped, customer complaint, same root cause on the same line in the last 90 days), otherwise internal corrective action.
+- One investigation per batch excursion (INV-0142 for stg-B0003). 8D screens, report recommendation, investigation stages and overdue tracking are out of scope for this demo (see the history before this commit).
 - Containment holds every board that was out of spec on any linked root cause and has not already failed a test, counted once under its first linked root cause. Containment belongs to the investigation, and its scope follows the root cause, so other batches through the same line during the windows are checked too.
