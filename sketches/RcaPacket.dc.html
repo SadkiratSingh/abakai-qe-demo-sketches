@@ -249,7 +249,7 @@ class Component extends DCLogic {
         linked: [
           { id: 'b1', root: 'High peak reflow temperature', mech: 'Excess reflow spreading', equip: 'Reflow oven', status: 'Out of spec · 156 boards', model: '98.9%',
             cov: '44 of 47', rr: '226×', p: '< 0.1%', expLabel: 'Above USL',
-            a: '44', b: '112', c2: '3', d: '2,401', r1: '28.2%', r2: '0.12%',
+            a: '44', b: '112', c2: '3', d: '2,401', r1: '28.2%', r2: '0.125%',
             evidence: ['156 boards were above the upper limit, all built between 02:00 and 02:40 (peak 257.9–259.8 °C, spec 245–255 °C).', '44 of the 47 bridged boards were built in that window.', 'Outside the window, peak reflow averaged 251.8 °C and only 3 boards bridged.'],
             rule: 'PeakReflowTemperature > USL → ExcessReflowSpreading',
             action: 'Lock the approved reflow recipe and confirm how a different profile was loaded at 02:00.' }
@@ -276,7 +276,7 @@ class Component extends DCLogic {
         linked: [
           { id: 'o1', root: 'High paste viscosity', mech: 'Poor paste transfer', equip: 'Solder paste', status: 'Out of spec · 190 boards', model: '91.0%',
             cov: '28 of 31', rr: '116×', p: '< 0.1%', expLabel: 'Above USL',
-            a: '28', b: '162', c2: '3', d: '2,367', r1: '14.7%', r2: '0.13%',
+            a: '28', b: '162', c2: '3', d: '2,367', r1: '14.7%', r2: '0.127%',
             evidence: ['190 boards were printed with viscosity above the limit, all between 03:40 and 04:30 (236–246 Pa·s, spec 180–220 Pa·s).', '28 of the 31 open-circuit boards were printed in that window.', 'The paste jar was replaced at 04:30 and viscosity returned to about 206 Pa·s.'],
             rule: 'PasteViscosity > USL → PoorPasteTransfer',
             action: 'Quarantine the paste lot; check its age, storage temperature and floor life.' },
