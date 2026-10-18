@@ -71,6 +71,7 @@ A root cause checked and not linked shows the first check it failed, in the same
 | Trend note | `{Parameter} averaged {mean} {unit} outside {window} and reached {max} {unit} during it.` |
 | Containment | `{n} boards built {window} passed {AOI | electrical test} but were {above USL} on {parameter}.` |
 | Containment, each further linked root cause | `{n} more boards passed {inspection} but were {below LSL} on {parameter}.` |
+| Containment scope check | `Also checked: other batches through {line} during {windows}: {none | list}.` |
 | Line alert | `{K} boards with {defect}; {k} of {K} built {window}. Root cause analysis is ready.` |
 | Board banner | `Passed {inspections}, but {parameter} was {above USL} ({value}, spec {spec}). Built {time}, during {window}: matches linked root cause #{n} of {investigation}.` |
 | Suggested action | The root cause's **Fix** text from the Failure Library, word for word |
@@ -90,4 +91,4 @@ All numbers are story data, not output from the backend. Before a real demo:
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2: short-excursion story (reflow 02:00–02:40, paste viscosity 03:40–04:30). The RCA packet separates each parameter's status (out of spec, with a board count, or in spec) from whether it is linked to the defect (≥2× more likely, under 1% chance of coincidence, explains ≥20% of defective boards), lists every other root cause as checked and not linked, and the other screens use the same numbers.
 - One investigation per batch excursion (INV-0142 for stg-B0003). The 8D screens were dropped from the demo; instead each investigation gets one recommended report: 8D when any trigger is met (boards shipped, customer complaint, same root cause on the same line in the last 90 days), otherwise internal corrective action.
-- Containment holds every board that was out of spec on any linked root cause and has not already failed a test, counted once under its first linked root cause.
+- Containment holds every board that was out of spec on any linked root cause and has not already failed a test, counted once under its first linked root cause. Containment belongs to the investigation, and its scope follows the root cause, so other batches through the same line during the windows are checked too.
