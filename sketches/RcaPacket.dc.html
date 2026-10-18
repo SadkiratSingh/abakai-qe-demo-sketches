@@ -103,7 +103,6 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span class="chip info">Linked</span>
 <span class="chip crit">{{h.status}}</span>
 </div>
-<span style="font-size: 13px; color: #5B6169">Model confidence <span class="mono" style="color: #16191D">{{h.model}}</span></span>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <div class="node n-root">{{h.root}}<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · {{h.equip}}</div></div>
@@ -115,7 +114,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <div class="stat"><span class="v">{{h.cov}}</span><span class="l">{{c.lower}} boards explained</span></div>
 <div class="stat"><span class="v">{{h.rr}}</span><span class="l">more likely when out of spec</span></div>
-<div class="stat"><span class="v">{{h.p}}</span><span class="l">chance it's a coincidence</span></div>
+<div class="stat"><span class="v">{{h.found}} found</span><span class="l">about {{h.exp}} expected by chance</span></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
@@ -136,6 +135,8 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </tbody>
 </table>
 <div style="margin-top: 10px; color: #4A4F56; line-height: 1.5">{{h.rr}} = {{h.r1}} ÷ {{h.r2}}. The causal path comes from the Failure Library rule <span class="mono" style="font-size: 13px">{{h.rule}}</span>.</div>
+<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5"><span style="font-weight: 600; color: #16191D">Expected by chance:</span> {{h.expCalc}}</div>
+<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5"><span style="font-weight: 600; color: #16191D">Fisher's exact test: p {{h.p}}.</span> The chance of a split at least this lopsided if this parameter had nothing to do with the defect.</div>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
 <div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>{{h.action}}</div>
@@ -166,7 +167,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 12px; color: #5B6169">via {{r.mech}}</span>
 </div>
 <span class="{{r.cls}}">{{r.status}}</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">{{r.reason}}</span>
+<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">{{r.reason}}</span><sc-if value="{{r.ef}}" hint-placeholder-val="{{ false }}"><span class="mono" style="font-size: 12px; color: #5B6169">{{r.ef}}</span></sc-if></div>
 </div>
 </sc-for>
 </div>
@@ -207,7 +208,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="font-size: 14px; line-height: 1.5; color: #4A4F56">A root cause is linked when its parameter was out of spec in this batch and all three hold:</div>
 <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6">
 <li>the defect is at least 2× more likely on out-of-spec boards</li>
-<li>the chance of coincidence is under 1%</li>
+<li>luck alone would give a split this lopsided less than 1% of the time (Fisher's exact test)</li>
 <li>it explains at least 20% of the defective boards</li>
 </ul>
 </section>
@@ -235,7 +236,7 @@ class Component extends DCLogic {
     return { points, uslY, lslY, bandH: lslY - uslY, uslTy: uslY - 6, lslTy: lslY + 16, winX, winW, winTx: winX + Math.round(winW / 2), midX: X(12) };
   }
   renderVals() {
-    const ruledRow = (root, mech, status, reason) => ({ root, mech, status, reason, cls: status.indexOf('Out of spec') === 0 ? 'chip warn' : 'chip ok' });
+    const ruledRow = (root, mech, status, reason, ef) => ({ root, mech, status, reason, ef: ef || '', cls: status.indexOf('Out of spec') === 0 ? 'chip warn' : 'chip ok' });
     const cases = {
       bridge: {
         title: 'Solder bridging', defLower: 'solder bridging', lower: 'bridged', batchLabel: 'stg-B0003 boards', atRisk: 112,
@@ -247,16 +248,16 @@ class Component extends DCLogic {
         chartNote: 'Peak reflow held near 251.8 °C all shift except 02:00–02:40, when it ran about 4 °C above the upper limit.',
         containNote: '112 boards built between 02:00 and 02:40 passed AOI but went through the oven above spec.',
         linked: [
-          { id: 'b1', root: 'High peak reflow temperature', mech: 'Excess reflow spreading', equip: 'Reflow oven', status: 'Out of spec · 156 boards', model: '98.9%',
-            cov: '44 of 47', rr: '226×', p: '< 0.1%', expLabel: 'Above USL',
+          { id: 'b1', root: 'High peak reflow temperature', mech: 'Excess reflow spreading', equip: 'Reflow oven', status: 'Out of spec · 156 boards', 
+            cov: '44 of 47', rr: '226×', p: '< 0.001', found: '44', exp: '3', expCalc: '156 of 2,560 boards (6.1%) were out of spec, so luck alone would put about 6.1% of the 47 bridges there: about 3. 44 were found.', expLabel: 'Above USL',
             a: '44', b: '112', c2: '3', d: '2,401', r1: '28.2%', r2: '0.125%',
             evidence: ['156 boards were above the upper limit, all built between 02:00 and 02:40 (peak 257.9–259.8 °C, spec 245–255 °C).', '44 of the 47 bridged boards were built in that window.', 'Outside the window, peak reflow averaged 251.8 °C and only 3 boards bridged.'],
             rule: 'PeakReflowTemperature > USL → ExcessReflowSpreading',
             action: 'Lock the approved reflow recipe and confirm how a different profile was loaded at 02:00.' }
         ],
         ruled: [
-          ruledRow('High paste volume per aperture', 'Aperture overfill', 'Out of spec · 61 boards', 'Explains only 6 of 47 bridged boards (13%), below the 20% threshold.'),
-          ruledRow('High ambient temperature', 'Aperture overfill', 'Out of spec · 96 boards', 'Bridging rate is about the same with or without it: 2.1% vs 1.8%.'),
+          ruledRow('High paste volume per aperture', 'Aperture overfill', 'Out of spec · 61 boards', 'Explains only 6 of 47 bridged boards (13%), below the 20% threshold.', 'About 1 expected by chance · 6 found'),
+          ruledRow('High ambient temperature', 'Aperture overfill', 'Out of spec · 96 boards', 'Bridging rate is about the same with or without it: 2.1% vs 1.8%.', 'About 2 expected by chance · 2 found'),
           ruledRow('High stencil thickness', 'Aperture overfill', 'In spec', 'Stencil ST-0412 measured 100.4 µm (spec 95–105 µm).'),
           ruledRow('Low aperture area ratio', 'Aperture overfill', 'In spec', 'Design check 0.71 (minimum 0.66).'),
           ruledRow('High bead size of solder paste', 'Aperture overfill', 'In spec', 'All 2,560 boards within 3.6–4.4 mm³.'),
@@ -274,14 +275,14 @@ class Component extends DCLogic {
         chartNote: 'Viscosity held near 206 Pa·s except 03:40–04:30, when it rose to about 240 Pa·s until the paste jar was replaced.',
         containNote: '162 boards printed between 03:40 and 04:30 passed electrical test but used the out-of-spec paste.',
         linked: [
-          { id: 'o1', root: 'High paste viscosity', mech: 'Poor paste transfer', equip: 'Solder paste', status: 'Out of spec · 190 boards', model: '91.0%',
-            cov: '28 of 31', rr: '116×', p: '< 0.1%', expLabel: 'Above USL',
+          { id: 'o1', root: 'High paste viscosity', mech: 'Poor paste transfer', equip: 'Solder paste', status: 'Out of spec · 190 boards', 
+            cov: '28 of 31', rr: '116×', p: '< 0.001', found: '28', exp: '2', expCalc: '190 of 2,560 boards (7.4%) were out of spec, so luck alone would put about 7.4% of the 31 opens there: about 2. 28 were found.', expLabel: 'Above USL',
             a: '28', b: '162', c2: '3', d: '2,367', r1: '14.7%', r2: '0.127%',
             evidence: ['190 boards were printed with viscosity above the limit, all between 03:40 and 04:30 (236–246 Pa·s, spec 180–220 Pa·s).', '28 of the 31 open-circuit boards were printed in that window.', 'The paste jar was replaced at 04:30 and viscosity returned to about 206 Pa·s.'],
             rule: 'PasteViscosity > USL → PoorPasteTransfer',
             action: 'Quarantine the paste lot; check its age, storage temperature and floor life.' },
-          { id: 'o2', root: 'Low paste volume per aperture', mech: 'Poor paste transfer', equip: 'Solder printer', status: 'Out of spec · 74 boards', model: '64.0%',
-            cov: '22 of 31', rr: '82×', p: '< 0.1%', expLabel: 'Below LSL',
+          { id: 'o2', root: 'Low paste volume per aperture', mech: 'Poor paste transfer', equip: 'Solder printer', status: 'Out of spec · 74 boards', 
+            cov: '22 of 31', rr: '82×', p: '< 0.001', found: '22', exp: '1', expCalc: '74 of 2,560 boards (2.9%) were out of spec, so luck alone would put about 2.9% of the 31 opens there: about 1. 22 were found.', expLabel: 'Below LSL',
             a: '22', b: '52', c2: '9', d: '2,477', r1: '29.7%', r2: '0.36%',
             evidence: ['74 boards had paste volume below the lower limit (spec 0.040 ± 0.004 mm³).', '22 of the 31 open-circuit boards were among them.'],
             hasNote: true, note: '70 of these 74 boards were printed during the high-viscosity window. Low paste volume is most likely an effect of #1, not a separate cause.',

@@ -101,7 +101,6 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span class="chip info">Linked</span>
 <span class="chip crit">Out of spec · 190 boards</span>
 </div>
-<span style="font-size: 13px; color: #5B6169">Model confidence <span class="mono" style="color: #16191D">91.0%</span></span>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <div class="node n-root">High paste viscosity<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder paste</div></div>
@@ -113,7 +112,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <div class="stat"><span class="v">28 of 31</span><span class="l">open-circuit boards explained</span></div>
 <div class="stat"><span class="v">116×</span><span class="l">more likely when out of spec</span></div>
-<div class="stat"><span class="v">&lt; 0.1%</span><span class="l">chance it's a coincidence</span></div>
+<div class="stat"><span class="v">28 found</span><span class="l">about 2 expected by chance</span></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
@@ -132,6 +131,8 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </tbody>
 </table>
 <div style="margin-top: 10px; color: #4A4F56; line-height: 1.5">116× = 14.7% ÷ 0.127%. The causal path comes from the Failure Library rule <span class="mono" style="font-size: 13px">PasteViscosity &gt; USL → PoorPasteTransfer</span>.</div>
+<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5"><span style="font-weight: 600; color: #16191D">Expected by chance:</span> 190 of 2,560 boards (7.4%) were out of spec, so luck alone would put about 7.4% of the 31 opens there: about 2. 28 were found.</div>
+<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5"><span style="font-weight: 600; color: #16191D">Fisher's exact test: p &lt; 0.001.</span> The chance of a split at least this lopsided if this parameter had nothing to do with the defect.</div>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
 <div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Quarantine the paste lot; check its age, storage temperature and floor life.</div>
@@ -152,7 +153,6 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span class="chip info">Linked</span>
 <span class="chip crit">Out of spec · 74 boards</span>
 </div>
-<span style="font-size: 13px; color: #5B6169">Model confidence <span class="mono" style="color: #16191D">64.0%</span></span>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <div class="node n-root">Low paste volume per aperture<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
@@ -164,7 +164,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <div class="stat"><span class="v">22 of 31</span><span class="l">open-circuit boards explained</span></div>
 <div class="stat"><span class="v">82×</span><span class="l">more likely when out of spec</span></div>
-<div class="stat"><span class="v">&lt; 0.1%</span><span class="l">chance it's a coincidence</span></div>
+<div class="stat"><span class="v">22 found</span><span class="l">about 1 expected by chance</span></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
@@ -185,6 +185,8 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </tbody>
 </table>
 <div style="margin-top: 10px; color: #4A4F56; line-height: 1.5">82× = 29.7% ÷ 0.36%. The causal path comes from the Failure Library rule <span class="mono" style="font-size: 13px">PasteVolumePerAperture &lt; LSL → PoorPasteTransfer</span>.</div>
+<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5"><span style="font-weight: 600; color: #16191D">Expected by chance:</span> 74 of 2,560 boards (2.9%) were out of spec, so luck alone would put about 2.9% of the 31 opens there: about 1. 22 were found.</div>
+<div style="margin-top: 8px; color: #4A4F56; line-height: 1.5"><span style="font-weight: 600; color: #16191D">Fisher's exact test: p &lt; 0.001.</span> The chance of a split at least this lopsided if this parameter had nothing to do with the defect.</div>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
 <div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>No separate action; recheck SPI volume after the paste is replaced.</div>
@@ -213,7 +215,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 12px; color: #5B6169">via Poor paste transfer</span>
 </div>
 <span class="chip ok">In spec</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">No boards above the limit.</span>
+<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: #4A4F56">No boards above the limit.</span></div>
 </div>
 
 </div>
@@ -254,7 +256,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="font-size: 14px; line-height: 1.5; color: #4A4F56">A root cause is linked when its parameter was out of spec in this batch and all three hold:</div>
 <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6">
 <li>the defect is at least 2× more likely on out-of-spec boards</li>
-<li>the chance of coincidence is under 1%</li>
+<li>luck alone would give a split this lopsided less than 1% of the time (Fisher's exact test)</li>
 <li>it explains at least 20% of the defective boards</li>
 </ul>
 </section>

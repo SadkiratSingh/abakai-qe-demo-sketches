@@ -83,7 +83,8 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid #E1E4E0; border-radius: 8px">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
 <div style="display: flex; align-items: center; gap: 10px"><span style="font-weight: 600">{{r.defect}} risk</span><span class="chip ok">Matches batch cause</span></div>
-<div style="display: flex; align-items: center; gap: 10px; min-width: 200px">
+<div style="display: flex; align-items: center; gap: 10px; min-width: 280px">
+<span style="font-size: 13px; color: #5B6169; white-space: nowrap">Model confidence</span>
 <div style="flex: 1; height: 8px; border-radius: 4px; background: #EEF0ED; overflow: hidden"><div style="height: 100%; width: {{r.pct}}; background: {{r.color}}"></div></div>
 <span class="mono" style="font-weight: 500">{{r.pct}}</span>
 </div>
@@ -96,6 +97,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <div class="node n-def">{{r.defect}}</div>
 </div>
 <div style="font-size: 14px; color: #4A4F56">{{r.note}}</div>
+<div style="font-size: 13px; color: #5B6169; line-height: 1.5; padding-top: 10px; border-top: 1px solid #EEF0ED">Model confidence is the trained model's estimate, from this board's own measurements, of how likely it is to have {{r.lower}} through this chain. It ranks individual boards; the batch root cause comes from the board counts in the RCA packet.</div>
 </div>
 </sc-for>
 </section>
@@ -195,7 +197,7 @@ class Component extends DCLogic {
   }
   renderVals() {
     const risks = [
-      { defect: 'Solder bridging', pct: '81%', color: '#1A4F9C', root: 'High peak reflow temperature', mech: 'Excess reflow spreading', note: 'Same cause as the 44 bridged boards built in this window. Bridges under the QFN may not be visible to AOI.' }
+      { defect: 'Solder bridging', lower: 'solder bridging', pct: '81%', color: '#1A4F9C', root: 'High peak reflow temperature', mech: 'Excess reflow spreading', note: 'Same cause as the 44 bridged boards built in this window. Bridges under the QFN may not be visible to AOI.' }
     ];
     const P = (name, val, spec, v, lsl, usl, norm, unit) => {
       const span = usl - lsl;
