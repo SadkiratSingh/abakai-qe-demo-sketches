@@ -77,15 +77,15 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <span class="chip crit">Critical</span>
 <div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 4px">
 <div style="font-weight: 600">Solder bridging spike in stg-B0003</div>
-<div style="font-size: 14px; color: #4A4F56">47 boards, 43 of them after 02:00. Root cause analysis is ready.</div>
+<div style="font-size: 14px; color: #4A4F56">47 boards, 44 of them built between 02:00 and 02:40. Root cause analysis is ready.</div>
 </div>
 <a class="btn primary" href="RcaPacket.dc.html">Open RCA packet</a>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px; border: 1px solid #F1D3B5; background: #FFFAF4; border-radius: 8px">
 <span class="chip warn">High</span>
 <div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 4px">
-<div style="font-weight: 600">Open circuits rising in stg-B0003</div>
-<div style="font-size: 14px; color: #4A4F56">31 boards, 28 of them after 03:00. Root cause analysis is ready.</div>
+<div style="font-weight: 600">Open circuit cluster in stg-B0003</div>
+<div style="font-size: 14px; color: #4A4F56">31 boards, 28 of them printed between 03:40 and 04:30. Root cause analysis is ready.</div>
 </div>
 <a class="btn" href="RcaPacket.dc.html">Open RCA packet</a>
 </div>
@@ -95,23 +95,23 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Defects by hour, stg-B0003</h2>
-<div style="font-size: 14px; color: #5B6169">Both defects climb from 02:00, so the cause started mid-shift.</div>
+<div style="font-size: 14px; color: #5B6169">Each defect clusters in one short window, so each points to a short-lived cause.</div>
 </div>
 <div style="display: flex; gap: 16px; font-size: 13px; color: #4A4F56">
 <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 3px; background: #1A4F9C"></span>Solder bridging</span>
 <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 3px; background: #E08A3C"></span>Open circuit</span>
 </div>
 </div>
-<div style="display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 12px; align-items: end; height: 180px; border-bottom: 1px solid #C9CDD2; padding: 0 4px">
-<sc-for list="{{hours}}" as="h" hint-placeholder-count="9">
+<div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 12px; align-items: end; height: 180px; border-bottom: 1px solid #C9CDD2; padding: 0 4px">
+<sc-for list="{{hours}}" as="h" hint-placeholder-count="8">
 <div style="display: flex; justify-content: center; align-items: flex-end; gap: 4px; height: 100%">
 <div style="width: 40%; max-width: 22px; background: #1A4F9C; border-radius: 3px 3px 0 0; height: {{h.bh}}" title="{{h.bt}}"></div>
 <div style="width: 40%; max-width: 22px; background: #E08A3C; border-radius: 3px 3px 0 0; height: {{h.oh}}" title="{{h.ot}}"></div>
 </div>
 </sc-for>
 </div>
-<div style="display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 12px; padding: 0 4px">
-<sc-for list="{{hours}}" as="h" hint-placeholder-count="9">
+<div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 12px; padding: 0 4px">
+<sc-for list="{{hours}}" as="h" hint-placeholder-count="8">
 <div class="mono" style="text-align: center; font-size: 12px; color: #5B6169">{{h.label}}</div>
 </sc-for>
 </div>
@@ -136,10 +136,10 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1150}}'>
 class Component extends DCLogic {
   renderVals() {
-    const labels = ['22:00','23:00','00:00','01:00','02:00','03:00','04:00','05:00','06:00'];
-    const br = [1,0,1,2,8,10,9,8,8];
-    const op = [0,1,0,1,1,4,8,9,7];
-    const max = 10;
+    const labels = ['22:00','23:00','00:00','01:00','02:00','03:00','04:00','05:00'];
+    const br = [1,0,1,0,44,1,0,0];
+    const op = [1,0,0,1,0,10,18,1];
+    const max = 44;
     const hours = labels.map((l, i) => ({
       label: l,
       bh: Math.max(2, Math.round(br[i] / max * 170)) + 'px',

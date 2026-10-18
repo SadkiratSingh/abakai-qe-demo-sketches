@@ -71,7 +71,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 
 <section class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #F1D3B5; background: #FFFAF4">
 <span class="chip warn">At risk</span>
-<div style="flex: 1 1 520px; font-size: 16px; line-height: 1.5">Passed AOI and electrical test, but two parameters were out of spec when it was built. Both match this batch's confirmed root causes.</div>
+<div style="flex: 1 1 520px; font-size: 16px; line-height: 1.5">Passed AOI and electrical test, but it went through the reflow oven during the 02:00–02:40 excursion, when peak temperature was above spec. That is the linked root cause of this batch's bridging.</div>
 <a href="RcaPacket.dc.html" style="font-size: 14px; font-weight: 600">See batch analysis</a>
 </section>
 
@@ -103,7 +103,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <section class="card" style="overflow: hidden" aria-label="Parameter fingerprint">
 <div style="padding: 20px 24px 8px; display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Parameter fingerprint</h2>
-<div style="font-size: 14px; color: #5B6169">This board's measurements against spec. The shaded band is the spec window; the tick marks the batch's normal before 02:00.</div>
+<div style="font-size: 14px; color: #5B6169">This board's measurements against spec. The shaded band is the spec window; the tick marks the batch's normal outside the excursion windows.</div>
 </div>
 <div style="overflow-x: auto">
 <table>
@@ -195,8 +195,7 @@ class Component extends DCLogic {
   }
   renderVals() {
     const risks = [
-      { defect: 'Solder bridging', pct: '81%', color: '#1A4F9C', root: 'High peak reflow temperature', mech: 'Excess reflow spreading', note: 'Same cause as the 47 boards that failed AOI. Bridges under the QFN may not be visible to AOI.' },
-      { defect: 'Open circuit', pct: '46%', color: '#E08A3C', root: 'High paste viscosity', mech: 'Poor paste transfer', note: 'Same cause as the 31 open-circuit boards. Paste volume was in spec, which lowers the risk.' }
+      { defect: 'Solder bridging', pct: '81%', color: '#1A4F9C', root: 'High peak reflow temperature', mech: 'Excess reflow spreading', note: 'Same cause as the 44 bridged boards built in this window. Bridges under the QFN may not be visible to AOI.' }
     ];
     const P = (name, val, spec, v, lsl, usl, norm, unit) => {
       const span = usl - lsl;
@@ -206,7 +205,7 @@ class Component extends DCLogic {
     };
     const params = [
       P('Peak reflow temperature', '259.4', '245–255 °C', 259.4, 245, 255, 251.8, '°C'),
-      P('Paste viscosity', '238', '180–220 Pa·s', 238, 180, 220, 207, 'Pa·s'),
+      P('Paste viscosity', '207', '180–220 Pa·s', 207, 180, 220, 206, 'Pa·s'),
       P('Paste volume per aperture', '0.0391', '0.040 ± 0.004 mm³', 0.0391, 0.036, 0.044, 0.0399, 'mm³'),
       P('Stencil thickness', '99.7', '100 ± 5 µm', 99.7, 95, 105, 100.1, 'µm'),
       P('Squeegee speed', '71', '70 ± 14 mm/s', 71, 56, 84, 70, 'mm/s'),

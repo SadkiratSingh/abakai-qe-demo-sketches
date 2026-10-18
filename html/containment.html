@@ -49,7 +49,8 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <div style="display: flex; flex-direction: column; gap: 8px">
 <a href="rca-packet.html" style="font-size: 14px; text-decoration: none">← INV-0142 root cause analysis</a>
 <div class="eyebrow">Containment · stg-B0003</div>
-<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">158 boards passed inspection but share the failure signature</h1>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">274 boards passed inspection but were built out of spec</h1>
+<div style="font-size: 15px; color: #4A4F56">The other 2,208 boards in stg-B0003 were built in spec and can be released.</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <button class="btn" type="button">Export list (CSV)</button>
@@ -58,10 +59,10 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </div>
 
 <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px" aria-label="Where the boards are">
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">In WIP</div><div class="mono" style="font-size: 32px; font-weight: 500">96</div><div style="font-size: 13px; color: #5B6169">Hold at next station</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Finished goods</div><div class="mono" style="font-size: 32px; font-weight: 500">54</div><div style="font-size: 13px; color: #5B6169">Quarantine and re-inspect</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">In WIP</div><div class="mono" style="font-size: 32px; font-weight: 500">150</div><div style="font-size: 13px; color: #5B6169">Hold at next station</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Finished goods</div><div class="mono" style="font-size: 32px; font-weight: 500">116</div><div style="font-size: 13px; color: #5B6169">Quarantine and re-inspect</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0; background: #FFF8F7"><div class="eyebrow" style="color: #9B1C12">Shipped</div><div class="mono" style="font-size: 32px; font-weight: 500; color: #9B1C12">8</div><div style="font-size: 13px; color: #7E160E; font-weight: 600">Customer notification needed</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Signatures</div><div style="font-size: 14px; line-height: 1.6"><span style="font-weight: 600">112</span> high peak reflow<br><span style="font-weight: 600">64</span> high paste viscosity<br><span style="color: #5B6169">18 boards have both</span></div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Signatures</div><div style="font-size: 14px; line-height: 1.6"><span style="font-weight: 600">112</span> high peak reflow, 02:00–02:40<br><span style="font-weight: 600">162</span> high paste viscosity, 03:40–04:30<br><span style="color: #5B6169">No board has both</span></div></div>
 </section>
 
 <section class="card" style="overflow: hidden" aria-label="Boards at risk">
@@ -85,7 +86,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td><input type="checkbox" aria-label="Select PCB-0006489" checked></td>
 <td class="mono"><a href="board-detail.html">PCB-0006489</a></td>
 <td class="mono">stg-B0003-P0343</td>
-<td class="mono">02:06</td>
+<td class="mono">02:03</td>
 <td>High peak reflow</td>
 <td class="mono">Peak 258.9 °C</td>
 <td><span class="chip crit">High</span></td>
@@ -96,7 +97,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td><input type="checkbox" aria-label="Select PCB-0006502" checked></td>
 <td class="mono"><a href="board-detail.html">PCB-0006502</a></td>
 <td class="mono">stg-B0003-P0346</td>
-<td class="mono">02:09</td>
+<td class="mono">02:07</td>
 <td>High peak reflow</td>
 <td class="mono">Peak 258.2 °C</td>
 <td><span class="chip crit">High</span></td>
@@ -104,76 +105,76 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </tr>
 
 <tr>
+<td><input type="checkbox" aria-label="Select PCB-0006557" checked></td>
+<td class="mono"><a href="board-detail.html">PCB-0006557</a></td>
+<td class="mono">stg-B0003-P0360</td>
+<td class="mono">02:16</td>
+<td>High peak reflow</td>
+<td class="mono">Peak 259.6 °C</td>
+<td><span class="chip crit">High</span></td>
+<td><span class="chip muted">Finished goods</span></td>
+</tr>
+
+<tr>
 <td><input type="checkbox" aria-label="Select PCB-0006615" checked></td>
 <td class="mono"><a href="board-detail.html">PCB-0006615</a></td>
 <td class="mono">stg-B0003-P0374</td>
 <td class="mono">02:31</td>
-<td>Both</td>
-<td class="mono">Peak 259.4 °C · 238 Pa·s</td>
+<td>High peak reflow</td>
+<td class="mono">Peak 259.4 °C</td>
 <td><span class="chip crit">High</span></td>
 <td><span class="chip muted">Finished goods</span></td>
 </tr>
 
 <tr>
-<td><input type="checkbox" aria-label="Select PCB-0006703"></td>
-<td class="mono"><a href="board-detail.html">PCB-0006703</a></td>
-<td class="mono">stg-B0003-P0396</td>
-<td class="mono">02:52</td>
+<td><input type="checkbox" aria-label="Select PCB-0006640"></td>
+<td class="mono"><a href="board-detail.html">PCB-0006640</a></td>
+<td class="mono">stg-B0003-P0381</td>
+<td class="mono">02:38</td>
 <td>High peak reflow</td>
-<td class="mono">Peak 257.6 °C</td>
+<td class="mono">Peak 257.9 °C</td>
 <td><span class="chip warn">Medium</span></td>
 <td><span class="chip muted">Finished goods</span></td>
 </tr>
 
 <tr>
-<td><input type="checkbox" aria-label="Select PCB-0006842" checked></td>
-<td class="mono"><a href="board-detail.html">PCB-0006842</a></td>
-<td class="mono">stg-B0003-P0431</td>
-<td class="mono">03:14</td>
+<td><input type="checkbox" aria-label="Select PCB-0006921"></td>
+<td class="mono"><a href="board-detail.html">PCB-0006921</a></td>
+<td class="mono">stg-B0003-P0451</td>
+<td class="mono">03:42</td>
+<td>High paste viscosity</td>
+<td class="mono">237 Pa·s</td>
+<td><span class="chip warn">Medium</span></td>
+<td><span class="chip info">WIP</span></td>
+</tr>
+
+<tr>
+<td><input type="checkbox" aria-label="Select PCB-0006988" checked></td>
+<td class="mono"><a href="board-detail.html">PCB-0006988</a></td>
+<td class="mono">stg-B0003-P0468</td>
+<td class="mono">03:55</td>
 <td>High paste viscosity</td>
 <td class="mono">241 Pa·s</td>
 <td><span class="chip crit">High</span></td>
-<td><span class="chip muted">Finished goods</span></td>
-</tr>
-
-<tr>
-<td><input type="checkbox" aria-label="Select PCB-0006977" checked></td>
-<td class="mono"><a href="board-detail.html">PCB-0006977</a></td>
-<td class="mono">stg-B0003-P0465</td>
-<td class="mono">03:41</td>
-<td>Both</td>
-<td class="mono">Peak 258.8 °C · 244 Pa·s</td>
-<td><span class="chip crit">High</span></td>
 <td><span class="chip info">WIP</span></td>
 </tr>
 
 <tr>
-<td><input type="checkbox" aria-label="Select PCB-0007120"></td>
-<td class="mono"><a href="board-detail.html">PCB-0007120</a></td>
-<td class="mono">stg-B0003-P0501</td>
-<td class="mono">04:07</td>
+<td><input type="checkbox" aria-label="Select PCB-0007064" checked></td>
+<td class="mono"><a href="board-detail.html">PCB-0007064</a></td>
+<td class="mono">stg-B0003-P0487</td>
+<td class="mono">04:08</td>
 <td>High paste viscosity</td>
-<td class="mono">239 Pa·s</td>
-<td><span class="chip warn">Medium</span></td>
-<td><span class="chip info">WIP</span></td>
-</tr>
-
-<tr>
-<td><input type="checkbox" aria-label="Select PCB-0007256" checked></td>
-<td class="mono"><a href="board-detail.html">PCB-0007256</a></td>
-<td class="mono">stg-B0003-P0535</td>
-<td class="mono">04:33</td>
-<td>High peak reflow</td>
-<td class="mono">Peak 259.1 °C</td>
+<td class="mono">244 Pa·s</td>
 <td><span class="chip crit">High</span></td>
 <td><span class="chip info">WIP</span></td>
 </tr>
 
 <tr>
-<td><input type="checkbox" aria-label="Select PCB-0007391" checked></td>
-<td class="mono"><a href="board-detail.html">PCB-0007391</a></td>
-<td class="mono">stg-B0003-P0568</td>
-<td class="mono">05:01</td>
+<td><input type="checkbox" aria-label="Select PCB-0007133" checked></td>
+<td class="mono"><a href="board-detail.html">PCB-0007133</a></td>
+<td class="mono">stg-B0003-P0504</td>
+<td class="mono">04:19</td>
 <td>High paste viscosity</td>
 <td class="mono">246 Pa·s</td>
 <td><span class="chip crit">High</span></td>
@@ -181,12 +182,12 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </tr>
 
 <tr>
-<td><input type="checkbox" aria-label="Select PCB-0007514"></td>
-<td class="mono"><a href="board-detail.html">PCB-0007514</a></td>
-<td class="mono">stg-B0003-P0599</td>
-<td class="mono">05:27</td>
-<td>High peak reflow</td>
-<td class="mono">Peak 256.4 °C</td>
+<td><input type="checkbox" aria-label="Select PCB-0007190"></td>
+<td class="mono"><a href="board-detail.html">PCB-0007190</a></td>
+<td class="mono">stg-B0003-P0518</td>
+<td class="mono">04:28</td>
+<td>High paste viscosity</td>
+<td class="mono">239 Pa·s</td>
 <td><span class="chip warn">Medium</span></td>
 <td><span class="chip info">WIP</span></td>
 </tr>
@@ -195,7 +196,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </table>
 </div>
 <div style="padding: 16px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; color: #5B6169">
-<span>Showing 10 of 158 boards · select a board to see why it was flagged</span>
+<span>Showing 10 of 274 boards · select a board to see why it was flagged</span>
 <div style="display: flex; gap: 8px"><button class="btn" type="button">Previous</button><button class="btn" type="button">Next</button></div>
 </div>
 </section>

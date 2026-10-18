@@ -83,28 +83,27 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 <section id="d2" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D2 · Problem description</h2><span class="chip ok">Auto-filled</span></div>
-<div class="field">On the night shift of 15 Oct 2026, 47 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 showed solder bridging. 43 of the 47 were built after 02:00. Batches stg-B0001 and stg-B0002 were not affected.</div>
+<div class="field">On the night shift of 15 Oct 2026, 47 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 showed solder bridging. 44 of the 47 were built between 02:00 and 02:40. Batches stg-B0001 and stg-B0002 were not affected.</div>
 </section>
 
 <section id="d3" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D3 · Containment</h2><span class="chip ok">Auto-filled</span></div>
-<div class="field">112 boards share the high peak reflow signature but passed AOI: hold WIP, quarantine finished goods, and notify the customer about boards already shipped. <a href="Containment.dc.html">See the board list</a>.</div>
+<div class="field">112 boards built between 02:00 and 02:40 went through the oven above spec but passed AOI: quarantine finished goods and notify the customer about boards already shipped. The rest of the batch was built in spec and can be released. <a href="Containment.dc.html">See the board list</a>.</div>
 </section>
 
 <section id="d4" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D4 · Root cause</h2><span class="chip ok">Auto-filled</span></div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px">
-<div style="display: flex; flex-direction: column; gap: 6px"><div class="eyebrow">Occurrence</div><div class="field">Peak reflow temperature rose to 258.6 °C (spec 245–255 °C) from 02:00, causing excess solder spreading. 44 of 47 bridged boards were above the upper limit. Confidence 98.9%.</div></div>
-<div style="display: flex; flex-direction: column; gap: 6px"><div class="eyebrow">Escape</div><div class="need">Why didn't the line catch the reflow drift earlier? Confirm whether a peak-temperature alarm exists on the oven.</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div class="eyebrow">Occurrence</div><div class="field">Peak reflow temperature ran above spec (257.9–259.8 °C vs 245–255 °C) from 02:00 to 02:40, causing excess solder spreading. 44 of 47 bridged boards were built in that window; bridging was 226× more likely above the limit.</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div class="eyebrow">Escape</div><div class="need">Why did the line run 40 minutes on the wrong profile? Confirm whether recipe changes need sign-off and whether the oven has a peak-temperature alarm.</div></div>
 </div>
-<div style="font-size: 14px; color: #5B6169">Contributing: stencil thickness above spec on 11 boards (72.5%). <a href="RcaPacket.dc.html">See full analysis</a></div>
+<div style="font-size: 14px; color: #5B6169">Seven other possible causes were checked and not linked. <a href="RcaPacket.dc.html">See full analysis</a></div>
 </section>
 
 <section id="d5" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D5 · Corrective action</h2><span class="chip ok">Auto-filled</span></div>
 <ul class="field" style="margin: 0; padding-left: 32px; display: flex; flex-direction: column; gap: 6px">
-<li>Restore the approved reflow profile; check the peak-zone setpoint and thermocouple.</li>
-<li>Use a thinner foil or step-down stencil; verify the stencil ID against the job.</li>
+<li>Lock the approved reflow recipe and confirm how a different profile was loaded at 02:00.</li>
 </ul>
 </section>
 

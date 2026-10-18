@@ -69,7 +69,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 
 <section class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #F1D3B5; background: #FFFAF4">
 <span class="chip warn">At risk</span>
-<div style="flex: 1 1 520px; font-size: 16px; line-height: 1.5">Passed AOI and electrical test, but two parameters were out of spec when it was built. Both match this batch's confirmed root causes.</div>
+<div style="flex: 1 1 520px; font-size: 16px; line-height: 1.5">Passed AOI and electrical test, but it went through the reflow oven during the 02:00–02:40 excursion, when peak temperature was above spec. That is the linked root cause of this batch's bridging.</div>
 <a href="rca-packet.html" style="font-size: 14px; font-weight: 600">See batch analysis</a>
 </section>
 
@@ -93,25 +93,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <span aria-hidden="true" style="color: #5B6169">→</span>
 <div class="node n-def">Solder bridging</div>
 </div>
-<div style="font-size: 14px; color: #4A4F56">Same cause as the 47 boards that failed AOI. Bridges under the QFN may not be visible to AOI.</div>
-</div>
-
-<div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid #E1E4E0; border-radius: 8px">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
-<div style="display: flex; align-items: center; gap: 10px"><span style="font-weight: 600">Open circuit risk</span><span class="chip ok">Matches batch cause</span></div>
-<div style="display: flex; align-items: center; gap: 10px; min-width: 200px">
-<div style="flex: 1; height: 8px; border-radius: 4px; background: #EEF0ED; overflow: hidden"><div style="height: 100%; width: 46%; background: #E08A3C"></div></div>
-<span class="mono" style="font-weight: 500">46%</span>
-</div>
-</div>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
-<div class="node n-root">High paste viscosity</div>
-<span aria-hidden="true" style="color: #5B6169">→</span>
-<div class="node n-mech">Poor paste transfer</div>
-<span aria-hidden="true" style="color: #5B6169">→</span>
-<div class="node n-def">Open circuit</div>
-</div>
-<div style="font-size: 14px; color: #4A4F56">Same cause as the 31 open-circuit boards. Paste volume was in spec, which lowers the risk.</div>
+<div style="font-size: 14px; color: #4A4F56">Same cause as the 44 bridged boards built in this window. Bridges under the QFN may not be visible to AOI.</div>
 </div>
 
 </section>
@@ -119,7 +101,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <section class="card" style="overflow: hidden" aria-label="Parameter fingerprint">
 <div style="padding: 20px 24px 8px; display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Parameter fingerprint</h2>
-<div style="font-size: 14px; color: #5B6169">This board's measurements against spec. The shaded band is the spec window; the tick marks the batch's normal before 02:00.</div>
+<div style="font-size: 14px; color: #5B6169">This board's measurements against spec. The shaded band is the spec window; the tick marks the batch's normal outside the excursion windows.</div>
 </div>
 <div style="overflow-x: auto">
 <table>
@@ -142,16 +124,16 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 
 <tr>
 <td>Paste viscosity</td>
-<td class="mono" style="font-weight: 500">238 Pa·s</td>
+<td class="mono" style="font-weight: 500">207 Pa·s</td>
 <td class="mono" style="color: #4A4F56">180–220 Pa·s</td>
 <td>
 <div style="position: relative; height: 20px; background: #F4F5F3; border-radius: 4px">
 <div style="position: absolute; top: 0; bottom: 0; left: 25%; width: 50%; background: #E7F3EC; border-left: 1px solid #8CC4A3; border-right: 1px solid #8CC4A3"></div>
-<div style="position: absolute; top: 2px; bottom: 2px; width: 2px; background: #8A9097; left: 58.75%"></div>
-<div style="position: absolute; top: 3px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; border: 2px solid #fff; box-sizing: border-box; left: 97.5%; background: #B42318"></div>
+<div style="position: absolute; top: 2px; bottom: 2px; width: 2px; background: #8A9097; left: 57.5%"></div>
+<div style="position: absolute; top: 3px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; border: 2px solid #fff; box-sizing: border-box; left: 58.75%; background: #1D6B3F"></div>
 </div>
 </td>
-<td><span class="chip crit">Above USL</span></td>
+<td><span class="chip ok">In spec</span></td>
 </tr>
 
 <tr>

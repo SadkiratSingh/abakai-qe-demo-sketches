@@ -32,13 +32,21 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .n-mech{background:#E8EFFA;border:1px solid #B7CBEA;color:#123A73}
 .n-def{background:#FDECEA;border:1px solid #F3C5C0;color:#7E160E}
 .arrow{color:#5B6169;font-size:18px}
-.trend .grid{stroke:#E1E4E0;stroke-width:1}
+.stat{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:#F4F5F3;border-radius:8px;flex:1 1 150px}
+.stat .v{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:500}
+.stat .l{font-size:12px;color:#4A4F56}
+.tt{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+.tt th{text-align:left;font-weight:600;color:#5B6169;padding:8px 10px;border-bottom:1px solid #E1E4E0}
+.tt td{padding:8px 10px;border-bottom:1px solid #EEF0ED;font-family:'IBM Plex Mono',monospace}
+.tt td:first-child{font-family:'IBM Plex Sans',sans-serif}
 .trend .lim{stroke:#B42318;stroke-width:1.5;stroke-dasharray:5 4}
-.trend .line{fill:none;stroke:#1A4F9C;stroke-width:2.5;stroke-linejoin:round}
-.trend .onset{stroke:#16191D;stroke-width:1;stroke-dasharray:2 3}
+.trend .line{fill:none;stroke:#1A4F9C;stroke-width:2;stroke-linejoin:round}
+.trend .base{stroke:#C9CDD2;stroke-width:1}
 .trend .band{fill:#E7F3EC}
+.trend .win{fill:#FDECEA}
 .trend text{font-family:'IBM Plex Mono',monospace;font-size:12px;fill:#5B6169}
 .trend .limtxt{fill:#9B1C12;font-weight:500}
+.trend .wintxt{fill:#7E160E;font-weight:500}
 </style>
 </head>
 <body>
@@ -58,7 +66,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <a href="line-overview.html" style="font-size: 14px; text-decoration: none">← Line overview</a>
-<div class="eyebrow">Investigation INV-0142 · CTRL-BRD-A · stg-B0003 · Night shift</div>
+<div class="eyebrow">Investigation INV-0142 · CTRL-BRD-A · stg-B0003 · 2,560 boards · Night shift</div>
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">Root cause analysis</h1>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
@@ -74,24 +82,26 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
 <span class="chip info">Most likely cause</span>
-<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Solder paste viscosity rose above spec from 03:00, so less paste transferred to the pads.</div>
-<div class="mono" style="font-size: 13px; color: #4A4F56">Evidence from 31 boards · 5 parameters checked</div>
+<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Solder paste viscosity was above its limit from 03:40 to 04:30, after a new paste jar was loaded. Boards printed in that window account for 28 of the 31 opens.</div>
+<div class="mono" style="font-size: 13px; color: #4A4F56">3 possible causes checked · 2 linked</div>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
-<section style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="Ranked root causes">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Ranked root causes</h2>
+<div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked root causes">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked root causes</h2>
+<div style="font-size: 14px; color: #5B6169">Out of spec in this batch and clearly more common on open-circuit boards.</div>
+</div>
 
 <article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
 <div style="display: flex; align-items: center; gap: 12px">
 <span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#1</span>
-<span class="chip info">Likely</span>
+<span class="chip info">Linked</span>
+<span class="chip crit">Out of spec · 190 boards</span>
 </div>
-<div style="display: flex; align-items: center; gap: 12px; min-width: 220px">
-<div style="flex: 1; height: 8px; border-radius: 4px; background: #EEF0ED; overflow: hidden"><div style="height: 100%; width: 91%; background: #1A4F9C"></div></div>
-<span class="mono" style="font-size: 15px; font-weight: 500">91%</span>
-</div>
+<span style="font-size: 13px; color: #5B6169">Model confidence <span class="mono" style="color: #16191D">91.0%</span></span>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <div class="node n-root">High paste viscosity<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder paste</div></div>
@@ -100,18 +110,31 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span class="arrow" aria-hidden="true">→</span>
 <div class="node n-def">Open circuit<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="stat"><span class="v">28 of 31</span><span class="l">open-circuit boards explained</span></div>
+<div class="stat"><span class="v">116×</span><span class="l">more likely when out of spec</span></div>
+<div class="stat"><span class="v">&lt; 0.1%</span><span class="l">chance it's a coincidence</span></div>
+</div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
 <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>Viscosity averaged 241 Pa·s after 03:00 (spec 180–220 Pa·s).</li><li>29 of 31 open-circuit boards were above the upper limit.</li><li>Paste volume per aperture fell on the same boards.</li>
+<li>190 boards were printed with viscosity above the limit, all between 03:40 and 04:30 (236–246 Pa·s, spec 180–220 Pa·s).</li><li>28 of the 31 open-circuit boards were printed in that window.</li><li>The paste jar was replaced at 04:30 and viscosity returned to about 206 Pa·s.</li>
 </ul>
 </div>
+
 <details style="font-size: 14px">
-<summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">Why the system linked these</summary>
-<div class="mono" style="margin-top: 8px; padding: 12px; background: #F4F5F3; border-radius: 6px; font-size: 13px; line-height: 1.6; overflow-x: auto">If PasteViscosity &gt; PasteViscosity_USL == PoorPasteTransfer</div>
+<summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
+<table class="tt">
+<thead><tr><th>stg-B0003 boards</th><th>Open circuit</th><th>No defect</th><th>Defect rate</th></tr></thead>
+<tbody>
+<tr><td>Above USL</td><td>28</td><td>162</td><td>14.7%</td></tr>
+<tr><td>In spec</td><td>3</td><td>2,367</td><td>0.13%</td></tr>
+</tbody>
+</table>
+<div style="margin-top: 10px; color: #4A4F56; line-height: 1.5">116× = 14.7% ÷ 0.13%. The causal path comes from the Failure Library rule <span class="mono" style="font-size: 13px">PasteViscosity &gt; USL → PoorPasteTransfer</span>.</div>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
-<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Replace the paste on the printer; check paste age and floor life.</div>
+<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Quarantine the paste lot; check its age, storage temperature and floor life.</div>
 
 
 <div style="display: flex; gap: 8px">
@@ -126,12 +149,10 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
 <div style="display: flex; align-items: center; gap: 12px">
 <span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#2</span>
-<span class="chip warn">Possible</span>
+<span class="chip info">Linked</span>
+<span class="chip crit">Out of spec · 74 boards</span>
 </div>
-<div style="display: flex; align-items: center; gap: 12px; min-width: 220px">
-<div style="flex: 1; height: 8px; border-radius: 4px; background: #EEF0ED; overflow: hidden"><div style="height: 100%; width: 64%; background: #E08A3C"></div></div>
-<span class="mono" style="font-size: 15px; font-weight: 500">64%</span>
-</div>
+<span style="font-size: 13px; color: #5B6169">Model confidence <span class="mono" style="color: #16191D">64.0%</span></span>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <div class="node n-root">Low paste volume per aperture<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
@@ -140,58 +161,33 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span class="arrow" aria-hidden="true">→</span>
 <div class="node n-def">Open circuit<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 8px">
-<div class="eyebrow">Evidence</div>
-<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>Paste volume averaged 0.0352 mm³ (spec 0.040 ± 0.004 mm³).</li><li>22 of 31 boards were below the lower limit.</li><li>Likely an effect of high viscosity rather than a separate cause.</li>
-</ul>
-</div>
-<details style="font-size: 14px">
-<summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">Why the system linked these</summary>
-<div class="mono" style="margin-top: 8px; padding: 12px; background: #F4F5F3; border-radius: 6px; font-size: 13px; line-height: 1.6; overflow-x: auto">If PasteVolumePerAperture &lt; PasteVolumePerAperture_LSL == PoorPasteTransfer</div>
-</details>
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
-<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Check the SPI volume trend; clean the stencil underside and verify squeegee pressure.</div>
-
-
-<div style="display: flex; gap: 8px">
-<button class="btn" type="button">Reject</button>
-<button class="btn primary" type="button">Accept</button>
-</div>
-
-</div>
-</article>
-
-<article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
-<div style="display: flex; align-items: center; gap: 12px">
-<span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#3</span>
-<span class="chip muted">Unlikely</span>
-</div>
-<div style="display: flex; align-items: center; gap: 12px; min-width: 220px">
-<div style="flex: 1; height: 8px; border-radius: 4px; background: #EEF0ED; overflow: hidden"><div style="height: 100%; width: 22%; background: #A3A9B0"></div></div>
-<span class="mono" style="font-size: 15px; font-weight: 500">22%</span>
-</div>
-</div>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
-<div class="node n-root">High ambient humidity<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Environment</div></div>
-<span class="arrow" aria-hidden="true">→</span>
-<div class="node n-mech">Poor paste transfer<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
-<span class="arrow" aria-hidden="true">→</span>
-<div class="node n-def">Open circuit<div style="font-size: 12px; font-weight: 400">Defect</div></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="stat"><span class="v">22 of 31</span><span class="l">open-circuit boards explained</span></div>
+<div class="stat"><span class="v">82×</span><span class="l">more likely when out of spec</span></div>
+<div class="stat"><span class="v">&lt; 0.1%</span><span class="l">chance it's a coincidence</span></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
 <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>Ambient RH was in spec for 27 of 31 boards.</li>
+<li>74 boards had paste volume below the lower limit (spec 0.040 ± 0.004 mm³).</li><li>22 of the 31 open-circuit boards were among them.</li>
 </ul>
 </div>
+
+<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #FFFAF4; border: 1px solid #F1D3B5; border-radius: 8px; color: #6B2C05">70 of these 74 boards were printed during the high-viscosity window. Low paste volume is most likely an effect of #1, not a separate cause.</div>
+
 <details style="font-size: 14px">
-<summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">Why the system linked these</summary>
-<div class="mono" style="margin-top: 8px; padding: 12px; background: #F4F5F3; border-radius: 6px; font-size: 13px; line-height: 1.6; overflow-x: auto">If AmbientRh &gt; AmbientRh_USL supports PoorPasteTransfer</div>
+<summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
+<table class="tt">
+<thead><tr><th>stg-B0003 boards</th><th>Open circuit</th><th>No defect</th><th>Defect rate</th></tr></thead>
+<tbody>
+<tr><td>Below LSL</td><td>22</td><td>52</td><td>29.7%</td></tr>
+<tr><td>In spec</td><td>9</td><td>2,477</td><td>0.36%</td></tr>
+</tbody>
+</table>
+<div style="margin-top: 10px; color: #4A4F56; line-height: 1.5">82× = 29.7% ÷ 0.36%. The causal path comes from the Failure Library rule <span class="mono" style="font-size: 13px">PasteVolumePerAperture &lt; LSL → PoorPasteTransfer</span>.</div>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
-<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>No action unless other evidence appears.</div>
+<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>No separate action; recheck SPI volume after the paste is replaced.</div>
 
 
 <div style="display: flex; gap: 8px">
@@ -204,60 +200,63 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 </section>
 
-<aside style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="Evidence and next steps">
+<section class="card" style="overflow: hidden" aria-label="Checked and not linked">
+<div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 1</h2>
+<div style="font-size: 14px; color: #5B6169">Every other root cause in the Failure Library for open circuits, and why it was set aside.</div>
+</div>
+<div style="display: flex; flex-direction: column">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 14px">High ambient RH</span>
+<span style="font-size: 12px; color: #5B6169">via Poor paste transfer</span>
+</div>
+<span class="chip ok">In spec</span>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">No boards above the limit.</span>
+</div>
+
+</div>
+</section>
+</div>
+
+<aside style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="Trend and containment">
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Paste viscosity (Pa·s)</h2>
-<div style="font-size: 14px; color: #5B6169">Hourly mean vs. spec limits, stg-B0003</div>
+<div style="font-size: 14px; color: #5B6169">20-minute averages, stg-B0003</div>
 </div>
-<svg class="trend" viewBox="0 0 520 240" width="100%" role="img" aria-label="Paste viscosity rises above the 220 Pa·s upper limit from 03:00">
-<rect class="band" x="48" y="96" width="456" height="91"></rect>
-<line class="lim" x1="48" x2="504" y1="96" y2="96"></line>
-<line class="lim" x1="48" x2="504" y1="187" y2="187"></line>
-<text class="limtxt" x="500" y="90" text-anchor="end">USL 220</text>
-<text class="limtxt" x="500" y="203" text-anchor="end">LSL 180</text>
-<line class="onset" x1="305" x2="305" y1="12" y2="204"></line>
-<text x="311" y="24">Onset 03:00</text>
-<polyline class="line" points="48,132 105,123 162,128 219,119 276,109 333,60 390,50 447,41 504,48"></polyline>
-<line class="grid" x1="48" x2="504" y1="204" y2="204"></line>
-<text x="48" y="226">22:00</text>
-<text x="276" y="226" text-anchor="middle">02:00</text>
-<text x="504" y="226" text-anchor="end">06:00</text>
+<svg class="trend" viewBox="0 0 520 250" width="100%" role="img" aria-label="Paste viscosity is above the 220 Pa·s upper limit only between 03:40 and 04:30">
+<rect class="win" x="375" y="30" width="59" height="184"></rect>
+<text class="wintxt" x="405" y="22" text-anchor="middle">03:40–04:30</text>
+<rect class="band" x="48" y="106" width="456" height="93" opacity="0.6"></rect>
+<line class="lim" x1="48" x2="504" y1="106" y2="106"></line>
+<line class="lim" x1="48" x2="504" y1="199" y2="199"></line>
+<text class="limtxt" x="500" y="100" text-anchor="end">USL 220</text>
+<text class="limtxt" x="500" y="215" text-anchor="end">LSL 180</text>
+<polyline class="line" points="48,141 68,136 88,143 107,134 127,139 147,146 167,136 187,141 207,139 226,143 246,134 266,139 286,141 306,136 326,143 345,139 365,141 385,64 405,53 425,60 445,139 464,143 484,136 504,141"></polyline>
+<line class="base" x1="48" x2="504" y1="214" y2="214"></line>
+<text x="48" y="236">22:00</text>
+<text x="286" y="236" text-anchor="middle">02:00</text>
+<text x="504" y="236" text-anchor="end">05:40</text>
 </svg>
-<div style="font-size: 14px; line-height: 1.5">Viscosity crossed the upper limit at 03:00 and kept rising; paste volume per aperture fell on the same boards.</div>
+<div style="font-size: 14px; line-height: 1.5">Viscosity held near 206 Pa·s except 03:40–04:30, when it rose to about 240 Pa·s until the paste jar was replaced.</div>
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><span class="chip crit">64 at risk</span></div>
-<div style="font-size: 14px; line-height: 1.5">64 boards in stg-B0003 share the high-viscosity signature but passed electrical test.</div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><span class="chip crit">162 at risk</span></div>
+<div style="font-size: 14px; line-height: 1.5">162 boards printed between 03:40 and 04:30 passed electrical test but used the out-of-spec paste.</div>
 <a class="btn" href="containment.html">Review boards to hold</a>
 </section>
 
-<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Parameters checked</h2>
-<div style="display: flex; flex-direction: column">
-
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #EEF0ED; font-size: 14px">
-<span>Paste viscosity</span><span class="chip crit">Out of spec</span>
-</div>
-
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #EEF0ED; font-size: 14px">
-<span>Paste volume per aperture</span><span class="chip warn">Below spec on 22 boards</span>
-</div>
-
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #EEF0ED; font-size: 14px">
-<span>Stencil thickness</span><span class="chip ok">In spec</span>
-</div>
-
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #EEF0ED; font-size: 14px">
-<span>Ambient RH</span><span class="chip ok">In spec</span>
-</div>
-
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #EEF0ED; font-size: 14px">
-<span>Ambient temperature</span><span class="chip ok">In spec</span>
-</div>
-
-</div>
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a cause is linked</h2>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">A root cause is linked when its parameter was out of spec in this batch and all three hold:</div>
+<ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6">
+<li>the defect is at least 2× more likely on out-of-spec boards</li>
+<li>the chance of coincidence is under 1%</li>
+<li>it explains at least 20% of the defective boards</li>
+</ul>
 </section>
 </aside>
 </div>

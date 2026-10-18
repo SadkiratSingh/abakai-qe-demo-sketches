@@ -2,7 +2,7 @@ This repository contains sketches for rca demo for quality engineers and manager
 
 ## What's here
 
-Clickable screen sketches for a root cause analysis (RCA) demo aimed at quality engineers (QEs) and quality managers (QMs) in SMT/PCB assembly. The story follows one excursion: CTRL-BRD-A, batch stg-B0003, night shift on SMT line 2, with a solder bridging spike and rising open circuits from about 02:00.
+Clickable screen sketches for a root cause analysis (RCA) demo aimed at quality engineers (QEs) and quality managers (QMs) in SMT/PCB assembly. The story follows batch stg-B0003 of CTRL-BRD-A on the night shift of SMT line 2: the reflow oven ran on the wrong profile from 02:00 to 02:40 (solder bridging), and an out-of-spec paste jar was used from 03:40 to 04:30 (open circuits).
 
 | File | Screen | What it shows |
 | --- | --- | --- |
@@ -42,3 +42,4 @@ All numbers are story data, not output from the backend. Before a real demo:
 ## Versions
 
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
+- v2: short-excursion story (reflow 02:00–02:40, paste viscosity 03:40–04:30). The RCA packet separates each parameter's status (out of spec, with a board count, or in spec) from whether it is linked to the defect (≥2× more likely, under 1% chance of coincidence, explains ≥20% of defective boards), lists every other root cause as checked and not linked, and the other screens use the same numbers.
