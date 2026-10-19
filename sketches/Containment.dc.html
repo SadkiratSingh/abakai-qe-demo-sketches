@@ -81,7 +81,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </div>
 <div style="overflow-x: auto">
 <table>
-<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Root cause</th><th>Measured</th><th>Model confidence</th><th>Location</th></tr></thead>
+<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Root cause</th><th>Measured</th><th>Location</th></tr></thead>
 <tbody>
 <sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
 <tr>
@@ -91,7 +91,6 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">{{r.time}}</td>
 <td>{{r.sig}}</td>
 <td class="mono">{{r.meas}}</td>
-<td class="mono">{{r.risk}}</td>
 <td><span class="{{r.locCls}}">{{r.loc}}</span></td>
 </tr>
 </sc-for>
@@ -122,7 +121,7 @@ class Component extends DCLogic {
       ['PCB-0007402', 'stg-B0003-P0571', '05:12', 'Low paste volume per aperture', '0.034 mm³', '60%', 'WIP']
     ];
     const rows = data.map(d => ({
-      id: d[0], panel: d[1], time: d[2], sig: d[3], meas: d[4], risk: d[5], loc: d[6],
+      id: d[0], panel: d[1], time: d[2], sig: d[3], meas: d[4], loc: d[6],
       sel: true,
       locCls: d[6] === 'Shipped' ? 'chip crit' : (d[6] === 'WIP' ? 'chip info' : 'chip muted')
     }));

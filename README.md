@@ -9,7 +9,7 @@ Clickable screen sketches for a root cause analysis (RCA) demo aimed at quality 
 | `sketches/Main.dc.html` | 1 · Line overview | Shift KPIs, excursion alerts, defects by hour, batch table |
 | `sketches/RcaPacket.dc.html` | 2 · RCA packet | Linked root causes per defect with the three checks, root causes checked and not linked, spec trend, suggested action |
 | `sketches/Containment.dc.html` | 3 · Containment | Boards that passed inspection but were built out of spec, by location |
-| `sketches/Board.dc.html` | 3a · Board detail | One board's linked root cause, model confidence, parameter fingerprint, same-panel boards, disposition, history |
+| `sketches/Board.dc.html` | 3a · Board detail | One board's linked root cause and the rule condition that flagged it, parameter fingerprint, same-panel boards, disposition, history |
 | `sketches/Manager.dc.html` | 5 · Manager overview | Open investigations, repeat root causes, Failure Library summary |
 | `sketches/Library.dc.html` | 6 · Failure Library | Root cause → mechanism → defect knowledge, with specs and fixes |
 
@@ -55,7 +55,6 @@ Every generated sentence on the screens comes from one of these templates, so th
 | Spec as a range `{LSL}–{USL} {unit}`, or `≥ {min}` | nominal ± tolerance |
 | `linked root cause #{n}`, `checked and not linked` | most likely cause, matches batch cause |
 | `excursion` / `no excursion` | spike, cluster, in control (that is SPC language) |
-| `model confidence` for the per-board model score only | risk, probability |
 
 **Status chip:** `Rule condition true · {n} boards`
 
@@ -95,13 +94,14 @@ A unit rule checked and not linked shows the first check it failed, in the same 
 All numbers are story data, not output from the backend. Before a real demo:
 
 - Peak reflow (245–255 °C) and paste viscosity (180–220 Pa·s) specs are assumed; ambient temperature and RH limits are `[your limit]`.
-- Confidence percentages, board counts, times, engineer names and traceability IDs (`[stencil ID]`, `[paste lot]`, `[recipe ID]`) are illustrative.
+- Board counts, times, engineer names and traceability IDs (`[stencil ID]`, `[paste lot]`, `[recipe ID]`) are illustrative.
 - The manager screen's time-to-root-cause baseline is `[your figure]`.
 
 ## Versions
 
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2 (branch `sketches-v2`): rule-based linking with unit rules, contributing state and measurements as evidence; squeegee wear added to the story.
+- v3 (branch `sketches-v3`): no model output on any screen. The ML model is currently trained on rule-generated labels, so its scores would only repeat the Failure Library rules. Boards are flagged by rule conditions and linked by board counts only. The model returns once it is trained on real line data.
 - v1.x: short-excursion story (reflow 02:00–02:40, paste viscosity 03:40–04:30). The RCA packet separates each parameter's status (out of spec, with a board count, or in spec) from whether it is linked to the defect (≥2× more likely, under 1% chance of coincidence, explains ≥20% of defective boards), lists every other root cause as checked and not linked, and the other screens use the same numbers.
 - One investigation per batch excursion (INV-0142 for stg-B0003). 8D screens, report recommendation, investigation stages and overdue tracking are out of scope for this demo (see the history before this commit).
 - Containment holds every board that was out of spec on any linked root cause and has not already failed a test, counted once under its first linked root cause. Containment belongs to the investigation, and its scope follows the root cause, so other batches through the same line during the windows are checked too.
