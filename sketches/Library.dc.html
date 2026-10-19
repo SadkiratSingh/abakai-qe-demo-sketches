@@ -24,7 +24,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .mono{font-family:'IBM Plex Mono',monospace}
 .eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5B6169;font-weight:600}
 .chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
-.info{background:#E8EFFA;color:#1A4F9C}.muted{background:#EEF0ED;color:#4A4F56}
+.warn{background:#FDF0E3;color:#8A3505}.info{background:#E8EFFA;color:#1A4F9C}.muted{background:#EEF0ED;color:#4A4F56}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;text-decoration:none;border:1px solid #C9CDD2;background:#fff;color:#16191D;cursor:pointer;box-sizing:border-box}
 .btn.primary{background:#1A4F9C;border-color:#1A4F9C;color:#fff}
 .seg{min-height:44px;padding:0 18px;border:1px solid #C9CDD2;background:#fff;font:600 14px 'IBM Plex Sans',sans-serif;color:#4A4F56;cursor:pointer}
@@ -48,7 +48,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-direction: column; gap: 6px; max-width: 720px">
 <div class="eyebrow">Failure Library · Solder printing and reflow</div>
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">What causes each defect, and how to fix it</h1>
-<div style="font-size: 15px; color: #4A4F56; line-height: 1.5">Your engineers' process knowledge as rules, linked to your specs. Rules with OR are split into unit rules joined only by AND, and every investigation checks each one. Measurements are evidence for a mechanism, never a root cause.</div>
+<div style="font-size: 15px; color: #4A4F56; line-height: 1.5">Your engineers' process knowledge as rules, linked to your specs. Rules with OR are split into unit rules joined only by AND, and every investigation checks each one. Every unit rule is also checked near its limit. Measurements are evidence for a mechanism, never a root cause.</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
 <div role="group" aria-label="Defect" style="display: flex">
@@ -66,6 +66,12 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span aria-hidden="true" style="color: #5B6169">→</span>
 <span style="padding: 6px 12px; border-radius: 6px; background: #FDECEA; border: 1px solid #F3C5C0; color: #7E160E; font-weight: 600">{{d.name}}</span>
 <span style="margin-left: auto; color: #5B6169">{{d.meta}}</span>
+</div>
+
+<div class="card" style="padding: 16px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; font-size: 14px; line-height: 1.5; border-color: #F1D3B5; background: #FFFAF4">
+<span class="chip warn">Near-limit zone · 20%</span>
+<span style="flex: 1 1 560px">Each parameter's near-limit zone is the last 20% of the way from nominal to each limit; for squeegee speed (nominal 70, spec 56–84 mm/s), near LSL is 56.0–58.8 mm/s. Each unit rule has a near-limit variant, for example <span class="mono" style="font-size: 13px">SqueegeeSpeed near LSL</span>, checked the same way. Boards under a linked near-limit rule go to Review, not Hold.</span>
+<button type="button" class="btn">Edit zones</button>
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; align-items: start">
@@ -118,11 +124,11 @@ class Component extends DCLogic {
   renderVals() {
     const R = (name, code, units, spec, where, kind, fix, seen) => ({ name, code, units, unitCount: units.length, split: units.length > 1, spec, where, kind, fix, seen: seen ? 'Seen ' + seen + '×' : 'Not seen yet', seenCls: seen ? 'chip info' : 'chip muted' });
     const lib = {
-      b: { name: 'Solder bridging', meta: '7 rules · 9 unit rules · last edited 15 Oct 2026 by Priya S.', mechs: [
+      b: { name: 'Solder bridging', meta: '7 rules · 9 unit rules · 9 near-limit variants · last edited 15 Oct 2026 by Priya S.', mechs: [
         { name: 'Aperture overfill', support: ['Paste volume per aperture above USL · SPI · spec 0.036–0.044 mm³'], rules: [
           R('Low aperture area ratio or high stencil thickness', 'ApertureAreaRatio < LSL OR StencilThickness > USL', ['ApertureAreaRatio < LSL', 'StencilThickness > USL'], 'Spec ≥ 0.66 · 95–105 µm', 'Stencil', 'Setting', 'Use a thinner foil or step-down stencil; redesign apertures below the area ratio limit.', 3),
           R('Low squeegee angle with low speed or high pressure', 'SqueegeeAngle < LSL AND (SqueegeeSpeed < LSL OR SqueegeePressure > USL)', ['SqueegeeAngle < LSL AND SqueegeeSpeed < LSL', 'SqueegeeAngle < LSL AND SqueegeePressure > USL'], 'Spec 55–65° · 56–84 mm/s · 0.27–0.33 MPa', 'Solder printer', 'Setting', 'Replace the squeegee blade; check angle, speed and pressure against the recipe.', 2),
-          R('Low squeegee speed', 'SqueegeeSpeed < LSL', ['SqueegeeSpeed < LSL'], 'Spec 56–84 mm/s', 'Solder printer', 'Setting', 'Raise the speed into the window.', 2),
+          R('Low squeegee speed', 'SqueegeeSpeed < LSL', ['SqueegeeSpeed < LSL'], 'Spec 56–84 mm/s', 'Solder printer', 'Setting', 'Raise the speed to nominal (70 mm/s).', 3),
           R('High bead size of solder paste', 'PasteBeadSize > USL', ['PasteBeadSize > USL'], 'Spec 3.6–4.4 mm³', 'Solder printer', 'Setting', 'Reduce bead width and mass.', 1)
         ]},
         { name: 'Excess reflow spreading', support: [], rules: [
@@ -133,7 +139,7 @@ class Component extends DCLogic {
           R('High ambient RH', 'AmbientRh > USL', ['AmbientRh > USL'], 'Spec [your limit]', 'Line', 'Environment', 'Control humidity; check paste exposure time.', 1)
         ]}
       ]},
-      o: { name: 'Open circuit', meta: '2 rules · 2 unit rules · last edited 12 Oct 2026 by Wei C.', mechs: [
+      o: { name: 'Open circuit', meta: '2 rules · 2 unit rules · 2 near-limit variants · last edited 12 Oct 2026 by Wei C.', mechs: [
         { name: 'Poor paste transfer', support: ['Paste volume per aperture below LSL · SPI · spec 0.036–0.044 mm³'], rules: [
           R('High paste viscosity', 'PasteViscosity > USL', ['PasteViscosity > USL'], 'Spec 180–220 Pa·s', 'Solder paste', 'Material', 'Replace the paste; check paste age and floor life.', 4),
           R('High ambient RH', 'AmbientRh > USL', ['AmbientRh > USL'], 'Spec [your limit]', 'Line', 'Environment', 'Control humidity; check paste exposure time.', 0)

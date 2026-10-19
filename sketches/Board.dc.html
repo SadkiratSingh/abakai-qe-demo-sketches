@@ -101,7 +101,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <section class="card" style="overflow: hidden" aria-label="Parameter fingerprint">
 <div style="padding: 20px 24px 8px; display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Parameter fingerprint</h2>
-<div style="font-size: 14px; color: #5B6169">This board's measurements against spec. The shaded band is the spec window; the tick marks the batch average outside the excursion windows (23:10–00:20, 02:00–02:40, 03:40–04:30).</div>
+<div style="font-size: 14px; color: #5B6169">This board's measurements against spec. The shaded band is the spec window, with near-limit zones (the last 20% of the way to each limit) at its ends; the tick marks the batch average outside the excursion windows (23:10–00:20, 02:00–02:40, 03:40–04:30).</div>
 </div>
 <div style="overflow-x: auto">
 <table>
@@ -115,6 +115,8 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <td>
 <div style="position: relative; height: 20px; background: #F4F5F3; border-radius: 4px">
 <div style="position: absolute; top: 0; bottom: 0; left: 25%; width: 50%; background: #E7F3EC; border-left: 1px solid #8CC4A3; border-right: 1px solid #8CC4A3"></div>
+<div style="position: absolute; top: 0; bottom: 0; left: 25%; width: 5%; background: #FDF0E3"></div>
+<div style="position: absolute; top: 0; bottom: 0; left: 70%; width: 5%; background: #FDF0E3"></div>
 <div style="position: absolute; top: 2px; bottom: 2px; width: 2px; background: #8A9097; left: {{p.normX}}"></div>
 <div style="position: absolute; top: 3px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; border: 2px solid #fff; box-sizing: border-box; left: {{p.x}}; background: {{p.dot}}"></div>
 </div>
@@ -199,7 +201,8 @@ class Component extends DCLogic {
       const span = usl - lsl;
       const pos = x => Math.max(2, Math.min(98, 25 + (x - lsl) / span * 50)) + '%';
       const out = v > usl || v < lsl;
-      return { name, val: val + ' ' + unit, spec, x: pos(v), normX: pos(norm), dot: out ? '#B42318' : '#1D6B3F', cls: out ? 'chip crit' : 'chip ok', state: out ? (v > usl ? 'Above USL' : 'Below LSL') : 'In spec' };
+      const nom = (lsl + usl) / 2, near = !out && Math.abs(v - nom) >= 0.8 * span / 2;
+      return { name, val: val + ' ' + unit, spec, x: pos(v), normX: pos(norm), dot: out ? '#B42318' : (near ? '#C4620F' : '#1D6B3F'), cls: out ? 'chip crit' : (near ? 'chip warn' : 'chip ok'), state: out ? (v > usl ? 'Above USL' : 'Below LSL') : (near ? (v > nom ? 'Near USL' : 'Near LSL') : 'In spec') };
     };
     const params = [
       P('Peak reflow temperature', '259.4', '245–255 °C', 259.4, 245, 255, 251.8, '°C'),

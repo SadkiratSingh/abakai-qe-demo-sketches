@@ -12,6 +12,7 @@ const [, , srcDir, outDir] = process.argv;
 const NAMES = {
   'Main.dc.html': 'line-overview.html',
   'RcaPacket.dc.html': 'rca-packet.html',
+  'RcaNearLimit.dc.html': 'rca-packet-near-limit.html',
   'Containment.dc.html': 'containment.html',
   'Board.dc.html': 'board-detail.html',
   'Manager.dc.html': 'manager-overview.html',
@@ -23,6 +24,7 @@ const PAGES = [
   { src: 'Main.dc.html', out: 'line-overview.html', label: '1 · Line overview', desc: 'Shift KPIs, excursion alerts, defects by hour, batch table' },
   { src: 'RcaPacket.dc.html', out: 'rca-packet.html', label: '2 · RCA packet: solder bridging', desc: 'Ranked root causes, causal chain, evidence, spec trend' },
   { src: 'RcaPacket.dc.html', out: 'rca-packet-open-circuit.html', label: '2 · RCA packet: open circuit', desc: 'Same screen with the open circuit tab selected', state: { tab: 'open' } },
+  { src: 'RcaNearLimit.dc.html', out: 'rca-packet-near-limit.html', label: '2b · RCA packet: near limit (INV-0143)', desc: 'No parameter out of spec: mechanism seen, near-limit rule linked, review vs hold' },
   { src: 'Containment.dc.html', out: 'containment.html', label: '3 · Containment', desc: 'Boards that passed inspection but were built out of spec' },
   { src: 'Board.dc.html', out: 'board-detail.html', label: '3a · Board detail', desc: 'One board: linked root cause, parameter fingerprint, disposition, history' },
   { src: 'Manager.dc.html', out: 'manager-overview.html', label: '5 · Manager overview', desc: 'Open investigations, recurring root causes, overdue actions' },

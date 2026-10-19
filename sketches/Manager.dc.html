@@ -53,7 +53,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 </div>
 
 <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px" aria-label="Key figures">
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Open investigations</div><div class="mono" style="font-size: 32px; font-weight: 500">5</div><div style="font-size: 13px; color: #5B6169">1 opened this week</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Open investigations</div><div class="mono" style="font-size: 32px; font-weight: 500">6</div><div style="font-size: 13px; color: #5B6169">2 opened this week</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Median time to root cause</div><div class="mono" style="font-size: 32px; font-weight: 500">3.2 h</div><div style="font-size: 13px; color: #5B6169">Baseline before rollout: [your figure]</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Repeat root causes</div><div class="mono" style="font-size: 32px; font-weight: 500">3</div><div style="font-size: 13px; color: #5B6169">Root causes seen in 2+ investigations</div></div>
 </section>
@@ -93,7 +93,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <tbody>
 <sc-for list="{{invs}}" as="r" hint-placeholder-count="5">
 <tr>
-<td class="mono" style="white-space: nowrap"><a href="RcaPacket.dc.html">{{r.id}}</a> · {{r.batch}}</td>
+<td class="mono" style="white-space: nowrap"><a href="{{r.href}}">{{r.id}}</a> · {{r.batch}}</td>
 <td>{{r.defects}}</td>
 <td style="white-space: nowrap">{{r.prod}}</td>
 <td style="white-space: nowrap">{{r.owner}}</td>
@@ -111,16 +111,17 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1200}}'>
 class Component extends DCLogic {
   renderVals() {
-    const raw = [['High peak reflow temperature', 5], ['High paste viscosity', 4], ['High stencil thickness', 3], ['Low squeegee speed', 2], ['High ambient RH', 1]];
+    const raw = [['High peak reflow temperature', 5], ['High paste viscosity', 4], ['High stencil thickness', 3], ['Low squeegee speed', 3], ['High ambient RH', 1]];
     const causes = raw.map((c, i) => ({ name: c[0], n: c[1], w: (c[1] / 5 * 100) + '%', color: i === 0 ? '#1A4F9C' : '#8FA9D3' }));
     const inv = [
+      ['INV-0143', 'stg-B0005', 'Solder bridging', 'CTRL-BRD-A · Line 2', 'Wei C.', '3 h', 'Low squeegee speed (near LSL, in spec)'],
       ['INV-0142', 'stg-B0003', 'Solder bridging, open circuit', 'CTRL-BRD-A · Line 2', 'Priya S.', '6 h', 'High peak reflow temperature; high paste viscosity; low squeegee angle (contributing)'],
       ['INV-0139', 'stg-C0211', 'Solder bridging', 'PWR-BRD-C · Line 1', 'Marco L.', '4 d', 'High stencil thickness'],
       ['INV-0137', 'stg-A0185', 'Solder bridging', 'CTRL-BRD-A · Line 2', 'Wei C.', '6 d', 'Low squeegee speed'],
       ['INV-0135', 'stg-I0092', 'Solder bridging', 'IO-BRD-B · Line 2', 'Wei C.', '9 d', 'High peak reflow temperature'],
       ['INV-0131', 'stg-C0198', 'Open circuit', 'PWR-BRD-C · Line 1', 'Marco L.', '12 d', 'High paste viscosity']
     ];
-    const invs = inv.map(r => ({ id: r[0], batch: r[1], defects: r[2], prod: r[3], owner: r[4], age: r[5], causes: r[6] }));
+    const invs = inv.map(r => ({ href: r[0] === 'INV-0143' ? 'RcaNearLimit.dc.html' : 'RcaPacket.dc.html', id: r[0], batch: r[1], defects: r[2], prod: r[3], owner: r[4], age: r[5], causes: r[6] }));
     return { causes, invs };
   }
 }

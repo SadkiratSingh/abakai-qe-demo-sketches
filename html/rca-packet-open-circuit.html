@@ -83,7 +83,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
 <span class="chip info">Linked rule #1</span>
 <div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Paste viscosity was above USL 03:40–04:30. 28 of 31 boards with open circuit were built 03:40–04:30.</div>
-<div class="mono" style="font-size: 13px; color: #4A4F56">2 unit rules checked · 1 linked</div>
+<div class="mono" style="font-size: 13px; color: #4A4F56">2 unit rules and 2 near-limit variants checked · 1 linked</div>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
@@ -194,8 +194,8 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 <section class="card" style="overflow: hidden" aria-label="Checked and not linked">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 1</h2>
-<div style="font-size: 14px; color: #5B6169">Every other unit rule in the Failure Library for open circuit, with the check it failed.</div>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 3</h2>
+<div style="font-size: 14px; color: #5B6169">Every other unit rule in the Failure Library for open circuit, at the limit and near it, with the check it failed.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 
@@ -206,6 +206,15 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 <span class="chip ok">Rule condition true · 0 boards</span>
 <span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 38–55 %RH on all 2,560 boards (spec [your limit]).</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 14px">Near-limit variants of the 2 unit rules</span>
+<span style="font-size: 12px; color: #5B6169">via poor paste transfer</span>
+</div>
+<span class="chip ok">None linked</span>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Largest: paste viscosity near USL. Open circuit rate, rule condition true vs false: 0.20% vs 0.12% (1.6×). Needs 2× or more.</span>
 </div>
 
 </div>
