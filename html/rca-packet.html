@@ -47,6 +47,8 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .trend text{font-family:'IBM Plex Mono',monospace;font-size:12px;fill:#5B6169}
 .trend .limtxt{fill:#9B1C12;font-weight:500}
 .trend .wintxt{fill:#7E160E;font-weight:500}
+.rule{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#4A4F56;background:#F4F5F3;border-radius:6px;padding:6px 10px;display:inline-block}
+.evi{font-size:14px;line-height:1.5;padding:12px 14px;background:#F5F8FD;border:1px solid #B7CBEA;border-radius:8px}
 </style>
 </head>
 <body>
@@ -74,31 +76,29 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 
 <div aria-label="Defect" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E1E4E0">
-<a class="tab on" href="rca-packet.html" style="display:inline-flex;align-items:center;text-decoration:none">Solder bridging · 47 boards</a>
+<a class="tab on" href="rca-packet.html" style="display:inline-flex;align-items:center;text-decoration:none">Solder bridging · 58 boards</a>
 <a class="tab" href="rca-packet-open-circuit.html" style="display:inline-flex;align-items:center;text-decoration:none">Open circuit · 31 boards</a>
 </div>
 
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
-<span class="chip info">Linked root cause #1</span>
-<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Peak reflow temperature was above USL 02:00–02:40. 44 of 47 boards with solder bridging were built 02:00–02:40.</div>
-<div class="mono" style="font-size: 13px; color: #4A4F56">8 root causes checked · 1 linked</div>
+<span class="chip info">Linked rule #1</span>
+<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Peak reflow temperature was above USL 02:00–02:40. 44 of 58 boards with solder bridging were built 02:00–02:40.</div>
+<div class="mono" style="font-size: 13px; color: #4A4F56">9 unit rules checked · 1 linked · 2 contributing</div>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
 <div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
-<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked root causes">
+<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked and contributing rules">
 <div style="display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked root causes</h2>
-<div style="font-size: 14px; color: #5B6169">Out of spec in this batch and passed all three checks.</div>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked and contributing rules</h2>
+<div style="font-size: 14px; color: #5B6169">Failure Library rules whose condition was true on boards in this batch and that passed the checks.</div>
 </div>
 
 <article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
-<div style="display: flex; align-items: center; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
 <span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#1</span>
 <span class="chip info">Linked</span>
-<span class="chip crit">Above USL · 156 boards</span>
-</div>
+<span class="chip crit">Rule condition true · 156 boards</span>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <div class="node n-root">High peak reflow temperature<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Reflow oven</div></div>
@@ -107,15 +107,20 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span class="arrow" aria-hidden="true">→</span>
 <div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
-<div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">28.2% vs 0.125%</span><span class="l">Solder bridging rate, out of spec vs in spec</span></div>
-<div class="stat"><span class="v">226×</span><span class="l">more likely when out of spec</span></div>
-<div class="stat"><span class="v">44 of 47</span><span class="l">Boards with solder bridging that were out of spec</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span class="rule">Rule: PeakReflowTemperature &gt; USL</span>
+
 </div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="stat"><span class="v">28.2% vs 0.58%</span><span class="l">Solder bridging rate, rule condition true vs false</span></div>
+<div class="stat"><span class="v">48×</span><span class="l">more likely when the rule condition is true</span></div>
+<div class="stat"><span class="v">44 of 58</span><span class="l">Boards with solder bridging where the rule condition was true</span></div>
+</div>
+
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
 <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>156 boards were above USL 02:00–02:40: peak reflow temperature 257.9–259.8 °C (spec 245–255 °C).</li><li>44 of 47 boards with solder bridging were built 02:00–02:40.</li><li>Outside 02:00–02:40: peak reflow temperature averaged 251.8 °C; 3 boards with solder bridging.</li>
+<li>156 boards were above USL 02:00–02:40: peak reflow temperature 257.9–259.8 °C (spec 245–255 °C).</li><li>44 of 58 boards with solder bridging were built 02:00–02:40.</li><li>Outside 02:00–02:40: peak reflow temperature averaged 251.8 °C; 14 boards with solder bridging.</li>
 </ul>
 </div>
 
@@ -124,15 +129,15 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <table class="tt">
 <thead><tr><th>stg-B0003 boards</th><th>Solder bridging</th><th>No solder bridging</th><th>Solder bridging rate</th></tr></thead>
 <tbody>
-<tr><td>Above USL</td><td>44</td><td>112</td><td>28.2%</td></tr>
-<tr><td>In spec</td><td>3</td><td>2,401</td><td>0.125%</td></tr>
+<tr><td>Rule condition true</td><td>44</td><td>112</td><td>28.2%</td></tr>
+<tr><td>Rule condition false</td><td>14</td><td>2,390</td><td>0.58%</td></tr>
 </tbody>
 </table>
 <ul style="margin: 10px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
-<li>Solder bridging rate, out of spec vs in spec: 28.2% vs 0.125% (226×). Needs 2× or more.</li>
+<li>Failure Library path: <span class="mono" style="font-size: 13px">PeakReflowTemperature &gt; USL</span> → Excess reflow spreading → Solder bridging</li>
+<li>Solder bridging rate, rule condition true vs false: 28.2% vs 0.58% (48×). Needs 2× or more.</li>
 <li>Fisher's exact test: p &lt; 0.001. Needs p &lt; 0.01.</li>
-<li>Boards with solder bridging that were out of spec: 44 of 47 (94%). Needs 20% or more.</li>
-<li>Failure Library rule: <span class="mono" style="font-size: 13px">PeakReflowTemperature &gt; USL → ExcessReflowSpreading</span></li>
+<li>Boards with solder bridging where the rule condition was true: 44 of 58 (76%). Needs 20% or more.</li>
 </ul>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
@@ -147,31 +152,153 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 </article>
 
+<article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#2</span>
+<span class="chip warn">Contributing</span>
+<span class="chip crit">Rule condition true · 40 boards</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<div class="node n-root">Low squeegee angle + low squeegee speed<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-mech">Aperture overfill<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span class="rule">Rule: SqueegeeAngle &lt; LSL AND SqueegeeSpeed &lt; LSL</span>
+<span style="font-size: 13px; color: #5B6169">Unit rule split from: <span class="mono">SqueegeeAngle &lt; LSL AND (SqueegeeSpeed &lt; LSL OR SqueegeePressure &gt; USL)</span></span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="stat"><span class="v">17.5% vs 2.0%</span><span class="l">Solder bridging rate, rule condition true vs false</span></div>
+<div class="stat"><span class="v">8.7×</span><span class="l">more likely when the rule condition is true</span></div>
+<div class="stat"><span class="v">7 of 58</span><span class="l">Boards with solder bridging where the rule condition was true</span></div>
+</div>
+
+<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #FFFAF4; border: 1px solid #F1D3B5; border-radius: 8px; color: #6B2C05">Contributing: explains 7 of 58 boards with solder bridging (12%) on its own. Together with the other passing aperture overfill rules: 14 of 58 (24%).</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div class="eyebrow">Evidence</div>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
+<li>40 boards met the rule condition 23:10–00:20: squeegee angle 51–54° (spec 55–65°) with speed 48–55 mm/s (spec 56–84 mm/s).</li><li>7 of 58 boards with solder bridging were built 23:10–00:20 under this rule.</li>
+</ul>
+</div>
+
+<div class="evi"><span style="font-weight: 600">Supported by: </span>Paste volume per aperture was above USL on 61 boards, 12 of them among the 14 boards with solder bridging under rules #2 and #3.</div>
+
+<details style="font-size: 14px">
+<summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
+<table class="tt">
+<thead><tr><th>stg-B0003 boards</th><th>Solder bridging</th><th>No solder bridging</th><th>Solder bridging rate</th></tr></thead>
+<tbody>
+<tr><td>Rule condition true</td><td>7</td><td>33</td><td>17.5%</td></tr>
+<tr><td>Rule condition false</td><td>51</td><td>2,469</td><td>2.0%</td></tr>
+</tbody>
+</table>
+<ul style="margin: 10px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
+<li>Failure Library path: <span class="mono" style="font-size: 13px">SqueegeeAngle &lt; LSL AND SqueegeeSpeed &lt; LSL</span> → Aperture overfill → Solder bridging</li>
+<li>Solder bridging rate, rule condition true vs false: 17.5% vs 2.0% (8.7×). Needs 2× or more.</li>
+<li>Fisher's exact test: p &lt; 0.001. Needs p &lt; 0.01.</li>
+<li>Boards with solder bridging where the rule condition was true: 7 of 58 (12%), below 20% on its own. Aperture overfill rules together: 14 of 58 (24%).</li>
+</ul>
+</details>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
+<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Replace the squeegee blade; check angle, speed and pressure against the recipe.</div>
+
+
+<div style="display: flex; gap: 8px">
+<button class="btn" type="button">Reject</button>
+<button class="btn primary" type="button">Accept</button>
+</div>
+
+</div>
+</article>
+
+<article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#3</span>
+<span class="chip warn">Contributing</span>
+<span class="chip crit">Rule condition true · 35 boards</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<div class="node n-root">Low squeegee angle + high squeegee pressure<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-mech">Aperture overfill<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span class="rule">Rule: SqueegeeAngle &lt; LSL AND SqueegeePressure &gt; USL</span>
+<span style="font-size: 13px; color: #5B6169">Unit rule split from: <span class="mono">SqueegeeAngle &lt; LSL AND (SqueegeeSpeed &lt; LSL OR SqueegeePressure &gt; USL)</span></span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="stat"><span class="v">20.0% vs 2.0%</span><span class="l">Solder bridging rate, rule condition true vs false</span></div>
+<div class="stat"><span class="v">9.9×</span><span class="l">more likely when the rule condition is true</span></div>
+<div class="stat"><span class="v">7 of 58</span><span class="l">Boards with solder bridging where the rule condition was true</span></div>
+</div>
+
+<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #FFFAF4; border: 1px solid #F1D3B5; border-radius: 8px; color: #6B2C05">Contributing: explains 7 of 58 boards with solder bridging (12%) on its own. Together with the other passing aperture overfill rules: 14 of 58 (24%).</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div class="eyebrow">Evidence</div>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
+<li>35 boards met the rule condition 23:10–00:20: squeegee angle 51–54° (spec 55–65°) with pressure 0.34–0.36 MPa (spec 0.27–0.33 MPa).</li><li>7 of 58 boards with solder bridging were built 23:10–00:20 under this rule.</li>
+</ul>
+</div>
+
+<details style="font-size: 14px">
+<summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
+<table class="tt">
+<thead><tr><th>stg-B0003 boards</th><th>Solder bridging</th><th>No solder bridging</th><th>Solder bridging rate</th></tr></thead>
+<tbody>
+<tr><td>Rule condition true</td><td>7</td><td>28</td><td>20.0%</td></tr>
+<tr><td>Rule condition false</td><td>51</td><td>2,474</td><td>2.0%</td></tr>
+</tbody>
+</table>
+<ul style="margin: 10px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
+<li>Failure Library path: <span class="mono" style="font-size: 13px">SqueegeeAngle &lt; LSL AND SqueegeePressure &gt; USL</span> → Aperture overfill → Solder bridging</li>
+<li>Solder bridging rate, rule condition true vs false: 20.0% vs 2.0% (9.9×). Needs 2× or more.</li>
+<li>Fisher's exact test: p &lt; 0.001. Needs p &lt; 0.01.</li>
+<li>Boards with solder bridging where the rule condition was true: 7 of 58 (12%), below 20% on its own. Aperture overfill rules together: 14 of 58 (24%).</li>
+</ul>
+</details>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
+<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Replace the squeegee blade; check angle, speed and pressure against the recipe.</div>
+
+
+<div style="display: flex; gap: 8px">
+<button class="btn" type="button">Reject</button>
+<button class="btn primary" type="button">Accept</button>
+</div>
+
+</div>
+</article>
+
 </section>
 
 <section class="card" style="overflow: hidden" aria-label="Checked and not linked">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 7</h2>
-<div style="font-size: 14px; color: #5B6169">Every other root cause in the Failure Library for solder bridging, with the check it failed.</div>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 6</h2>
+<div style="font-size: 14px; color: #5B6169">Every other unit rule in the Failure Library for solder bridging, with the check it failed.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
 <div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
-<span style="font-weight: 600; font-size: 14px">High paste volume per aperture</span>
+<span style="font-weight: 600; font-size: 14px">Low squeegee speed</span>
 <span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
 </div>
-<span class="chip warn">Above USL · 61 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Boards with solder bridging that were out of spec: 6 of 47 (13%). Needs 20% or more.</span>
+<span class="chip warn">Rule condition true · 220 boards</span>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Solder bridging rate, rule condition true vs false: 3.2% vs 2.2% (1.5×). Needs 2× or more. Only with low squeegee angle does it pass (rule #2).</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
 <div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
 <span style="font-weight: 600; font-size: 14px">High ambient temperature</span>
-<span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
+<span style="font-size: 12px; color: #5B6169">via Excess reflow spreading</span>
 </div>
-<span class="chip warn">Above USL · 96 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Solder bridging rate, out of spec vs in spec: 2.1% vs 1.8% (1.1×). Needs 2× or more.</span>
+<span class="chip warn">Rule condition true · 96 boards</span>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Solder bridging rate, rule condition true vs false: 2.1% vs 2.3% (0.9×). Needs 2× or more.</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
@@ -179,7 +306,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 14px">High stencil thickness</span>
 <span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
 </div>
-<span class="chip ok">In spec</span>
+<span class="chip ok">Rule condition true · 0 boards</span>
 <span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 100.4 µm on stencil ST-0412 (spec 95–105 µm).</span>
 </div>
 
@@ -188,7 +315,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 14px">Low aperture area ratio</span>
 <span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
 </div>
-<span class="chip ok">In spec</span>
+<span class="chip ok">Rule condition true · 0 boards</span>
 <span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 0.71 on stencil ST-0412 (spec ≥ 0.66).</span>
 </div>
 
@@ -197,17 +324,8 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 14px">High bead size of solder paste</span>
 <span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
 </div>
-<span class="chip ok">In spec</span>
+<span class="chip ok">Rule condition true · 0 boards</span>
 <span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 3.7–4.3 mm³ on all 2,560 boards (spec 3.6–4.4 mm³).</span>
-</div>
-
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
-<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
-<span style="font-weight: 600; font-size: 14px">Low squeegee speed</span>
-<span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
-</div>
-<span class="chip ok">In spec</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 62–78 mm/s on all 2,560 boards (spec 56–84 mm/s).</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
@@ -215,7 +333,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 14px">High ambient RH</span>
 <span style="font-size: 12px; color: #5B6169">via Post-print spread</span>
 </div>
-<span class="chip ok">In spec</span>
+<span class="chip ok">Rule condition true · 0 boards</span>
 <span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 38–55 %RH on all 2,560 boards (spec [your limit]).</span>
 </div>
 
@@ -227,7 +345,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Peak reflow temperature (°C)</h2>
-<div style="font-size: 14px; color: #5B6169">20-minute averages, stg-B0003</div>
+<div style="font-size: 14px; color: #5B6169">Linked rule #1 · 20-minute averages, stg-B0003</div>
 </div>
 <svg class="trend" viewBox="0 0 520 250" width="100%" role="img" aria-label="Peak reflow temperature is above USL only during 02:00–02:40">
 <rect class="win" x="276" y="30" width="40" height="184"></rect>
@@ -247,19 +365,26 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><span class="chip crit">112 at risk</span></div>
-<div style="font-size: 14px; line-height: 1.5">112 boards built 02:00–02:40 passed AOI but were above USL on peak reflow temperature.</div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><span class="chip crit">173 at risk</span></div>
+<ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; display: flex; flex-direction: column; gap: 6px">
+<li>112 boards built 02:00–02:40 passed AOI but met linked rule #1 (peak reflow temperature above USL).</li><li>61 boards built 23:10–00:20 passed AOI but met contributing rule #2 or #3 (squeegee angle below LSL with speed below LSL or pressure above USL).</li>
+</ul>
 <a class="btn" href="containment.html">Review boards to hold</a>
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
-<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a root cause is linked</h2>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Its parameter was out of spec in this batch, and it passes all three checks:</div>
-<ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6">
-<li>Defect rate, out of spec vs in spec: 2× or more</li>
-<li>Fisher's exact test: p &lt; 0.01, so the gap is not random variation</li>
-<li>Boards with the defect that were out of spec: 20% or more</li>
-</ul>
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a rule is linked</h2>
+<ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 6px">
+<li>The Failure Library has a path: rule → mechanism → defect. Rules with OR are split into unit rules joined only by AND.</li>
+<li>Boards where the rule condition is true are compared with boards where it is false:
+<ul style="margin: 4px 0 0; padding-left: 18px">
+<li>Defect rate, rule condition true vs false: 2× or more</li>
+<li>Fisher's exact test: p &lt; 0.01</li>
+<li>Boards with the defect where the rule condition was true: 20% or more</li>
+</ul></li>
+</ol>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56"><span style="font-weight: 600; color: #16191D">Linked:</span> passes all three. <span style="font-weight: 600; color: #16191D">Contributing:</span> passes the first two, and the mechanism's passing rules together reach 20%.</div>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Measurements such as SPI paste volume are never root causes; they show as evidence for a mechanism.</div>
 </section>
 </aside>
 </div>

@@ -48,19 +48,19 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-direction: column; gap: 6px; max-width: 720px">
 <div class="eyebrow">Failure Library · Solder printing and reflow</div>
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">What causes each defect, and how to fix it</h1>
-<div style="font-size: 15px; color: #4A4F56; line-height: 1.5">Your engineers' process knowledge, linked to your specs. Every investigation is checked against this library.</div>
+<div style="font-size: 15px; color: #4A4F56; line-height: 1.5">Your engineers' process knowledge as rules, linked to your specs. Rules with OR are split into unit rules joined only by AND, and every investigation checks each one. Measurements are evidence for a mechanism, never a root cause.</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
 <div role="group" aria-label="Defect" style="display: flex">
 <button type="button" class="{{bClass}}" aria-pressed="{{isB}}" onClick="{{showB}}">Solder bridging</button>
 <button type="button" class="{{oClass}}" aria-pressed="{{isO}}" onClick="{{showO}}">Open circuit</button>
 </div>
-<button type="button" class="btn primary">Add root cause</button>
+<button type="button" class="btn primary">Add rule</button>
 </div>
 </div>
 
 <div class="card" style="padding: 16px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 14px">
-<span style="padding: 6px 12px; border-radius: 6px; background: #F4F5F3; border: 1px solid #C9CDD2; font-weight: 600">Root cause</span>
+<span style="padding: 6px 12px; border-radius: 6px; background: #F4F5F3; border: 1px solid #C9CDD2; font-weight: 600">Rule</span>
 <span aria-hidden="true" style="color: #5B6169">→</span>
 <span style="padding: 6px 12px; border-radius: 6px; background: #E8EFFA; border: 1px solid #B7CBEA; color: #123A73; font-weight: 600">Mechanism</span>
 <span aria-hidden="true" style="color: #5B6169">→</span>
@@ -68,7 +68,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="margin-left: auto; color: #5B6169">{{d.meta}}</span>
 </div>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; align-items: start">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; align-items: start">
 <sc-for list="{{d.mechs}}" as="m" hint-placeholder-count="3">
 <section class="card" style="overflow: hidden">
 <div style="padding: 16px 20px; background: #E8EFFA; border-bottom: 1px solid #B7CBEA; display: flex; justify-content: space-between; align-items: center; gap: 12px">
@@ -76,19 +76,32 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span class="mono" style="font-size: 13px; color: #123A73">{{m.count}}</span>
 </div>
 <div style="display: flex; flex-direction: column">
-<sc-for list="{{m.causes}}" as="c" hint-placeholder-count="3">
+<sc-for list="{{m.rules}}" as="r" hint-placeholder-count="3">
 <div style="padding: 16px 20px; border-bottom: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start">
-<div style="font-weight: 600; font-size: 15px">{{c.name}}</div>
-<span class="{{c.seenCls}}">{{c.seen}}</span>
+<div style="font-weight: 600; font-size: 15px">{{r.name}}</div>
+<span class="{{r.seenCls}}">{{r.seen}}</span>
 </div>
+<div class="mono" style="font-size: 12.5px; color: #4A4F56; background: #F4F5F3; border-radius: 6px; padding: 6px 10px">{{r.code}}</div>
+<sc-if value="{{r.split}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #4A4F56">
+<span>Split into {{r.unitCount}} unit rules:</span>
+<sc-for list="{{r.units}}" as="u" hint-placeholder-count="2"><span class="mono" style="font-size: 12px; padding-left: 12px">{{u}}</span></sc-for>
+</div>
+</sc-if>
 <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
-<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">{{c.spec}}</span>
-<span>{{c.where}}</span>
+<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">{{r.spec}}</span>
+<span>{{r.where}} · {{r.kind}}</span>
 </div>
-<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>{{c.fix}}</div>
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>{{r.fix}}</div>
 </div>
 </sc-for>
+<sc-if value="{{m.hasSupport}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 14px 20px; background: #F5F8FD; display: flex; flex-direction: column; gap: 4px">
+<span class="eyebrow">Supported by (measurement, not a root cause)</span>
+<sc-for list="{{m.support}}" as="x" hint-placeholder-count="1"><span style="font-size: 14px">{{x}}</span></sc-for>
+</div>
+</sc-if>
 </div>
 </section>
 </sc-for>
@@ -103,34 +116,32 @@ class Component extends DCLogic {
     this.state = { d: 'b' };
   }
   renderVals() {
-    const C = (name, spec, where, fix, seen) => ({ name, spec, where, fix, seen: seen ? 'Seen ' + seen + '×' : 'Not seen yet', seenCls: seen ? 'chip info' : 'chip muted' });
+    const R = (name, code, units, spec, where, kind, fix, seen) => ({ name, code, units, unitCount: units.length, split: units.length > 1, spec, where, kind, fix, seen: seen ? 'Seen ' + seen + '×' : 'Not seen yet', seenCls: seen ? 'chip info' : 'chip muted' });
     const lib = {
-      b: { name: 'Solder bridging', meta: '8 root causes · last edited 15 Oct 2026 by Priya S.', mechs: [
-        { name: 'Aperture overfill', causes: [
-          C('High stencil thickness', 'Spec 95–105 µm', 'Stencil', 'Use a thinner foil or step-down stencil.', 3),
-          C('Low aperture area ratio', 'Spec ≥ 0.66', 'Stencil', 'Redesign the apertures.', 0),
-          C('High bead size of solder paste', 'Spec 3.6–4.4 mm³', 'Solder printer', 'Reduce bead width and mass.', 1),
-          C('Low squeegee speed', 'Spec 56–84 mm/s', 'Solder printer', 'Raise the speed into the window.', 2),
-          C('High paste volume per aperture', 'Spec 0.036–0.044 mm³', 'Solder printer', 'Target the dominant upstream drivers.', 1)
+      b: { name: 'Solder bridging', meta: '7 rules · 9 unit rules · last edited 15 Oct 2026 by Priya S.', mechs: [
+        { name: 'Aperture overfill', support: ['Paste volume per aperture above USL · SPI · spec 0.036–0.044 mm³'], rules: [
+          R('Low aperture area ratio or high stencil thickness', 'ApertureAreaRatio < LSL OR StencilThickness > USL', ['ApertureAreaRatio < LSL', 'StencilThickness > USL'], 'Spec ≥ 0.66 · 95–105 µm', 'Stencil', 'Setting', 'Use a thinner foil or step-down stencil; redesign apertures below the area ratio limit.', 3),
+          R('Low squeegee angle with low speed or high pressure', 'SqueegeeAngle < LSL AND (SqueegeeSpeed < LSL OR SqueegeePressure > USL)', ['SqueegeeAngle < LSL AND SqueegeeSpeed < LSL', 'SqueegeeAngle < LSL AND SqueegeePressure > USL'], 'Spec 55–65° · 56–84 mm/s · 0.27–0.33 MPa', 'Solder printer', 'Setting', 'Replace the squeegee blade; check angle, speed and pressure against the recipe.', 2),
+          R('Low squeegee speed', 'SqueegeeSpeed < LSL', ['SqueegeeSpeed < LSL'], 'Spec 56–84 mm/s', 'Solder printer', 'Setting', 'Raise the speed into the window.', 2),
+          R('High bead size of solder paste', 'PasteBeadSize > USL', ['PasteBeadSize > USL'], 'Spec 3.6–4.4 mm³', 'Solder printer', 'Setting', 'Reduce bead width and mass.', 1)
         ]},
-        { name: 'Excess reflow spreading', causes: [
-          C('High peak reflow temperature', 'Spec 245–255 °C', 'Reflow oven', 'Restore the approved reflow recipe; lock recipe changes behind sign-off.', 5),
-          C('High ambient temperature', 'Spec [your limit]', 'Environment', 'Check HVAC on the line.', 0)
+        { name: 'Excess reflow spreading', support: [], rules: [
+          R('High peak reflow temperature', 'PeakReflowTemperature > USL', ['PeakReflowTemperature > USL'], 'Spec 245–255 °C', 'Reflow oven', 'Setting', 'Restore the approved reflow recipe; lock recipe changes behind sign-off.', 5),
+          R('High ambient temperature', 'AmbientTemperature > USL', ['AmbientTemperature > USL'], 'Spec [your limit]', 'Line', 'Environment', 'Check HVAC on the line.', 0)
         ]},
-        { name: 'Post-print spread', causes: [
-          C('High ambient RH', 'Spec [your limit]', 'Environment', 'Control humidity; check paste exposure time.', 1)
+        { name: 'Post-print spread', support: [], rules: [
+          R('High ambient RH', 'AmbientRh > USL', ['AmbientRh > USL'], 'Spec [your limit]', 'Line', 'Environment', 'Control humidity; check paste exposure time.', 1)
         ]}
       ]},
-      o: { name: 'Open circuit', meta: '3 root causes · last edited 12 Oct 2026 by Wei C.', mechs: [
-        { name: 'Poor paste transfer', causes: [
-          C('High paste viscosity', 'Spec 180–220 Pa·s', 'Solder paste', 'Replace the paste; check paste age and floor life.', 4),
-          C('Low paste volume per aperture', 'Spec 0.036–0.044 mm³', 'Solder printer', 'Clean the stencil underside; verify squeegee pressure.', 2),
-          C('High ambient RH', 'Spec [your limit]', 'Environment', 'Control humidity; check paste exposure time.', 0)
+      o: { name: 'Open circuit', meta: '2 rules · 2 unit rules · last edited 12 Oct 2026 by Wei C.', mechs: [
+        { name: 'Poor paste transfer', support: ['Paste volume per aperture below LSL · SPI · spec 0.036–0.044 mm³'], rules: [
+          R('High paste viscosity', 'PasteViscosity > USL', ['PasteViscosity > USL'], 'Spec 180–220 Pa·s', 'Solder paste', 'Material', 'Replace the paste; check paste age and floor life.', 4),
+          R('High ambient RH', 'AmbientRh > USL', ['AmbientRh > USL'], 'Spec [your limit]', 'Line', 'Environment', 'Control humidity; check paste exposure time.', 0)
         ]}
       ]}
     };
     const raw = lib[this.state.d];
-    const d = Object.assign({}, raw, { mechs: raw.mechs.map(m => Object.assign({}, m, { count: m.causes.length + (m.causes.length === 1 ? ' root cause' : ' root causes') })) });
+    const d = Object.assign({}, raw, { mechs: raw.mechs.map(m => Object.assign({}, m, { hasSupport: m.support.length > 0, count: m.rules.length + (m.rules.length === 1 ? ' rule' : ' rules') })) });
     const isB = this.state.d === 'b';
     return {
       d, isB, isO: !isB,

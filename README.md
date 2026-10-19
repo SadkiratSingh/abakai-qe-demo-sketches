@@ -2,7 +2,7 @@ This repository contains sketches for rca demo for quality engineers and manager
 
 ## What's here
 
-Clickable screen sketches for a root cause analysis (RCA) demo aimed at quality engineers (QEs) and quality managers (QMs) in SMT/PCB assembly. The story follows batch stg-B0003 of CTRL-BRD-A on the night shift of SMT line 2: the reflow oven ran on the wrong profile from 02:00 to 02:40 (solder bridging), and an out-of-spec paste jar was used from 03:40 to 04:30 (open circuits).
+Clickable screen sketches for a root cause analysis (RCA) demo aimed at quality engineers (QEs) and quality managers (QMs) in SMT/PCB assembly. The story follows batch stg-B0003 of CTRL-BRD-A on the night shift of SMT line 2: a worn squeegee blade from 23:10 to 00:20 and the reflow oven on the wrong profile from 02:00 to 02:40 (58 boards with solder bridging), and an out-of-spec paste jar from 03:40 to 04:30 (31 boards with open circuit).
 
 | File | Screen | What it shows |
 | --- | --- | --- |
@@ -30,6 +30,16 @@ npm install
 npm run export
 ```
 
+## Linking model (v2)
+
+1. Engineers write Failure Library rules per mechanism (rule → mechanism), with a separate mechanism → defect link. Rules may use OR.
+2. Each rule is split automatically into **unit rules** joined only by AND; each unit rule keeps its parent rule. Example: `SqueegeeAngle < LSL AND (SqueegeeSpeed < LSL OR SqueegeePressure > USL)` becomes `SqueegeeAngle < LSL AND SqueegeeSpeed < LSL` and `SqueegeeAngle < LSL AND SqueegeePressure > USL`.
+3. For every unit rule with a path to the defect, boards are split into **rule condition true** and **rule condition false**, and three checks run: defect rate 2× or more, Fisher's exact test p < 0.01, and at least 20% of defective boards where the rule condition was true.
+4. **Linked:** passes all three. **Contributing:** passes the first two, fails the 20% on its own, and its mechanism's passing unit rules together reach 20%. **Checked and not linked:** shows the first check it failed.
+5. The parameters in a linked or contributing unit rule are its root causes. Only settings, materials and environment can be root causes.
+6. **Measurements** (SPI, AOI) are linked to mechanisms by *supported_by*, never as root causes, and show as "Supported by" evidence.
+7. **Containment:** boards where a linked or contributing unit rule is true, plus boards whose supporting measurement is out of spec, minus boards that already failed, each counted once.
+
 ## Wording templates
 
 Every generated sentence on the screens comes from one of these templates, so the same fact is always said the same way. `{…}` is filled from data. The RCA packet builds its text from them in code (`const T` in `sketches/RcaPacket.dc.html`).
@@ -47,15 +57,19 @@ Every generated sentence on the screens comes from one of these templates, so th
 | `excursion` / `no excursion` | spike, cluster, in control (that is SPC language) |
 | `model confidence` for the per-board model score only | risk, probability |
 
-**Status chip:** `{Above USL | Below LSL} · {n} boards` or `In spec`
+**Status chip:** `Rule condition true · {n} boards`
 
 **The three linking checks** (also the labels of the stat boxes):
 
-- `{Defect} rate, out of spec vs in spec: {a}% vs {b}% ({ratio}×). Needs 2× or more.`
+- `{Defect} rate, rule condition true vs false: {a}% vs {b}% ({ratio}×). Needs 2× or more.`
 - `Fisher's exact test: p {value}. Needs p < 0.01.`
-- `Boards with {defect} that were out of spec: {k} of {K} ({pct}%). Needs 20% or more.`
+- `Boards with {defect} where the rule condition was true: {k} of {K} ({pct}%). Needs 20% or more.`
 
-A root cause checked and not linked shows the first check it failed, in the same words. One that is in spec shows:
+Contributing: `Contributing: explains {k} of {K} boards with {defect} ({pct}) on its own. Together with the other passing {mechanism} rules: {k2} of {K} ({pct2}).`
+
+Supported by: `{Measurement} was {above USL} on {n} boards, {x} of them {where}.`
+
+A unit rule checked and not linked shows the first check it failed, in the same words. One whose condition was true on 0 boards shows:
 `Measured {value or range} on {stencil ID | all {N} boards} (spec {spec}).`
 
 **Sentences**
@@ -67,10 +81,10 @@ A root cause checked and not linked shows the first check it failed, in the same
 | Evidence, out of spec | `{n} boards were {above USL} {window}: {parameter} {min}–{max} {unit} (spec {spec}).` |
 | Evidence, in window | `{k} of {K} boards with {defect} were built {window}.` |
 | Evidence, outside window | `Outside {window}: {parameter} averaged {mean} {unit}; {k} boards with {defect}.` |
-| Overlap note | `{x} of these {n} boards were also {above USL} on {parameter}. Likely an effect of #1, not a separate root cause.` |
+| Evidence, compound rule | `{n} boards met the rule condition {window}: {detail}.` |
 | Trend note | `{Parameter} averaged {mean} {unit} outside {window} and reached {max} {unit} during it.` |
-| Containment | `{n} boards built {window} passed {AOI | electrical test} but were {above USL} on {parameter}.` |
-| Containment, each further linked root cause | `{n} more boards passed {inspection} but were {below LSL} on {parameter}.` |
+| Containment | `{n} boards built {window} passed {AOI | electrical test} but met {linked rule #n (rule)}.` |
+| Containment, supporting measurement | `{n} more boards passed {inspection} but {measurement}, which supports {mechanism}, was {below LSL}.` |
 | Containment scope check | `Also checked: other batches through {line} during {windows}: {none | list}.` |
 | Line alert | `{K} boards with {defect}; {k} of {K} built {window}. Root cause analysis is ready.` |
 | Board banner | `Passed {inspections}, but {parameter} was {above USL} ({value}, spec {spec}). Built {time}, during {window}: matches linked root cause #{n} of {investigation}.` |
@@ -87,6 +101,7 @@ All numbers are story data, not output from the backend. Before a real demo:
 ## Versions
 
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
-- v2: short-excursion story (reflow 02:00–02:40, paste viscosity 03:40–04:30). The RCA packet separates each parameter's status (out of spec, with a board count, or in spec) from whether it is linked to the defect (≥2× more likely, under 1% chance of coincidence, explains ≥20% of defective boards), lists every other root cause as checked and not linked, and the other screens use the same numbers.
+- v2 (branch `sketches-v2`): rule-based linking with unit rules, contributing state and measurements as evidence; squeegee wear added to the story.
+- v1.x: short-excursion story (reflow 02:00–02:40, paste viscosity 03:40–04:30). The RCA packet separates each parameter's status (out of spec, with a board count, or in spec) from whether it is linked to the defect (≥2× more likely, under 1% chance of coincidence, explains ≥20% of defective boards), lists every other root cause as checked and not linked, and the other screens use the same numbers.
 - One investigation per batch excursion (INV-0142 for stg-B0003). 8D screens, report recommendation, investigation stages and overdue tracking are out of scope for this demo (see the history before this commit).
 - Containment holds every board that was out of spec on any linked root cause and has not already failed a test, counted once under its first linked root cause. Containment belongs to the investigation, and its scope follows the root cause, so other batches through the same line during the windows are checked too.

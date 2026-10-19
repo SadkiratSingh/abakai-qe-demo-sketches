@@ -46,69 +46,71 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-direction: column; gap: 6px; max-width: 720px">
 <div class="eyebrow">Failure Library · Solder printing and reflow</div>
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">What causes each defect, and how to fix it</h1>
-<div style="font-size: 15px; color: #4A4F56; line-height: 1.5">Your engineers' process knowledge, linked to your specs. Every investigation is checked against this library.</div>
+<div style="font-size: 15px; color: #4A4F56; line-height: 1.5">Your engineers' process knowledge as rules, linked to your specs. Rules with OR are split into unit rules joined only by AND, and every investigation checks each one. Measurements are evidence for a mechanism, never a root cause.</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
 <div role="group" aria-label="Defect" style="display: flex">
 <a class="seg on" href="failure-library.html" style="display:inline-flex;align-items:center;text-decoration:none">Solder bridging</a>
 <a class="seg" href="failure-library-open-circuit.html" style="display:inline-flex;align-items:center;text-decoration:none">Open circuit</a>
 </div>
-<button type="button" class="btn primary">Add root cause</button>
+<button type="button" class="btn primary">Add rule</button>
 </div>
 </div>
 
 <div class="card" style="padding: 16px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 14px">
-<span style="padding: 6px 12px; border-radius: 6px; background: #F4F5F3; border: 1px solid #C9CDD2; font-weight: 600">Root cause</span>
+<span style="padding: 6px 12px; border-radius: 6px; background: #F4F5F3; border: 1px solid #C9CDD2; font-weight: 600">Rule</span>
 <span aria-hidden="true" style="color: #5B6169">→</span>
 <span style="padding: 6px 12px; border-radius: 6px; background: #E8EFFA; border: 1px solid #B7CBEA; color: #123A73; font-weight: 600">Mechanism</span>
 <span aria-hidden="true" style="color: #5B6169">→</span>
 <span style="padding: 6px 12px; border-radius: 6px; background: #FDECEA; border: 1px solid #F3C5C0; color: #7E160E; font-weight: 600">Solder bridging</span>
-<span style="margin-left: auto; color: #5B6169">8 root causes · last edited 15 Oct 2026 by Priya S.</span>
+<span style="margin-left: auto; color: #5B6169">7 rules · 9 unit rules · last edited 15 Oct 2026 by Priya S.</span>
 </div>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; align-items: start">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; align-items: start">
 
 <section class="card" style="overflow: hidden">
 <div style="padding: 16px 20px; background: #E8EFFA; border-bottom: 1px solid #B7CBEA; display: flex; justify-content: space-between; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 16px; font-weight: 600; color: #123A73">Aperture overfill</h2>
-<span class="mono" style="font-size: 13px; color: #123A73">5 root causes</span>
+<span class="mono" style="font-size: 13px; color: #123A73">4 rules</span>
 </div>
 <div style="display: flex; flex-direction: column">
 
 <div style="padding: 16px 20px; border-bottom: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start">
-<div style="font-weight: 600; font-size: 15px">High stencil thickness</div>
+<div style="font-weight: 600; font-size: 15px">Low aperture area ratio or high stencil thickness</div>
 <span class="chip info">Seen 3×</span>
 </div>
-<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
-<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec 95–105 µm</span>
-<span>Stencil</span>
+<div class="mono" style="font-size: 12.5px; color: #4A4F56; background: #F4F5F3; border-radius: 6px; padding: 6px 10px">ApertureAreaRatio &lt; LSL OR StencilThickness &gt; USL</div>
+
+<div style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #4A4F56">
+<span>Split into 2 unit rules:</span>
+<span class="mono" style="font-size: 12px; padding-left: 12px">ApertureAreaRatio &lt; LSL</span><span class="mono" style="font-size: 12px; padding-left: 12px">StencilThickness &gt; USL</span>
 </div>
-<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Use a thinner foil or step-down stencil.</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
+<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec ≥ 0.66 · 95–105 µm</span>
+<span>Stencil · Setting</span>
+</div>
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Use a thinner foil or step-down stencil; redesign apertures below the area ratio limit.</div>
 </div>
 
 <div style="padding: 16px 20px; border-bottom: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start">
-<div style="font-weight: 600; font-size: 15px">Low aperture area ratio</div>
-<span class="chip muted">Not seen yet</span>
+<div style="font-weight: 600; font-size: 15px">Low squeegee angle with low speed or high pressure</div>
+<span class="chip info">Seen 2×</span>
 </div>
-<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
-<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec ≥ 0.66</span>
-<span>Stencil</span>
-</div>
-<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Redesign the apertures.</div>
+<div class="mono" style="font-size: 12.5px; color: #4A4F56; background: #F4F5F3; border-radius: 6px; padding: 6px 10px">SqueegeeAngle &lt; LSL AND (SqueegeeSpeed &lt; LSL OR SqueegeePressure &gt; USL)</div>
+
+<div style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #4A4F56">
+<span>Split into 2 unit rules:</span>
+<span class="mono" style="font-size: 12px; padding-left: 12px">SqueegeeAngle &lt; LSL AND SqueegeeSpeed &lt; LSL</span><span class="mono" style="font-size: 12px; padding-left: 12px">SqueegeeAngle &lt; LSL AND SqueegeePressure &gt; USL</span>
 </div>
 
-<div style="padding: 16px 20px; border-bottom: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start">
-<div style="font-weight: 600; font-size: 15px">High bead size of solder paste</div>
-<span class="chip info">Seen 1×</span>
-</div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
-<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec 3.6–4.4 mm³</span>
-<span>Solder printer</span>
+<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec 55–65° · 56–84 mm/s · 0.27–0.33 MPa</span>
+<span>Solder printer · Setting</span>
 </div>
-<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Reduce bead width and mass.</div>
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Replace the squeegee blade; check angle, speed and pressure against the recipe.</div>
 </div>
 
 <div style="padding: 16px 20px; border-bottom: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 8px">
@@ -116,23 +118,33 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="font-weight: 600; font-size: 15px">Low squeegee speed</div>
 <span class="chip info">Seen 2×</span>
 </div>
+<div class="mono" style="font-size: 12.5px; color: #4A4F56; background: #F4F5F3; border-radius: 6px; padding: 6px 10px">SqueegeeSpeed &lt; LSL</div>
+
 <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
 <span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec 56–84 mm/s</span>
-<span>Solder printer</span>
+<span>Solder printer · Setting</span>
 </div>
 <div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Raise the speed into the window.</div>
 </div>
 
 <div style="padding: 16px 20px; border-bottom: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start">
-<div style="font-weight: 600; font-size: 15px">High paste volume per aperture</div>
+<div style="font-weight: 600; font-size: 15px">High bead size of solder paste</div>
 <span class="chip info">Seen 1×</span>
 </div>
+<div class="mono" style="font-size: 12.5px; color: #4A4F56; background: #F4F5F3; border-radius: 6px; padding: 6px 10px">PasteBeadSize &gt; USL</div>
+
 <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
-<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec 0.036–0.044 mm³</span>
-<span>Solder printer</span>
+<span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec 3.6–4.4 mm³</span>
+<span>Solder printer · Setting</span>
 </div>
-<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Target the dominant upstream drivers.</div>
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Reduce bead width and mass.</div>
+</div>
+
+
+<div style="padding: 14px 20px; background: #F5F8FD; display: flex; flex-direction: column; gap: 4px">
+<span class="eyebrow">Supported by (measurement, not a root cause)</span>
+<span style="font-size: 14px">Paste volume per aperture above USL · SPI · spec 0.036–0.044 mm³</span>
 </div>
 
 </div>
@@ -141,7 +153,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section class="card" style="overflow: hidden">
 <div style="padding: 16px 20px; background: #E8EFFA; border-bottom: 1px solid #B7CBEA; display: flex; justify-content: space-between; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 16px; font-weight: 600; color: #123A73">Excess reflow spreading</h2>
-<span class="mono" style="font-size: 13px; color: #123A73">2 root causes</span>
+<span class="mono" style="font-size: 13px; color: #123A73">2 rules</span>
 </div>
 <div style="display: flex; flex-direction: column">
 
@@ -150,9 +162,11 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="font-weight: 600; font-size: 15px">High peak reflow temperature</div>
 <span class="chip info">Seen 5×</span>
 </div>
+<div class="mono" style="font-size: 12.5px; color: #4A4F56; background: #F4F5F3; border-radius: 6px; padding: 6px 10px">PeakReflowTemperature &gt; USL</div>
+
 <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
 <span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec 245–255 °C</span>
-<span>Reflow oven</span>
+<span>Reflow oven · Setting</span>
 </div>
 <div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Restore the approved reflow recipe; lock recipe changes behind sign-off.</div>
 </div>
@@ -162,12 +176,15 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="font-weight: 600; font-size: 15px">High ambient temperature</div>
 <span class="chip muted">Not seen yet</span>
 </div>
+<div class="mono" style="font-size: 12.5px; color: #4A4F56; background: #F4F5F3; border-radius: 6px; padding: 6px 10px">AmbientTemperature &gt; USL</div>
+
 <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
 <span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec [your limit]</span>
-<span>Environment</span>
+<span>Line · Environment</span>
 </div>
 <div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Check HVAC on the line.</div>
 </div>
+
 
 </div>
 </section>
@@ -175,7 +192,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section class="card" style="overflow: hidden">
 <div style="padding: 16px 20px; background: #E8EFFA; border-bottom: 1px solid #B7CBEA; display: flex; justify-content: space-between; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 16px; font-weight: 600; color: #123A73">Post-print spread</h2>
-<span class="mono" style="font-size: 13px; color: #123A73">1 root cause</span>
+<span class="mono" style="font-size: 13px; color: #123A73">1 rule</span>
 </div>
 <div style="display: flex; flex-direction: column">
 
@@ -184,12 +201,15 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="font-weight: 600; font-size: 15px">High ambient RH</div>
 <span class="chip info">Seen 1×</span>
 </div>
+<div class="mono" style="font-size: 12.5px; color: #4A4F56; background: #F4F5F3; border-radius: 6px; padding: 6px 10px">AmbientRh &gt; USL</div>
+
 <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
 <span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec [your limit]</span>
-<span>Environment</span>
+<span>Line · Environment</span>
 </div>
 <div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Fix: </span>Control humidity; check paste exposure time.</div>
 </div>
+
 
 </div>
 </section>

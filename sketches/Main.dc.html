@@ -62,8 +62,8 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 
 <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px" aria-label="Shift summary">
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Boards built</div><div class="mono" style="font-size: 32px; font-weight: 500">7,680</div><div style="font-size: 13px; color: #5B6169">3 batches · 1,920 panels</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">First-pass yield</div><div class="mono" style="font-size: 32px; font-weight: 500">98.9%</div><div style="font-size: 13px; color: #9B1C12; font-weight: 600">Down from 99.6% last night</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Solder bridging</div><div class="mono" style="font-size: 32px; font-weight: 500">47</div><div style="font-size: 13px; color: #5B6169">All in stg-B0003</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">First-pass yield</div><div class="mono" style="font-size: 32px; font-weight: 500">98.8%</div><div style="font-size: 13px; color: #9B1C12; font-weight: 600">Down from 99.6% last night</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Solder bridging</div><div class="mono" style="font-size: 32px; font-weight: 500">58</div><div style="font-size: 13px; color: #5B6169">All in stg-B0003</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Open circuit</div><div class="mono" style="font-size: 32px; font-weight: 500">31</div><div style="font-size: 13px; color: #5B6169">All in stg-B0003</div></div>
 </section>
 
@@ -76,7 +76,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <span class="chip crit">Critical</span>
 <div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 4px">
 <div style="font-weight: 600">Solder bridging excursion in stg-B0003</div>
-<div style="font-size: 14px; color: #4A4F56">47 boards with solder bridging; 44 of 47 built 02:00–02:40. Root cause analysis is ready.</div>
+<div style="font-size: 14px; color: #4A4F56">58 boards with solder bridging; 44 of 58 built 02:00–02:40, 14 of 58 built 23:10–00:20. Root cause analysis is ready.</div>
 </div>
 <a class="btn primary" href="RcaPacket.dc.html">Open RCA packet</a>
 </div>
@@ -94,7 +94,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Defects by hour, stg-B0003</h2>
-<div style="font-size: 14px; color: #5B6169">Each defect clusters in one short window, so each points to a short-lived cause.</div>
+<div style="font-size: 14px; color: #5B6169">Each cluster sits in one short window, so each points to a short-lived cause.</div>
 </div>
 <div style="display: flex; gap: 16px; font-size: 13px; color: #4A4F56">
 <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 3px; background: #1A4F9C"></span>Solder bridging</span>
@@ -124,7 +124,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <tbody>
 <tr><td class="mono">stg-B0001</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono">0</td><td class="mono">0</td><td><span class="chip ok">No excursion</span></td><td></td></tr>
 <tr><td class="mono">stg-B0002</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono">0</td><td class="mono">0</td><td><span class="chip ok">No excursion</span></td><td></td></tr>
-<tr><td class="mono" style="font-weight: 500">stg-B0003</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono" style="color: #9B1C12; font-weight: 500">47</td><td class="mono" style="color: #8A3505; font-weight: 500">31</td><td><span class="chip crit">2 excursions</span></td><td style="text-align: right"><a href="RcaPacket.dc.html">Investigate</a></td></tr>
+<tr><td class="mono" style="font-weight: 500">stg-B0003</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono" style="color: #9B1C12; font-weight: 500">58</td><td class="mono" style="color: #8A3505; font-weight: 500">31</td><td><span class="chip crit">2 excursions</span></td><td style="text-align: right"><a href="RcaPacket.dc.html">Investigate</a></td></tr>
 </tbody>
 </table>
 </div>
@@ -136,7 +136,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 class Component extends DCLogic {
   renderVals() {
     const labels = ['22:00','23:00','00:00','01:00','02:00','03:00','04:00','05:00'];
-    const br = [1,0,1,0,44,1,0,0];
+    const br = [0,8,6,0,44,0,0,0];
     const op = [1,0,0,1,0,10,18,1];
     const max = 44;
     const hours = labels.map((l, i) => ({
