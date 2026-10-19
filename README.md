@@ -2,7 +2,7 @@ This repository contains sketches for rca demo for quality engineers and manager
 
 ## What's here
 
-Clickable screen sketches for a root cause analysis (RCA) demo aimed at quality engineers (QEs) and quality managers (QMs) in SMT/PCB assembly. The story follows batch stg-B0003 of CTRL-BRD-A on the night shift of SMT line 2: a worn squeegee blade from 23:10 to 00:20 and the reflow oven on the wrong profile from 02:00 to 02:40 (58 boards with solder bridging), and an out-of-spec paste jar from 03:40 to 04:30 (31 boards with open circuit).
+Clickable screen sketches for a root cause analysis (RCA) demo aimed at quality engineers (QEs) and quality managers (QMs) in SMT/PCB assembly. The story follows batch stg-B0003 of CTRL-BRD-A on the night shift of SMT line 2: a worn squeegee blade from 23:10 to 00:20 and the reflow oven on the wrong profile from 02:00 to 02:40 (61 boards with solder bridging, 3 of them not explained by any rule), and an out-of-spec paste jar from 03:40 to 04:30 (31 boards with open circuit).
 
 | File | Screen | What it shows |
 | --- | --- | --- |
@@ -71,6 +71,9 @@ Supported by: `{Measurement} was {above USL} on {n} boards, {x} of them {where}.
 A unit rule checked and not linked shows the first check it failed, in the same words. One whose condition was true on 0 boards shows:
 `Measured {value or range} on {stencil ID | all {N} boards} (spec {spec}).`
 
+Unexplained boards (defective boards where no linked or contributing rule condition was true):
+`Unexplained: {k} of {K} boards with {defect}` · `{Defect} rate where no linked or contributing rule condition was true: {k} of {N} boards ({pct}).` · `Built {times}: not grouped in one window.` · `Boards with {defect} in batches with no excursion on {line} this shift: {batch} {k} of {N} ({pct}), ….` There is no line baseline yet, so batches without an excursion in the same shift are the comparison.
+
 **Sentences**
 
 | Where | Template |
@@ -101,7 +104,7 @@ All numbers are story data, not output from the backend. Before a real demo:
 
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2 (branch `sketches-v2`): rule-based linking with unit rules, contributing state and measurements as evidence; squeegee wear added to the story.
-- v3 (branch `sketches-v3`): no model output on any screen. The ML model is currently trained on rule-generated labels, so its scores would only repeat the Failure Library rules. Boards are flagged by rule conditions and linked by board counts only. The model returns once it is trained on real line data.
+- v3 (branch `sketches-v3`): unexplained boards shown per defect (3 of 61 solder bridging, 3 of 31 open circuit), compared with batches stg-B0001 and stg-B0002, which now have a few boards with each defect and no excursion. No model output on any screen. The ML model is currently trained on rule-generated labels, so its scores would only repeat the Failure Library rules. Boards are flagged by rule conditions and linked by board counts only. The model returns once it is trained on real line data.
 - v1.x: short-excursion story (reflow 02:00–02:40, paste viscosity 03:40–04:30). The RCA packet separates each parameter's status (out of spec, with a board count, or in spec) from whether it is linked to the defect (≥2× more likely, under 1% chance of coincidence, explains ≥20% of defective boards), lists every other root cause as checked and not linked, and the other screens use the same numbers.
 - One investigation per batch excursion (INV-0142 for stg-B0003). 8D screens, report recommendation, investigation stages and overdue tracking are out of scope for this demo (see the history before this commit).
 - Containment holds every board that was out of spec on any linked root cause and has not already failed a test, counted once under its first linked root cause. Containment belongs to the investigation, and its scope follows the root cause, so other batches through the same line during the windows are checked too.

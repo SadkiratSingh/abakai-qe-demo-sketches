@@ -78,7 +78,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 
 <div role="tablist" aria-label="Defect" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E1E4E0">
-<button role="tab" class="{{bridgeTabClass}}" aria-selected="{{isBridge}}" onClick="{{showBridge}}">Solder bridging · 58 boards</button>
+<button role="tab" class="{{bridgeTabClass}}" aria-selected="{{isBridge}}" onClick="{{showBridge}}">Solder bridging · 61 boards</button>
 <button role="tab" class="{{openTabClass}}" aria-selected="{{isOpen}}" onClick="{{showOpen}}">Open circuit · 31 boards</button>
 </div>
 
@@ -162,6 +162,30 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </sc-for>
 </section>
 
+<section class="card" style="overflow: hidden" aria-label="Unexplained boards">
+<div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">{{u.head}}</h2>
+<span class="chip muted">No rule</span>
+</div>
+<div style="font-size: 14px; color: #4A4F56">{{u.why}}</div>
+</div>
+<div style="display: flex; flex-direction: column">
+<sc-for list="{{u.boards}}" as="b" hint-placeholder-count="3">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<a class="mono" href="Board.dc.html" style="flex: 0 0 120px">{{b.id}}</a>
+<span class="mono" style="flex: 0 0 56px; color: #4A4F56">{{b.time}}</span>
+<span style="flex: 1 1 260px; color: #4A4F56">{{b.note}}</span>
+</div>
+</sc-for>
+</div>
+<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 6px">
+<ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #4A4F56">
+<sc-for list="{{u.facts}}" as="f" hint-placeholder-count="3"><li>{{f}}</li></sc-for>
+</ul>
+</div>
+</section>
+
 <section class="card" style="overflow: hidden" aria-label="Checked and not linked">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · {{c.ruledCount}}</h2>
@@ -232,7 +256,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </main>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2100}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2400}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
@@ -270,8 +294,19 @@ class Component extends DCLogic {
       containMeas: (n, insp, meas, dir, mech) => `${n} more boards passed ${insp} but ${meas}, which supports ${mech}, was ${low(dir)}.`,
       failRate: (D, a, b, rr) => `${D} rate, rule condition true vs false: ${a} vs ${b} (${rr}). Needs 2× or more.`,
       zero: (N, detail) => `Rule condition true on 0 of ${N} boards. ${detail}`,
-      inSpec: (range, where, spec) => `Measured ${range} on ${where} (spec ${spec}).`
+      inSpec: (range, where, spec) => `Measured ${range} on ${where} (spec ${spec}).`,
+      unexplHead: (k, K, d) => `Unexplained: ${k} of ${K} boards with ${d}`,
+      unexplWhy: () => 'No linked or contributing rule condition was true when these boards were built.',
+      unexplBoard: () => 'Every rule condition false · all parameters in spec',
+      unexplRate: (D, k, N, pct) => `${D} rate where no linked or contributing rule condition was true: ${k} of ${N} boards (${pct}).`,
+      unexplTime: times => `Built ${times}: not grouped in one window.`,
+      unexplCompare: (d, list) => `Boards with ${d} in batches with no excursion on line 2 this shift: ${list}.`
     };
+    const unexpl = (k, K, d, D, N, pct, boards, compare) => ({
+      head: T.unexplHead(k, K, d), why: T.unexplWhy(),
+      boards: boards.map(b => ({ id: b[0], time: b[1], note: T.unexplBoard() })),
+      facts: [T.unexplRate(D, k, N, pct), T.unexplTime(boards.map(b => b[1]).join(', ')), T.unexplCompare(d, compare)]
+    });
     const linkedRow = h => Object.assign({ hasParent: false, parent: '', isContrib: false, contribNote: '', hasSupport: false, support: '' }, h);
     const outRow = (root, mech, n, reason) => ({ root, mech, status: T.status(n), reason, cls: 'chip warn' });
     const zeroRow = (root, mech, detail) => ({ root, mech, status: T.status(0), reason: detail, cls: 'chip ok' });
@@ -279,7 +314,8 @@ class Component extends DCLogic {
     const cases = {
       bridge: {
         title: 'Solder bridging', defLower: 'solder bridging', batchLabel: 'stg-B0003 boards', atRisk: 173,
-        summary: T.summary('Peak reflow temperature', 'above USL', '02:00–02:40', 44, 58, 'solder bridging'),
+        summary: T.summary('Peak reflow temperature', 'above USL', '02:00–02:40', 44, 61, 'solder bridging'),
+        unexpl: unexpl(3, 61, 'solder bridging', 'Solder bridging', '2,329', '0.13%', [['PCB-0005451', '22:41'], ['PCB-0006244', '01:15'], ['PCB-0007351', '05:02']], 'stg-B0001 3 of 2,560 (0.12%), stg-B0002 2 of 2,560 (0.08%)'),
         checkedLine: T.checked(9, 1, 2),
         param: 'Peak reflow temperature (°C)', lsl: 245, usl: 255, window: '02:00–02:40',
         vals: [251.6, 251.9, 251.4, 252.1, 251.8, 251.5, 252.0, 251.7, 251.9, 251.6, 252.2, 251.8, 258.6, 258.9, 251.9, 251.7, 252.0, 251.5, 251.8, 252.1, 251.6, 251.9, 251.7, 251.8], w0: 12, w1: 13,
@@ -292,29 +328,29 @@ class Component extends DCLogic {
         linked: [
           linkedRow({ id: 'b1', state: 'Linked', stateCls: 'chip info', root: 'High peak reflow temperature', mech: 'Excess reflow spreading', equip: 'Reflow oven', status: T.status(156),
             rule: 'PeakReflowTemperature > USL',
-            cov: '44 of 58', rr: '48×', p: '< 0.001', a: '44', b: '112', c2: '14', d: '2,390', r1: '28.2%', r2: '0.58%',
-            covLine: T.cov('solder bridging', 44, 58, '76%'),
-            evidence: [T.evWindow(156, 'Above USL', '02:00–02:40', 'peak reflow temperature', '257.9–259.8 °C', '245–255 °C'), T.evBuilt(44, 58, 'solder bridging', '02:00–02:40'), T.evOutside('02:00–02:40', 'peak reflow temperature', '251.8 °C', 14, 'solder bridging')],
+            cov: '44 of 61', rr: '40×', p: '< 0.001', a: '44', b: '112', c2: '17', d: '2,387', r1: '28.2%', r2: '0.71%',
+            covLine: T.cov('solder bridging', 44, 61, '72%'),
+            evidence: [T.evWindow(156, 'Above USL', '02:00–02:40', 'peak reflow temperature', '257.9–259.8 °C', '245–255 °C'), T.evBuilt(44, 61, 'solder bridging', '02:00–02:40'), T.evOutside('02:00–02:40', 'peak reflow temperature', '251.8 °C', 17, 'solder bridging')],
             action: 'Restore the approved reflow recipe; lock recipe changes behind sign-off.' }),
           linkedRow({ id: 'b2', state: 'Contributing', stateCls: 'chip warn', root: 'Low squeegee angle + low squeegee speed', mech: 'Aperture overfill', equip: 'Solder printer', status: T.status(40),
             rule: 'SqueegeeAngle < LSL AND SqueegeeSpeed < LSL', hasParent: true, parent: squeegeeParent,
-            cov: '7 of 58', rr: '8.7×', p: '< 0.001', a: '7', b: '33', c2: '51', d: '2,469', r1: '17.5%', r2: '2.0%',
-            isContrib: true, contribNote: T.contribNote(7, 58, 'solder bridging', '12%', 'aperture overfill', 14, '24%'),
-            covLine: T.covContrib('solder bridging', 7, 58, '12%', 'Aperture overfill', 14, '24%'),
-            evidence: [T.evRule(40, '23:10–00:20', 'squeegee angle 51–54° (spec 55–65°) with speed 48–55 mm/s (spec 56–84 mm/s)'), T.evBuilt(7, 58, 'solder bridging', '23:10–00:20 under this rule')],
+            cov: '7 of 61', rr: '8.2×', p: '< 0.001', a: '7', b: '33', c2: '54', d: '2,466', r1: '17.5%', r2: '2.1%',
+            isContrib: true, contribNote: T.contribNote(7, 61, 'solder bridging', '11%', 'aperture overfill', 14, '23%'),
+            covLine: T.covContrib('solder bridging', 7, 61, '11%', 'Aperture overfill', 14, '23%'),
+            evidence: [T.evRule(40, '23:10–00:20', 'squeegee angle 51–54° (spec 55–65°) with speed 48–55 mm/s (spec 56–84 mm/s)'), T.evBuilt(7, 61, 'solder bridging', '23:10–00:20 under this rule')],
             hasSupport: true, support: T.support('Paste volume per aperture', 'Above USL', 61, 12, 'among the 14 boards with solder bridging under rules #2 and #3'),
             action: 'Replace the squeegee blade; check angle, speed and pressure against the recipe.' }),
           linkedRow({ id: 'b3', state: 'Contributing', stateCls: 'chip warn', root: 'Low squeegee angle + high squeegee pressure', mech: 'Aperture overfill', equip: 'Solder printer', status: T.status(35),
             rule: 'SqueegeeAngle < LSL AND SqueegeePressure > USL', hasParent: true, parent: squeegeeParent,
-            cov: '7 of 58', rr: '9.9×', p: '< 0.001', a: '7', b: '28', c2: '51', d: '2,474', r1: '20.0%', r2: '2.0%',
-            isContrib: true, contribNote: T.contribNote(7, 58, 'solder bridging', '12%', 'aperture overfill', 14, '24%'),
-            covLine: T.covContrib('solder bridging', 7, 58, '12%', 'Aperture overfill', 14, '24%'),
-            evidence: [T.evRule(35, '23:10–00:20', 'squeegee angle 51–54° (spec 55–65°) with pressure 0.34–0.36 MPa (spec 0.27–0.33 MPa)'), T.evBuilt(7, 58, 'solder bridging', '23:10–00:20 under this rule')],
+            cov: '7 of 61', rr: '9.4×', p: '< 0.001', a: '7', b: '28', c2: '54', d: '2,471', r1: '20.0%', r2: '2.1%',
+            isContrib: true, contribNote: T.contribNote(7, 61, 'solder bridging', '11%', 'aperture overfill', 14, '23%'),
+            covLine: T.covContrib('solder bridging', 7, 61, '11%', 'Aperture overfill', 14, '23%'),
+            evidence: [T.evRule(35, '23:10–00:20', 'squeegee angle 51–54° (spec 55–65°) with pressure 0.34–0.36 MPa (spec 0.27–0.33 MPa)'), T.evBuilt(7, 61, 'solder bridging', '23:10–00:20 under this rule')],
             action: 'Replace the squeegee blade; check angle, speed and pressure against the recipe.' })
         ],
         ruled: [
-          outRow('Low squeegee speed', 'Aperture overfill', 220, T.failRate('Solder bridging', '3.2%', '2.2%', '1.5×') + ' Only with low squeegee angle does it pass (rule #2).'),
-          outRow('High ambient temperature', 'Excess reflow spreading', 96, T.failRate('Solder bridging', '2.1%', '2.3%', '0.9×')),
+          outRow('Low squeegee speed', 'Aperture overfill', 220, T.failRate('Solder bridging', '3.2%', '2.3%', '1.4×') + ' Only with low squeegee angle does it pass (rule #2).'),
+          outRow('High ambient temperature', 'Excess reflow spreading', 96, T.failRate('Solder bridging', '2.1%', '2.4%', '0.9×')),
           zeroRow('High stencil thickness', 'Aperture overfill', T.inSpec('100.4 µm', 'stencil ST-0412', '95–105 µm')),
           zeroRow('Low aperture area ratio', 'Aperture overfill', T.inSpec('0.71', 'stencil ST-0412', '≥ 0.66')),
           zeroRow('High bead size of solder paste', 'Aperture overfill', T.inSpec('3.7–4.3 mm³', 'all 2,560 boards', '3.6–4.4 mm³')),
@@ -324,6 +360,7 @@ class Component extends DCLogic {
       open: {
         title: 'Open circuit', defLower: 'open circuit', batchLabel: 'stg-B0003 boards', atRisk: 165,
         summary: T.summary('Paste viscosity', 'above USL', '03:40–04:30', 28, 31, 'open circuit'),
+        unexpl: unexpl(3, 31, 'open circuit', 'Open circuit', '2,370', '0.13%', [['PCB-0005334', '22:18'], ['PCB-0006407', '01:47'], ['PCB-0007473', '05:26']], 'stg-B0001 2 of 2,560 (0.08%), stg-B0002 1 of 2,560 (0.04%)'),
         checkedLine: T.checked(2, 1, 0),
         param: 'Paste viscosity (Pa·s)', lsl: 180, usl: 220, window: '03:40–04:30',
         vals: [205, 207, 204, 208, 206, 203, 207, 205, 206, 204, 208, 206, 205, 207, 204, 206, 205, 238, 243, 240, 206, 204, 207, 205], w0: 17, w1: 19,
@@ -358,8 +395,8 @@ class Component extends DCLogic {
     });
     const c = Object.assign({}, raw, { linked, ruledCount: raw.ruled.length });
     return {
-      c,
-      ch: this.chart(raw.vals, raw.lsl, raw.usl, raw.w0, raw.w1),
+      c, u: raw.unexpl,
+      ch:this.chart(raw.vals, raw.lsl, raw.usl, raw.w0, raw.w1),
       isBridge: key === 'bridge', isOpen: key === 'open',
       bridgeTabClass: key === 'bridge' ? 'tab on' : 'tab',
       openTabClass: key === 'open' ? 'tab on' : 'tab',

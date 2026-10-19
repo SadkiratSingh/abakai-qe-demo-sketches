@@ -76,13 +76,13 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 
 <div aria-label="Defect" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E1E4E0">
-<a class="tab on" href="rca-packet.html" style="display:inline-flex;align-items:center;text-decoration:none">Solder bridging · 58 boards</a>
+<a class="tab on" href="rca-packet.html" style="display:inline-flex;align-items:center;text-decoration:none">Solder bridging · 61 boards</a>
 <a class="tab" href="rca-packet-open-circuit.html" style="display:inline-flex;align-items:center;text-decoration:none">Open circuit · 31 boards</a>
 </div>
 
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
 <span class="chip info">Linked rule #1</span>
-<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Peak reflow temperature was above USL 02:00–02:40. 44 of 58 boards with solder bridging were built 02:00–02:40.</div>
+<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Peak reflow temperature was above USL 02:00–02:40. 44 of 61 boards with solder bridging were built 02:00–02:40.</div>
 <div class="mono" style="font-size: 13px; color: #4A4F56">9 unit rules checked · 1 linked · 2 contributing</div>
 </div>
 
@@ -112,15 +112,15 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">28.2% vs 0.58%</span><span class="l">Solder bridging rate, rule condition true vs false</span></div>
-<div class="stat"><span class="v">48×</span><span class="l">more likely when the rule condition is true</span></div>
-<div class="stat"><span class="v">44 of 58</span><span class="l">Boards with solder bridging where the rule condition was true</span></div>
+<div class="stat"><span class="v">28.2% vs 0.71%</span><span class="l">Solder bridging rate, rule condition true vs false</span></div>
+<div class="stat"><span class="v">40×</span><span class="l">more likely when the rule condition is true</span></div>
+<div class="stat"><span class="v">44 of 61</span><span class="l">Boards with solder bridging where the rule condition was true</span></div>
 </div>
 
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
 <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>156 boards were above USL 02:00–02:40: peak reflow temperature 257.9–259.8 °C (spec 245–255 °C).</li><li>44 of 58 boards with solder bridging were built 02:00–02:40.</li><li>Outside 02:00–02:40: peak reflow temperature averaged 251.8 °C; 14 boards with solder bridging.</li>
+<li>156 boards were above USL 02:00–02:40: peak reflow temperature 257.9–259.8 °C (spec 245–255 °C).</li><li>44 of 61 boards with solder bridging were built 02:00–02:40.</li><li>Outside 02:00–02:40: peak reflow temperature averaged 251.8 °C; 17 boards with solder bridging.</li>
 </ul>
 </div>
 
@@ -130,14 +130,14 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <thead><tr><th>stg-B0003 boards</th><th>Solder bridging</th><th>No solder bridging</th><th>Solder bridging rate</th></tr></thead>
 <tbody>
 <tr><td>Rule condition true</td><td>44</td><td>112</td><td>28.2%</td></tr>
-<tr><td>Rule condition false</td><td>14</td><td>2,390</td><td>0.58%</td></tr>
+<tr><td>Rule condition false</td><td>17</td><td>2,387</td><td>0.71%</td></tr>
 </tbody>
 </table>
 <ul style="margin: 10px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
 <li>Failure Library path: <span class="mono" style="font-size: 13px">PeakReflowTemperature &gt; USL</span> → Excess reflow spreading → Solder bridging</li>
-<li>Solder bridging rate, rule condition true vs false: 28.2% vs 0.58% (48×). Needs 2× or more.</li>
+<li>Solder bridging rate, rule condition true vs false: 28.2% vs 0.71% (40×). Needs 2× or more.</li>
 <li>Fisher's exact test: p &lt; 0.001. Needs p &lt; 0.01.</li>
-<li>Boards with solder bridging where the rule condition was true: 44 of 58 (76%). Needs 20% or more.</li>
+<li>Boards with solder bridging where the rule condition was true: 44 of 61 (72%). Needs 20% or more.</li>
 </ul>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
@@ -170,17 +170,17 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 13px; color: #5B6169">Unit rule split from: <span class="mono">SqueegeeAngle &lt; LSL AND (SqueegeeSpeed &lt; LSL OR SqueegeePressure &gt; USL)</span></span>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">17.5% vs 2.0%</span><span class="l">Solder bridging rate, rule condition true vs false</span></div>
-<div class="stat"><span class="v">8.7×</span><span class="l">more likely when the rule condition is true</span></div>
-<div class="stat"><span class="v">7 of 58</span><span class="l">Boards with solder bridging where the rule condition was true</span></div>
+<div class="stat"><span class="v">17.5% vs 2.1%</span><span class="l">Solder bridging rate, rule condition true vs false</span></div>
+<div class="stat"><span class="v">8.2×</span><span class="l">more likely when the rule condition is true</span></div>
+<div class="stat"><span class="v">7 of 61</span><span class="l">Boards with solder bridging where the rule condition was true</span></div>
 </div>
 
-<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #FFFAF4; border: 1px solid #F1D3B5; border-radius: 8px; color: #6B2C05">Contributing: explains 7 of 58 boards with solder bridging (12%) on its own. Together with the other passing aperture overfill rules: 14 of 58 (24%).</div>
+<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #FFFAF4; border: 1px solid #F1D3B5; border-radius: 8px; color: #6B2C05">Contributing: explains 7 of 61 boards with solder bridging (11%) on its own. Together with the other passing aperture overfill rules: 14 of 61 (23%).</div>
 
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
 <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>40 boards met the rule condition 23:10–00:20: squeegee angle 51–54° (spec 55–65°) with speed 48–55 mm/s (spec 56–84 mm/s).</li><li>7 of 58 boards with solder bridging were built 23:10–00:20 under this rule.</li>
+<li>40 boards met the rule condition 23:10–00:20: squeegee angle 51–54° (spec 55–65°) with speed 48–55 mm/s (spec 56–84 mm/s).</li><li>7 of 61 boards with solder bridging were built 23:10–00:20 under this rule.</li>
 </ul>
 </div>
 
@@ -192,14 +192,14 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <thead><tr><th>stg-B0003 boards</th><th>Solder bridging</th><th>No solder bridging</th><th>Solder bridging rate</th></tr></thead>
 <tbody>
 <tr><td>Rule condition true</td><td>7</td><td>33</td><td>17.5%</td></tr>
-<tr><td>Rule condition false</td><td>51</td><td>2,469</td><td>2.0%</td></tr>
+<tr><td>Rule condition false</td><td>54</td><td>2,466</td><td>2.1%</td></tr>
 </tbody>
 </table>
 <ul style="margin: 10px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
 <li>Failure Library path: <span class="mono" style="font-size: 13px">SqueegeeAngle &lt; LSL AND SqueegeeSpeed &lt; LSL</span> → Aperture overfill → Solder bridging</li>
-<li>Solder bridging rate, rule condition true vs false: 17.5% vs 2.0% (8.7×). Needs 2× or more.</li>
+<li>Solder bridging rate, rule condition true vs false: 17.5% vs 2.1% (8.2×). Needs 2× or more.</li>
 <li>Fisher's exact test: p &lt; 0.001. Needs p &lt; 0.01.</li>
-<li>Boards with solder bridging where the rule condition was true: 7 of 58 (12%), below 20% on its own. Aperture overfill rules together: 14 of 58 (24%).</li>
+<li>Boards with solder bridging where the rule condition was true: 7 of 61 (11%), below 20% on its own. Aperture overfill rules together: 14 of 61 (23%).</li>
 </ul>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
@@ -232,17 +232,17 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 13px; color: #5B6169">Unit rule split from: <span class="mono">SqueegeeAngle &lt; LSL AND (SqueegeeSpeed &lt; LSL OR SqueegeePressure &gt; USL)</span></span>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">20.0% vs 2.0%</span><span class="l">Solder bridging rate, rule condition true vs false</span></div>
-<div class="stat"><span class="v">9.9×</span><span class="l">more likely when the rule condition is true</span></div>
-<div class="stat"><span class="v">7 of 58</span><span class="l">Boards with solder bridging where the rule condition was true</span></div>
+<div class="stat"><span class="v">20.0% vs 2.1%</span><span class="l">Solder bridging rate, rule condition true vs false</span></div>
+<div class="stat"><span class="v">9.4×</span><span class="l">more likely when the rule condition is true</span></div>
+<div class="stat"><span class="v">7 of 61</span><span class="l">Boards with solder bridging where the rule condition was true</span></div>
 </div>
 
-<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #FFFAF4; border: 1px solid #F1D3B5; border-radius: 8px; color: #6B2C05">Contributing: explains 7 of 58 boards with solder bridging (12%) on its own. Together with the other passing aperture overfill rules: 14 of 58 (24%).</div>
+<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #FFFAF4; border: 1px solid #F1D3B5; border-radius: 8px; color: #6B2C05">Contributing: explains 7 of 61 boards with solder bridging (11%) on its own. Together with the other passing aperture overfill rules: 14 of 61 (23%).</div>
 
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
 <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>35 boards met the rule condition 23:10–00:20: squeegee angle 51–54° (spec 55–65°) with pressure 0.34–0.36 MPa (spec 0.27–0.33 MPa).</li><li>7 of 58 boards with solder bridging were built 23:10–00:20 under this rule.</li>
+<li>35 boards met the rule condition 23:10–00:20: squeegee angle 51–54° (spec 55–65°) with pressure 0.34–0.36 MPa (spec 0.27–0.33 MPa).</li><li>7 of 61 boards with solder bridging were built 23:10–00:20 under this rule.</li>
 </ul>
 </div>
 
@@ -252,14 +252,14 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <thead><tr><th>stg-B0003 boards</th><th>Solder bridging</th><th>No solder bridging</th><th>Solder bridging rate</th></tr></thead>
 <tbody>
 <tr><td>Rule condition true</td><td>7</td><td>28</td><td>20.0%</td></tr>
-<tr><td>Rule condition false</td><td>51</td><td>2,474</td><td>2.0%</td></tr>
+<tr><td>Rule condition false</td><td>54</td><td>2,471</td><td>2.1%</td></tr>
 </tbody>
 </table>
 <ul style="margin: 10px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
 <li>Failure Library path: <span class="mono" style="font-size: 13px">SqueegeeAngle &lt; LSL AND SqueegeePressure &gt; USL</span> → Aperture overfill → Solder bridging</li>
-<li>Solder bridging rate, rule condition true vs false: 20.0% vs 2.0% (9.9×). Needs 2× or more.</li>
+<li>Solder bridging rate, rule condition true vs false: 20.0% vs 2.1% (9.4×). Needs 2× or more.</li>
 <li>Fisher's exact test: p &lt; 0.001. Needs p &lt; 0.01.</li>
-<li>Boards with solder bridging where the rule condition was true: 7 of 58 (12%), below 20% on its own. Aperture overfill rules together: 14 of 58 (24%).</li>
+<li>Boards with solder bridging where the rule condition was true: 7 of 61 (11%), below 20% on its own. Aperture overfill rules together: 14 of 61 (23%).</li>
 </ul>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
@@ -276,6 +276,42 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 </section>
 
+<section class="card" style="overflow: hidden" aria-label="Unexplained boards">
+<div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Unexplained: 3 of 61 boards with solder bridging</h2>
+<span class="chip muted">No rule</span>
+</div>
+<div style="font-size: 14px; color: #4A4F56">No linked or contributing rule condition was true when these boards were built.</div>
+</div>
+<div style="display: flex; flex-direction: column">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0005451</a>
+<span class="mono" style="flex: 0 0 56px; color: #4A4F56">22:41</span>
+<span style="flex: 1 1 260px; color: #4A4F56">Every rule condition false · all parameters in spec</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0006244</a>
+<span class="mono" style="flex: 0 0 56px; color: #4A4F56">01:15</span>
+<span style="flex: 1 1 260px; color: #4A4F56">Every rule condition false · all parameters in spec</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0007351</a>
+<span class="mono" style="flex: 0 0 56px; color: #4A4F56">05:02</span>
+<span style="flex: 1 1 260px; color: #4A4F56">Every rule condition false · all parameters in spec</span>
+</div>
+
+</div>
+<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 6px">
+<ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #4A4F56">
+<li>Solder bridging rate where no linked or contributing rule condition was true: 3 of 2,329 boards (0.13%).</li><li>Built 22:41, 01:15, 05:02: not grouped in one window.</li><li>Boards with solder bridging in batches with no excursion on line 2 this shift: stg-B0001 3 of 2,560 (0.12%), stg-B0002 2 of 2,560 (0.08%).</li>
+</ul>
+</div>
+</section>
+
 <section class="card" style="overflow: hidden" aria-label="Checked and not linked">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 6</h2>
@@ -289,7 +325,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
 </div>
 <span class="chip warn">Rule condition true · 220 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Solder bridging rate, rule condition true vs false: 3.2% vs 2.2% (1.5×). Needs 2× or more. Only with low squeegee angle does it pass (rule #2).</span>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Solder bridging rate, rule condition true vs false: 3.2% vs 2.3% (1.4×). Needs 2× or more. Only with low squeegee angle does it pass (rule #2).</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
@@ -298,7 +334,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-size: 12px; color: #5B6169">via Excess reflow spreading</span>
 </div>
 <span class="chip warn">Rule condition true · 96 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Solder bridging rate, rule condition true vs false: 2.1% vs 2.3% (0.9×). Needs 2× or more.</span>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Solder bridging rate, rule condition true vs false: 2.1% vs 2.4% (0.9×). Needs 2× or more.</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
