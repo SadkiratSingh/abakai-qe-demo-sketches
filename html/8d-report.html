@@ -65,7 +65,7 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 <a href="rca-packet.html" style="font-size: 14px; text-decoration: none">← INV-0142 root cause analysis</a>
 <div class="eyebrow">8D-0142-A · Solder bridging · CTRL-BRD-A · stg-B0003 · Customer: [customer]</div>
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">8D report: solder bridging</h1>
-<div style="font-size: 14px; color: #4A4F56">Created automatically from INV-0142 on 15 Oct 2026, 06:05 · last updated 06:42, when chain #1 was confirmed</div>
+<div style="font-size: 14px; color: #4A4F56">Created automatically from INV-0142 on 15 Oct 2026, 06:05 · last updated 06:42</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <button class="btn" type="button">Send for review</button>
@@ -139,21 +139,7 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 
 <section id="d2" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D2 · Problem description</h2><span class="chip ok">Auto-filled</span></div>
-<div class="field">On the night shift of 15 Oct 2026, 61 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 had solder bridging at AOI.</div>
-<table class="t">
-<thead><tr><th></th><th>Is</th><th>Is not</th></tr></thead>
-<tbody>
-
-<tr><td style="font-weight: 600">What</td><td>Solder bridging on CTRL-BRD-A</td><td style="color: #4A4F56">Other defects on these boards, apart from open circuit (8D-0142-B)</td></tr>
-
-<tr><td style="font-weight: 600">Where</td><td>SMT line 2</td><td style="color: #4A4F56">Other lines</td></tr>
-
-<tr><td style="font-weight: 600">When</td><td>02:00–02:40 (44 boards) and 23:10–00:20 (14 boards)</td><td style="color: #4A4F56">The rest of the shift; batches stg-B0001 and stg-B0002 (3 and 2 boards)</td></tr>
-
-<tr><td style="font-weight: 600">How many</td><td>61 boards</td><td style="color: #4A4F56"></td></tr>
-
-</tbody>
-</table>
+<div class="field" style="display: flex; flex-direction: column; gap: 8px"><span>On the night shift of 15 Oct 2026, 61 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 had solder bridging at AOI.</span><span>44 of them were built 02:00–02:40 and 14 during 23:10–00:20. The other two batches on line 2 that night, stg-B0001 and stg-B0002, had 3 and 2 boards with solder bridging, which is normal for this line.</span><span>The same batch also had 31 boards with open circuit, covered in 8D-0142-B.</span></div>
 <span class="src">From INV-0142 and AOI results</span>
 </section>
 
@@ -171,10 +157,7 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 
 </tbody>
 </table>
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
-<span class="src">Boards that passed AOI come from the re-inspection list. Holding them is the QE's decision.</span>
-<a class="btn sm" href="re-inspection.html">Open re-inspection list</a>
-</div>
+<div style="display: flex; justify-content: flex-end"><a class="btn sm" href="re-inspection.html">Open re-inspection list</a></div>
 </section>
 
 <section id="d4" class="card sec">

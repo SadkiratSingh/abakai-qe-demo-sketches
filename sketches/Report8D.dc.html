@@ -143,15 +143,7 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 
 <section id="d2" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D2 · Problem description</h2><span class="chip ok">Auto-filled</span></div>
-<div class="field">{{r.problem}}</div>
-<table class="t">
-<thead><tr><th></th><th>Is</th><th>Is not</th></tr></thead>
-<tbody>
-<sc-for list="{{r.isnot}}" as="x" hint-placeholder-count="4">
-<tr><td style="font-weight: 600">{{x.q}}</td><td>{{x.is}}</td><td style="color: #4A4F56">{{x.not}}</td></tr>
-</sc-for>
-</tbody>
-</table>
+<div class="field" style="display: flex; flex-direction: column; gap: 8px"><sc-for list="{{r.problem}}" as="x" hint-placeholder-count="2"><span>{{x}}</span></sc-for></div>
 <span class="src">From INV-0142 and {{r.insp}} results</span>
 </section>
 
@@ -165,10 +157,7 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 </sc-for>
 </tbody>
 </table>
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
-<span class="src">Boards that passed {{r.insp}} come from the re-inspection list. Holding them is the QE's decision.</span>
-<a class="btn sm" href="Containment.dc.html">Open re-inspection list</a>
-</div>
+<div style="display: flex; justify-content: flex-end"><a class="btn sm" href="Containment.dc.html">Open re-inspection list</a></div>
 </section>
 
 <section id="d4" class="card sec">
@@ -236,7 +225,7 @@ class Component extends DCLogic {
     const R = {
       a: {
         id: '8D-0142-A', defect: 'Solder bridging', defectLower: 'solder bridging', insp: 'AOI',
-        created: 'Created automatically from INV-0142 on 15 Oct 2026, 06:05 · last updated 06:42, when chain #1 was confirmed',
+        created: 'Created automatically from INV-0142 on 15 Oct 2026, 06:05 · last updated 06:42',
         steps: steps(['need', 'ok', 'dec', 'ok', 'need', 'wait', 'ok', 'none']),
         progress: '4 of 8 steps filled from the investigation. Steps update as chains are confirmed and data comes in.',
         log: [
@@ -246,13 +235,7 @@ class Component extends DCLogic {
           { t: 'Next', e: 'D4 and D5 update when chains #2 and #3 are confirmed or rejected.' }
         ],
         team: ['Reflow process engineer', 'Printing process engineer', 'Line 2 supervisor'],
-        problem: 'On the night shift of 15 Oct 2026, 61 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 had solder bridging at AOI.',
-        isnot: [
-          { q: 'What', is: 'Solder bridging on CTRL-BRD-A', not: 'Other defects on these boards, apart from open circuit (8D-0142-B)' },
-          { q: 'Where', is: 'SMT line 2', not: 'Other lines' },
-          { q: 'When', is: '02:00–02:40 (44 boards) and 23:10–00:20 (14 boards)', not: 'The rest of the shift; batches stg-B0001 and stg-B0002 (3 and 2 boards)' },
-          { q: 'How many', is: '61 boards', not: '' }
-        ],
+        problem: ['On the night shift of 15 Oct 2026, 61 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 had solder bridging at AOI.', '44 of them were built 02:00–02:40 and 14 during 23:10–00:20. The other two batches on line 2 that night, stg-B0001 and stg-B0002, had 3 and 2 boards with solder bridging, which is normal for this line.', 'The same batch also had 31 boards with open circuit, covered in 8D-0142-B.'],
         contain: [
           { what: '61 boards with solder bridging at AOI', where: 'Rework area', action: 'Rework or scrap per MRB', status: 'In rework', cls: 'chip info' },
           { what: '45 boards that passed AOI, where the model predicts solder bridging', where: 'WIP 6 · finished goods 34 · shipped 5', action: 'Hold and re-inspect with X-ray', status: 'Needs decision', cls: 'chip warn' },
@@ -276,7 +259,7 @@ class Component extends DCLogic {
         prevent: ['Add a peak reflow temperature USL alarm on line 2.', 'Failure Library: chain #1 recorded for CTRL-BRD-A; high peak reflow temperature has now been confirmed in 5 investigations.'],
         expSummary: '5 of 9 template fields ready.',
         map: [
-          F('Team members', 'D1 Team', 'n'), F('Problem description (5W2H)', 'D2 Problem, Is / Is not', 'r'), F('Containment actions and quantities', 'D3 Containment', 'd'),
+          F('Team members', 'D1 Team', 'n'), F('Problem description', 'D2 Problem', 'r'), F('Containment actions and quantities', 'D3 Containment', 'd'),
           F('Root cause: occurrence', 'D4 confirmed chains (1 of 3)', 'r'), F('Root cause: non-detection', 'D4 escape', 'r'), F('Permanent corrective actions', 'D5 Corrective action', 'n'),
           F('Verification of effectiveness', 'D6 Verification', 'w'), F('Preventive actions', 'D7 Prevention', 'r'), F('Approval and closure', 'D8 Closure', 'x')
         ]
@@ -292,13 +275,7 @@ class Component extends DCLogic {
           { t: 'Next', e: 'D4 and D5 update when chain #1 (high paste viscosity) is confirmed.' }
         ],
         team: ['Printing process engineer', 'Materials engineer', 'Line 2 supervisor'],
-        problem: 'On the night shift of 15 Oct 2026, 31 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 failed electrical test with open circuit.',
-        isnot: [
-          { q: 'What', is: 'Open circuit on CTRL-BRD-A', not: 'Other defects on these boards, apart from solder bridging (8D-0142-A)' },
-          { q: 'Where', is: 'SMT line 2', not: 'Other lines' },
-          { q: 'When', is: '03:40–04:30 (28 boards)', not: 'The rest of the shift; batches stg-B0001 and stg-B0002 (2 and 1 boards)' },
-          { q: 'How many', is: '31 boards', not: '' }
-        ],
+        problem: ['On the night shift of 15 Oct 2026, 31 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 failed electrical test with open circuit.', '28 of them were built 03:40–04:30, all with paste lot [paste lot]. The other two batches on line 2 that night, stg-B0001 and stg-B0002, had 2 and 1 boards with open circuit, which is normal for this line.', 'The same batch also had 61 boards with solder bridging, covered in 8D-0142-A.'],
         contain: [
           { what: '31 boards with open circuit at electrical test', where: 'Rework area', action: 'Rework or scrap per MRB', status: 'In rework', cls: 'chip info' },
           { what: '30 boards that passed electrical test, where the model predicts open circuit', where: 'WIP 28 · finished goods 2', action: 'Hold and re-inspect', status: 'Needs decision', cls: 'chip warn' },
@@ -319,7 +296,7 @@ class Component extends DCLogic {
         prevent: ['Check paste viscosity at incoming inspection for every lot.', 'Failure Library: high paste viscosity has been confirmed in 4 investigations.'],
         expSummary: '3 of 9 template fields ready.',
         map: [
-          F('Team members', 'D1 Team', 'n'), F('Problem description (5W2H)', 'D2 Problem, Is / Is not', 'r'), F('Containment actions and quantities', 'D3 Containment', 'd'),
+          F('Team members', 'D1 Team', 'n'), F('Problem description', 'D2 Problem', 'r'), F('Containment actions and quantities', 'D3 Containment', 'd'),
           F('Root cause: occurrence', 'D4 confirmed chains (0 of 1)', 'w'), F('Root cause: non-detection', 'D4 escape', 'r'), F('Permanent corrective actions', 'D5 Corrective action', 'w'),
           F('Verification of effectiveness', 'D6 Verification', 'w'), F('Preventive actions', 'D7 Prevention', 'r'), F('Approval and closure', 'D8 Closure', 'x')
         ]

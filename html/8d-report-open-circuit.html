@@ -137,21 +137,7 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 
 <section id="d2" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D2 · Problem description</h2><span class="chip ok">Auto-filled</span></div>
-<div class="field">On the night shift of 15 Oct 2026, 31 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 failed electrical test with open circuit.</div>
-<table class="t">
-<thead><tr><th></th><th>Is</th><th>Is not</th></tr></thead>
-<tbody>
-
-<tr><td style="font-weight: 600">What</td><td>Open circuit on CTRL-BRD-A</td><td style="color: #4A4F56">Other defects on these boards, apart from solder bridging (8D-0142-A)</td></tr>
-
-<tr><td style="font-weight: 600">Where</td><td>SMT line 2</td><td style="color: #4A4F56">Other lines</td></tr>
-
-<tr><td style="font-weight: 600">When</td><td>03:40–04:30 (28 boards)</td><td style="color: #4A4F56">The rest of the shift; batches stg-B0001 and stg-B0002 (2 and 1 boards)</td></tr>
-
-<tr><td style="font-weight: 600">How many</td><td>31 boards</td><td style="color: #4A4F56"></td></tr>
-
-</tbody>
-</table>
+<div class="field" style="display: flex; flex-direction: column; gap: 8px"><span>On the night shift of 15 Oct 2026, 31 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 failed electrical test with open circuit.</span><span>28 of them were built 03:40–04:30, all with paste lot [paste lot]. The other two batches on line 2 that night, stg-B0001 and stg-B0002, had 2 and 1 boards with open circuit, which is normal for this line.</span><span>The same batch also had 61 boards with solder bridging, covered in 8D-0142-A.</span></div>
 <span class="src">From INV-0142 and electrical test results</span>
 </section>
 
@@ -169,10 +155,7 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 
 </tbody>
 </table>
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
-<span class="src">Boards that passed electrical test come from the re-inspection list. Holding them is the QE's decision.</span>
-<a class="btn sm" href="re-inspection.html">Open re-inspection list</a>
-</div>
+<div style="display: flex; justify-content: flex-end"><a class="btn sm" href="re-inspection.html">Open re-inspection list</a></div>
 </section>
 
 <section id="d4" class="card sec">
