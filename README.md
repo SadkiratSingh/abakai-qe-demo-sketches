@@ -38,7 +38,7 @@ npm run export
 1. **Per board:** for every board, the RCA model (defect head and mechanism heads) predicts the defect and the mechanisms, and feature attribution finds the parameters that raised the board's risk. The Failure Library, the cause-and-effect (Ishikawa) ontology, turns each of those parameters into a **root cause chain**: root cause → mechanism → defect. Chains below the display threshold (τ = 0.60) are left out.
 2. **Per batch:** the investigation groups boards by chain and shows the **top 3** chains per defect, ranked by how many boards with the defect show them. The rest are under "Other chains". Boards with no chain are listed under "No root cause chain found".
 3. **A board can show more than one chain**, so the counts across chains can add up to more than the number of boards with the defect.
-4. **Each chain card** shows: the chain; boards with the defect that show it; boards that passed inspection and show it (the re-inspection list); when it appeared (time window, material lot, or "spread across the shift") with a small trend line of the root cause parameter; the Failure Library fix; and View boards / Reject / **Confirm chain**, which records the QE's decision.
+4. **Each chain card** shows: the chain; boards with the defect that show it; boards that passed inspection and show it (the re-inspection list); when it appeared (time window, material lot, or "spread across the shift") with a small trend line of the root cause parameter; the Failure Library corrective action; and View boards / Reject / **Confirm chain**, which records the QE's decision.
 5. **View boards** opens a side panel: the boards with the chain, and the selected board's **RCA packet** (defect and mechanisms with risk bands, the board's chains ranked by **contribution**, the evidence value against spec, any supporting measurement, an interpretation, and the assessment time, model version and τ). Previous/next move through the boards; "Open full page" opens the board's full packet.
 6. **Contribution** is the share of a board's predicted risk that comes from the root cause (feature attribution). There are no per-parameter risk heads and no statistical tests.
 7. **Model vs inspection matrix** per defect: Confirmed, Hidden risk (re-inspect), Unexplained (the no-chain boards: verify the inspection call), Agree: no defect.
@@ -68,7 +68,7 @@ Every generated sentence on the screens comes from one of these templates, so th
 
 **Investigation summary:** `{k} of {K} boards with {defect} show at least one root cause chain. The {n} most frequent are below; a board can show more than one, so the counts can add up to more than {K}.`
 
-**Chain card:** `{root cause} → {mechanism} → {defect}` · `{k} of {K}` boards with {defect} show this chain · `{n}` boards that passed {inspection} show this chain · `Built {window}` | `Paste lot {lot} · built {window}` | `Spread across the shift` · Suggested action: the Failure Library fix.
+**Chain card:** `{root cause} → {mechanism} → {defect}` · `{k} of {K}` boards with {defect} show this chain · `{n}` boards that passed {inspection} show this chain · `Built {window}` | `Paste lot {lot} · built {window}` | `Spread across the shift` · Corrective action: from the Failure Library.
 
 **Other chains:** `{chain}` · `{k} with {defect} · {n} passed` · `{when}`
 
@@ -103,6 +103,7 @@ All numbers are story data, not output from the backend or the model. Before a r
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2 (branch `sketches-v2`): rule-based linking with unit rules, contributing state and measurements as evidence; squeegee wear added to the story.
 - v3 (branch `sketches-v3`): statistics only, no model output. Unexplained boards per defect, compared with batches with no excursion; near-limit investigation INV-0143 linked through near-limit rule variants.
+- v6.4: "Fix" and "Suggested action" are now "Corrective action" everywhere.
 - v6.3: the Failure Library drops the unit-rule split and its explanation banner; rules are shown as written, with a one-line subtitle.
 - v6.2: Re-inspection is removed from the top menu. It opens from the investigation (header button and sidebar card) and from D3 of the 8D report; on the re-inspection and board pages, Investigations is the active menu item.
 - v6.1: D2 is plain sentences instead of an Is / Is not table; the "when chain #1 was confirmed" note and the D3 helper line are removed.
