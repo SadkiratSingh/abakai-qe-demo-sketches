@@ -48,8 +48,8 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <div style="display: flex; flex-direction: column; gap: 8px">
 <a href="rca-packet.html" style="font-size: 14px; text-decoration: none">← INV-0142 root cause analysis</a>
 <div class="eyebrow">Containment · INV-0142 · stg-B0003</div>
-<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">338 boards passed inspection but were built out of spec</h1>
-<div style="font-size: 15px; color: #4A4F56">The other 2,133 boards in stg-B0003 were built in spec and can be released.</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">338 boards passed inspection but are at risk: 75 to hold, 263 to review</h1>
+<div style="font-size: 15px; color: #4A4F56">The other 2,130 boards in stg-B0003 have Low model risk and can be released.</div>
 <div style="font-size: 14px; color: #5B6169">Also checked: other batches through line 2 during 23:10–00:20, 02:00–02:40 and 03:40–04:30: none.</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
@@ -59,18 +59,21 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </div>
 
 <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px" aria-label="Where the boards are">
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">In WIP</div><div class="mono" style="font-size: 32px; font-weight: 500">153</div><div style="font-size: 13px; color: #5B6169">Hold at next station</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Finished goods</div><div class="mono" style="font-size: 32px; font-weight: 500">165</div><div style="font-size: 13px; color: #5B6169">Quarantine and re-inspect</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0; background: #FFF8F7"><div class="eyebrow" style="color: #9B1C12">Shipped</div><div class="mono" style="font-size: 32px; font-weight: 500; color: #9B1C12">20</div><div style="font-size: 13px; color: #7E160E; font-weight: 600">Customer notification needed</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">By root cause</div><div style="font-size: 14px; line-height: 1.6"><span style="font-weight: 600">112</span> · High peak reflow temperature · 02:00–02:40<br><span style="font-weight: 600">61</span> · Low squeegee angle with low speed or high pressure · 23:10–00:20<br><span style="font-weight: 600">162</span> · High paste viscosity · 03:40–04:30<br><span style="font-weight: 600">3</span> · Paste volume per aperture below LSL (measurement)<br><span style="color: #5B6169">Each board counted once, under its first rule</span></div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0"><div class="eyebrow" style="color: #9B1C12">Hold · High model risk</div><div class="mono" style="font-size: 32px; font-weight: 500">75</div><div style="font-size: 13px; color: #5B6169">WIP 34 · finished goods 36 · shipped 5</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F1D3B5"><div class="eyebrow" style="color: #8A3505">Review · Medium model risk</div><div class="mono" style="font-size: 32px; font-weight: 500">263</div><div style="font-size: 13px; color: #5B6169">WIP 119 · finished goods 129 · shipped 15</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0; background: #FFF8F7"><div class="eyebrow" style="color: #9B1C12">Shipped</div><div class="mono" style="font-size: 32px; font-weight: 500; color: #9B1C12">20</div><div style="font-size: 13px; color: #7E160E; font-weight: 600">5 at High risk: customer notification needed</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">By attributed root cause · hold / review</div><div style="font-size: 14px; line-height: 1.6"><span class="mono" style="font-weight: 600">38 / 74</span> · High peak reflow temperature · 02:00–02:40<br><span class="mono" style="font-weight: 600">7 / 54</span> · Low squeegee angle with low speed or high pressure · 23:10–00:20<br><span class="mono" style="font-weight: 600">30 / 135</span> · High paste viscosity · 03:40–04:30<br><span style="color: #5B6169">Each board counted once, under the root cause the model attributes most of its risk to</span></div></div>
 </section>
 
 <section class="card" style="overflow: hidden" aria-label="Boards at risk">
 <div style="padding: 20px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Boards at risk</h2>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
+<label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Model risk
+<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>High and Medium</option><option>High (hold)</option><option>Medium (review)</option></select>
+</label>
 <label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Root cause
-<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>High peak reflow temperature</option><option>Low squeegee angle with low speed or high pressure</option><option>High paste viscosity</option><option>Paste volume per aperture below LSL</option></select>
+<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>High peak reflow temperature</option><option>Low squeegee angle with low speed or high pressure</option><option>High paste viscosity</option></select>
 </label>
 <label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Location
 <select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>WIP</option><option>Finished goods</option><option>Shipped</option></select>
@@ -79,7 +82,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </div>
 <div style="overflow-x: auto">
 <table>
-<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Root cause</th><th>Measured</th><th>Location</th></tr></thead>
+<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Attributed root cause</th><th>Measured</th><th>Model risk</th><th>Location</th></tr></thead>
 <tbody>
 
 <tr>
@@ -89,6 +92,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">23:24</td>
 <td>Low squeegee angle with low speed or high pressure</td>
 <td class="mono">52° · 51 mm/s</td>
+<td><span class="chip warn" title="Model risk 3.8%">Medium</span></td>
 <td><span class="chip crit">Shipped</span></td>
 </tr>
 
@@ -99,6 +103,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">00:02</td>
 <td>Low squeegee angle with low speed or high pressure</td>
 <td class="mono">53° · 0.35 MPa</td>
+<td><span class="chip crit" title="Model risk 6.4%">High</span></td>
 <td><span class="chip muted">Finished goods</span></td>
 </tr>
 
@@ -109,6 +114,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">02:03</td>
 <td>High peak reflow temperature</td>
 <td class="mono">258.9 °C</td>
+<td><span class="chip crit" title="Model risk 24%">High</span></td>
 <td><span class="chip crit">Shipped</span></td>
 </tr>
 
@@ -119,6 +125,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">02:16</td>
 <td>High peak reflow temperature</td>
 <td class="mono">259.6 °C</td>
+<td><span class="chip crit" title="Model risk 29%">High</span></td>
 <td><span class="chip muted">Finished goods</span></td>
 </tr>
 
@@ -129,6 +136,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">02:31</td>
 <td>High peak reflow temperature</td>
 <td class="mono">259.4 °C</td>
+<td><span class="chip crit" title="Model risk 27%">High</span></td>
 <td><span class="chip muted">Finished goods</span></td>
 </tr>
 
@@ -139,6 +147,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">02:38</td>
 <td>High peak reflow temperature</td>
 <td class="mono">257.9 °C</td>
+<td><span class="chip warn" title="Model risk 4.1%">Medium</span></td>
 <td><span class="chip muted">Finished goods</span></td>
 </tr>
 
@@ -149,6 +158,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">03:42</td>
 <td>High paste viscosity</td>
 <td class="mono">237 Pa·s</td>
+<td><span class="chip warn" title="Model risk 3.2%">Medium</span></td>
 <td><span class="chip info">WIP</span></td>
 </tr>
 
@@ -159,6 +169,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">03:55</td>
 <td>High paste viscosity</td>
 <td class="mono">241 Pa·s</td>
+<td><span class="chip crit" title="Model risk 12%">High</span></td>
 <td><span class="chip info">WIP</span></td>
 </tr>
 
@@ -169,16 +180,18 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">04:08</td>
 <td>High paste viscosity</td>
 <td class="mono">244 Pa·s</td>
+<td><span class="chip crit" title="Model risk 15%">High</span></td>
 <td><span class="chip info">WIP</span></td>
 </tr>
 
 <tr>
-<td><input type="checkbox" aria-label="Select PCB-0007402" checked></td>
-<td class="mono"><a href="board-detail.html">PCB-0007402</a></td>
-<td class="mono">stg-B0003-P0571</td>
-<td class="mono">05:12</td>
-<td>Low paste volume per aperture</td>
-<td class="mono">0.034 mm³</td>
+<td><input type="checkbox" aria-label="Select PCB-0007130" checked></td>
+<td class="mono"><a href="board-detail.html">PCB-0007130</a></td>
+<td class="mono">stg-B0003-P0503</td>
+<td class="mono">04:21</td>
+<td>High paste viscosity</td>
+<td class="mono">239 Pa·s</td>
+<td><span class="chip warn" title="Model risk 4.4%">Medium</span></td>
 <td><span class="chip info">WIP</span></td>
 </tr>
 
@@ -186,7 +199,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </table>
 </div>
 <div style="padding: 16px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; color: #5B6169">
-<span>Showing 10 of 338 boards · select a board to see why it was flagged</span>
+<span>Showing 10 of 338 boards · hover a risk band for the model's value · select a board to see why it was flagged</span>
 <div style="display: flex; gap: 8px"><button class="btn" type="button">Previous</button><button class="btn" type="button">Next</button></div>
 </div>
 </section>

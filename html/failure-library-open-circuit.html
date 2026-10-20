@@ -46,7 +46,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-direction: column; gap: 6px; max-width: 720px">
 <div class="eyebrow">Failure Library · Solder printing and reflow</div>
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">What causes each defect, and how to fix it</h1>
-<div style="font-size: 15px; color: #4A4F56; line-height: 1.5">Your engineers' process knowledge as rules, linked to your specs. Rules with OR are split into unit rules joined only by AND, and every investigation checks each one. Every unit rule is also checked near its limit. Measurements are evidence for a mechanism, never a root cause.</div>
+<div style="font-size: 15px; color: #4A4F56; line-height: 1.5">Your engineers' process knowledge as rules, linked to your specs. Rules with OR are split into unit rules joined only by AND, and every investigation checks each one. The RCA model checks every unit rule in every investigation. Measurements are evidence for a mechanism, never a root cause.</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
 <div role="group" aria-label="Defect" style="display: flex">
@@ -63,13 +63,12 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="padding: 6px 12px; border-radius: 6px; background: #E8EFFA; border: 1px solid #B7CBEA; color: #123A73; font-weight: 600">Mechanism</span>
 <span aria-hidden="true" style="color: #5B6169">→</span>
 <span style="padding: 6px 12px; border-radius: 6px; background: #FDECEA; border: 1px solid #F3C5C0; color: #7E160E; font-weight: 600">Open circuit</span>
-<span style="margin-left: auto; color: #5B6169">2 rules · 2 unit rules · 2 near-limit variants · last edited 12 Oct 2026 by Wei C.</span>
+<span style="margin-left: auto; color: #5B6169">2 rules · 2 unit rules · last edited 12 Oct 2026 by Wei C.</span>
 </div>
 
-<div class="card" style="padding: 16px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; font-size: 14px; line-height: 1.5; border-color: #F1D3B5; background: #FFFAF4">
-<span class="chip warn">Near-limit zone · 20%</span>
-<span style="flex: 1 1 560px">Each parameter's near-limit zone is the last 20% of the way from nominal to each limit; for squeegee speed (nominal 70, spec 56–84 mm/s), near LSL is 56.0–58.8 mm/s. Each unit rule has a near-limit variant, for example <span class="mono" style="font-size: 13px">SqueegeeSpeed near LSL</span>, checked the same way. Boards under a linked near-limit rule go to Review, not Hold.</span>
-<button type="button" class="btn">Edit zones</button>
+<div class="card" style="padding: 16px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; font-size: 14px; line-height: 1.5; border-color: #B7CBEA; background: #F5F8FD">
+<span class="chip info">RCA model</span>
+<span style="flex: 1 1 560px">Rules give the path and the fix; the RCA model gives the evidence. In every investigation the model checks each unit rule: it attributes boards with a defect to the rule's parameters, re-scores them with those parameters at nominal, and predicts the mechanism. Charts shade a near-limit zone (the last 20% of the way from nominal to each limit) for reading only.</span>
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; align-items: start">

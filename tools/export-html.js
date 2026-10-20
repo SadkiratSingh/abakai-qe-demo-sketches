@@ -22,10 +22,10 @@ const NAMES = {
 // Pages to export: source, output name, title, optional state override.
 const PAGES = [
   { src: 'Main.dc.html', out: 'line-overview.html', label: '1 · Line overview', desc: 'Shift KPIs, excursion alerts, defects by hour, batch table' },
-  { src: 'RcaPacket.dc.html', out: 'rca-packet.html', label: '2 · RCA packet: solder bridging', desc: 'Ranked root causes, causal chain, evidence, spec trend' },
+  { src: 'RcaPacket.dc.html', out: 'rca-packet.html', label: '2 · RCA packet: solder bridging', desc: 'Root causes linked by model attribution, what-if and predicted mechanism; model vs AOI' },
   { src: 'RcaPacket.dc.html', out: 'rca-packet-open-circuit.html', label: '2 · RCA packet: open circuit', desc: 'Same screen with the open circuit tab selected', state: { tab: 'open' } },
-  { src: 'RcaNearLimit.dc.html', out: 'rca-packet-near-limit.html', label: '2b · RCA packet: near limit (INV-0143)', desc: 'No parameter out of spec: mechanism seen, near-limit rule linked, review vs hold' },
-  { src: 'Containment.dc.html', out: 'containment.html', label: '3 · Containment', desc: 'Boards that passed inspection but were built out of spec' },
+  { src: 'RcaNearLimit.dc.html', out: 'rca-packet-near-limit.html', label: '2b · RCA packet: in spec (INV-0143)', desc: 'No parameter out of spec: the model links squeegee speed near LSL; hold vs review by model risk' },
+  { src: 'Containment.dc.html', out: 'containment.html', label: '3 · Containment', desc: 'Boards that passed inspection, held or reviewed by model risk' },
   { src: 'Board.dc.html', out: 'board-detail.html', label: '3a · Board detail', desc: 'One board: linked root cause, parameter fingerprint, disposition, history' },
   { src: 'Manager.dc.html', out: 'manager-overview.html', label: '5 · Manager overview', desc: 'Open investigations, recurring root causes, overdue actions' },
   { src: 'Library.dc.html', out: 'failure-library.html', label: '6 · Failure Library: solder bridging', desc: 'Root cause → mechanism → defect, with specs and fixes' },

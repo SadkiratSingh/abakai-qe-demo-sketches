@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RCA packet: near limit (INV-0143) · RCA Studio</title>
+<title>RCA packet: in spec (INV-0143) · RCA Studio</title>
 <!-- Static export of sketches/RcaNearLimit.dc.html. Regenerate from the sketches; do not edit by hand. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
@@ -33,10 +33,6 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .stat{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:#F4F5F3;border-radius:8px;flex:1 1 150px}
 .stat .v{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:500}
 .stat .l{font-size:12px;color:#4A4F56}
-.tt{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
-.tt th{text-align:left;font-weight:600;color:#5B6169;padding:8px 10px;border-bottom:1px solid #E1E4E0}
-.tt td{padding:8px 10px;border-bottom:1px solid #EEF0ED;font-family:'IBM Plex Mono',monospace}
-.tt td:first-child{font-family:'IBM Plex Sans',sans-serif}
 .trend .lim{stroke:#B42318;stroke-width:1.5;stroke-dasharray:5 4}
 .trend .near{fill:#FDF0E3}
 .trend .nearln{stroke:#C4620F;stroke-width:1.2;stroke-dasharray:2 3}
@@ -47,12 +43,23 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .trend .limtxt{fill:#9B1C12;font-weight:500}
 .trend .neartxt{fill:#8A3505;font-weight:500}
 .trend .wintxt{fill:#16191D;font-weight:500}
+.pd .hi{fill:#FDECEA}.pd .md{fill:#FDF0E3}.pd .lo{fill:#E7F3EC}
+.pd .curve{fill:none;stroke:#1A4F9C;stroke-width:2.5;stroke-linejoin:round}
+.pd .win{fill:#16191D;opacity:.08}
+.pd .lim{stroke:#B42318;stroke-width:1.5;stroke-dasharray:5 4}
+.pd text{font-family:'IBM Plex Mono',monospace;font-size:12px;fill:#5B6169}
+.pd .bl{font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:12px}
 .rule{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#4A4F56;background:#F4F5F3;border-radius:6px;padding:6px 10px;display:inline-block}
 .evi{font-size:14px;line-height:1.5;padding:12px 14px;background:#F5F8FD;border:1px solid #B7CBEA;border-radius:8px}
-.pos{position:relative;height:14px;background:#E7F3EC;border-radius:3px}
-.pos .nz{position:absolute;top:0;bottom:0;background:#FDF0E3}
-.pos .mk{position:absolute;top:-2px;width:4px;height:18px;margin-left:-2px;border-radius:2px;background:#16191D}
-.dose td.hl{background:#FFFAF4}
+.mx{display:grid;grid-template-columns:minmax(120px,0.8fr) 1fr 1fr;gap:8px;font-size:13px}
+.mx .h{font-weight:600;color:#5B6169;padding:4px 8px;display:flex;align-items:center}
+.mx .c{border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.mx .n{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500}
+.mx .t{font-weight:600;font-size:14px}
+.mx .s{color:#4A4F56;font-size:12.5px}
+.attr{display:grid;grid-template-columns:minmax(150px,1fr) 2fr 48px;align-items:center;gap:6px 12px;font-size:13px}
+.attr .bar{height:10px;border-radius:5px;background:#EEF0ED;overflow:hidden}
+.attr .bar div{height:100%;background:#1A4F9C;border-radius:5px}
 </style>
 </head>
 <body>
@@ -68,77 +75,58 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </nav>
 </header>
 <main class="wrap" style="display: flex; flex-direction: column; gap: 24px">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
-<div style="display: flex; flex-direction: column; gap: 8px; max-width: 860px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 900px">
 <a href="manager-overview.html" style="font-size: 14px; text-decoration: none">← Open investigations</a>
 <div class="eyebrow">Investigation INV-0143 · CTRL-BRD-A · stg-B0005 · 2,560 boards · 1 defect · Day shift, 16 Oct 2026</div>
-<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">No parameter was out of spec, yet solder bridging rose to 0.90%</h1>
-<div style="font-size: 15px; color: #4A4F56">23 of 2,560 boards in stg-B0005. Batches with no excursion on line 2 this week: 0.08–0.12%.</div>
-</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">No parameter was out of spec, yet 23 boards had solder bridging</h1>
+<div style="font-size: 15px; color: #4A4F56">Batches with no excursion on line 2 this week had 2–3 boards with solder bridging each.</div>
 </div>
 
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #F1D3B5; background: #FFFAF4">
-<span class="chip warn">Linked rule #1 · near limit</span>
-<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Squeegee speed was near LSL 10:20–12:30. 19 of 23 boards with solder bridging were built 10:20–12:30. It stayed in spec (56–84 mm/s).</div>
-<div class="mono" style="font-size: 13px; color: #4A4F56">9 unit rules and 9 near-limit variants checked · 1 linked</div>
+<span class="chip warn">Linked root cause #1 · in spec</span>
+<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Squeegee speed was near LSL 10:20–12:30. The model attributes 19 of 23 boards with solder bridging to it. It stayed in spec (56–84 mm/s).</div>
+<div class="mono" style="font-size: 13px; color: #4A4F56">9 unit rules checked by the model · 1 linked</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 13px; color: #4A4F56">
+<span class="chip muted">RCA model · trained on synthetic data</span>
+<span>Evidence from the RCA model. It agreed with AOI on 99% of boards in this batch. Retrained on your line's data at onboarding.</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
 <div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
 
-<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px" aria-label="Mechanism seen">
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Mechanism seen">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Aperture overfill seen without an out-of-spec root cause</h2>
 <span class="chip info">Supporting measurement</span>
 </div>
-<div style="font-size: 15px; line-height: 1.5">Paste volume per aperture was above USL on 41 boards, but no aperture overfill rule condition at the limit was true.</div>
-<div style="display: flex; flex-direction: column; gap: 10px">
-<div class="eyebrow">Settings closest to their limit on these 41 boards</div>
+<div style="font-size: 15px; line-height: 1.5">Paste volume per aperture was above USL on 41 boards, while every setting was in spec.</div>
+<div class="eyebrow">What raised predicted risk on these 41 boards</div>
+<div class="attr">
 
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 14px">
-<span style="flex: 0 0 170px; font-weight: 600">Squeegee speed</span>
-<span class="mono" style="flex: 0 0 110px">57.6 mm/s</span>
-<div style="flex: 1 1 200px; min-width: 160px; display: flex; flex-direction: column; gap: 4px">
-<div class="pos"><div class="nz" style="left: 0; width: 10%"></div><div class="nz" style="right: 0; width: 10%"></div><div class="mk" style="left: 5.71428571428572%"></div></div>
-<div class="mono" style="display: flex; justify-content: space-between; font-size: 11px; color: #5B6169"><span>LSL 56</span><span>USL 84</span></div>
-</div>
-<span class="chip warn">Near LSL</span>
-</div>
+<span>Squeegee speed <span class="mono" style="color: #5B6169">57.6 mm/s</span></span><div class="bar"><div style="width: 68%"></div></div><span class="mono" style="text-align: right">68%</span>
 
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 14px">
-<span style="flex: 0 0 170px; font-weight: 600">Squeegee angle</span>
-<span class="mono" style="flex: 0 0 110px">58.9°</span>
-<div style="flex: 1 1 200px; min-width: 160px; display: flex; flex-direction: column; gap: 4px">
-<div class="pos"><div class="nz" style="left: 0; width: 10%"></div><div class="nz" style="right: 0; width: 10%"></div><div class="mk" style="left: 38.999999999999986%"></div></div>
-<div class="mono" style="display: flex; justify-content: space-between; font-size: 11px; color: #5B6169"><span>LSL 55</span><span>USL 65</span></div>
-</div>
-<span class="chip ok">In spec</span>
-</div>
+<span>Squeegee angle <span class="mono" style="color: #5B6169">58.9°</span></span><div class="bar"><div style="width: 9%"></div></div><span class="mono" style="text-align: right">9%</span>
 
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 14px">
-<span style="flex: 0 0 170px; font-weight: 600">Squeegee pressure</span>
-<span class="mono" style="flex: 0 0 110px">0.304 MPa</span>
-<div style="flex: 1 1 200px; min-width: 160px; display: flex; flex-direction: column; gap: 4px">
-<div class="pos"><div class="nz" style="left: 0; width: 10%"></div><div class="nz" style="right: 0; width: 10%"></div><div class="mk" style="left: 56.66666666666663%"></div></div>
-<div class="mono" style="display: flex; justify-content: space-between; font-size: 11px; color: #5B6169"><span>LSL 0.27</span><span>USL 0.33</span></div>
-</div>
-<span class="chip ok">In spec</span>
-</div>
+<span>Squeegee pressure <span class="mono" style="color: #5B6169">0.304 MPa</span></span><div class="bar"><div style="width: 6%"></div></div><span class="mono" style="text-align: right">6%</span>
+
+<span>Other parameters <span class="mono" style="color: #5B6169"></span></span><div class="bar"><div style="width: 17%"></div></div><span class="mono" style="text-align: right">17%</span>
 
 </div>
-<div style="font-size: 13px; color: #5B6169; line-height: 1.5; padding-top: 10px; border-top: 1px solid #EEF0ED">Shaded ends are the near-limit zones: the last 20% of the way from nominal to each limit. Every Failure Library rule is also checked near its limit; see linked rule #1 below.</div>
+<div style="font-size: 13px; color: #5B6169; line-height: 1.5; padding-top: 10px; border-top: 1px solid #EEF0ED">Share of predicted risk from model attribution, averaged over the 41 boards. Squeegee speed was in spec on all of them.</div>
 </section>
 
-<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked rules">
+<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked root causes">
 <div style="display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked rules</h2>
-<div style="font-size: 14px; color: #5B6169">Failure Library rules, at the limit or near it, whose condition was true on boards in this batch and that passed the checks.</div>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked root causes</h2>
+<div style="font-size: 14px; color: #5B6169">Failure Library rules the model checked on this batch and that passed the checks.</div>
 </div>
 <article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
 <span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#1</span>
-<span class="chip warn">Linked · near limit</span>
-<span class="chip warn">Rule condition true · 700 boards</span>
+<span class="chip info">Linked</span>
+<span class="chip warn">In spec · near LSL on 700 boards</span>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <div class="node n-root">Low squeegee speed<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
@@ -148,55 +136,60 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 4px">
-<span class="rule">Rule: SqueegeeSpeed near LSL</span>
-<span style="font-size: 13px; color: #5B6169">Near-limit variant of: <span class="mono">SqueegeeSpeed &lt; LSL</span> · near LSL = 56.0–58.8 mm/s, the last 20% of the way from nominal (70) to LSL (56)</span>
+<span class="rule">Rule: SqueegeeSpeed &lt; LSL</span>
+<span style="font-size: 13px; color: #5B6169">Rule condition true on 0 boards: squeegee speed stayed in spec. The model links it because speeds near LSL raised predicted risk.</span>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">2.71% vs 0.215%</span><span class="l">Solder bridging rate, rule condition true vs false</span></div>
-<div class="stat"><span class="v">12.6×</span><span class="l">more likely when the rule condition is true</span></div>
-<div class="stat"><span class="v">19 of 23</span><span class="l">Boards with solder bridging where the rule condition was true</span></div>
+<div class="stat"><span class="v">19 of 23</span><span class="l">Boards with solder bridging the model attributes to this root cause</span></div>
+<div class="stat"><span class="v">21 → 5</span><span class="l">Predicted boards with solder bridging, with squeegee speed at nominal (70 mm/s)</span></div>
+<div class="stat"><span class="v">17 of 19</span><span class="l">Attributed boards where the predicted mechanism is aperture overfill</span></div>
 </div>
+
 <div style="display: flex; flex-direction: column; gap: 8px">
-<div class="eyebrow">Solder bridging rate by position in the spec window</div>
-<table class="tt dose" style="margin-top: 0">
-<thead><tr><th>Squeegee speed</th><th>Boards</th><th>Solder bridging</th><th>Rate</th></tr></thead>
-<tbody>
-
-<tr><td class>Below LSL (&lt; 56.0)</td><td class>0</td><td class>0</td><td class>–</td></tr>
-
-<tr><td class="hl">Near LSL (56.0–58.8)</td><td class="hl">700</td><td class="hl">19</td><td class="hl">2.71%</td></tr>
-
-<tr><td class>Centred (58.8–81.2)</td><td class>1,860</td><td class>4</td><td class>0.22%</td></tr>
-
-<tr><td class>Near USL (81.2–84.0)</td><td class>0</td><td class>0</td><td class>–</td></tr>
-
-<tr><td class>Above USL (&gt; 84.0)</td><td class>0</td><td class>0</td><td class>–</td></tr>
-
-</tbody>
-</table>
-<div style="font-size: 13px; color: #5B6169">Near-limit zones are the last 20% of the way from nominal (70 mm/s) to each limit.</div>
+<div class="eyebrow">Predicted solder bridging risk by squeegee speed</div>
+<svg class="pd" viewBox="0 0 560 250" width="100%" style="max-width: 640px" role="img" aria-label="Predicted risk rises from Low at nominal to Medium in the near-LSL zone and High below LSL">
+<rect class="hi" x="56" y="20" width="480" height="48"></rect>
+<rect class="md" x="56" y="68" width="480" height="79"></rect>
+<rect class="lo" x="56" y="147" width="480" height="63"></rect>
+<text class="bl" x="498" y="36" text-anchor="end" style="fill: #9B1C12">High</text>
+<text class="bl" x="498" y="84" text-anchor="end" style="fill: #8A3505">Medium</text>
+<text class="bl" x="498" y="204" text-anchor="end" style="fill: #1D6B3F">Low</text>
+<rect class="win" x="99" y="20" width="26" height="190"></rect>
+<text x="131" y="14" text-anchor="start" style="fill: #16191D; font-weight: 500">this batch 10:20–12:30</text>
+<line class="lim" x1="86" x2="86" y1="20" y2="210"></line>
+<line class="lim" x1="506" x2="506" y1="20" y2="210"></line>
+<polyline class="curve" points="56,33 71,50 86,66 101,85 116,104 131,123 146,138 176,157 206,170 236,175 296,182 371,182 446,178 506,170 536,161"></polyline>
+<text x="86" y="230" text-anchor="middle" style="fill: #9B1C12">LSL 56</text>
+<text x="296" y="230" text-anchor="middle">nominal 70</text>
+<text x="506" y="230" text-anchor="middle" style="fill: #9B1C12">USL 84</text>
+<text x="296" y="246" text-anchor="middle">squeegee speed (mm/s)</text>
+</svg>
+<div style="font-size: 13px; color: #5B6169">The model's predicted risk for a board from this batch as squeegee speed changes, with every other parameter as built. Bands: High 5% or more, Medium 1–5%, Low under 1%.</div>
 </div>
+
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
 <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>700 boards were near LSL 10:20–12:30: squeegee speed 56.9–58.6 mm/s (spec 56–84 mm/s).</li><li>19 of 23 boards with solder bridging were built 10:20–12:30.</li><li>Outside 10:20–12:30: squeegee speed averaged 70.2 mm/s; 4 boards with solder bridging.</li>
+<li>700 boards were near LSL 10:20–12:30: squeegee speed 56.9–58.6 mm/s (spec 56–84 mm/s).</li><li>The model attributes 19 boards with solder bridging built 10:20–12:30 to this root cause.</li>
 </ul>
 </div>
 <div class="evi"><span style="font-weight: 600">Supported by: </span>Paste volume per aperture was above USL on 41 boards, 38 of them built 10:20–12:30; 15 of 23 boards with solder bridging were among the 41.</div>
 <details style="font-size: 14px">
 <summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
-<table class="tt">
-<thead><tr><th>stg-B0005 boards</th><th>Solder bridging</th><th>No solder bridging</th><th>Solder bridging rate</th></tr></thead>
-<tbody>
-<tr><td>Rule condition true</td><td>19</td><td>681</td><td>2.71%</td></tr>
-<tr><td>Rule condition false</td><td>4</td><td>1,856</td><td>0.215%</td></tr>
-</tbody>
-</table>
-<ul style="margin: 10px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
-<li>Failure Library path: <span class="mono" style="font-size: 13px">SqueegeeSpeed near LSL</span> → Aperture overfill → Solder bridging</li>
-<li>Solder bridging rate, rule condition true vs false: 2.71% vs 0.215% (12.6×). Needs 2× or more.</li>
-<li>Fisher's exact test: p &lt; 0.001. Needs p &lt; 0.01.</li>
-<li>Boards with solder bridging where the rule condition was true: 19 of 23 (83%). Needs 20% or more.</li>
+<div style="font-size: 13px; color: #4A4F56; margin: 8px 0 10px">Share of predicted risk, averaged over the 19 attributed boards with solder bridging:</div>
+<div class="attr">
+
+<span>Squeegee speed</span><div class="bar"><div style="width: 72%"></div></div><span class="mono" style="text-align: right">72%</span>
+
+<span>Squeegee angle</span><div class="bar"><div style="width: 8%"></div></div><span class="mono" style="text-align: right">8%</span>
+
+<span>Squeegee pressure</span><div class="bar"><div style="width: 5%"></div></div><span class="mono" style="text-align: right">5%</span>
+
+<span>Other parameters</span><div class="bar"><div style="width: 15%"></div></div><span class="mono" style="text-align: right">15%</span>
+
+</div>
+<ul style="margin: 12px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
+<li>Failure Library path: SqueegeeSpeed &lt; LSL → Aperture overfill → Solder bridging</li><li>Attributed: the model attributes 19 of 23 boards with solder bridging (83%) to this root cause. Needs 20% or more.</li><li>Predicted mechanism: aperture overfill on 17 of 19 attributed boards (89%). Needs 50% or more.</li><li>Model agreement with AOI on stg-B0005: 99%. Needs 90% or more.</li><li>What-if: with squeegee speed (70 mm/s) at nominal, predicted boards with solder bridging fall from 21 to 5.</li>
 </ul>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
@@ -212,89 +205,104 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </article>
 </section>
 
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Model vs AOI">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs AOI · solder bridging</h2>
+<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0005, by model risk and AOI result.</div>
+</div>
+<span class="chip ok">Agreement 99%</span>
+</div>
+<div class="mx">
+<span></span><span class="h">AOI: solder bridging</span><span class="h">AOI: pass</span>
+<span class="h">Model risk High</span>
+<div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">19</span><span class="t">Confirmed</span><span class="s">Explained by root cause #1</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">26</span><span class="t">Hidden risk</span><span class="s">Passed AOI; hold in containment</span></div>
+<span class="h">Model risk Medium or Low</span>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">4</span><span class="t">Unexplained</span><span class="s">Listed below</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,511</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards go to review</span></div>
+</div>
+</section>
+
 <section class="card" style="overflow: hidden" aria-label="Unexplained boards">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Unexplained: 4 of 23 boards with solder bridging</h2>
-<span class="chip muted">No rule</span>
+<span class="chip muted">Not explained</span>
 </div>
-<div style="font-size: 14px; color: #4A4F56">No linked rule condition was true when these boards were built.</div>
+<div style="font-size: 14px; color: #4A4F56">AOI found solder bridging, but the model risk was Low and no parameter raised it.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0008174</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">06:48</span>
-<span style="flex: 1 1 260px; color: #4A4F56">Every rule condition false · all parameters in spec</span>
+<span class="chip ok" title="Model risk 0.3%">Low</span>
+<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0008637</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">08:15</span>
-<span style="flex: 1 1 260px; color: #4A4F56">Every rule condition false · all parameters in spec</span>
+<span class="chip ok" title="Model risk 0.2%">Low</span>
+<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0010031</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">13:02</span>
-<span style="flex: 1 1 260px; color: #4A4F56">Every rule condition false · all parameters in spec</span>
+<span class="chip ok" title="Model risk 0.4%">Low</span>
+<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0010239</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">13:41</span>
-<span style="flex: 1 1 260px; color: #4A4F56">Every rule condition false · all parameters in spec</span>
+<span class="chip ok" title="Model risk 0.3%">Low</span>
+<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
 </div>
 
 </div>
 <div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED">
 <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #4A4F56">
-<li>Solder bridging rate where no linked rule condition was true: 4 of 1,860 boards (0.22%).</li><li>Built 06:48, 08:15, 13:02, 13:41: not grouped in one window.</li><li>Boards with solder bridging in batches with no excursion on line 2 this week: stg-B0001 3 of 2,560 (0.12%), stg-B0002 2 of 2,560 (0.08%).</li>
+<li>Built 06:48, 08:15, 13:02, 13:41: not grouped in one window.</li>
+<li>Check the AOI images. If the defect is real, its cause is not among the model's inputs.</li>
 </ul>
 </div>
 </section>
 
 <section class="card" style="overflow: hidden" aria-label="Checked and not linked">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 17</h2>
-<div style="font-size: 14px; color: #5B6169">Every other unit rule for solder bridging, at the limit and near it, with the check it failed.</div>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 8</h2>
+<div style="font-size: 14px; color: #5B6169">Every other unit rule in the Failure Library for solder bridging, with what the model found.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
 <div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
 <span style="font-weight: 600; font-size: 14px">Low squeegee angle + low squeegee speed</span>
-<span style="font-size: 12px; color: #5B6169">Near-limit variant · SqueegeeAngle near LSL AND SqueegeeSpeed near LSL</span>
+<span style="font-size: 12px; color: #5B6169">via Aperture overfill · SqueegeeAngle &lt; LSL AND SqueegeeSpeed &lt; LSL</span>
 </div>
-<span class="chip warn">Rule condition true · 52 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Fisher's exact test: p 0.078. Needs p &lt; 0.01. Solder bridging rate 3.85% vs 0.84% (4.6×), but only 2 boards.</span>
+<span class="chip ok">Rule condition true · 0 boards</span>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Attributed 0 boards with solder bridging: the model attributes them to squeegee speed alone. With squeegee angle at nominal, predicted boards with solder bridging: 21 → 20.</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
 <div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
 <span style="font-weight: 600; font-size: 14px">High peak reflow temperature</span>
-<span style="font-size: 12px; color: #5B6169">Near-limit variant · PeakReflowTemperature near USL</span>
+<span style="font-size: 12px; color: #5B6169">via Excess reflow spreading · PeakReflowTemperature &gt; USL</span>
 </div>
-<span class="chip warn">Rule condition true · 112 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Solder bridging rate, rule condition true vs false: 0.89% vs 0.90% (1.0×). Needs 2× or more.</span>
+<span class="chip ok">Rule condition true · 0 boards</span>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Attributed 0 boards with solder bridging. With peak reflow temperature at nominal, predicted boards with solder bridging: 21 → 21.</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
 <div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
-<span style="font-weight: 600; font-size: 14px">Low squeegee speed</span>
-<span style="font-size: 12px; color: #5B6169">At the limit · SqueegeeSpeed &lt; LSL</span>
+<span style="font-weight: 600; font-size: 14px">6 more unit rules</span>
+<span style="font-size: 12px; color: #5B6169">For all three mechanisms</span>
 </div>
 <span class="chip ok">Rule condition true · 0 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 56.9–79.8 mm/s on all 2,560 boards (spec 56–84 mm/s).</span>
-</div>
-
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
-<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
-<span style="font-weight: 600; font-size: 14px">14 more unit rules</span>
-<span style="font-size: 12px; color: #5B6169">At the limit and near it, for all three mechanisms</span>
-</div>
-<span class="chip ok">Rule condition true · 0 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Rule condition true on 0 of 2,560 boards, at the limit or near it.</span>
+<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Attributed 0 boards with solder bridging; no parameter in these rules raised predicted risk by more than 5% on any of them.</span>
 </div>
 
 </div>
@@ -305,9 +313,9 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Squeegee speed (mm/s)</h2>
-<div style="font-size: 14px; color: #5B6169">Linked rule #1 · 20-minute averages, stg-B0005</div>
+<div style="font-size: 14px; color: #5B6169">Linked root cause #1 · 20-minute averages, stg-B0005</div>
 </div>
-<svg class="trend" viewBox="0 0 520 250" width="100%" role="img" aria-label="Squeegee speed drops into the near-LSL zone during 10:20–12:30 but stays in spec">
+<svg class="trend" viewBox="0 0 520 250" width="100%" role="img" aria-label="Squeegee speed drops near LSL during 10:20–12:30 but stays in spec">
 <rect class="win" x="296" y="30" width="139" height="184"></rect>
 <text class="wintxt" x="366" y="22" text-anchor="middle">10:20–12:30</text>
 <rect class="near" x="48" y="185" width="456" height="14"></rect>
@@ -323,28 +331,24 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <text x="286" y="236" text-anchor="middle">10:00</text>
 <text x="504" y="236" text-anchor="end">13:40</text>
 </svg>
-<div style="font-size: 14px; line-height: 1.5">Squeegee speed averaged 70.2 mm/s outside 10:20–12:30 and reached 56.9 mm/s, inside the near-LSL zone (56.0–58.8) during it.</div>
+<div style="font-size: 14px; line-height: 1.5">Squeegee speed averaged 70.2 mm/s outside 10:20–12:30 and reached 56.9 mm/s, near LSL but in spec during it.</div>
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F1D3B5">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><div style="display: flex; gap: 6px"><span class="chip crit">26 hold</span><span class="chip warn">657 review</span></div></div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<div class="eyebrow" style="color: #9B1C12">Hold</div>
-<div style="font-size: 14px; line-height: 1.5">26 boards passed AOI but paste volume per aperture, which supports aperture overfill, was above USL.</div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<div class="eyebrow" style="color: #8A3505">Review</div>
-<div style="font-size: 14px; line-height: 1.5">657 more boards built 10:20–12:30 passed AOI with linked rule #1 (squeegee speed near LSL). They met spec: review before release.</div>
-</div>
+<ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; display: flex; flex-direction: column; gap: 6px">
+<li>26 boards passed AOI but have High model risk for solder bridging: hold.</li>
+<li>657 more have Medium model risk: review before release. They met spec.</li>
+</ul>
 <a class="btn" href="containment.html">Review boards</a>
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
-<h2 style="margin: 0; font-size: 16px; font-weight: 600">How near limit is checked</h2>
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">Linking a root cause that stayed in spec</h2>
 <ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 6px">
-<li>Each parameter has a near-limit zone: the last 20% of the way from nominal to each limit. For squeegee speed (nominal 70, spec 56–84 mm/s), near LSL is 56.0–58.8 mm/s.</li>
-<li>Every unit rule is also checked as a near-limit variant, with the same three checks: 2× or more, Fisher p &lt; 0.01, 20% of boards with the defect.</li>
-<li>Boards under a linked near-limit rule met spec, so they go to Review, not Hold. Boards whose supporting measurement is out of spec are held.</li>
+<li>The model scores every board from its parameter values, in spec or not, so an in-spec setting can still raise predicted risk.</li>
+<li>The same three checks apply: 20% or more attributed, predicted mechanism matches on 50% or more, model agrees with AOI on 90% or more.</li>
+<li>The shaded near-limit zone (the last 20% of the way from nominal to each limit) is for reading the charts; it is not a check.</li>
 </ol>
 </section>
 </aside>

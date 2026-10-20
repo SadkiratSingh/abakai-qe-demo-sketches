@@ -52,6 +52,15 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .trend .wintxt{fill:#7E160E;font-weight:500}
 .rule{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#4A4F56;background:#F4F5F3;border-radius:6px;padding:6px 10px;display:inline-block}
 .evi{font-size:14px;line-height:1.5;padding:12px 14px;background:#F5F8FD;border:1px solid #B7CBEA;border-radius:8px}
+.mx{display:grid;grid-template-columns:minmax(120px,0.8fr) 1fr 1fr;gap:8px;font-size:13px}
+.mx .h{font-weight:600;color:#5B6169;padding:4px 8px;display:flex;align-items:center}
+.mx .c{border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.mx .n{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500}
+.mx .t{font-weight:600;font-size:14px}
+.mx .s{color:#4A4F56;font-size:12.5px}
+.attr{display:grid;grid-template-columns:minmax(150px,1fr) 2fr 48px;align-items:center;gap:6px 12px;font-size:13px;margin-top:10px}
+.attr .bar{height:10px;border-radius:5px;background:#EEF0ED;overflow:hidden}
+.attr .bar div{height:100%;background:#1A4F9C;border-radius:5px}
 </style>
 </helmet>
 <div style="min-height: 100vh; background: #F4F5F3">
@@ -83,17 +92,22 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
-<span class="chip info">Linked rule #1</span>
+<span class="chip info">Linked root cause #1</span>
 <div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">{{c.summary}}</div>
 <div class="mono" style="font-size: 13px; color: #4A4F56">{{c.checkedLine}}</div>
 </div>
 
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 13px; color: #4A4F56">
+<span class="chip muted">RCA model · trained on synthetic data</span>
+<span>{{c.modelLine}}</span>
+</div>
+
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
 <div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
-<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked and contributing rules">
+<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked and contributing root causes">
 <div style="display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked and contributing rules</h2>
-<div style="font-size: 14px; color: #5B6169">Failure Library rules whose condition was true on boards in this batch and that passed the checks.</div>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked and contributing root causes</h2>
+<div style="font-size: 14px; color: #5B6169">Failure Library rules the model checked on this batch and that passed the checks.</div>
 </div>
 <sc-for list="{{c.linked}}" as="h" hint-placeholder-count="1">
 <article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
@@ -114,9 +128,9 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <sc-if value="{{h.hasParent}}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; color: #5B6169">Unit rule split from: <span class="mono">{{h.parent}}</span></span></sc-if>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">{{h.r1}} vs {{h.r2}}</span><span class="l">{{c.title}} rate, rule condition true vs false</span></div>
-<div class="stat"><span class="v">{{h.rr}}</span><span class="l">more likely when the rule condition is true</span></div>
-<div class="stat"><span class="v">{{h.cov}}</span><span class="l">Boards with {{c.defLower}} where the rule condition was true</span></div>
+<div class="stat"><span class="v">{{h.attr}}</span><span class="l">Boards with {{c.defLower}} the model attributes to this root cause</span></div>
+<div class="stat"><span class="v">{{h.wif}}</span><span class="l">{{h.wifLabel}}</span></div>
+<div class="stat"><span class="v">{{h.mechAgree}}</span><span class="l">Attributed boards where the predicted mechanism is {{h.mechLower}}</span></div>
 </div>
 <sc-if value="{{h.isContrib}}" hint-placeholder-val="{{ false }}">
 <div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #FFFAF4; border: 1px solid #F1D3B5; border-radius: 8px; color: #6B2C05">{{h.contribNote}}</div>
@@ -132,18 +146,18 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </sc-if>
 <details style="font-size: 14px">
 <summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
-<table class="tt">
-<thead><tr><th>{{c.batchLabel}}</th><th>{{c.title}}</th><th>No {{c.defLower}}</th><th>{{c.title}} rate</th></tr></thead>
-<tbody>
-<tr><td>Rule condition true</td><td>{{h.a}}</td><td>{{h.b}}</td><td>{{h.r1}}</td></tr>
-<tr><td>Rule condition false</td><td>{{h.c2}}</td><td>{{h.d}}</td><td>{{h.r2}}</td></tr>
-</tbody>
-</table>
-<ul style="margin: 10px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
+<div style="font-size: 13px; color: #4A4F56; margin-top: 8px">{{h.attrHead}}</div>
+<div class="attr">
+<sc-for list="{{h.shares}}" as="s" hint-placeholder-count="4">
+<span>{{s.name}}</span><div class="bar"><div style="width: {{s.pct}}"></div></div><span class="mono" style="text-align: right">{{s.pct}}</span>
+</sc-for>
+</div>
+<ul style="margin: 12px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
 <li>Failure Library path: <span class="mono" style="font-size: 13px">{{h.rule}}</span> → {{h.mech}} → {{c.title}}</li>
-<li>{{c.title}} rate, rule condition true vs false: {{h.r1}} vs {{h.r2}} ({{h.rr}}). Needs 2× or more.</li>
-<li>Fisher's exact test: p {{h.p}}. Needs p &lt; 0.01.</li>
-<li>{{h.covLine}}</li>
+<li>{{h.attrLine}}</li>
+<li>{{h.mechLine}}</li>
+<li>{{c.agreeLine}}</li>
+<li>{{h.wifLine}}</li>
 </ul>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
@@ -162,11 +176,30 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </sc-for>
 </section>
 
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Model vs inspection">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs {{c.inspLower}} · {{c.defLower}}</h2>
+<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0003, by model risk and {{c.inspLower}} result.</div>
+</div>
+<span class="chip ok">{{c.agreeChip}}</span>
+</div>
+<div class="mx">
+<span></span><span class="h">{{c.insp}}: {{c.defLower}}</span><span class="h">{{c.insp}}: pass</span>
+<span class="h">Model risk High</span>
+<div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">{{c.mx.conf}}</span><span class="t">Confirmed</span><span class="s">Explained by the root causes above</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">{{c.mx.hidden}}</span><span class="t">Hidden risk</span><span class="s">Passed {{c.inspLower}}; hold in containment</span></div>
+<span class="h">Model risk Medium or Low</span>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">{{c.mx.unexpl}}</span><span class="t">Unexplained</span><span class="s">Listed below</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">{{c.mx.good}}</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards go to review</span></div>
+</div>
+</section>
+
 <section class="card" style="overflow: hidden" aria-label="Unexplained boards">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">{{u.head}}</h2>
-<span class="chip muted">No rule</span>
+<span class="chip muted">Not explained</span>
 </div>
 <div style="font-size: 14px; color: #4A4F56">{{u.why}}</div>
 </div>
@@ -175,13 +208,14 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="Board.dc.html" style="flex: 0 0 120px">{{b.id}}</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">{{b.time}}</span>
-<span style="flex: 1 1 260px; color: #4A4F56">{{b.note}}</span>
+<span class="chip ok" title="{{b.pct}}">Low</span>
+<span style="flex: 1 1 240px; color: #4A4F56">{{b.note}}</span>
 </div>
 </sc-for>
 </div>
-<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 6px">
+<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED">
 <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #4A4F56">
-<sc-for list="{{u.facts}}" as="f" hint-placeholder-count="3"><li>{{f}}</li></sc-for>
+<sc-for list="{{u.facts}}" as="f" hint-placeholder-count="2"><li>{{f}}</li></sc-for>
 </ul>
 </div>
 </section>
@@ -189,7 +223,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section class="card" style="overflow: hidden" aria-label="Checked and not linked">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · {{c.ruledCount}}</h2>
-<div style="font-size: 14px; color: #5B6169">Every other unit rule in the Failure Library for {{c.defLower}}, at the limit and near it, with the check it failed.</div>
+<div style="font-size: 14px; color: #5B6169">Every other unit rule in the Failure Library for {{c.defLower}}, with what the model found.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 <sc-for list="{{c.ruled}}" as="r" hint-placeholder-count="5">
@@ -210,7 +244,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">{{c.param}}</h2>
-<div style="font-size: 14px; color: #5B6169">Linked rule #1 · 20-minute averages, stg-B0003</div>
+<div style="font-size: 14px; color: #5B6169">Linked root cause #1 · 20-minute averages, stg-B0003</div>
 </div>
 <svg class="trend" viewBox="0 0 520 250" width="100%" role="img" aria-label="{{c.chartLabel}}">
 <rect class="win" x="{{ch.winX}}" y="30" width="{{ch.winW}}" height="184"></rect>
@@ -230,7 +264,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><span class="chip crit">{{c.atRisk}} at risk</span></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><div style="display: flex; gap: 6px"><span class="chip crit">{{c.hold}} hold</span><span class="chip warn">{{c.review}} review</span></div></div>
 <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; display: flex; flex-direction: column; gap: 6px">
 <sc-for list="{{c.containLines}}" as="l" hint-placeholder-count="2"><li>{{l}}</li></sc-for>
 </ul>
@@ -238,25 +272,25 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
-<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a rule is linked</h2>
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a root cause is linked</h2>
 <ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 6px">
-<li>The Failure Library has a path: rule → mechanism → defect. Rules with OR are split into unit rules joined only by AND.</li>
-<li>Boards where the rule condition is true are compared with boards where it is false:
+<li>The Failure Library gives the path: rule → mechanism → defect. Rules with OR are split into unit rules joined only by AND.</li>
+<li>The RCA model scores every board and works out which parameters raised its risk. For each unit rule:
 <ul style="margin: 4px 0 0; padding-left: 18px">
-<li>Defect rate, rule condition true vs false: 2× or more</li>
-<li>Fisher's exact test: p &lt; 0.01</li>
-<li>Boards with the defect where the rule condition was true: 20% or more</li>
+<li>Boards with the defect the model attributes to it: 20% or more</li>
+<li>Predicted mechanism matches the path: 50% or more of those boards</li>
+<li>Model agrees with inspection on the batch: 90% or more</li>
 </ul></li>
 </ol>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56"><span style="font-weight: 600; color: #16191D">Linked:</span> passes all three. <span style="font-weight: 600; color: #16191D">Contributing:</span> passes the first two, and the mechanism's passing rules together reach 20%.</div>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Measurements such as SPI paste volume are never root causes; they show as evidence for a mechanism.</div>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56"><span style="font-weight: 600; color: #16191D">Linked:</span> passes all three. <span style="font-weight: 600; color: #16191D">Contributing:</span> under 20% on its own, but the mechanism's root causes together reach 20%.</div>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">What-if re-scores the boards with the root cause at nominal. Model risk bands: High 5% or more, Medium 1–5%, Low under 1%.</div>
 </section>
 </aside>
 </div>
 </main>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2400}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2500}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
@@ -276,114 +310,125 @@ class Component extends DCLogic {
   }
   renderVals() {
     // Text templates (see README, "Wording templates"). Every sentence below is one of these, filled with data.
-    const low = d => d.replace('Above', 'above').replace('Below', 'below');
     const T = {
-      summary: (param, dir, win, k, K, d) => `${param} was ${dir} ${win}. ${k} of ${K} boards with ${d} were built ${win}.`,
-      checked: (n, v, l, c) => `${n} unit rules and ${v} near-limit variants checked · ${l} linked` + (c ? ` · ${c} contributing` : ''),
+      summary: (param, dir, win, k, K, d) => `${param} was ${dir} ${win}. The model attributes ${k} of ${K} boards with ${d} to it.`,
+      checked: (n, l, c) => `${n} unit rules checked by the model · ${l} linked` + (c ? ` · ${c} contributing` : ''),
+      model: (insp, pct) => `Evidence from the RCA model. It agreed with ${insp} on ${pct} of boards in this batch. Retrained on your line's data at onboarding.`,
       status: n => `Rule condition true · ${n} boards`,
-      evWindow: (n, dir, win, param, range, spec) => `${n} boards were ${low(dir)} ${win}: ${param} ${range} (spec ${spec}).`,
+      attrLine: (k, K, d, pct) => `Attributed: the model attributes ${k} of ${K} boards with ${d} (${pct}) to this root cause. Needs 20% or more.`,
+      mechLine: (mech, k, K, pct) => `Predicted mechanism: ${mech} on ${k} of ${K} attributed boards (${pct}). Needs 50% or more.`,
+      agreeLine: (insp, pct) => `Model agreement with ${insp} on stg-B0003: ${pct}. Needs 90% or more.`,
+      wifLine: (what, d, a, b) => `What-if: with ${what} at nominal, predicted boards with ${d} fall from ${a} to ${b}.`,
+      wifLabel: (what, d) => `Predicted boards with ${d}, with ${what} at nominal`,
+      attrHead: (n, d) => `Share of predicted risk, averaged over the ${n} attributed boards with ${d}:`,
+      contribNote: (k, K, d, pct, mech, k2, pct2) => `Contributing: the model attributes ${k} of ${K} boards with ${d} (${pct}) to it on its own. Together with the other ${mech} root causes: ${k2} of ${K} (${pct2}).`,
+      evWindow: (n, dir, win, param, range, spec) => `${n} boards were ${dir} ${win}: ${param} ${range} (spec ${spec}).`,
       evRule: (n, win, detail) => `${n} boards met the rule condition ${win}: ${detail}.`,
-      evBuilt: (k, K, d, win) => `${k} of ${K} boards with ${d} were built ${win}.`,
-      evOutside: (win, param, mean, k, d) => `Outside ${win}: ${param} averaged ${mean}; ${k} boards with ${d}.`,
-      cov: (d, k, K, pct) => `Boards with ${d} where the rule condition was true: ${k} of ${K} (${pct}). Needs 20% or more.`,
-      covContrib: (d, k, K, pct, mech, k2, pct2) => `Boards with ${d} where the rule condition was true: ${k} of ${K} (${pct}), below 20% on its own. ${mech} rules together: ${k2} of ${K} (${pct2}).`,
-      contribNote: (k, K, d, pct, mech, k2, pct2) => `Contributing: explains ${k} of ${K} boards with ${d} (${pct}) on its own. Together with the other passing ${mech} rules: ${k2} of ${K} (${pct2}).`,
-      support: (meas, dir, n, x, what) => `${meas} was ${low(dir)} on ${n} boards, ${x} of them ${what}.`,
+      evAttr: (k, d, win) => `The model attributes ${k} boards with ${d} built ${win} to this root cause.`,
+      support: (meas, dir, n, x, what) => `${meas} was ${dir} on ${n} boards, ${x} of them ${what}.`,
       chartNote: (param, mean, win, max) => `${param} averaged ${mean} outside ${win} and reached ${max} during it.`,
-      contain: (n, win, insp, rule) => `${n} boards built ${win} passed ${insp} but met ${rule}.`,
-      containMeas: (n, insp, meas, dir, mech) => `${n} more boards passed ${insp} but ${meas}, which supports ${mech}, was ${low(dir)}.`,
-      failRate: (D, a, b, rr) => `${D} rate, rule condition true vs false: ${a} vs ${b} (${rr}). Needs 2× or more.`,
-      zero: (N, detail) => `Rule condition true on 0 of ${N} boards. ${detail}`,
+      containHold: (n, insp, d) => `${n} boards passed ${insp} but have High model risk for ${d}: hold.`,
+      containReview: (n) => `${n} more have Medium model risk: review before release.`,
+      notLinked: (d, what, a, b) => `Attributed 0 boards with ${d}. With ${what} at nominal, predicted boards with ${d}: ${a} → ${b}.`,
       inSpec: (range, where, spec) => `Measured ${range} on ${where} (spec ${spec}).`,
       unexplHead: (k, K, d) => `Unexplained: ${k} of ${K} boards with ${d}`,
-      unexplWhy: () => 'No linked or contributing rule condition was true when these boards were built.',
-      unexplBoard: () => 'Every rule condition false · all parameters in spec',
-      unexplRate: (D, k, N, pct) => `${D} rate where no linked or contributing rule condition was true: ${k} of ${N} boards (${pct}).`,
+      unexplWhy: (insp, d) => `${insp} found ${d}, but the model risk was Low and no parameter raised it.`,
+      unexplBoard: () => 'No parameter raised its risk by more than 5%',
       unexplTime: times => `Built ${times}: not grouped in one window.`,
-      unexplCompare: (d, list) => `Boards with ${d} in batches with no excursion on line 2 this shift: ${list}.`
+      unexplNext: (rec) => `Check the ${rec}. If the defect is real, its cause is not among the model's inputs.`
     };
-    const unexpl = (k, K, d, D, N, pct, boards, compare) => ({
-      head: T.unexplHead(k, K, d), why: T.unexplWhy(),
-      boards: boards.map(b => ({ id: b[0], time: b[1], note: T.unexplBoard() })),
-      facts: [T.unexplRate(D, k, N, pct), T.unexplTime(boards.map(b => b[1]).join(', ')), T.unexplCompare(d, compare)]
-    });
+    const share = (rows) => rows.map(r => ({ name: r[0], pct: r[1] + '%' }));
     const linkedRow = h => Object.assign({ hasParent: false, parent: '', isContrib: false, contribNote: '', hasSupport: false, support: '' }, h);
-    const nearRow = (n, mechs, reason) => ({ root: `Near-limit variants of the ${n} unit rules`, mech: mechs, status: 'None linked', reason, cls: 'chip ok' });
     const outRow = (root, mech, n, reason) => ({ root, mech, status: T.status(n), reason, cls: 'chip warn' });
     const zeroRow = (root, mech, detail) => ({ root, mech, status: T.status(0), reason: detail, cls: 'chip ok' });
     const squeegeeParent = 'SqueegeeAngle < LSL AND (SqueegeeSpeed < LSL OR SqueegeePressure > USL)';
+    const B = 'solder bridging';
     const cases = {
       bridge: {
-        title: 'Solder bridging', defLower: 'solder bridging', batchLabel: 'stg-B0003 boards', atRisk: 173,
-        summary: T.summary('Peak reflow temperature', 'above USL', '02:00–02:40', 44, 61, 'solder bridging'),
-        unexpl: unexpl(3, 61, 'solder bridging', 'Solder bridging', '2,329', '0.13%', [['PCB-0005451', '22:41'], ['PCB-0006244', '01:15'], ['PCB-0007351', '05:02']], 'stg-B0001 3 of 2,560 (0.12%), stg-B0002 2 of 2,560 (0.08%)'),
-        checkedLine: T.checked(9, 9, 1, 2), ruledN: 15,
+        title: 'Solder bridging', defLower: B, insp: 'AOI', inspLower: 'AOI', record: 'AOI images',
+        summary: T.summary('Peak reflow temperature', 'above USL', '02:00–02:40', 44, 61, B),
+        checkedLine: T.checked(9, 1, 2),
+        modelLine: T.model('AOI', '98%'), agreeLine: T.agreeLine('AOI', '98%'), agreeChip: 'Agreement 98%',
+        mx: { conf: 58, hidden: 45, unexpl: 3, good: '2,454' },
+        hold: 45, review: 128,
         param: 'Peak reflow temperature (°C)', lsl: 245, usl: 255, window: '02:00–02:40',
         vals: [251.6, 251.9, 251.4, 252.1, 251.8, 251.5, 252.0, 251.7, 251.9, 251.6, 252.2, 251.8, 258.6, 258.9, 251.9, 251.7, 252.0, 251.5, 251.8, 252.1, 251.6, 251.9, 251.7, 251.8], w0: 12, w1: 13,
         chartLabel: 'Peak reflow temperature is above USL only during 02:00–02:40',
         chartNote: T.chartNote('Peak reflow temperature', '251.8 °C', '02:00–02:40', '259.8 °C'),
-        containLines: [
-          T.contain(112, '02:00–02:40', 'AOI', 'linked rule #1 (peak reflow temperature above USL)'),
-          T.contain(61, '23:10–00:20', 'AOI', 'contributing rule #2 or #3 (squeegee angle below LSL with speed below LSL or pressure above USL)')
-        ],
+        containLines: [T.containHold(45, 'AOI', B), T.containReview(128)],
+        unexpl: { k: 3, K: 61, boards: [['PCB-0005451', '22:41', '0.3%'], ['PCB-0006244', '01:15', '0.2%'], ['PCB-0007351', '05:02', '0.4%']] },
         linked: [
           linkedRow({ id: 'b1', state: 'Linked', stateCls: 'chip info', root: 'High peak reflow temperature', mech: 'Excess reflow spreading', equip: 'Reflow oven', status: T.status(156),
             rule: 'PeakReflowTemperature > USL',
-            cov: '44 of 61', rr: '40×', p: '< 0.001', a: '44', b: '112', c2: '17', d: '2,387', r1: '28.2%', r2: '0.71%',
-            covLine: T.cov('solder bridging', 44, 61, '72%'),
-            evidence: [T.evWindow(156, 'Above USL', '02:00–02:40', 'peak reflow temperature', '257.9–259.8 °C', '245–255 °C'), T.evBuilt(44, 61, 'solder bridging', '02:00–02:40'), T.evOutside('02:00–02:40', 'peak reflow temperature', '251.8 °C', 17, 'solder bridging')],
+            attr: '44 of 61', wif: '58 → 15', mechAgree: '41 of 44', mechLower: 'excess reflow spreading',
+            wifLabel: T.wifLabel('peak reflow', B),
+            attrLine: T.attrLine(44, 61, B, '72%'), mechLine: T.mechLine('excess reflow spreading', 41, 44, '93%'),
+            wifLine: T.wifLine('peak reflow temperature (250 °C)', B, 58, 15),
+            attrHead: T.attrHead(44, B),
+            shares: share([['Peak reflow temperature', 81], ['Squeegee speed', 5], ['Ambient temperature', 4], ['Other parameters', 10]]),
+            evidence: [T.evWindow(156, 'above USL', '02:00–02:40', 'peak reflow temperature', '257.9–259.8 °C', '245–255 °C'), T.evAttr(44, B, '02:00–02:40')],
             action: 'Restore the approved reflow recipe; lock recipe changes behind sign-off.' }),
           linkedRow({ id: 'b2', state: 'Contributing', stateCls: 'chip warn', root: 'Low squeegee angle + low squeegee speed', mech: 'Aperture overfill', equip: 'Solder printer', status: T.status(40),
             rule: 'SqueegeeAngle < LSL AND SqueegeeSpeed < LSL', hasParent: true, parent: squeegeeParent,
-            cov: '7 of 61', rr: '8.2×', p: '< 0.001', a: '7', b: '33', c2: '54', d: '2,466', r1: '17.5%', r2: '2.1%',
-            isContrib: true, contribNote: T.contribNote(7, 61, 'solder bridging', '11%', 'aperture overfill', 14, '23%'),
-            covLine: T.covContrib('solder bridging', 7, 61, '11%', 'Aperture overfill', 14, '23%'),
-            evidence: [T.evRule(40, '23:10–00:20', 'squeegee angle 51–54° (spec 55–65°) with speed 48–55 mm/s (spec 56–84 mm/s)'), T.evBuilt(7, 61, 'solder bridging', '23:10–00:20 under this rule')],
-            hasSupport: true, support: T.support('Paste volume per aperture', 'Above USL', 61, 12, 'among the 14 boards with solder bridging under rules #2 and #3'),
+            attr: '7 of 61', wif: '58 → 51', mechAgree: '6 of 7', mechLower: 'aperture overfill',
+            wifLabel: T.wifLabel('squeegee angle and speed', B),
+            isContrib: true, contribNote: T.contribNote(7, 61, B, '11%', 'aperture overfill', 14, '23%'),
+            attrLine: T.attrLine(7, 61, B, '11%') + ' Together with rule #3: 14 of 61 (23%).', mechLine: T.mechLine('aperture overfill', 6, 7, '86%'),
+            wifLine: T.wifLine('squeegee angle and speed (60°, 70 mm/s)', B, 58, 51),
+            attrHead: T.attrHead(7, B),
+            shares: share([['Squeegee angle', 46], ['Squeegee speed', 38], ['Peak reflow temperature', 4], ['Other parameters', 12]]),
+            evidence: [T.evRule(40, '23:10–00:20', 'squeegee angle 51–54° (spec 55–65°) with speed 48–55 mm/s (spec 56–84 mm/s)'), T.evAttr(7, B, '23:10–00:20')],
+            hasSupport: true, support: T.support('Paste volume per aperture', 'above USL', 61, 12, 'among the 14 boards with solder bridging attributed to rules #2 and #3'),
             action: 'Replace the squeegee blade; check angle, speed and pressure against the recipe.' }),
           linkedRow({ id: 'b3', state: 'Contributing', stateCls: 'chip warn', root: 'Low squeegee angle + high squeegee pressure', mech: 'Aperture overfill', equip: 'Solder printer', status: T.status(35),
             rule: 'SqueegeeAngle < LSL AND SqueegeePressure > USL', hasParent: true, parent: squeegeeParent,
-            cov: '7 of 61', rr: '9.4×', p: '< 0.001', a: '7', b: '28', c2: '54', d: '2,471', r1: '20.0%', r2: '2.1%',
-            isContrib: true, contribNote: T.contribNote(7, 61, 'solder bridging', '11%', 'aperture overfill', 14, '23%'),
-            covLine: T.covContrib('solder bridging', 7, 61, '11%', 'Aperture overfill', 14, '23%'),
-            evidence: [T.evRule(35, '23:10–00:20', 'squeegee angle 51–54° (spec 55–65°) with pressure 0.34–0.36 MPa (spec 0.27–0.33 MPa)'), T.evBuilt(7, 61, 'solder bridging', '23:10–00:20 under this rule')],
+            attr: '7 of 61', wif: '58 → 51', mechAgree: '6 of 7', mechLower: 'aperture overfill',
+            wifLabel: T.wifLabel('squeegee angle and pressure', B),
+            isContrib: true, contribNote: T.contribNote(7, 61, B, '11%', 'aperture overfill', 14, '23%'),
+            attrLine: T.attrLine(7, 61, B, '11%') + ' Together with rule #2: 14 of 61 (23%).', mechLine: T.mechLine('aperture overfill', 6, 7, '86%'),
+            wifLine: T.wifLine('squeegee angle and pressure (60°, 0.30 MPa)', B, 58, 51),
+            attrHead: T.attrHead(7, B),
+            shares: share([['Squeegee angle', 44], ['Squeegee pressure', 41], ['Other parameters', 15]]),
+            evidence: [T.evRule(35, '23:10–00:20', 'squeegee angle 51–54° (spec 55–65°) with pressure 0.34–0.36 MPa (spec 0.27–0.33 MPa)'), T.evAttr(7, B, '23:10–00:20')],
             action: 'Replace the squeegee blade; check angle, speed and pressure against the recipe.' })
         ],
         ruled: [
-          outRow('Low squeegee speed', 'Aperture overfill', 220, T.failRate('Solder bridging', '3.2%', '2.3%', '1.4×') + ' Only with low squeegee angle does it pass (rule #2).'),
-          outRow('High ambient temperature', 'Excess reflow spreading', 96, T.failRate('Solder bridging', '2.1%', '2.4%', '0.9×')),
+          outRow('Low squeegee speed', 'Aperture overfill', 220, T.notLinked(B, 'squeegee speed', 58, 57) + ' It raises risk only with low squeegee angle (rule #2).'),
+          outRow('High ambient temperature', 'Excess reflow spreading', 96, T.notLinked(B, 'ambient temperature', 58, 58)),
           zeroRow('High stencil thickness', 'Aperture overfill', T.inSpec('100.4 µm', 'stencil ST-0412', '95–105 µm')),
           zeroRow('Low aperture area ratio', 'Aperture overfill', T.inSpec('0.71', 'stencil ST-0412', '≥ 0.66')),
           zeroRow('High bead size of solder paste', 'Aperture overfill', T.inSpec('3.7–4.3 mm³', 'all 2,560 boards', '3.6–4.4 mm³')),
-          zeroRow('High ambient RH', 'Post-print spread', T.inSpec('38–55 %RH', 'all 2,560 boards', '[your limit]')),
-          nearRow(9, 'all three mechanisms', 'Largest: squeegee speed near LSL. ' + T.failRate('Solder bridging', '3.0%', '2.3%', '1.3×'))
+          zeroRow('High ambient RH', 'Post-print spread', T.inSpec('38–55 %RH', 'all 2,560 boards', '[your limit]'))
         ]
       },
       open: {
-        title: 'Open circuit', defLower: 'open circuit', batchLabel: 'stg-B0003 boards', atRisk: 165,
+        title: 'Open circuit', defLower: 'open circuit', insp: 'Electrical test', inspLower: 'electrical test', record: 'electrical test logs',
         summary: T.summary('Paste viscosity', 'above USL', '03:40–04:30', 28, 31, 'open circuit'),
-        unexpl: unexpl(3, 31, 'open circuit', 'Open circuit', '2,370', '0.13%', [['PCB-0005334', '22:18'], ['PCB-0006407', '01:47'], ['PCB-0007473', '05:26']], 'stg-B0001 2 of 2,560 (0.08%), stg-B0002 1 of 2,560 (0.04%)'),
-        checkedLine: T.checked(2, 2, 1, 0), ruledN: 3,
+        checkedLine: T.checked(2, 1, 0),
+        modelLine: T.model('electrical test', '99%'), agreeLine: T.agreeLine('electrical test', '99%'), agreeChip: 'Agreement 99%',
+        mx: { conf: 28, hidden: 30, unexpl: 3, good: '2,499' },
+        hold: 30, review: 135,
         param: 'Paste viscosity (Pa·s)', lsl: 180, usl: 220, window: '03:40–04:30',
         vals: [205, 207, 204, 208, 206, 203, 207, 205, 206, 204, 208, 206, 205, 207, 204, 206, 205, 238, 243, 240, 206, 204, 207, 205], w0: 17, w1: 19,
         chartLabel: 'Paste viscosity is above USL only during 03:40–04:30',
         chartNote: T.chartNote('Paste viscosity', '206 Pa·s', '03:40–04:30', '246 Pa·s'),
-        containLines: [
-          T.contain(162, '03:40–04:30', 'electrical test', 'linked rule #1 (paste viscosity above USL)'),
-          T.containMeas(3, 'electrical test', 'paste volume per aperture', 'Below LSL', 'poor paste transfer')
-        ],
+        containLines: [T.containHold(30, 'electrical test', 'open circuit'), T.containReview(135)],
+        unexpl: { k: 3, K: 31, boards: [['PCB-0005334', '22:18', '0.2%'], ['PCB-0006407', '01:47', '0.1%'], ['PCB-0007473', '05:26', '0.3%']] },
         linked: [
           linkedRow({ id: 'o1', state: 'Linked', stateCls: 'chip info', root: 'High paste viscosity', mech: 'Poor paste transfer', equip: 'Solder paste', status: T.status(190),
             rule: 'PasteViscosity > USL',
-            cov: '28 of 31', rr: '116×', p: '< 0.001', a: '28', b: '162', c2: '3', d: '2,367', r1: '14.7%', r2: '0.127%',
-            covLine: T.cov('open circuit', 28, 31, '90%'),
-            evidence: [T.evWindow(190, 'Above USL', '03:40–04:30', 'paste viscosity', '236–246 Pa·s', '180–220 Pa·s'), T.evBuilt(28, 31, 'open circuit', '03:40–04:30'), T.evOutside('03:40–04:30', 'paste viscosity', '206 Pa·s', 3, 'open circuit')],
-            hasSupport: true, support: T.support('Paste volume per aperture', 'Below LSL', 74, 70, 'built 03:40–04:30; 22 of 31 boards with open circuit were among the 74'),
+            attr: '28 of 31', wif: '30 → 4', mechAgree: '26 of 28', mechLower: 'poor paste transfer',
+            wifLabel: T.wifLabel('paste viscosity', 'open circuit'),
+            attrLine: T.attrLine(28, 31, 'open circuit', '90%'), mechLine: T.mechLine('poor paste transfer', 26, 28, '93%'),
+            wifLine: T.wifLine('paste viscosity (200 Pa·s)', 'open circuit', 30, 4),
+            attrHead: T.attrHead(28, 'open circuit'),
+            shares: share([['Paste viscosity', 88], ['Ambient RH', 3], ['Other parameters', 9]]),
+            evidence: [T.evWindow(190, 'above USL', '03:40–04:30', 'paste viscosity', '236–246 Pa·s', '180–220 Pa·s'), T.evAttr(28, 'open circuit', '03:40–04:30')],
+            hasSupport: true, support: T.support('Paste volume per aperture', 'below LSL', 74, 70, 'built 03:40–04:30; 22 of 31 boards with open circuit were among the 74'),
             action: 'Replace the paste; check paste age and floor life.' })
         ],
         ruled: [
-          zeroRow('High ambient RH', 'Poor paste transfer', T.inSpec('38–55 %RH', 'all 2,560 boards', '[your limit]')),
-          nearRow(2, 'poor paste transfer', 'Largest: paste viscosity near USL. ' + T.failRate('Open circuit', '0.20%', '0.12%', '1.6×'))
+          zeroRow('High ambient RH', 'Poor paste transfer', T.inSpec('38–55 %RH', 'all 2,560 boards', '[your limit]'))
         ]
       }
     };
@@ -396,10 +441,16 @@ class Component extends DCLogic {
         accept: () => this.setState({ accepted: Object.assign({}, this.state.accepted, { [h.id]: true }) })
       });
     });
-    const c = Object.assign({}, raw, { linked, ruledCount: raw.ruledN });
+    const ue = raw.unexpl;
+    const u = {
+      head: T.unexplHead(ue.k, ue.K, raw.defLower), why: T.unexplWhy(raw.insp, raw.defLower),
+      boards: ue.boards.map(b => ({ id: b[0], time: b[1], pct: 'Model risk ' + b[2], note: T.unexplBoard() })),
+      facts: [T.unexplTime(ue.boards.map(b => b[1]).join(', ')), T.unexplNext(raw.record)]
+    };
+    const c = Object.assign({}, raw, { linked, ruledCount: raw.ruled.length });
     return {
-      c, u: raw.unexpl,
-      ch:this.chart(raw.vals, raw.lsl, raw.usl, raw.w0, raw.w1),
+      c, u,
+      ch: this.chart(raw.vals, raw.lsl, raw.usl, raw.w0, raw.w1),
       isBridge: key === 'bridge', isOpen: key === 'open',
       bridgeTabClass: key === 'bridge' ? 'tab on' : 'tab',
       openTabClass: key === 'open' ? 'tab on' : 'tab',

@@ -38,6 +38,12 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 .n-def{background:#FDECEA;border:1px solid #F3C5C0;color:#7E160E}
 .kv{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #EEF0ED;font-size:14px}
 .kv span:first-child{color:#5B6169}
+.attr2{display:grid;grid-template-columns:minmax(200px,1.4fr) 1fr 1fr 52px;align-items:center;gap:8px 0;font-size:13px}
+.attr2 .half{height:10px;background:#F4F5F3;display:flex}
+.attr2 .neg{justify-content:flex-end;border-right:1px solid #8A9097;border-radius:5px 0 0 5px}
+.attr2 .pos{border-radius:0 5px 5px 0}
+.attr2 .neg div{height:100%;background:#1D6B3F;border-radius:5px 0 0 5px}
+.attr2 .pos div{height:100%;background:#B42318;border-radius:0 5px 5px 0}
 </style>
 </helmet>
 <div style="min-height: 100vh; background: #F4F5F3">
@@ -69,33 +75,37 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 </div>
 
 <section class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #F1D3B5; background: #FFFAF4">
-<span class="chip warn">At risk</span>
-<div style="flex: 1 1 520px; font-size: 16px; line-height: 1.5">Passed AOI and electrical test, but peak reflow temperature was above USL (259.4 °C, spec 245–255 °C). Built 02:31, during 02:00–02:40: matches linked root cause #1 of INV-0142.</div>
+<span class="chip crit" title="Model risk 27%">High risk · hold</span>
+<div style="flex: 1 1 520px; font-size: 16px; line-height: 1.5">Passed AOI and electrical test, but the model risk for solder bridging is High. Peak reflow temperature was above USL (259.4 °C, spec 245–255 °C). Built 02:31, during 02:00–02:40: attributed to linked root cause #1 of INV-0142.</div>
 <a href="RcaPacket.dc.html" style="font-size: 14px; font-weight: 600">See batch analysis</a>
 </section>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
 <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px" aria-label="Why this board was flagged">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Why this board was flagged</h2>
-<sc-for list="{{risks}}" as="r" hint-placeholder-count="2">
-<div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid #E1E4E0; border-radius: 8px">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
-<div style="display: flex; align-items: center; gap: 10px"><span style="font-weight: 600">{{r.defect}}</span><span class="chip ok">Matches linked root cause #1</span></div>
-<span class="chip info">Rule condition true</span>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Why this board was flagged</h2>
+<div style="display: flex; align-items: center; gap: 8px"><span style="font-size: 13px; color: #5B6169">Model risk · solder bridging</span><span class="chip crit" title="Model risk 27%">High</span></div>
 </div>
-<div style="font-size: 14px; line-height: 1.5"><span style="color: #5B6169">Rule: </span><span class="mono">{{r.rule}}</span><span style="color: #5B6169"> · measured </span><span class="mono">{{r.meas}}</span></div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
-<div class="node n-root">{{r.root}}</div>
+<div class="node n-root">High peak reflow temperature</div>
 <span aria-hidden="true" style="color: #5B6169">→</span>
-<div class="node n-mech">{{r.mech}}</div>
+<div class="node n-mech">Excess reflow spreading</div>
 <span aria-hidden="true" style="color: #5B6169">→</span>
-<div class="node n-def">{{r.defect}}</div>
+<div class="node n-def">Solder bridging</div>
 </div>
-<div style="font-size: 14px; color: #4A4F56">{{r.note}}</div>
-<div style="font-size: 13px; color: #5B6169; line-height: 1.5; padding-top: 10px; border-top: 1px solid #EEF0ED">This board is flagged because the condition of a linked rule was true when it was built. Whether that rule is linked to {{r.lower}} comes from the board counts in the RCA packet.</div>
-</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 14px"><span class="chip ok">Matches linked root cause #1 of INV-0142</span><span style="color: #4A4F56">Predicted mechanism: excess reflow spreading</span></div>
+<div class="eyebrow">What raised this board's risk</div>
+<div class="attr2">
+<sc-for list="{{attrs}}" as="a" hint-placeholder-count="5">
+<span>{{a.name}} <span class="mono" style="color: #5B6169">{{a.val}}</span></span>
+<div class="half neg"><div style="width: {{a.neg}}"></div></div>
+<div class="half pos"><div style="width: {{a.pos}}"></div></div>
+<span class="mono" style="text-align: right">{{a.pct}}</span>
 </sc-for>
+</div>
+<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #F5F8FD; border: 1px solid #B7CBEA; border-radius: 8px"><span style="font-weight: 600">What-if: </span>with peak reflow temperature at nominal (250 °C), this board's model risk would be Low.</div>
+<div style="font-size: 13px; color: #5B6169; line-height: 1.5; padding-top: 10px; border-top: 1px solid #EEF0ED">Attribution shows how much each parameter moved this board's predicted risk compared with a typical in-spec board. Bars to the right raised it; bars to the left lowered it. Bridges under the QFN may not be visible to AOI.</div>
 </section>
 
 <section class="card" style="overflow: hidden" aria-label="Parameter fingerprint">
@@ -194,9 +204,8 @@ class Component extends DCLogic {
     this.state = { pick: null };
   }
   renderVals() {
-    const risks = [
-      { defect: 'Solder bridging', lower: 'solder bridging', rule: 'PeakReflowTemp > USL', meas: '259.4 °C (spec 245–255 °C)', root: 'High peak reflow temperature', mech: 'Excess reflow spreading', note: '44 of 61 boards with solder bridging were built 02:00–02:40. Bridges under the QFN may not be visible to AOI.' }
-    ];
+    const A = (name, val, v) => ({ name, val, pct: (v > 0 ? '+' : '−') + Math.abs(v) + '%', pos: v > 0 ? (v / 84 * 100) + '%' : '0%', neg: v < 0 ? (-v / 84 * 100) + '%' : '0%' });
+    const attrs = [A('Peak reflow temperature', '259.4 °C', 84), A('Squeegee speed', '71 mm/s', 4), A('Ambient temperature', '22.8 °C', 3), A('Stencil thickness', '100.4 µm', 1), A('Paste viscosity', '207 Pa·s', -2)];
     const P = (name, val, spec, v, lsl, usl, norm, unit) => {
       const span = usl - lsl;
       const pos = x => Math.max(2, Math.min(98, 25 + (x - lsl) / span * 50)) + '%';
@@ -223,7 +232,7 @@ class Component extends DCLogic {
     const pick = this.state.pick;
     const cls = (k, base) => 'btn' + (base ? ' ' + base : '') + (pick === k ? ' sel' : '');
     return {
-      risks, params, history,
+      attrs, params, history,
       hasPick: !!pick,
       reCls: cls('re', 'primary'), relCls: cls('rel', ''), scrCls: cls('scr', 'danger'),
       pickRe: () => this.setState({ pick: 're' }),

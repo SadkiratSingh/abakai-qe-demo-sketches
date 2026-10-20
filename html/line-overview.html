@@ -61,6 +61,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px" aria-label="Shift summary">
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Boards built</div><div class="mono" style="font-size: 32px; font-weight: 500">7,680</div><div style="font-size: 13px; color: #5B6169">3 batches · 1,920 panels</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">First-pass yield</div><div class="mono" style="font-size: 32px; font-weight: 500">98.7%</div><div style="font-size: 13px; color: #9B1C12; font-weight: 600">Down from 99.6% last night</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Model agreement</div><div class="mono" style="font-size: 32px; font-weight: 500">98%</div><div style="font-size: 13px; color: #5B6169">Boards where the RCA model and AOI or electrical test agreed</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Solder bridging</div><div class="mono" style="font-size: 32px; font-weight: 500">66</div><div style="font-size: 13px; color: #5B6169">61 in stg-B0003</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Open circuit</div><div class="mono" style="font-size: 32px; font-weight: 500">34</div><div style="font-size: 13px; color: #5B6169">31 in stg-B0003</div></div>
 </section>
@@ -74,7 +75,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <span class="chip crit">Critical</span>
 <div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 4px">
 <div style="font-weight: 600">Solder bridging excursion in stg-B0003</div>
-<div style="font-size: 14px; color: #4A4F56">61 boards with solder bridging; 44 of 61 built 02:00–02:40, 14 of 61 built 23:10–00:20. Root cause analysis is ready.</div>
+<div style="font-size: 14px; color: #4A4F56">61 boards with solder bridging; the model attributes 44 to high peak reflow temperature (02:00–02:40) and 14 to low squeegee angle (23:10–00:20). Root cause analysis is ready.</div>
 </div>
 <a class="btn primary" href="rca-packet.html">Open RCA packet</a>
 </div>
@@ -82,7 +83,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <span class="chip warn">High</span>
 <div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 4px">
 <div style="font-weight: 600">Open circuit excursion in stg-B0003</div>
-<div style="font-size: 14px; color: #4A4F56">31 boards with open circuit; 28 of 31 built 03:40–04:30. Root cause analysis is ready.</div>
+<div style="font-size: 14px; color: #4A4F56">31 boards with open circuit; the model attributes 28 to high paste viscosity (03:40–04:30). Root cause analysis is ready.</div>
 </div>
 <a class="btn" href="rca-packet.html">Open RCA packet</a>
 </div>
@@ -92,7 +93,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Defects by hour, stg-B0003</h2>
-<div style="font-size: 14px; color: #5B6169">Each cluster sits in one short window, so each points to a short-lived cause.</div>
+<div style="font-size: 14px; color: #5B6169">Each cluster sits in one short window, which points to a short-lived cause.</div>
 </div>
 <div style="display: flex; gap: 16px; font-size: 13px; color: #4A4F56">
 <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 3px; background: #1A4F9C"></span>Solder bridging</span>

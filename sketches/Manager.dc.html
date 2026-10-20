@@ -114,7 +114,7 @@ class Component extends DCLogic {
     const raw = [['High peak reflow temperature', 5], ['High paste viscosity', 4], ['High stencil thickness', 3], ['Low squeegee speed', 3], ['High ambient RH', 1]];
     const causes = raw.map((c, i) => ({ name: c[0], n: c[1], w: (c[1] / 5 * 100) + '%', color: i === 0 ? '#1A4F9C' : '#8FA9D3' }));
     const inv = [
-      ['INV-0143', 'stg-B0005', 'Solder bridging', 'CTRL-BRD-A · Line 2', 'Wei C.', '3 h', 'Low squeegee speed (near LSL, in spec)'],
+      ['INV-0143', 'stg-B0005', 'Solder bridging', 'CTRL-BRD-A · Line 2', 'Wei C.', '3 h', 'Low squeegee speed (in spec, near LSL)'],
       ['INV-0142', 'stg-B0003', 'Solder bridging, open circuit', 'CTRL-BRD-A · Line 2', 'Priya S.', '6 h', 'High peak reflow temperature; high paste viscosity; low squeegee angle (contributing)'],
       ['INV-0139', 'stg-C0211', 'Solder bridging', 'PWR-BRD-C · Line 1', 'Marco L.', '4 d', 'High stencil thickness'],
       ['INV-0137', 'stg-A0185', 'Solder bridging', 'CTRL-BRD-A · Line 2', 'Wei C.', '6 d', 'Low squeegee speed'],

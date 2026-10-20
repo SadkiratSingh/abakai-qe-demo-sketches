@@ -49,6 +49,15 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .trend .wintxt{fill:#7E160E;font-weight:500}
 .rule{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#4A4F56;background:#F4F5F3;border-radius:6px;padding:6px 10px;display:inline-block}
 .evi{font-size:14px;line-height:1.5;padding:12px 14px;background:#F5F8FD;border:1px solid #B7CBEA;border-radius:8px}
+.mx{display:grid;grid-template-columns:minmax(120px,0.8fr) 1fr 1fr;gap:8px;font-size:13px}
+.mx .h{font-weight:600;color:#5B6169;padding:4px 8px;display:flex;align-items:center}
+.mx .c{border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.mx .n{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500}
+.mx .t{font-weight:600;font-size:14px}
+.mx .s{color:#4A4F56;font-size:12.5px}
+.attr{display:grid;grid-template-columns:minmax(150px,1fr) 2fr 48px;align-items:center;gap:6px 12px;font-size:13px;margin-top:10px}
+.attr .bar{height:10px;border-radius:5px;background:#EEF0ED;overflow:hidden}
+.attr .bar div{height:100%;background:#1A4F9C;border-radius:5px}
 </style>
 </head>
 <body>
@@ -81,17 +90,22 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
-<span class="chip info">Linked rule #1</span>
-<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Paste viscosity was above USL 03:40–04:30. 28 of 31 boards with open circuit were built 03:40–04:30.</div>
-<div class="mono" style="font-size: 13px; color: #4A4F56">2 unit rules and 2 near-limit variants checked · 1 linked</div>
+<span class="chip info">Linked root cause #1</span>
+<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Paste viscosity was above USL 03:40–04:30. The model attributes 28 of 31 boards with open circuit to it.</div>
+<div class="mono" style="font-size: 13px; color: #4A4F56">2 unit rules checked by the model · 1 linked</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 13px; color: #4A4F56">
+<span class="chip muted">RCA model · trained on synthetic data</span>
+<span>Evidence from the RCA model. It agreed with electrical test on 99% of boards in this batch. Retrained on your line's data at onboarding.</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
 <div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
-<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked and contributing rules">
+<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked and contributing root causes">
 <div style="display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked and contributing rules</h2>
-<div style="font-size: 14px; color: #5B6169">Failure Library rules whose condition was true on boards in this batch and that passed the checks.</div>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked and contributing root causes</h2>
+<div style="font-size: 14px; color: #5B6169">Failure Library rules the model checked on this batch and that passed the checks.</div>
 </div>
 
 <article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
@@ -112,15 +126,15 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">14.7% vs 0.127%</span><span class="l">Open circuit rate, rule condition true vs false</span></div>
-<div class="stat"><span class="v">116×</span><span class="l">more likely when the rule condition is true</span></div>
-<div class="stat"><span class="v">28 of 31</span><span class="l">Boards with open circuit where the rule condition was true</span></div>
+<div class="stat"><span class="v">28 of 31</span><span class="l">Boards with open circuit the model attributes to this root cause</span></div>
+<div class="stat"><span class="v">30 → 4</span><span class="l">Predicted boards with open circuit, with paste viscosity at nominal</span></div>
+<div class="stat"><span class="v">26 of 28</span><span class="l">Attributed boards where the predicted mechanism is poor paste transfer</span></div>
 </div>
 
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
 <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>190 boards were above USL 03:40–04:30: paste viscosity 236–246 Pa·s (spec 180–220 Pa·s).</li><li>28 of 31 boards with open circuit were built 03:40–04:30.</li><li>Outside 03:40–04:30: paste viscosity averaged 206 Pa·s; 3 boards with open circuit.</li>
+<li>190 boards were above USL 03:40–04:30: paste viscosity 236–246 Pa·s (spec 180–220 Pa·s).</li><li>The model attributes 28 boards with open circuit built 03:40–04:30 to this root cause.</li>
 </ul>
 </div>
 
@@ -128,18 +142,22 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 <details style="font-size: 14px">
 <summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
-<table class="tt">
-<thead><tr><th>stg-B0003 boards</th><th>Open circuit</th><th>No open circuit</th><th>Open circuit rate</th></tr></thead>
-<tbody>
-<tr><td>Rule condition true</td><td>28</td><td>162</td><td>14.7%</td></tr>
-<tr><td>Rule condition false</td><td>3</td><td>2,367</td><td>0.127%</td></tr>
-</tbody>
-</table>
-<ul style="margin: 10px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
+<div style="font-size: 13px; color: #4A4F56; margin-top: 8px">Share of predicted risk, averaged over the 28 attributed boards with open circuit:</div>
+<div class="attr">
+
+<span>Paste viscosity</span><div class="bar"><div style="width: 88%"></div></div><span class="mono" style="text-align: right">88%</span>
+
+<span>Ambient RH</span><div class="bar"><div style="width: 3%"></div></div><span class="mono" style="text-align: right">3%</span>
+
+<span>Other parameters</span><div class="bar"><div style="width: 9%"></div></div><span class="mono" style="text-align: right">9%</span>
+
+</div>
+<ul style="margin: 12px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
 <li>Failure Library path: <span class="mono" style="font-size: 13px">PasteViscosity &gt; USL</span> → Poor paste transfer → Open circuit</li>
-<li>Open circuit rate, rule condition true vs false: 14.7% vs 0.127% (116×). Needs 2× or more.</li>
-<li>Fisher's exact test: p &lt; 0.001. Needs p &lt; 0.01.</li>
-<li>Boards with open circuit where the rule condition was true: 28 of 31 (90%). Needs 20% or more.</li>
+<li>Attributed: the model attributes 28 of 31 boards with open circuit (90%) to this root cause. Needs 20% or more.</li>
+<li>Predicted mechanism: poor paste transfer on 26 of 28 attributed boards (93%). Needs 50% or more.</li>
+<li>Model agreement with electrical test on stg-B0003: 99%. Needs 90% or more.</li>
+<li>What-if: with paste viscosity (200 Pa·s) at nominal, predicted boards with open circuit fall from 30 to 4.</li>
 </ul>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
@@ -156,46 +174,68 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 </section>
 
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Model vs inspection">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs electrical test · open circuit</h2>
+<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0003, by model risk and electrical test result.</div>
+</div>
+<span class="chip ok">Agreement 99%</span>
+</div>
+<div class="mx">
+<span></span><span class="h">Electrical test: open circuit</span><span class="h">Electrical test: pass</span>
+<span class="h">Model risk High</span>
+<div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">28</span><span class="t">Confirmed</span><span class="s">Explained by the root causes above</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">30</span><span class="t">Hidden risk</span><span class="s">Passed electrical test; hold in containment</span></div>
+<span class="h">Model risk Medium or Low</span>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">3</span><span class="t">Unexplained</span><span class="s">Listed below</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,499</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards go to review</span></div>
+</div>
+</section>
+
 <section class="card" style="overflow: hidden" aria-label="Unexplained boards">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Unexplained: 3 of 31 boards with open circuit</h2>
-<span class="chip muted">No rule</span>
+<span class="chip muted">Not explained</span>
 </div>
-<div style="font-size: 14px; color: #4A4F56">No linked or contributing rule condition was true when these boards were built.</div>
+<div style="font-size: 14px; color: #4A4F56">Electrical test found open circuit, but the model risk was Low and no parameter raised it.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0005334</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">22:18</span>
-<span style="flex: 1 1 260px; color: #4A4F56">Every rule condition false · all parameters in spec</span>
+<span class="chip ok" title="Model risk 0.2%">Low</span>
+<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0006407</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">01:47</span>
-<span style="flex: 1 1 260px; color: #4A4F56">Every rule condition false · all parameters in spec</span>
+<span class="chip ok" title="Model risk 0.1%">Low</span>
+<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0007473</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">05:26</span>
-<span style="flex: 1 1 260px; color: #4A4F56">Every rule condition false · all parameters in spec</span>
+<span class="chip ok" title="Model risk 0.3%">Low</span>
+<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
 </div>
 
 </div>
-<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED; display: flex; flex-direction: column; gap: 6px">
+<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED">
 <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #4A4F56">
-<li>Open circuit rate where no linked or contributing rule condition was true: 3 of 2,370 boards (0.13%).</li><li>Built 22:18, 01:47, 05:26: not grouped in one window.</li><li>Boards with open circuit in batches with no excursion on line 2 this shift: stg-B0001 2 of 2,560 (0.08%), stg-B0002 1 of 2,560 (0.04%).</li>
+<li>Built 22:18, 01:47, 05:26: not grouped in one window.</li><li>Check the electrical test logs. If the defect is real, its cause is not among the model's inputs.</li>
 </ul>
 </div>
 </section>
 
 <section class="card" style="overflow: hidden" aria-label="Checked and not linked">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 3</h2>
-<div style="font-size: 14px; color: #5B6169">Every other unit rule in the Failure Library for open circuit, at the limit and near it, with the check it failed.</div>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 1</h2>
+<div style="font-size: 14px; color: #5B6169">Every other unit rule in the Failure Library for open circuit, with what the model found.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 
@@ -208,15 +248,6 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 38–55 %RH on all 2,560 boards (spec [your limit]).</span>
 </div>
 
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
-<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
-<span style="font-weight: 600; font-size: 14px">Near-limit variants of the 2 unit rules</span>
-<span style="font-size: 12px; color: #5B6169">via poor paste transfer</span>
-</div>
-<span class="chip ok">None linked</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Largest: paste viscosity near USL. Open circuit rate, rule condition true vs false: 0.20% vs 0.12% (1.6×). Needs 2× or more.</span>
-</div>
-
 </div>
 </section>
 </div>
@@ -225,7 +256,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Paste viscosity (Pa·s)</h2>
-<div style="font-size: 14px; color: #5B6169">Linked rule #1 · 20-minute averages, stg-B0003</div>
+<div style="font-size: 14px; color: #5B6169">Linked root cause #1 · 20-minute averages, stg-B0003</div>
 </div>
 <svg class="trend" viewBox="0 0 520 250" width="100%" role="img" aria-label="Paste viscosity is above USL only during 03:40–04:30">
 <rect class="win" x="375" y="30" width="59" height="184"></rect>
@@ -245,26 +276,26 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><span class="chip crit">165 at risk</span></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><div style="display: flex; gap: 6px"><span class="chip crit">30 hold</span><span class="chip warn">135 review</span></div></div>
 <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; display: flex; flex-direction: column; gap: 6px">
-<li>162 boards built 03:40–04:30 passed electrical test but met linked rule #1 (paste viscosity above USL).</li><li>3 more boards passed electrical test but paste volume per aperture, which supports poor paste transfer, was below LSL.</li>
+<li>30 boards passed electrical test but have High model risk for open circuit: hold.</li><li>135 more have Medium model risk: review before release.</li>
 </ul>
 <a class="btn" href="containment.html">Review boards to hold</a>
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
-<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a rule is linked</h2>
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a root cause is linked</h2>
 <ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 6px">
-<li>The Failure Library has a path: rule → mechanism → defect. Rules with OR are split into unit rules joined only by AND.</li>
-<li>Boards where the rule condition is true are compared with boards where it is false:
+<li>The Failure Library gives the path: rule → mechanism → defect. Rules with OR are split into unit rules joined only by AND.</li>
+<li>The RCA model scores every board and works out which parameters raised its risk. For each unit rule:
 <ul style="margin: 4px 0 0; padding-left: 18px">
-<li>Defect rate, rule condition true vs false: 2× or more</li>
-<li>Fisher's exact test: p &lt; 0.01</li>
-<li>Boards with the defect where the rule condition was true: 20% or more</li>
+<li>Boards with the defect the model attributes to it: 20% or more</li>
+<li>Predicted mechanism matches the path: 50% or more of those boards</li>
+<li>Model agrees with inspection on the batch: 90% or more</li>
 </ul></li>
 </ol>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56"><span style="font-weight: 600; color: #16191D">Linked:</span> passes all three. <span style="font-weight: 600; color: #16191D">Contributing:</span> passes the first two, and the mechanism's passing rules together reach 20%.</div>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Measurements such as SPI paste volume are never root causes; they show as evidence for a mechanism.</div>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56"><span style="font-weight: 600; color: #16191D">Linked:</span> passes all three. <span style="font-weight: 600; color: #16191D">Contributing:</span> under 20% on its own, but the mechanism's root causes together reach 20%.</div>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">What-if re-scores the boards with the root cause at nominal. Model risk bands: High 5% or more, Medium 1–5%, Low under 1%.</div>
 </section>
 </aside>
 </div>

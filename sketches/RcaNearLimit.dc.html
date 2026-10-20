@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>RCA packet · near limit</title>
+<title>RCA packet · in spec</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -36,10 +36,6 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .stat{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:#F4F5F3;border-radius:8px;flex:1 1 150px}
 .stat .v{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:500}
 .stat .l{font-size:12px;color:#4A4F56}
-.tt{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
-.tt th{text-align:left;font-weight:600;color:#5B6169;padding:8px 10px;border-bottom:1px solid #E1E4E0}
-.tt td{padding:8px 10px;border-bottom:1px solid #EEF0ED;font-family:'IBM Plex Mono',monospace}
-.tt td:first-child{font-family:'IBM Plex Sans',sans-serif}
 .trend .lim{stroke:#B42318;stroke-width:1.5;stroke-dasharray:5 4}
 .trend .near{fill:#FDF0E3}
 .trend .nearln{stroke:#C4620F;stroke-width:1.2;stroke-dasharray:2 3}
@@ -50,12 +46,23 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .trend .limtxt{fill:#9B1C12;font-weight:500}
 .trend .neartxt{fill:#8A3505;font-weight:500}
 .trend .wintxt{fill:#16191D;font-weight:500}
+.pd .hi{fill:#FDECEA}.pd .md{fill:#FDF0E3}.pd .lo{fill:#E7F3EC}
+.pd .curve{fill:none;stroke:#1A4F9C;stroke-width:2.5;stroke-linejoin:round}
+.pd .win{fill:#16191D;opacity:.08}
+.pd .lim{stroke:#B42318;stroke-width:1.5;stroke-dasharray:5 4}
+.pd text{font-family:'IBM Plex Mono',monospace;font-size:12px;fill:#5B6169}
+.pd .bl{font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:12px}
 .rule{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#4A4F56;background:#F4F5F3;border-radius:6px;padding:6px 10px;display:inline-block}
 .evi{font-size:14px;line-height:1.5;padding:12px 14px;background:#F5F8FD;border:1px solid #B7CBEA;border-radius:8px}
-.pos{position:relative;height:14px;background:#E7F3EC;border-radius:3px}
-.pos .nz{position:absolute;top:0;bottom:0;background:#FDF0E3}
-.pos .mk{position:absolute;top:-2px;width:4px;height:18px;margin-left:-2px;border-radius:2px;background:#16191D}
-.dose td.hl{background:#FFFAF4}
+.mx{display:grid;grid-template-columns:minmax(120px,0.8fr) 1fr 1fr;gap:8px;font-size:13px}
+.mx .h{font-weight:600;color:#5B6169;padding:4px 8px;display:flex;align-items:center}
+.mx .c{border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.mx .n{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500}
+.mx .t{font-weight:600;font-size:14px}
+.mx .s{color:#4A4F56;font-size:12.5px}
+.attr{display:grid;grid-template-columns:minmax(150px,1fr) 2fr 48px;align-items:center;gap:6px 12px;font-size:13px}
+.attr .bar{height:10px;border-radius:5px;background:#EEF0ED;overflow:hidden}
+.attr .bar div{height:100%;background:#1A4F9C;border-radius:5px}
 </style>
 </helmet>
 <div style="min-height: 100vh; background: #F4F5F3">
@@ -70,111 +77,113 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </nav>
 </header>
 <main class="wrap" style="display: flex; flex-direction: column; gap: 24px">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
-<div style="display: flex; flex-direction: column; gap: 8px; max-width: 860px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 900px">
 <a href="Manager.dc.html" style="font-size: 14px; text-decoration: none">← Open investigations</a>
 <div class="eyebrow">Investigation INV-0143 · CTRL-BRD-A · stg-B0005 · 2,560 boards · 1 defect · Day shift, 16 Oct 2026</div>
-<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">{{headline}}</h1>
-<div style="font-size: 15px; color: #4A4F56">{{subhead}}</div>
-</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">No parameter was out of spec, yet 23 boards had solder bridging</h1>
+<div style="font-size: 15px; color: #4A4F56">Batches with no excursion on line 2 this week had 2–3 boards with solder bridging each.</div>
 </div>
 
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #F1D3B5; background: #FFFAF4">
-<span class="chip warn">Linked rule #1 · near limit</span>
+<span class="chip warn">Linked root cause #1 · in spec</span>
 <div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">{{summary}}</div>
 <div class="mono" style="font-size: 13px; color: #4A4F56">{{checkedLine}}</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 13px; color: #4A4F56">
+<span class="chip muted">RCA model · trained on synthetic data</span>
+<span>{{modelLine}}</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
 <div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
 
-<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px" aria-label="Mechanism seen">
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Mechanism seen">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">{{mech.head}}</h2>
 <span class="chip info">Supporting measurement</span>
 </div>
 <div style="font-size: 15px; line-height: 1.5">{{mech.line}}</div>
-<div style="display: flex; flex-direction: column; gap: 10px">
-<div class="eyebrow">Settings closest to their limit on these {{mech.n}} boards</div>
-<sc-for list="{{mech.settings}}" as="s" hint-placeholder-count="3">
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 14px">
-<span style="flex: 0 0 170px; font-weight: 600">{{s.name}}</span>
-<span class="mono" style="flex: 0 0 110px">{{s.avg}}</span>
-<div style="flex: 1 1 200px; min-width: 160px; display: flex; flex-direction: column; gap: 4px">
-<div class="pos"><div class="nz" style="left: 0; width: 10%"></div><div class="nz" style="right: 0; width: 10%"></div><div class="mk" style="left: {{s.x}}"></div></div>
-<div class="mono" style="display: flex; justify-content: space-between; font-size: 11px; color: #5B6169"><span>LSL {{s.lsl}}</span><span>USL {{s.usl}}</span></div>
-</div>
-<span class="{{s.cls}}">{{s.state}}</span>
-</div>
+<div class="eyebrow">What raised predicted risk on these {{mech.n}} boards</div>
+<div class="attr">
+<sc-for list="{{mech.shares}}" as="s" hint-placeholder-count="4">
+<span>{{s.name}} <span class="mono" style="color: #5B6169">{{s.avg}}</span></span><div class="bar"><div style="width: {{s.pct}}"></div></div><span class="mono" style="text-align: right">{{s.pct}}</span>
 </sc-for>
 </div>
-<div style="font-size: 13px; color: #5B6169; line-height: 1.5; padding-top: 10px; border-top: 1px solid #EEF0ED">Shaded ends are the near-limit zones: the last 20% of the way from nominal to each limit. Every Failure Library rule is also checked near its limit; see linked rule #1 below.</div>
+<div style="font-size: 13px; color: #5B6169; line-height: 1.5; padding-top: 10px; border-top: 1px solid #EEF0ED">Share of predicted risk from model attribution, averaged over the {{mech.n}} boards. Squeegee speed was in spec on all of them.</div>
 </section>
 
-<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked rules">
+<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked root causes">
 <div style="display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked rules</h2>
-<div style="font-size: 14px; color: #5B6169">Failure Library rules, at the limit or near it, whose condition was true on boards in this batch and that passed the checks.</div>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked root causes</h2>
+<div style="font-size: 14px; color: #5B6169">Failure Library rules the model checked on this batch and that passed the checks.</div>
 </div>
 <article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
 <span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#1</span>
-<span class="chip warn">Linked · near limit</span>
-<span class="chip warn">{{h.status}}</span>
+<span class="chip info">Linked</span>
+<span class="chip warn">In spec · near LSL on 700 boards</span>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
-<div class="node n-root">{{h.root}}<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · {{h.equip}}</div></div>
+<div class="node n-root">Low squeegee speed<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
 <span class="arrow" aria-hidden="true">→</span>
-<div class="node n-mech">{{h.mech}}<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
+<div class="node n-mech">Aperture overfill<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
 <span class="arrow" aria-hidden="true">→</span>
 <div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 4px">
-<span class="rule">Rule: {{h.rule}}</span>
-<span style="font-size: 13px; color: #5B6169">Near-limit variant of: <span class="mono">{{h.parent}}</span> · {{h.zone}}</span>
+<span class="rule">Rule: SqueegeeSpeed &lt; LSL</span>
+<span style="font-size: 13px; color: #5B6169">{{inSpecNote}}</span>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">{{h.r1}} vs {{h.r2}}</span><span class="l">Solder bridging rate, rule condition true vs false</span></div>
-<div class="stat"><span class="v">{{h.rr}}</span><span class="l">more likely when the rule condition is true</span></div>
-<div class="stat"><span class="v">{{h.cov}}</span><span class="l">Boards with solder bridging where the rule condition was true</span></div>
+<div class="stat"><span class="v">19 of 23</span><span class="l">Boards with solder bridging the model attributes to this root cause</span></div>
+<div class="stat"><span class="v">21 → 5</span><span class="l">Predicted boards with solder bridging, with squeegee speed at nominal (70 mm/s)</span></div>
+<div class="stat"><span class="v">17 of 19</span><span class="l">Attributed boards where the predicted mechanism is aperture overfill</span></div>
 </div>
+
 <div style="display: flex; flex-direction: column; gap: 8px">
-<div class="eyebrow">Solder bridging rate by position in the spec window</div>
-<table class="tt dose" style="margin-top: 0">
-<thead><tr><th>Squeegee speed</th><th>Boards</th><th>Solder bridging</th><th>Rate</th></tr></thead>
-<tbody>
-<sc-for list="{{dose}}" as="z" hint-placeholder-count="5">
-<tr><td class="{{z.hl}}">{{z.band}}</td><td class="{{z.hl}}">{{z.n}}</td><td class="{{z.hl}}">{{z.k}}</td><td class="{{z.hl}}">{{z.rate}}</td></tr>
-</sc-for>
-</tbody>
-</table>
-<div style="font-size: 13px; color: #5B6169">{{doseNote}}</div>
+<div class="eyebrow">Predicted solder bridging risk by squeegee speed</div>
+<svg class="pd" viewBox="0 0 560 250" width="100%" style="max-width: 640px" role="img" aria-label="Predicted risk rises from Low at nominal to Medium in the near-LSL zone and High below LSL">
+<rect class="hi" x="56" y="{{pd.hiY}}" width="480" height="{{pd.hiH}}"></rect>
+<rect class="md" x="56" y="{{pd.mdY}}" width="480" height="{{pd.mdH}}"></rect>
+<rect class="lo" x="56" y="{{pd.loY}}" width="480" height="{{pd.loH}}"></rect>
+<text class="bl" x="498" y="{{pd.hiTy}}" text-anchor="end" style="fill: #9B1C12">High</text>
+<text class="bl" x="498" y="{{pd.mdTy}}" text-anchor="end" style="fill: #8A3505">Medium</text>
+<text class="bl" x="498" y="204" text-anchor="end" style="fill: #1D6B3F">Low</text>
+<rect class="win" x="{{pd.winX}}" y="20" width="{{pd.winW}}" height="190"></rect>
+<text x="{{pd.winTx}}" y="14" text-anchor="start" style="fill: #16191D; font-weight: 500">this batch 10:20–12:30</text>
+<line class="lim" x1="{{pd.lslX}}" x2="{{pd.lslX}}" y1="20" y2="210"></line>
+<line class="lim" x1="{{pd.uslX}}" x2="{{pd.uslX}}" y1="20" y2="210"></line>
+<polyline class="curve" points="{{pd.points}}"></polyline>
+<text x="{{pd.lslX}}" y="230" text-anchor="middle" style="fill: #9B1C12">LSL 56</text>
+<text x="{{pd.nomX}}" y="230" text-anchor="middle">nominal 70</text>
+<text x="{{pd.uslX}}" y="230" text-anchor="middle" style="fill: #9B1C12">USL 84</text>
+<text x="296" y="246" text-anchor="middle">squeegee speed (mm/s)</text>
+</svg>
+<div style="font-size: 13px; color: #5B6169">The model's predicted risk for a board from this batch as squeegee speed changes, with every other parameter as built. Bands: High 5% or more, Medium 1–5%, Low under 1%.</div>
 </div>
+
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div class="eyebrow">Evidence</div>
 <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<sc-for list="{{h.evidence}}" as="e" hint-placeholder-count="3"><li>{{e}}</li></sc-for>
+<sc-for list="{{evidence}}" as="e" hint-placeholder-count="2"><li>{{e}}</li></sc-for>
 </ul>
 </div>
-<div class="evi"><span style="font-weight: 600">Supported by: </span>{{h.support}}</div>
+<div class="evi"><span style="font-weight: 600">Supported by: </span>{{support}}</div>
 <details style="font-size: 14px">
 <summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
-<table class="tt">
-<thead><tr><th>stg-B0005 boards</th><th>Solder bridging</th><th>No solder bridging</th><th>Solder bridging rate</th></tr></thead>
-<tbody>
-<tr><td>Rule condition true</td><td>{{h.a}}</td><td>{{h.b}}</td><td>{{h.r1}}</td></tr>
-<tr><td>Rule condition false</td><td>{{h.c2}}</td><td>{{h.d}}</td><td>{{h.r2}}</td></tr>
-</tbody>
-</table>
-<ul style="margin: 10px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
-<li>Failure Library path: <span class="mono" style="font-size: 13px">{{h.rule}}</span> → {{h.mech}} → Solder bridging</li>
-<li>{{h.rateLine}}</li>
-<li>Fisher's exact test: p {{h.p}}. Needs p &lt; 0.01.</li>
-<li>{{h.covLine}}</li>
+<div style="font-size: 13px; color: #4A4F56; margin: 8px 0 10px">Share of predicted risk, averaged over the 19 attributed boards with solder bridging:</div>
+<div class="attr">
+<sc-for list="{{shares}}" as="s" hint-placeholder-count="4">
+<span>{{s.name}}</span><div class="bar"><div style="width: {{s.pct}}"></div></div><span class="mono" style="text-align: right">{{s.pct}}</span>
+</sc-for>
+</div>
+<ul style="margin: 12px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
+<sc-for list="{{calc}}" as="l" hint-placeholder-count="5"><li>{{l}}</li></sc-for>
 </ul>
 </details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
-<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>{{h.action}}</div>
+<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Raise the speed to nominal (70 mm/s).</div>
 <sc-if value="{{accepted}}" hint-placeholder-val="{{ false }}">
 <span class="chip ok">Accepted as root cause</span>
 </sc-if>
@@ -188,37 +197,58 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </article>
 </section>
 
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Model vs AOI">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs AOI · solder bridging</h2>
+<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0005, by model risk and AOI result.</div>
+</div>
+<span class="chip ok">Agreement 99%</span>
+</div>
+<div class="mx">
+<span></span><span class="h">AOI: solder bridging</span><span class="h">AOI: pass</span>
+<span class="h">Model risk High</span>
+<div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">19</span><span class="t">Confirmed</span><span class="s">Explained by root cause #1</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">26</span><span class="t">Hidden risk</span><span class="s">Passed AOI; hold in containment</span></div>
+<span class="h">Model risk Medium or Low</span>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">4</span><span class="t">Unexplained</span><span class="s">Listed below</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,511</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards go to review</span></div>
+</div>
+</section>
+
 <section class="card" style="overflow: hidden" aria-label="Unexplained boards">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">{{u.head}}</h2>
-<span class="chip muted">No rule</span>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Unexplained: 4 of 23 boards with solder bridging</h2>
+<span class="chip muted">Not explained</span>
 </div>
-<div style="font-size: 14px; color: #4A4F56">{{u.why}}</div>
+<div style="font-size: 14px; color: #4A4F56">AOI found solder bridging, but the model risk was Low and no parameter raised it.</div>
 </div>
 <div style="display: flex; flex-direction: column">
-<sc-for list="{{u.boards}}" as="b" hint-placeholder-count="4">
+<sc-for list="{{ub}}" as="b" hint-placeholder-count="4">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="Board.dc.html" style="flex: 0 0 120px">{{b.id}}</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">{{b.time}}</span>
-<span style="flex: 1 1 260px; color: #4A4F56">{{b.note}}</span>
+<span class="chip ok" title="{{b.pct}}">Low</span>
+<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
 </div>
 </sc-for>
 </div>
 <div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED">
 <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #4A4F56">
-<sc-for list="{{u.facts}}" as="f" hint-placeholder-count="3"><li>{{f}}</li></sc-for>
+<li>Built 06:48, 08:15, 13:02, 13:41: not grouped in one window.</li>
+<li>Check the AOI images. If the defect is real, its cause is not among the model's inputs.</li>
 </ul>
 </div>
 </section>
 
 <section class="card" style="overflow: hidden" aria-label="Checked and not linked">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 17</h2>
-<div style="font-size: 14px; color: #5B6169">Every other unit rule for solder bridging, at the limit and near it, with the check it failed.</div>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 8</h2>
+<div style="font-size: 14px; color: #5B6169">Every other unit rule in the Failure Library for solder bridging, with what the model found.</div>
 </div>
 <div style="display: flex; flex-direction: column">
-<sc-for list="{{ruled}}" as="r" hint-placeholder-count="4">
+<sc-for list="{{ruled}}" as="r" hint-placeholder-count="3">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
 <div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
 <span style="font-weight: 600; font-size: 14px">{{r.root}}</span>
@@ -236,9 +266,9 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Squeegee speed (mm/s)</h2>
-<div style="font-size: 14px; color: #5B6169">Linked rule #1 · 20-minute averages, stg-B0005</div>
+<div style="font-size: 14px; color: #5B6169">Linked root cause #1 · 20-minute averages, stg-B0005</div>
 </div>
-<svg class="trend" viewBox="0 0 520 250" width="100%" role="img" aria-label="Squeegee speed drops into the near-LSL zone during 10:20–12:30 but stays in spec">
+<svg class="trend" viewBox="0 0 520 250" width="100%" role="img" aria-label="Squeegee speed drops near LSL during 10:20–12:30 but stays in spec">
 <rect class="win" x="{{ch.winX}}" y="30" width="{{ch.winW}}" height="184"></rect>
 <text class="wintxt" x="{{ch.winTx}}" y="22" text-anchor="middle">10:20–12:30</text>
 <rect class="near" x="48" y="{{ch.nearY}}" width="456" height="{{ch.nearH}}"></rect>
@@ -259,23 +289,19 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F1D3B5">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><div style="display: flex; gap: 6px"><span class="chip crit">26 hold</span><span class="chip warn">657 review</span></div></div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<div class="eyebrow" style="color: #9B1C12">Hold</div>
-<div style="font-size: 14px; line-height: 1.5">{{containHold}}</div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<div class="eyebrow" style="color: #8A3505">Review</div>
-<div style="font-size: 14px; line-height: 1.5">{{containReview}}</div>
-</div>
+<ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; display: flex; flex-direction: column; gap: 6px">
+<li>26 boards passed AOI but have High model risk for solder bridging: hold.</li>
+<li>657 more have Medium model risk: review before release. They met spec.</li>
+</ul>
 <a class="btn" href="Containment.dc.html">Review boards</a>
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
-<h2 style="margin: 0; font-size: 16px; font-weight: 600">How near limit is checked</h2>
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">Linking a root cause that stayed in spec</h2>
 <ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 6px">
-<li>Each parameter has a near-limit zone: the last 20% of the way from nominal to each limit. For squeegee speed (nominal 70, spec 56–84 mm/s), near LSL is 56.0–58.8 mm/s.</li>
-<li>Every unit rule is also checked as a near-limit variant, with the same three checks: 2× or more, Fisher p &lt; 0.01, 20% of boards with the defect.</li>
-<li>Boards under a linked near-limit rule met spec, so they go to Review, not Hold. Boards whose supporting measurement is out of spec are held.</li>
+<li>The model scores every board from its parameter values, in spec or not, so an in-spec setting can still raise predicted risk.</li>
+<li>The same three checks apply: 20% or more attributed, predicted mechanism matches on 50% or more, model agrees with AOI on 90% or more.</li>
+<li>The shaded near-limit zone (the last 20% of the way from nominal to each limit) is for reading the charts; it is not a check.</li>
 </ol>
 </section>
 </aside>
@@ -301,99 +327,75 @@ class Component extends DCLogic {
     const winX = Math.round(X(w0) - step / 2), winW = Math.round((w1 - w0 + 1) * step);
     return { points, uslY, lslY, nearY, nearH: lslY - nearY, nearTy: nearY - 6, uslTy: uslY - 6, lslTy: lslY + 16, winX, winW, winTx: winX + Math.round(winW / 2), midX: X(12) };
   }
+  // Model risk by squeegee speed (partial dependence), plotted on a square-root scale so the bands stay readable.
+  pd() {
+    const pts = [[54, 7.8], [55, 6.4], [56, 5.2], [57, 3.9], [58, 2.8], [59, 1.9], [60, 1.3], [62, 0.7], [64, 0.4], [66, 0.3], [70, 0.2], [75, 0.2], [80, 0.25], [84, 0.4], [86, 0.6]];
+    const X = v => Math.round(56 + (v - 54) / (86 - 54) * 480);
+    const ymax = Math.sqrt(9);
+    const Y = r => Math.round(210 - Math.sqrt(r) / ymax * 190);
+    const y5 = Y(5), y1 = Y(1);
+    return {
+      points: pts.map(p => X(p[0]) + ',' + Y(p[1])).join(' '),
+      hiY: 20, hiH: y5 - 20, mdY: y5, mdH: y1 - y5, loY: y1, loH: 210 - y1,
+      hiTy: 36, mdTy: y5 + 16, loTy: y1 + 16,
+      winX: X(56.9), winW: X(58.6) - X(56.9), winTx: X(58.6) + 6,
+      lslX: X(56), uslX: X(84), nomX: X(70)
+    };
+  }
   renderVals() {
-    // Text templates (see README, "Wording templates"). Same templates as INV-0142, plus the near-limit ones.
+    // Text templates (see README, "Wording templates"). Same templates as INV-0142.
     const T = {
-      headline: (D) => `No parameter was out of spec, yet ${D} rose to`,
-      summary: (param, dir, win, k, K, d) => `${param} was ${dir} ${win}. ${k} of ${K} boards with ${d} were built ${win}.`,
-      checked: (n, v, l) => `${n} unit rules and ${v} near-limit variants checked · ${l} linked`,
-      status: n => `Rule condition true · ${n} boards`,
+      summary: (param, dir, win, k, K, d) => `${param} was ${dir} ${win}. The model attributes ${k} of ${K} boards with ${d} to it.`,
+      checked: (n, l) => `${n} unit rules checked by the model · ${l} linked`,
+      model: (insp, pct) => `Evidence from the RCA model. It agreed with ${insp} on ${pct} of boards in this batch. Retrained on your line's data at onboarding.`,
+      attrLine: (k, K, d, pct) => `Attributed: the model attributes ${k} of ${K} boards with ${d} (${pct}) to this root cause. Needs 20% or more.`,
+      mechLine: (mech, k, K, pct) => `Predicted mechanism: ${mech} on ${k} of ${K} attributed boards (${pct}). Needs 50% or more.`,
+      agreeLine: (insp, b, pct) => `Model agreement with ${insp} on ${b}: ${pct}. Needs 90% or more.`,
+      wifLine: (what, d, a, b) => `What-if: with ${what} at nominal, predicted boards with ${d} fall from ${a} to ${b}.`,
       evWindow: (n, dir, win, param, range, spec) => `${n} boards were ${dir} ${win}: ${param} ${range} (spec ${spec}).`,
-      evBuilt: (k, K, d, win) => `${k} of ${K} boards with ${d} were built ${win}.`,
-      evOutside: (win, param, mean, k, d) => `Outside ${win}: ${param} averaged ${mean}; ${k} boards with ${d}.`,
-      failRate: (D, a, b, rr) => `${D} rate, rule condition true vs false: ${a} vs ${b} (${rr}). Needs 2× or more.`,
-      fisher: (p) => `Fisher's exact test: p ${p}. Needs p < 0.01.`,
-      cov: (d, k, K, pct) => `Boards with ${d} where the rule condition was true: ${k} of ${K} (${pct}). Needs 20% or more.`,
+      evAttr: (k, d, win) => `The model attributes ${k} boards with ${d} built ${win} to this root cause.`,
       support: (meas, dir, n, x, what) => `${meas} was ${dir} on ${n} boards, ${x} of them ${what}.`,
       chartNote: (param, mean, win, max) => `${param} averaged ${mean} outside ${win} and reached ${max} during it.`,
       mechHead: (mech) => `${mech} seen without an out-of-spec root cause`,
-      mechLine: (meas, dir, n, mech) => `${meas} was ${dir} on ${n} boards, but no ${mech} rule condition at the limit was true.`,
-      containMeas: (n, insp, meas, mech, dir) => `${n} boards passed ${insp} but ${meas}, which supports ${mech}, was ${dir}.`,
-      containNear: (n, win, insp, rule) => `${n} more boards built ${win} passed ${insp} with ${rule}. They met spec: review before release.`,
-      inSpec: (range, where, spec) => `Measured ${range} on ${where} (spec ${spec}).`,
-      zone: (dir, range, nom, limName, lim) => `${dir} = ${range}, the last 20% of the way from nominal (${nom}) to ${limName} (${lim})`,
-      unexplHead: (k, K, d) => `Unexplained: ${k} of ${K} boards with ${d}`,
-      unexplWhy: () => 'No linked rule condition was true when these boards were built.',
-      unexplBoard: () => 'Every rule condition false · all parameters in spec',
-      unexplRate: (D, k, N, pct) => `${D} rate where no linked rule condition was true: ${k} of ${N} boards (${pct}).`,
-      unexplTime: times => `Built ${times}: not grouped in one window.`,
-      unexplCompare: (d, period, list) => `Boards with ${d} in batches with no excursion on line 2 ${period}: ${list}.`
+      mechLine2: (meas, dir, n) => `${meas} was ${dir} on ${n} boards, while every setting was in spec.`,
+      notLinked: (d, what, a, b) => `Attributed 0 boards with ${d}. With ${what} at nominal, predicted boards with ${d}: ${a} → ${b}.`
     };
-    // Position of a value in the spec window, as used by the bar: 0% at LSL, 100% at USL.
-    const pos = (v, lsl, usl) => Math.max(1, Math.min(99, (v - lsl) / (usl - lsl) * 100)) + '%';
-    const S = (name, avg, unit, v, lsl, usl, state, cls) => ({ name, avg: avg + (unit === '°' ? '' : ' ') + unit, x: pos(v, lsl, usl), lsl, usl, state, cls });
-    const mech = {
-      head: T.mechHead('Aperture overfill'),
-      line: T.mechLine('Paste volume per aperture', 'above USL', 41, 'aperture overfill'),
-      n: 41,
-      settings: [
-        S('Squeegee speed', '57.6', 'mm/s', 57.6, 56, 84, 'Near LSL', 'chip warn'),
-        S('Squeegee angle', '58.9', '°', 58.9, 55, 65, 'In spec', 'chip ok'),
-        S('Squeegee pressure', '0.304', 'MPa', 0.304, 0.27, 0.33, 'In spec', 'chip ok')
-      ]
-    };
-    const h = {
-      status: T.status(700), root: 'Low squeegee speed', mech: 'Aperture overfill', equip: 'Solder printer',
-      rule: 'SqueegeeSpeed near LSL', parent: 'SqueegeeSpeed < LSL',
-      zone: T.zone('near LSL', '56.0–58.8 mm/s', '70', 'LSL', '56'),
-      a: '19', b: '681', c2: '4', d: '1,856', r1: '2.71%', r2: '0.215%', rr: '12.6×', p: '< 0.001', cov: '19 of 23',
-      rateLine: T.failRate('Solder bridging', '2.71%', '0.215%', '12.6×'),
-      covLine: T.cov('solder bridging', 19, 23, '83%'),
-      evidence: [
-        T.evWindow(700, 'near LSL', '10:20–12:30', 'squeegee speed', '56.9–58.6 mm/s', '56–84 mm/s'),
-        T.evBuilt(19, 23, 'solder bridging', '10:20–12:30'),
-        T.evOutside('10:20–12:30', 'squeegee speed', '70.2 mm/s', 4, 'solder bridging')
-      ],
-      support: T.support('Paste volume per aperture', 'above USL', 41, 38, 'built 10:20–12:30; 15 of 23 boards with solder bridging were among the 41'),
-      action: 'Raise the speed to nominal (70 mm/s).'
-    };
-    const dose = [
-      ['Below LSL (< 56.0)', '0', '0', '–'],
-      ['Near LSL (56.0–58.8)', '700', '19', '2.71%', true],
-      ['Centred (58.8–81.2)', '1,860', '4', '0.22%'],
-      ['Near USL (81.2–84.0)', '0', '0', '–'],
-      ['Above USL (> 84.0)', '0', '0', '–']
-    ].map(r => ({ band: r[0], n: r[1], k: r[2], rate: r[3], hl: r[4] ? 'hl' : '' }));
-    const ub = [['PCB-0008174', '06:48'], ['PCB-0008637', '08:15'], ['PCB-0010031', '13:02'], ['PCB-0010239', '13:41']];
-    const u = {
-      head: T.unexplHead(4, 23, 'solder bridging'), why: T.unexplWhy(),
-      boards: ub.map(b => ({ id: b[0], time: b[1], note: T.unexplBoard() })),
-      facts: [
-        T.unexplRate('Solder bridging', 4, '1,860', '0.22%'),
-        T.unexplTime(ub.map(b => b[1]).join(', ')),
-        T.unexplCompare('solder bridging', 'this week', 'stg-B0001 3 of 2,560 (0.12%), stg-B0002 2 of 2,560 (0.08%)')
-      ]
-    };
-    const row = (root, sub, n, reason, cls) => ({ root, sub, status: T.status(n), reason, cls });
-    const ruled = [
-      row('Low squeegee angle + low squeegee speed', 'Near-limit variant · SqueegeeAngle near LSL AND SqueegeeSpeed near LSL', 52, T.fisher('0.078') + ' Solder bridging rate 3.85% vs 0.84% (4.6×), but only 2 boards.', 'chip warn'),
-      row('High peak reflow temperature', 'Near-limit variant · PeakReflowTemperature near USL', 112, T.failRate('Solder bridging', '0.89%', '0.90%', '1.0×'), 'chip warn'),
-      row('Low squeegee speed', 'At the limit · SqueegeeSpeed < LSL', 0, T.inSpec('56.9–79.8 mm/s', 'all 2,560 boards', '56–84 mm/s'), 'chip ok'),
-      ({ root: '14 more unit rules', sub: 'At the limit and near it, for all three mechanisms', status: T.status(0), reason: 'Rule condition true on 0 of 2,560 boards, at the limit or near it.', cls: 'chip ok' })
-    ];
+    const B = 'solder bridging';
+    const share = rows => rows.map(r => ({ name: r[0], avg: r[2] || '', pct: r[1] + '%' }));
     const accepted = this.state.accepted;
     return {
-      headline: 'No parameter was out of spec, yet solder bridging rose to 0.90%',
-      subhead: '23 of 2,560 boards in stg-B0005. Batches with no excursion on line 2 this week: 0.08–0.12%.',
-      summary: T.summary('Squeegee speed', 'near LSL', '10:20–12:30', 19, 23, 'solder bridging') + ' It stayed in spec (56–84 mm/s).',
-      checkedLine: T.checked(9, 9, 1),
-      mech, h, dose,
-      doseNote: 'Near-limit zones are the last 20% of the way from nominal (70 mm/s) to each limit.',
-      u, ruled,
+      summary: T.summary('Squeegee speed', 'near LSL', '10:20–12:30', 19, 23, B) + ' It stayed in spec (56–84 mm/s).',
+      checkedLine: T.checked(9, 1),
+      modelLine: T.model('AOI', '99%'),
+      mech: {
+        head: T.mechHead('Aperture overfill'),
+        line: T.mechLine2('Paste volume per aperture', 'above USL', 41),
+        n: 41,
+        shares: share([['Squeegee speed', 68, '57.6 mm/s'], ['Squeegee angle', 9, '58.9°'], ['Squeegee pressure', 6, '0.304 MPa'], ['Other parameters', 17]])
+      },
+      inSpecNote: 'Rule condition true on 0 boards: squeegee speed stayed in spec. The model links it because speeds near LSL raised predicted risk.',
+      pd: this.pd(),
+      evidence: [
+        T.evWindow(700, 'near LSL', '10:20–12:30', 'squeegee speed', '56.9–58.6 mm/s', '56–84 mm/s'),
+        T.evAttr(19, B, '10:20–12:30')
+      ],
+      support: T.support('Paste volume per aperture', 'above USL', 41, 38, 'built 10:20–12:30; 15 of 23 boards with solder bridging were among the 41'),
+      shares: share([['Squeegee speed', 72], ['Squeegee angle', 8], ['Squeegee pressure', 5], ['Other parameters', 15]]),
+      calc: [
+        'Failure Library path: SqueegeeSpeed < LSL → Aperture overfill → Solder bridging',
+        T.attrLine(19, 23, B, '83%'),
+        T.mechLine('aperture overfill', 17, 19, '89%'),
+        T.agreeLine('AOI', 'stg-B0005', '99%'),
+        T.wifLine('squeegee speed (70 mm/s)', B, 21, 5)
+      ],
+      ub: [['PCB-0008174', '06:48', '0.3%'], ['PCB-0008637', '08:15', '0.2%'], ['PCB-0010031', '13:02', '0.4%'], ['PCB-0010239', '13:41', '0.3%']].map(b => ({ id: b[0], time: b[1], pct: 'Model risk ' + b[2] })),
+      ruled: [
+        { root: 'Low squeegee angle + low squeegee speed', sub: 'via Aperture overfill · SqueegeeAngle < LSL AND SqueegeeSpeed < LSL', status: 'Rule condition true · 0 boards', cls: 'chip ok', reason: 'Attributed 0 boards with solder bridging: the model attributes them to squeegee speed alone. With squeegee angle at nominal, predicted boards with solder bridging: 21 → 20.' },
+        { root: 'High peak reflow temperature', sub: 'via Excess reflow spreading · PeakReflowTemperature > USL', status: 'Rule condition true · 0 boards', cls: 'chip ok', reason: T.notLinked(B, 'peak reflow temperature', 21, 21) },
+        { root: '6 more unit rules', sub: 'For all three mechanisms', status: 'Rule condition true · 0 boards', cls: 'chip ok', reason: 'Attributed 0 boards with solder bridging; no parameter in these rules raised predicted risk by more than 5% on any of them.' }
+      ],
       ch: this.chart([70.1, 70.4, 69.8, 70.3, 70.0, 70.5, 69.9, 70.2, 70.6, 70.0, 70.3, 69.8, 70.4, 57.9, 57.4, 57.6, 56.9, 57.8, 57.5, 58.1, 70.2, 70.0, 70.5, 69.9], 56, 84, 58.8, 13, 19),
-      chartNote: T.chartNote('Squeegee speed', '70.2 mm/s', '10:20–12:30', '56.9 mm/s, inside the near-LSL zone (56.0–58.8)'),
-      containHold: T.containMeas(26, 'AOI', 'paste volume per aperture', 'aperture overfill', 'above USL'),
-      containReview: T.containNear(657, '10:20–12:30', 'AOI', 'linked rule #1 (squeegee speed near LSL)'),
+      chartNote: T.chartNote('Squeegee speed', '70.2 mm/s', '10:20–12:30', '56.9 mm/s, near LSL but in spec'),
       accepted, notAccepted: !accepted,
       accept: () => this.setState({ accepted: true })
     };
