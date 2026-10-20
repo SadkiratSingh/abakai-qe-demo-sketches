@@ -66,7 +66,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <nav class="nav" aria-label="Main">
 <a href="Main.dc.html">Line</a>
 <a class="on" href="RcaPacket.dc.html">Investigations</a>
-<a href="Containment.dc.html">Containment</a>
+<a href="Containment.dc.html">Re-inspection</a>
 <a href="Manager.dc.html">Overview</a>
 <a href="Library.dc.html">Failure Library</a>
 </nav>
@@ -79,7 +79,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">{{inv.title}}</h1>
 <sc-if value="{{inv.hasSub}}" hint-placeholder-val="{{ false }}"><div style="font-size: 15px; color: #4A4F56">{{inv.sub}}</div></sc-if>
 </div>
-<a class="btn" href="Containment.dc.html">View containment</a>
+<a class="btn" href="Containment.dc.html">View re-inspection list</a>
 </div>
 
 <sc-if value="{{inv.hasTabs}}" hint-placeholder-val="{{ true }}">
@@ -92,11 +92,6 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
 <span class="chip info">Root cause chains</span>
 <div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">{{c.summary}}</div>
-</div>
-
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 13px; color: #4A4F56">
-<span class="chip muted">RCA model · trained on synthetic data</span>
-<span>{{c.modelLine}}</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
@@ -162,7 +157,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <sc-for list="{{c.other}}" as="o" hint-placeholder-count="2">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <span style="flex: 1 1 340px; font-weight: 600">{{o.chain}}</span>
-<span class="mono" style="flex: 0 0 auto">{{o.k}} with {{c.defLower}} · {{o.passed}} passed</span>
+<span style="flex: 0 0 auto"><span class="mono">{{o.k}}</span> boards with {{c.defLower}} · <span class="mono">{{o.passed}}</span> boards that passed {{c.inspLower}}</span>
 <span style="flex: 0 0 auto; color: #4A4F56">{{o.when}}</span>
 </div>
 </sc-for>
@@ -202,10 +197,10 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span></span><span class="h">{{c.insp}}: {{c.defLower}}</span><span class="h">{{c.insp}}: pass</span>
 <span class="h">Model risk High</span>
 <div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">{{c.mx.conf}}</span><span class="t">Confirmed</span><span class="s">Both found {{c.defLower}}</span></div>
-<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">{{c.mx.hidden}}</span><span class="t">Hidden risk</span><span class="s">Passed {{c.inspLower}}; hold in containment</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">{{c.mx.hidden}}</span><span class="t">Hidden risk</span><span class="s">Passed {{c.inspLower}}; re-inspect</span></div>
 <span class="h">Model risk Medium or Low</span>
-<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">{{c.mx.unexpl}}</span><span class="t">Unexplained</span><span class="s">No root cause chain found</span></div>
-<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">{{c.mx.good}}</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards go to review</span></div>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">{{c.mx.unexpl}}</span><span class="t">Unexplained</span><span class="s">No chain found; verify the {{c.inspLower}} call</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">{{c.mx.good}}</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards: re-inspect if needed</span></div>
 </div>
 </section>
 </div>
@@ -213,9 +208,10 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <aside style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="{{asideLabel}}">
 <sc-if value="{{panelClosed}}" hint-placeholder-val="{{ true }}">
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><div style="display: flex; gap: 6px"><span class="chip crit">{{c.hold}} hold</span><span class="chip warn">{{c.review}} review</span></div></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Re-inspection</h2><div style="display: flex; flex-wrap: wrap; gap: 6px"><span class="chip crit">{{c.hold}} re-inspect</span><span class="chip warn">{{c.review}} if needed</span><span class="chip muted">{{c.mx.unexpl}} verify call</span></div></div>
+<div style="font-size: 13px; color: #5B6169">Boards where the RCA model and {{c.inspLower}} disagree. Not a hold: a list to inspect again.</div>
 <div style="font-size: 14px; line-height: 1.5">{{c.containLine}}</div>
-<a class="btn" href="Containment.dc.html">Review boards to hold</a>
+<a class="btn" href="Containment.dc.html">Open re-inspection list</a>
 </section>
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
 <h2 style="margin: 0; font-size: 16px; font-weight: 600">How root cause chains are found</h2>
@@ -313,15 +309,14 @@ class Component extends DCLogic {
     const T = {
       summary: (k, K, d, n) => `${k} of ${K} boards with ${d} show at least one root cause chain. The ${n} most frequent are below; a board can show more than one, so the counts can add up to more than ${K}.`,
       summaryOne: (k, K, d) => `${k} of ${K} boards with ${d} show a root cause chain, and no parameter was out of spec on any of them.`,
-      model: (insp, pct) => `Chains from the RCA model and the Failure Library. The model agreed with ${insp} on ${pct} of boards in this batch. Retrained on your line's data at onboarding.`,
       chain: (r, m, d) => `${r} → ${m} → ${d}`,
-      contain: (n, insp, d, hold, rev) => `${n} boards passed ${insp} but show a ${d} chain: ${hold} with High model risk (hold), ${rev} with Medium (review).`,
+      contain: (n, insp, d, hi, med, v) => `${n} boards passed ${insp} but show a ${d} chain: ${hi} with High model risk to re-inspect, ${med} with Medium to re-inspect if needed. ${v} boards failed ${insp} with no chain: verify the ${insp} call.`,
       meta: (time, panel, slot, insp, res, loc) => `Built ${time} · ${panel} · slot ${slot} · ${insp}: ${res} · ${loc}`,
       ev: (param, val, unit, spec) => `${param} ${val}${unit === '°' ? '' : ' '}${unit} (spec ${spec})`,
       interpTwo: (a, b) => `Top chain: ${a}. Second: ${b}.`,
       interpOne: (a) => `Top chain: ${a}. No other chain above the display threshold.`,
       noneWhy: (insp, d) => `${insp} found ${d}, but the model risk was Low and no parameter raised it, so no chain was assigned.`,
-      noneNext: (rec) => `Check the ${rec}. If the defect is real, its cause is not among the model's inputs.`
+      noneNext: (rec) => `These boards are on the re-inspection list to verify the call: check the ${rec}. If the defect is real, its cause is not among the model's inputs.`
     };
     // Parameters a chain can end in (the root cause), with the facts the packet shows.
     const P = {
@@ -453,17 +448,16 @@ class Component extends DCLogic {
     const n = d.top.length;
     const c = Object.assign({}, d, {
       summary: d.one ? T.summaryOne(d.withChain, d.K, d.defLower) : T.summary(d.withChain, d.K, d.defLower, n),
-      modelLine: T.model(d.inspLower, d.agree),
       top, hasOther: d.other.length > 0, otherCount: d.other.length,
       other: d.other.map(o => ({ chain: chainText(o[0]), k: o[1], passed: o[2], when: o[3] })),
       none: d.none.map(b => ({ id: b[0], time: b[1], pct: 'Model risk ' + b[2] })),
       noneWhy: T.noneWhy(d.insp, d.defLower), noneNext: T.noneNext(d.record),
-      containLine: T.contain(d.passedAny, d.inspLower, d.defLower, d.hold, d.review)
+      containLine: T.contain(d.passedAny, d.inspLower, d.defLower, d.hold, d.review, d.mx.unexpl)
     });
     const last = panelOpen ? d.top[this.state.panel].boards.length - 1 : 0;
     return {
       inv: Object.assign({}, inv, inv.times), c, p, bp, panelOpen, panelClosed: !panelOpen,
-      asideLabel: panelOpen ? 'Boards with this chain' : 'Containment',
+      asideLabel: panelOpen ? 'Boards with this chain' : 'Re-inspection',
       isBridge: tab === 'bridge', isOpen: tab === 'open',
       bridgeTabClass: tab === 'bridge' ? 'tab on' : 'tab', openTabClass: tab === 'open' ? 'tab on' : 'tab',
       showBridge: () => this.setState({ tab: 'bridge', panel: -1 }),

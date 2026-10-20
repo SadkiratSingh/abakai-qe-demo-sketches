@@ -64,7 +64,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <nav class="nav" aria-label="Main">
 <a href="line-overview.html">Line</a>
 <a class="on" href="rca-packet.html">Investigations</a>
-<a href="containment.html">Containment</a>
+<a href="re-inspection.html">Re-inspection</a>
 <a href="manager-overview.html">Overview</a>
 <a href="failure-library.html">Failure Library</a>
 </nav>
@@ -77,7 +77,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">Root cause analysis</h1>
 
 </div>
-<a class="btn" href="containment.html">View containment</a>
+<a class="btn" href="re-inspection.html">View re-inspection list</a>
 </div>
 
 
@@ -90,11 +90,6 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
 <span class="chip info">Root cause chains</span>
 <div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">58 of 61 boards with solder bridging show at least one root cause chain. The 3 most frequent are below; a board can show more than one, so the counts can add up to more than 61.</div>
-</div>
-
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 13px; color: #4A4F56">
-<span class="chip muted">RCA model · trained on synthetic data</span>
-<span>Chains from the RCA model and the Failure Library. The model agreed with AOI on 98% of boards in this batch. Retrained on your line's data at onboarding.</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
@@ -252,19 +247,19 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <span style="flex: 1 1 340px; font-weight: 600">High squeegee pressure → Aperture overfill → Solder bridging</span>
-<span class="mono" style="flex: 0 0 auto">7 with solder bridging · 28 passed</span>
+<span style="flex: 0 0 auto"><span class="mono">7</span> boards with solder bridging · <span class="mono">28</span> boards that passed AOI</span>
 <span style="flex: 0 0 auto; color: #4A4F56">Built 23:10–00:20</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <span style="flex: 1 1 340px; font-weight: 600">Low squeegee speed (in spec, near LSL) → Aperture overfill → Solder bridging</span>
-<span class="mono" style="flex: 0 0 auto">5 with solder bridging · 20 passed</span>
+<span style="flex: 0 0 auto"><span class="mono">5</span> boards with solder bridging · <span class="mono">20</span> boards that passed AOI</span>
 <span style="flex: 0 0 auto; color: #4A4F56">Built 02:00–02:40</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <span style="flex: 1 1 340px; font-weight: 600">High ambient temperature → Excess reflow spreading → Solder bridging</span>
-<span class="mono" style="flex: 0 0 auto">2 with solder bridging · 9 passed</span>
+<span style="flex: 0 0 auto"><span class="mono">2</span> boards with solder bridging · <span class="mono">9</span> boards that passed AOI</span>
 <span style="flex: 0 0 auto; color: #4A4F56">Built 02:00–02:40</span>
 </div>
 
@@ -303,7 +298,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 
 </div>
-<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED; font-size: 14px; color: #4A4F56">Check the AOI images. If the defect is real, its cause is not among the model's inputs.</div>
+<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED; font-size: 14px; color: #4A4F56">These boards are on the re-inspection list to verify the call: check the AOI images. If the defect is real, its cause is not among the model's inputs.</div>
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Model vs inspection">
@@ -318,20 +313,21 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span></span><span class="h">AOI: solder bridging</span><span class="h">AOI: pass</span>
 <span class="h">Model risk High</span>
 <div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">58</span><span class="t">Confirmed</span><span class="s">Both found solder bridging</span></div>
-<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">45</span><span class="t">Hidden risk</span><span class="s">Passed AOI; hold in containment</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">45</span><span class="t">Hidden risk</span><span class="s">Passed AOI; re-inspect</span></div>
 <span class="h">Model risk Medium or Low</span>
-<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">3</span><span class="t">Unexplained</span><span class="s">No root cause chain found</span></div>
-<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,454</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards go to review</span></div>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">3</span><span class="t">Unexplained</span><span class="s">No chain found; verify the AOI call</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,454</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards: re-inspect if needed</span></div>
 </div>
 </section>
 </div>
 
-<aside style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="Containment">
+<aside style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="Re-inspection">
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><div style="display: flex; gap: 6px"><span class="chip crit">45 hold</span><span class="chip warn">128 review</span></div></div>
-<div style="font-size: 14px; line-height: 1.5">173 boards passed AOI but show a solder bridging chain: 45 with High model risk (hold), 128 with Medium (review).</div>
-<a class="btn" href="containment.html">Review boards to hold</a>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Re-inspection</h2><div style="display: flex; flex-wrap: wrap; gap: 6px"><span class="chip crit">45 re-inspect</span><span class="chip warn">128 if needed</span><span class="chip muted">3 verify call</span></div></div>
+<div style="font-size: 13px; color: #5B6169">Boards where the RCA model and AOI disagree. Not a hold: a list to inspect again.</div>
+<div style="font-size: 14px; line-height: 1.5">173 boards passed AOI but show a solder bridging chain: 45 with High model risk to re-inspect, 128 with Medium to re-inspect if needed. 3 boards failed AOI with no chain: verify the AOI call.</div>
+<a class="btn" href="re-inspection.html">Open re-inspection list</a>
 </section>
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
 <h2 style="margin: 0; font-size: 16px; font-weight: 600">How root cause chains are found</h2>

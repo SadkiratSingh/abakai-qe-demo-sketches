@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Containment</title>
+<title>Re-inspection</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -40,7 +40,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <nav class="nav" aria-label="Main">
 <a href="Main.dc.html">Line</a>
 <a href="RcaPacket.dc.html">Investigations</a>
-<a class="on" href="Containment.dc.html">Containment</a>
+<a class="on" href="Containment.dc.html">Re-inspection</a>
 <a href="Manager.dc.html">Overview</a>
 <a href="Library.dc.html">Failure Library</a>
 </nav>
@@ -49,30 +49,30 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <a href="RcaPacket.dc.html" style="font-size: 14px; text-decoration: none">← INV-0142 root cause analysis</a>
-<div class="eyebrow">Containment · INV-0142 · stg-B0003</div>
-<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">338 boards passed inspection but are at risk: 75 to hold, 263 to review</h1>
-<div style="font-size: 15px; color: #4A4F56">The other 2,130 boards in stg-B0003 have Low model risk and can be released.</div>
+<div class="eyebrow">Re-inspection · INV-0142 · stg-B0003</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">344 boards where the RCA model and inspection disagree</h1>
+<div style="font-size: 15px; color: #4A4F56">Not a hold: a list of boards to inspect again. On the other 2,216 boards in stg-B0003, the model and inspection agree.</div>
 <div style="font-size: 14px; color: #5B6169">Also checked: other batches through line 2 during 23:10–00:20, 02:00–02:40 and 03:40–04:30: none.</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <button class="btn" type="button">Export list (CSV)</button>
-<button class="btn danger" type="button">Place hold in MES</button>
+<button class="btn primary" type="button">Send to inspection queue</button>
 </div>
 </div>
 
 <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px" aria-label="Where the boards are">
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0"><div class="eyebrow" style="color: #9B1C12">Hold · High model risk</div><div class="mono" style="font-size: 32px; font-weight: 500">75</div><div style="font-size: 13px; color: #5B6169">WIP 34 · finished goods 36 · shipped 5</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F1D3B5"><div class="eyebrow" style="color: #8A3505">Review · Medium model risk</div><div class="mono" style="font-size: 32px; font-weight: 500">263</div><div style="font-size: 13px; color: #5B6169">WIP 119 · finished goods 129 · shipped 15</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0; background: #FFF8F7"><div class="eyebrow" style="color: #9B1C12">Shipped</div><div class="mono" style="font-size: 32px; font-weight: 500; color: #9B1C12">20</div><div style="font-size: 13px; color: #7E160E; font-weight: 600">5 at High risk: customer notification needed</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">By root cause chain · hold / review</div><div style="font-size: 14px; line-height: 1.6"><span class="mono" style="font-weight: 600">38 / 74</span> · High peak reflow temperature · 02:00–02:40<br><span class="mono" style="font-weight: 600">7 / 54</span> · Low squeegee angle with low speed or high pressure · 23:10–00:20<br><span class="mono" style="font-weight: 600">30 / 135</span> · High paste viscosity · 03:40–04:30<br><span style="color: #5B6169">A board with more than one chain is counted once, under its top chain</span></div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0"><div class="eyebrow" style="color: #9B1C12">Re-inspect · High model risk</div><div class="mono" style="font-size: 32px; font-weight: 500">75</div><div style="font-size: 13px; color: #5B6169">WIP 34 · finished goods 36 · shipped 5</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F1D3B5"><div class="eyebrow" style="color: #8A3505">If needed · Medium model risk</div><div class="mono" style="font-size: 32px; font-weight: 500">263</div><div style="font-size: 13px; color: #5B6169">WIP 119 · finished goods 129 · shipped 15</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Verify the call · no chain</div><div class="mono" style="font-size: 32px; font-weight: 500">6</div><div style="font-size: 13px; color: #5B6169">Failed inspection, but the model saw no risk: 3 solder bridging (AOI), 3 open circuit (electrical test)</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">By root cause chain · re-inspect / if needed</div><div style="font-size: 14px; line-height: 1.6"><span class="mono" style="font-weight: 600">38 / 74</span> · High peak reflow temperature · 02:00–02:40<br><span class="mono" style="font-weight: 600">7 / 54</span> · Low squeegee angle with low speed or high pressure · 23:10–00:20<br><span class="mono" style="font-weight: 600">30 / 135</span> · High paste viscosity · 03:40–04:30<br><span style="color: #5B6169">A board with more than one chain is counted once, under its top chain</span></div></div>
 </section>
 
-<section class="card" style="overflow: hidden" aria-label="Boards at risk">
+<section class="card" style="overflow: hidden" aria-label="Boards to inspect again">
 <div style="padding: 20px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Boards at risk</h2>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Boards to inspect again</h2>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Model risk
-<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>High and Medium</option><option>High (hold)</option><option>Medium (review)</option></select>
+<label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Group
+<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All groups</option><option>Re-inspect (High)</option><option>If needed (Medium)</option><option>Verify the call</option></select>
 </label>
 <label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Root cause
 <select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>High peak reflow temperature</option><option>Low squeegee angle with low speed or high pressure</option><option>High paste viscosity</option></select>
@@ -102,7 +102,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </table>
 </div>
 <div style="padding: 16px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; color: #5B6169">
-<span>Showing 10 of 338 boards · hover a risk band for the model's value · select a board to see why it was flagged</span>
+<span>Showing 10 of 344 boards · hover a risk band for the model's value · select a board to see its RCA packet</span>
 <div style="display: flex; gap: 8px"><button class="btn" type="button">Previous</button><button class="btn" type="button">Next</button></div>
 </div>
 </section>
