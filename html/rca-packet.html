@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RCA packet: solder bridging · RCA Studio</title>
+<title>Investigation: solder bridging · RCA Studio</title>
 <!-- Static export of sketches/RcaPacket.dc.html. Regenerate from the sketches; do not edit by hand. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
@@ -25,6 +25,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;text-decoration:none;border:1px solid #C9CDD2;background:#fff;color:#16191D;cursor:pointer;box-sizing:border-box}
 .btn.primary{background:#1A4F9C;border-color:#1A4F9C;color:#fff}
 .btn.primary:hover{background:#123A73;color:#fff}
+.btn.sm{min-height:36px;padding:0 12px;font-size:13px}
 .tab{min-height:48px;padding:0 20px;border:0;border-bottom:3px solid transparent;background:none;font:600 15px 'IBM Plex Sans',sans-serif;color:#5B6169;cursor:pointer}
 .tab.on{color:#16191D;border-bottom-color:#1A4F9C}
 .node{padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600;line-height:1.3}
@@ -32,32 +33,28 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .n-mech{background:#E8EFFA;border:1px solid #B7CBEA;color:#123A73}
 .n-def{background:#FDECEA;border:1px solid #F3C5C0;color:#7E160E}
 .arrow{color:#5B6169;font-size:18px}
-.stat{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:#F4F5F3;border-radius:8px;flex:1 1 150px}
-.stat .v{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:500}
-.stat .l{font-size:12px;color:#4A4F56}
-.tt{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
-.tt th{text-align:left;font-weight:600;color:#5B6169;padding:8px 10px;border-bottom:1px solid #E1E4E0}
-.tt td{padding:8px 10px;border-bottom:1px solid #EEF0ED;font-family:'IBM Plex Mono',monospace}
-.tt td:first-child{font-family:'IBM Plex Sans',sans-serif}
-.trend .lim{stroke:#B42318;stroke-width:1.5;stroke-dasharray:5 4}
-.trend .line{fill:none;stroke:#1A4F9C;stroke-width:2;stroke-linejoin:round}
-.trend .base{stroke:#C9CDD2;stroke-width:1}
-.trend .band{fill:#E7F3EC}
-.trend .win{fill:#FDECEA}
-.trend text{font-family:'IBM Plex Mono',monospace;font-size:12px;fill:#5B6169}
-.trend .limtxt{fill:#9B1C12;font-weight:500}
-.trend .wintxt{fill:#7E160E;font-weight:500}
-.rule{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#4A4F56;background:#F4F5F3;border-radius:6px;padding:6px 10px;display:inline-block}
-.evi{font-size:14px;line-height:1.5;padding:12px 14px;background:#F5F8FD;border:1px solid #B7CBEA;border-radius:8px}
+.big{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:#F4F5F3;border-radius:8px;flex:1 1 180px}
+.big .v{font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500}
+.big .l{font-size:13px;color:#4A4F56}
+.spark .band{fill:#E7F3EC}.spark .near{fill:#FDF0E3}.spark .win{fill:#16191D;opacity:.07}
+.spark .lim{stroke:#B42318;stroke-width:1;stroke-dasharray:4 3}
+.spark .line{fill:none;stroke:#1A4F9C;stroke-width:2;stroke-linejoin:round}
+.spark text{font-family:'IBM Plex Mono',monospace;font-size:10px;fill:#5B6169}
 .mx{display:grid;grid-template-columns:minmax(120px,0.8fr) 1fr 1fr;gap:8px;font-size:13px}
 .mx .h{font-weight:600;color:#5B6169;padding:4px 8px;display:flex;align-items:center}
 .mx .c{border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
 .mx .n{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500}
 .mx .t{font-weight:600;font-size:14px}
 .mx .s{color:#4A4F56;font-size:12.5px}
-.attr{display:grid;grid-template-columns:minmax(150px,1fr) 2fr 48px;align-items:center;gap:6px 12px;font-size:13px;margin-top:10px}
-.attr .bar{height:10px;border-radius:5px;background:#EEF0ED;overflow:hidden}
-.attr .bar div{height:100%;background:#1A4F9C;border-radius:5px}
+.seg{min-height:36px;padding:0 12px;border:1px solid #C9CDD2;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#4A4F56}
+.seg.on{background:#16191D;border-color:#16191D;color:#fff}
+.seg:first-child{border-radius:8px 0 0 8px}.seg:last-child{border-radius:0 8px 8px 0;margin-left:-1px}
+.brow{display:grid;grid-template-columns:120px 52px 1fr auto;align-items:center;gap:10px;width:100%;min-height:40px;padding:6px 10px;border:0;border-bottom:1px solid #EEF0ED;background:#fff;font:14px 'IBM Plex Sans',sans-serif;color:#16191D;text-align:left;cursor:pointer}
+.brow.on{background:#F5F8FD;box-shadow:inset 3px 0 0 #1A4F9C}
+.pchain{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid #E1E4E0;border-radius:8px}
+.cbar{height:8px;border-radius:4px;background:#EEF0ED;overflow:hidden;flex:1 1 120px}
+.cbar div{height:100%;background:#B42318;border-radius:4px}
+.kv{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px}
 </style>
 </head>
 <body>
@@ -74,45 +71,46 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </header>
 <main class="wrap" style="display: flex; flex-direction: column; gap: 24px">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
-<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 900px">
 <a href="line-overview.html" style="font-size: 14px; text-decoration: none">← Line overview</a>
 <div class="eyebrow">Investigation INV-0142 · CTRL-BRD-A · stg-B0003 · 2,560 boards · 2 defects · Night shift</div>
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">Root cause analysis</h1>
+
 </div>
-<div style="display: flex; flex-wrap: wrap; gap: 8px">
 <a class="btn" href="containment.html">View containment</a>
 </div>
-</div>
+
 
 <div aria-label="Defect" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E1E4E0">
 <a class="tab on" href="rca-packet.html" style="display:inline-flex;align-items:center;text-decoration:none">Solder bridging · 61 boards</a>
 <a class="tab" href="rca-packet-open-circuit.html" style="display:inline-flex;align-items:center;text-decoration:none">Open circuit · 31 boards</a>
 </div>
 
+
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
-<span class="chip info">Linked root cause #1</span>
-<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Peak reflow temperature was above USL 02:00–02:40. The model attributes 44 of 61 boards with solder bridging to it.</div>
-<div class="mono" style="font-size: 13px; color: #4A4F56">9 unit rules checked by the model · 1 linked · 2 contributing</div>
+<span class="chip info">Root cause chains</span>
+<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">58 of 61 boards with solder bridging show at least one root cause chain. The 3 most frequent are below; a board can show more than one, so the counts can add up to more than 61.</div>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 13px; color: #4A4F56">
 <span class="chip muted">RCA model · trained on synthetic data</span>
-<span>Evidence from the RCA model. It agreed with AOI on 98% of boards in this batch. Retrained on your line's data at onboarding.</span>
+<span>Chains from the RCA model and the Failure Library. The model agreed with AOI on 98% of boards in this batch. Retrained on your line's data at onboarding.</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
-<div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
-<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked and contributing root causes">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Most frequent root cause chains">
 <div style="display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked and contributing root causes</h2>
-<div style="font-size: 14px; color: #5B6169">Failure Library rules the model checked on this batch and that passed the checks.</div>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Most frequent root cause chains</h2>
+<div style="font-size: 14px; color: #5B6169">Each board with solder bridging gets its root cause chains from the RCA model and the Failure Library. Ranked by how many boards show each chain.</div>
 </div>
 
 <article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#1</span>
-<span class="chip info">Linked</span>
-<span class="chip crit">Rule condition true · 156 boards</span>
+<span class="chip muted">Reflow</span>
+
+
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <div class="node n-root">High peak reflow temperature<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Reflow oven</div></div>
@@ -121,217 +119,165 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span class="arrow" aria-hidden="true">→</span>
 <div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<span class="rule">Rule: PeakReflowTemperature &gt; USL</span>
-
-</div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">44 of 61</span><span class="l">Boards with solder bridging the model attributes to this root cause</span></div>
-<div class="stat"><span class="v">58 → 15</span><span class="l">Predicted boards with solder bridging, with peak reflow at nominal</span></div>
-<div class="stat"><span class="v">41 of 44</span><span class="l">Attributed boards where the predicted mechanism is excess reflow spreading</span></div>
+<div class="big"><span class="v">44 of 61</span><span class="l">boards with solder bridging show this chain</span></div>
+<div class="big"><span class="v">112</span><span class="l">boards that passed AOI show this chain</span></div>
 </div>
-
-<div style="display: flex; flex-direction: column; gap: 8px">
-<div class="eyebrow">Evidence</div>
-<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>156 boards were above USL 02:00–02:40: peak reflow temperature 257.9–259.8 °C (spec 245–255 °C).</li><li>The model attributes 44 boards with solder bridging built 02:00–02:40 to this root cause.</li>
-</ul>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 15px">Built 02:00–02:40</span>
+<span style="font-size: 12px; color: #5B6169">Peak reflow temperature (°C) · 20-minute averages, spec band shaded</span>
 </div>
-
-<details style="font-size: 14px">
-<summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
-<div style="font-size: 13px; color: #4A4F56; margin-top: 8px">Share of predicted risk, averaged over the 44 attributed boards with solder bridging:</div>
-<div class="attr">
-
-<span>Peak reflow temperature</span><div class="bar"><div style="width: 81%"></div></div><span class="mono" style="text-align: right">81%</span>
-
-<span>Squeegee speed</span><div class="bar"><div style="width: 5%"></div></div><span class="mono" style="text-align: right">5%</span>
-
-<span>Ambient temperature</span><div class="bar"><div style="width: 4%"></div></div><span class="mono" style="text-align: right">4%</span>
-
-<span>Other parameters</span><div class="bar"><div style="width: 10%"></div></div><span class="mono" style="text-align: right">10%</span>
-
+<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Peak reflow temperature over the batch, with the window when this chain appeared" style="flex: 0 1 260px; max-width: 100%">
+<rect class="band" x="0" y="18" width="260" height="26" opacity="1"></rect>
+<rect class="near" x="0" y="0" width="260" height="0"></rect>
+<rect class="win" x="130" y="0" width="23" height="52"></rect>
+<line class="lim" x1="0" x2="260" y1="18" y2="18" opacity="1"></line>
+<line class="lim" x1="0" x2="260" y1="44" y2="44" opacity="1"></line>
+<polyline class="line" points="0,26 11,27 23,26 34,27 45,26 57,26 68,27 79,26 90,26 102,27 113,26 124,27 136,9 147,8 158,27 170,26 181,26 192,27 203,26 215,27 226,26 237,26 249,27 260,26"></polyline>
+<text x="0" y="63">22:00</text>
+<text x="260" y="63" text-anchor="end">05:40</text>
+</svg>
 </div>
-<ul style="margin: 12px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
-<li>Failure Library path: <span class="mono" style="font-size: 13px">PeakReflowTemperature &gt; USL</span> → Excess reflow spreading → Solder bridging</li>
-<li>Attributed: the model attributes 44 of 61 boards with solder bridging (72%) to this root cause. Needs 20% or more.</li>
-<li>Predicted mechanism: excess reflow spreading on 41 of 44 attributed boards (93%). Needs 50% or more.</li>
-<li>Model agreement with AOI on stg-B0003: 98%. Needs 90% or more.</li>
-<li>What-if: with peak reflow temperature (250 °C) at nominal, predicted boards with solder bridging fall from 58 to 15.</li>
-</ul>
-</details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
-<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Restore the approved reflow recipe; lock recipe changes behind sign-off.</div>
+<div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Suggested action: </span>Restore the approved reflow recipe; lock recipe changes behind sign-off.</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a class="btn" href="rca-packet-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
 
-
-<div style="display: flex; gap: 8px">
 <button class="btn" type="button">Reject</button>
-<button class="btn primary" type="button">Accept</button>
-</div>
+<button class="btn primary" type="button">Confirm chain</button>
 
+</div>
 </div>
 </article>
 
 <article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#2</span>
-<span class="chip warn">Contributing</span>
-<span class="chip crit">Rule condition true · 40 boards</span>
+<span class="chip muted">Printing</span>
+
+
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
-<div class="node n-root">Low squeegee angle + low squeegee speed<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
+<div class="node n-root">Low squeegee angle<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
 <span class="arrow" aria-hidden="true">→</span>
 <div class="node n-mech">Aperture overfill<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
 <span class="arrow" aria-hidden="true">→</span>
 <div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<span class="rule">Rule: SqueegeeAngle &lt; LSL AND SqueegeeSpeed &lt; LSL</span>
-<span style="font-size: 13px; color: #5B6169">Unit rule split from: <span class="mono">SqueegeeAngle &lt; LSL AND (SqueegeeSpeed &lt; LSL OR SqueegeePressure &gt; USL)</span></span>
-</div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">7 of 61</span><span class="l">Boards with solder bridging the model attributes to this root cause</span></div>
-<div class="stat"><span class="v">58 → 51</span><span class="l">Predicted boards with solder bridging, with squeegee angle and speed at nominal</span></div>
-<div class="stat"><span class="v">6 of 7</span><span class="l">Attributed boards where the predicted mechanism is aperture overfill</span></div>
+<div class="big"><span class="v">14 of 61</span><span class="l">boards with solder bridging show this chain</span></div>
+<div class="big"><span class="v">61</span><span class="l">boards that passed AOI show this chain</span></div>
 </div>
-
-<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #FFFAF4; border: 1px solid #F1D3B5; border-radius: 8px; color: #6B2C05">Contributing: the model attributes 7 of 61 boards with solder bridging (11%) to it on its own. Together with the other aperture overfill root causes: 14 of 61 (23%).</div>
-
-<div style="display: flex; flex-direction: column; gap: 8px">
-<div class="eyebrow">Evidence</div>
-<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>40 boards met the rule condition 23:10–00:20: squeegee angle 51–54° (spec 55–65°) with speed 48–55 mm/s (spec 56–84 mm/s).</li><li>The model attributes 7 boards with solder bridging built 23:10–00:20 to this root cause.</li>
-</ul>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 15px">Built 23:10–00:20</span>
+<span style="font-size: 12px; color: #5B6169">Squeegee angle (°) · 20-minute averages, spec band shaded</span>
 </div>
-
-<div class="evi"><span style="font-weight: 600">Supported by: </span>Paste volume per aperture was above USL on 61 boards, 12 of them among the 14 boards with solder bridging attributed to rules #2 and #3.</div>
-
-<details style="font-size: 14px">
-<summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
-<div style="font-size: 13px; color: #4A4F56; margin-top: 8px">Share of predicted risk, averaged over the 7 attributed boards with solder bridging:</div>
-<div class="attr">
-
-<span>Squeegee angle</span><div class="bar"><div style="width: 46%"></div></div><span class="mono" style="text-align: right">46%</span>
-
-<span>Squeegee speed</span><div class="bar"><div style="width: 38%"></div></div><span class="mono" style="text-align: right">38%</span>
-
-<span>Peak reflow temperature</span><div class="bar"><div style="width: 4%"></div></div><span class="mono" style="text-align: right">4%</span>
-
-<span>Other parameters</span><div class="bar"><div style="width: 12%"></div></div><span class="mono" style="text-align: right">12%</span>
-
+<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Squeegee angle over the batch, with the window when this chain appeared" style="flex: 0 1 260px; max-width: 100%">
+<rect class="band" x="0" y="8" width="260" height="28" opacity="1"></rect>
+<rect class="near" x="0" y="0" width="260" height="0"></rect>
+<rect class="win" x="39" y="0" width="34" height="52"></rect>
+<line class="lim" x1="0" x2="260" y1="8" y2="8" opacity="1"></line>
+<line class="lim" x1="0" x2="260" y1="36" y2="36" opacity="1"></line>
+<polyline class="line" points="0,21 11,22 23,21 34,23 45,43 57,44 68,42 79,21 90,21 102,22 113,21 124,23 136,22 147,22 158,23 170,21 181,21 192,22 203,21 215,23 226,22 237,22 249,23 260,21"></polyline>
+<text x="0" y="63">22:00</text>
+<text x="260" y="63" text-anchor="end">05:40</text>
+</svg>
 </div>
-<ul style="margin: 12px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
-<li>Failure Library path: <span class="mono" style="font-size: 13px">SqueegeeAngle &lt; LSL AND SqueegeeSpeed &lt; LSL</span> → Aperture overfill → Solder bridging</li>
-<li>Attributed: the model attributes 7 of 61 boards with solder bridging (11%) to this root cause. Needs 20% or more. Together with rule #3: 14 of 61 (23%).</li>
-<li>Predicted mechanism: aperture overfill on 6 of 7 attributed boards (86%). Needs 50% or more.</li>
-<li>Model agreement with AOI on stg-B0003: 98%. Needs 90% or more.</li>
-<li>What-if: with squeegee angle and speed (60°, 70 mm/s) at nominal, predicted boards with solder bridging fall from 58 to 51.</li>
-</ul>
-</details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
-<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Replace the squeegee blade; check angle, speed and pressure against the recipe.</div>
+<div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Suggested action: </span>Replace the squeegee blade; check angle, speed and pressure against the recipe.</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a class="btn" href="rca-packet-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
 
-
-<div style="display: flex; gap: 8px">
 <button class="btn" type="button">Reject</button>
-<button class="btn primary" type="button">Accept</button>
-</div>
+<button class="btn primary" type="button">Confirm chain</button>
 
+</div>
 </div>
 </article>
 
 <article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#3</span>
-<span class="chip warn">Contributing</span>
-<span class="chip crit">Rule condition true · 35 boards</span>
+<span class="chip muted">Printing</span>
+
+
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
-<div class="node n-root">Low squeegee angle + high squeegee pressure<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
+<div class="node n-root">Low squeegee speed<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
 <span class="arrow" aria-hidden="true">→</span>
 <div class="node n-mech">Aperture overfill<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
 <span class="arrow" aria-hidden="true">→</span>
 <div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<span class="rule">Rule: SqueegeeAngle &lt; LSL AND SqueegeePressure &gt; USL</span>
-<span style="font-size: 13px; color: #5B6169">Unit rule split from: <span class="mono">SqueegeeAngle &lt; LSL AND (SqueegeeSpeed &lt; LSL OR SqueegeePressure &gt; USL)</span></span>
-</div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">7 of 61</span><span class="l">Boards with solder bridging the model attributes to this root cause</span></div>
-<div class="stat"><span class="v">58 → 51</span><span class="l">Predicted boards with solder bridging, with squeegee angle and pressure at nominal</span></div>
-<div class="stat"><span class="v">6 of 7</span><span class="l">Attributed boards where the predicted mechanism is aperture overfill</span></div>
+<div class="big"><span class="v">7 of 61</span><span class="l">boards with solder bridging show this chain</span></div>
+<div class="big"><span class="v">33</span><span class="l">boards that passed AOI show this chain</span></div>
 </div>
-
-<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #FFFAF4; border: 1px solid #F1D3B5; border-radius: 8px; color: #6B2C05">Contributing: the model attributes 7 of 61 boards with solder bridging (11%) to it on its own. Together with the other aperture overfill root causes: 14 of 61 (23%).</div>
-
-<div style="display: flex; flex-direction: column; gap: 8px">
-<div class="eyebrow">Evidence</div>
-<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>35 boards met the rule condition 23:10–00:20: squeegee angle 51–54° (spec 55–65°) with pressure 0.34–0.36 MPa (spec 0.27–0.33 MPa).</li><li>The model attributes 7 boards with solder bridging built 23:10–00:20 to this root cause.</li>
-</ul>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 15px">Built 23:10–00:20</span>
+<span style="font-size: 12px; color: #5B6169">Squeegee speed (mm/s) · 20-minute averages, spec band shaded</span>
 </div>
-
-<details style="font-size: 14px">
-<summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
-<div style="font-size: 13px; color: #4A4F56; margin-top: 8px">Share of predicted risk, averaged over the 7 attributed boards with solder bridging:</div>
-<div class="attr">
-
-<span>Squeegee angle</span><div class="bar"><div style="width: 44%"></div></div><span class="mono" style="text-align: right">44%</span>
-
-<span>Squeegee pressure</span><div class="bar"><div style="width: 41%"></div></div><span class="mono" style="text-align: right">41%</span>
-
-<span>Other parameters</span><div class="bar"><div style="width: 15%"></div></div><span class="mono" style="text-align: right">15%</span>
-
+<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Squeegee speed over the batch, with the window when this chain appeared" style="flex: 0 1 260px; max-width: 100%">
+<rect class="band" x="0" y="8" width="260" height="31" opacity="1"></rect>
+<rect class="near" x="0" y="0" width="260" height="0"></rect>
+<rect class="win" x="39" y="0" width="34" height="52"></rect>
+<line class="lim" x1="0" x2="260" y1="8" y2="8" opacity="1"></line>
+<line class="lim" x1="0" x2="260" y1="39" y2="39" opacity="1"></line>
+<polyline class="line" points="0,23 11,24 23,22 34,25 45,43 57,44 68,42 79,23 90,23 102,24 113,22 124,25 136,24 147,23 158,25 170,23 181,23 192,24 203,22 215,25 226,24 237,23 249,25 260,23"></polyline>
+<text x="0" y="63">22:00</text>
+<text x="260" y="63" text-anchor="end">05:40</text>
+</svg>
 </div>
-<ul style="margin: 12px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
-<li>Failure Library path: <span class="mono" style="font-size: 13px">SqueegeeAngle &lt; LSL AND SqueegeePressure &gt; USL</span> → Aperture overfill → Solder bridging</li>
-<li>Attributed: the model attributes 7 of 61 boards with solder bridging (11%) to this root cause. Needs 20% or more. Together with rule #2: 14 of 61 (23%).</li>
-<li>Predicted mechanism: aperture overfill on 6 of 7 attributed boards (86%). Needs 50% or more.</li>
-<li>Model agreement with AOI on stg-B0003: 98%. Needs 90% or more.</li>
-<li>What-if: with squeegee angle and pressure (60°, 0.30 MPa) at nominal, predicted boards with solder bridging fall from 58 to 51.</li>
-</ul>
-</details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
-<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Replace the squeegee blade; check angle, speed and pressure against the recipe.</div>
+<div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Suggested action: </span>Raise the speed to nominal (70 mm/s).</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a class="btn" href="rca-packet-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
 
-
-<div style="display: flex; gap: 8px">
 <button class="btn" type="button">Reject</button>
-<button class="btn primary" type="button">Accept</button>
-</div>
+<button class="btn primary" type="button">Confirm chain</button>
 
+</div>
 </div>
 </article>
 
 </section>
 
-<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Model vs inspection">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
-<div style="display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs AOI · solder bridging</h2>
-<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0003, by model risk and AOI result.</div>
-</div>
-<span class="chip ok">Agreement 98%</span>
-</div>
-<div class="mx">
-<span></span><span class="h">AOI: solder bridging</span><span class="h">AOI: pass</span>
-<span class="h">Model risk High</span>
-<div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">58</span><span class="t">Confirmed</span><span class="s">Explained by the root causes above</span></div>
-<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">45</span><span class="t">Hidden risk</span><span class="s">Passed AOI; hold in containment</span></div>
-<span class="h">Model risk Medium or Low</span>
-<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">3</span><span class="t">Unexplained</span><span class="s">Listed below</span></div>
-<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,454</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards go to review</span></div>
-</div>
-</section>
 
-<section class="card" style="overflow: hidden" aria-label="Unexplained boards">
+<details class="card" style="overflow: hidden">
+<summary style="cursor: pointer; padding: 18px 24px; font-size: 16px; font-weight: 600; min-height: 24px">Other chains · 3</summary>
+<div style="display: flex; flex-direction: column">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<span style="flex: 1 1 340px; font-weight: 600">High squeegee pressure → Aperture overfill → Solder bridging</span>
+<span class="mono" style="flex: 0 0 auto">7 with solder bridging · 28 passed</span>
+<span style="flex: 0 0 auto; color: #4A4F56">Built 23:10–00:20</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<span style="flex: 1 1 340px; font-weight: 600">Low squeegee speed (in spec, near LSL) → Aperture overfill → Solder bridging</span>
+<span class="mono" style="flex: 0 0 auto">5 with solder bridging · 20 passed</span>
+<span style="flex: 0 0 auto; color: #4A4F56">Built 02:00–02:40</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<span style="flex: 1 1 340px; font-weight: 600">High ambient temperature → Excess reflow spreading → Solder bridging</span>
+<span class="mono" style="flex: 0 0 auto">2 with solder bridging · 9 passed</span>
+<span style="flex: 0 0 auto; color: #4A4F56">Built 02:00–02:40</span>
+</div>
+
+</div>
+</details>
+
+
+<section class="card" style="overflow: hidden" aria-label="No root cause chain found">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Unexplained: 3 of 61 boards with solder bridging</h2>
-<span class="chip muted">Not explained</span>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">No root cause chain found · 3 boards</h2>
 </div>
-<div style="font-size: 14px; color: #4A4F56">AOI found solder bridging, but the model risk was Low and no parameter raised it.</div>
+<div style="font-size: 14px; color: #4A4F56">AOI found solder bridging, but the model risk was Low and no parameter raised it, so no chain was assigned.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 
@@ -357,123 +303,48 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 
 </div>
-<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED">
-<ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #4A4F56">
-<li>Built 22:41, 01:15, 05:02: not grouped in one window.</li><li>Check the AOI images. If the defect is real, its cause is not among the model's inputs.</li>
-</ul>
-</div>
+<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED; font-size: 14px; color: #4A4F56">Check the AOI images. If the defect is real, its cause is not among the model's inputs.</div>
 </section>
 
-<section class="card" style="overflow: hidden" aria-label="Checked and not linked">
-<div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 6</h2>
-<div style="font-size: 14px; color: #5B6169">Every other unit rule in the Failure Library for solder bridging, with what the model found.</div>
-</div>
-<div style="display: flex; flex-direction: column">
-
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
-<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
-<span style="font-weight: 600; font-size: 14px">Low squeegee speed</span>
-<span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
-</div>
-<span class="chip warn">Rule condition true · 220 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Attributed 0 boards with solder bridging. With squeegee speed at nominal, predicted boards with solder bridging: 58 → 57. It raises risk only with low squeegee angle (rule #2).</span>
-</div>
-
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
-<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
-<span style="font-weight: 600; font-size: 14px">High ambient temperature</span>
-<span style="font-size: 12px; color: #5B6169">via Excess reflow spreading</span>
-</div>
-<span class="chip warn">Rule condition true · 96 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Attributed 0 boards with solder bridging. With ambient temperature at nominal, predicted boards with solder bridging: 58 → 58.</span>
-</div>
-
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
-<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
-<span style="font-weight: 600; font-size: 14px">High stencil thickness</span>
-<span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
-</div>
-<span class="chip ok">Rule condition true · 0 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 100.4 µm on stencil ST-0412 (spec 95–105 µm).</span>
-</div>
-
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
-<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
-<span style="font-weight: 600; font-size: 14px">Low aperture area ratio</span>
-<span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
-</div>
-<span class="chip ok">Rule condition true · 0 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 0.71 on stencil ST-0412 (spec ≥ 0.66).</span>
-</div>
-
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
-<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
-<span style="font-weight: 600; font-size: 14px">High bead size of solder paste</span>
-<span style="font-size: 12px; color: #5B6169">via Aperture overfill</span>
-</div>
-<span class="chip ok">Rule condition true · 0 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 3.7–4.3 mm³ on all 2,560 boards (spec 3.6–4.4 mm³).</span>
-</div>
-
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
-<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
-<span style="font-weight: 600; font-size: 14px">High ambient RH</span>
-<span style="font-size: 12px; color: #5B6169">via Post-print spread</span>
-</div>
-<span class="chip ok">Rule condition true · 0 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 38–55 %RH on all 2,560 boards (spec [your limit]).</span>
-</div>
-
-</div>
-</section>
-</div>
-
-<aside style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="Trend and containment">
-<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Model vs inspection">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
 <div style="display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Peak reflow temperature (°C)</h2>
-<div style="font-size: 14px; color: #5B6169">Linked root cause #1 · 20-minute averages, stg-B0003</div>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs AOI · solder bridging</h2>
+<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0003, by model risk and AOI result.</div>
 </div>
-<svg class="trend" viewBox="0 0 520 250" width="100%" role="img" aria-label="Peak reflow temperature is above USL only during 02:00–02:40">
-<rect class="win" x="276" y="30" width="40" height="184"></rect>
-<text class="wintxt" x="296" y="22" text-anchor="middle">02:00–02:40</text>
-<rect class="band" x="48" y="94" width="456" height="105" opacity="0.6"></rect>
-<line class="lim" x1="48" x2="504" y1="94" y2="94"></line>
-<line class="lim" x1="48" x2="504" y1="199" y2="199"></line>
-<text class="limtxt" x="500" y="88" text-anchor="end">USL 255</text>
-<text class="limtxt" x="500" y="215" text-anchor="end">LSL 245</text>
-<polyline class="line" points="48,130 68,127 88,132 107,124 127,128 147,131 167,125 187,129 207,127 226,130 246,123 266,128 286,56 306,53 326,127 345,129 365,125 385,131 405,128 425,124 445,130 464,127 484,129 504,128"></polyline>
-<line class="base" x1="48" x2="504" y1="214" y2="214"></line>
-<text x="48" y="236">22:00</text>
-<text x="286" y="236" text-anchor="middle">02:00</text>
-<text x="504" y="236" text-anchor="end">05:40</text>
-</svg>
-<div style="font-size: 14px; line-height: 1.5">Peak reflow temperature averaged 251.8 °C outside 02:00–02:40 and reached 259.8 °C during it.</div>
+<span class="chip ok">Agreement 98%</span>
+</div>
+<div class="mx">
+<span></span><span class="h">AOI: solder bridging</span><span class="h">AOI: pass</span>
+<span class="h">Model risk High</span>
+<div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">58</span><span class="t">Confirmed</span><span class="s">Both found solder bridging</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">45</span><span class="t">Hidden risk</span><span class="s">Passed AOI; hold in containment</span></div>
+<span class="h">Model risk Medium or Low</span>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">3</span><span class="t">Unexplained</span><span class="s">No root cause chain found</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,454</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards go to review</span></div>
+</div>
 </section>
+</div>
+
+<aside style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="Containment">
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><div style="display: flex; gap: 6px"><span class="chip crit">45 hold</span><span class="chip warn">128 review</span></div></div>
-<ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; display: flex; flex-direction: column; gap: 6px">
-<li>45 boards passed AOI but have High model risk for solder bridging: hold.</li><li>128 more have Medium model risk: review before release.</li>
-</ul>
+<div style="font-size: 14px; line-height: 1.5">173 boards passed AOI but show a solder bridging chain: 45 with High model risk (hold), 128 with Medium (review).</div>
 <a class="btn" href="containment.html">Review boards to hold</a>
 </section>
-
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
-<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a root cause is linked</h2>
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">How root cause chains are found</h2>
 <ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 6px">
-<li>The Failure Library gives the path: rule → mechanism → defect. Rules with OR are split into unit rules joined only by AND.</li>
-<li>The RCA model scores every board and works out which parameters raised its risk. For each unit rule:
-<ul style="margin: 4px 0 0; padding-left: 18px">
-<li>Boards with the defect the model attributes to it: 20% or more</li>
-<li>Predicted mechanism matches the path: 50% or more of those boards</li>
-<li>Model agrees with inspection on the batch: 90% or more</li>
-</ul></li>
+<li>For every board, the RCA model predicts the defect and the mechanism, and attribution finds the parameters that raised the board's risk.</li>
+<li>The Failure Library's cause-and-effect ontology turns each of those parameters into a chain: root cause → mechanism → defect. Chains below the display threshold are left out.</li>
+<li>This page groups boards by chain. A board can show more than one chain.</li>
 </ol>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56"><span style="font-weight: 600; color: #16191D">Linked:</span> passes all three. <span style="font-weight: 600; color: #16191D">Contributing:</span> under 20% on its own, but the mechanism's root causes together reach 20%.</div>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">What-if re-scores the boards with the root cause at nominal. Model risk bands: High 5% or more, Medium 1–5%, Low under 1%.</div>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Contribution is the share of a board's predicted risk that comes from the root cause. Model risk bands: High 5% or more, Medium 1–5%, Low under 1%.</div>
 </section>
+
+
+
 </aside>
 </div>
 </main>

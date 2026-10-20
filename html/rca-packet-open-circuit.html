@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RCA packet: open circuit · RCA Studio</title>
+<title>Investigation: open circuit · RCA Studio</title>
 <!-- Static export of sketches/RcaPacket.dc.html. Regenerate from the sketches; do not edit by hand. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
@@ -25,6 +25,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;text-decoration:none;border:1px solid #C9CDD2;background:#fff;color:#16191D;cursor:pointer;box-sizing:border-box}
 .btn.primary{background:#1A4F9C;border-color:#1A4F9C;color:#fff}
 .btn.primary:hover{background:#123A73;color:#fff}
+.btn.sm{min-height:36px;padding:0 12px;font-size:13px}
 .tab{min-height:48px;padding:0 20px;border:0;border-bottom:3px solid transparent;background:none;font:600 15px 'IBM Plex Sans',sans-serif;color:#5B6169;cursor:pointer}
 .tab.on{color:#16191D;border-bottom-color:#1A4F9C}
 .node{padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600;line-height:1.3}
@@ -32,32 +33,28 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .n-mech{background:#E8EFFA;border:1px solid #B7CBEA;color:#123A73}
 .n-def{background:#FDECEA;border:1px solid #F3C5C0;color:#7E160E}
 .arrow{color:#5B6169;font-size:18px}
-.stat{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:#F4F5F3;border-radius:8px;flex:1 1 150px}
-.stat .v{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:500}
-.stat .l{font-size:12px;color:#4A4F56}
-.tt{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
-.tt th{text-align:left;font-weight:600;color:#5B6169;padding:8px 10px;border-bottom:1px solid #E1E4E0}
-.tt td{padding:8px 10px;border-bottom:1px solid #EEF0ED;font-family:'IBM Plex Mono',monospace}
-.tt td:first-child{font-family:'IBM Plex Sans',sans-serif}
-.trend .lim{stroke:#B42318;stroke-width:1.5;stroke-dasharray:5 4}
-.trend .line{fill:none;stroke:#1A4F9C;stroke-width:2;stroke-linejoin:round}
-.trend .base{stroke:#C9CDD2;stroke-width:1}
-.trend .band{fill:#E7F3EC}
-.trend .win{fill:#FDECEA}
-.trend text{font-family:'IBM Plex Mono',monospace;font-size:12px;fill:#5B6169}
-.trend .limtxt{fill:#9B1C12;font-weight:500}
-.trend .wintxt{fill:#7E160E;font-weight:500}
-.rule{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#4A4F56;background:#F4F5F3;border-radius:6px;padding:6px 10px;display:inline-block}
-.evi{font-size:14px;line-height:1.5;padding:12px 14px;background:#F5F8FD;border:1px solid #B7CBEA;border-radius:8px}
+.big{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:#F4F5F3;border-radius:8px;flex:1 1 180px}
+.big .v{font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500}
+.big .l{font-size:13px;color:#4A4F56}
+.spark .band{fill:#E7F3EC}.spark .near{fill:#FDF0E3}.spark .win{fill:#16191D;opacity:.07}
+.spark .lim{stroke:#B42318;stroke-width:1;stroke-dasharray:4 3}
+.spark .line{fill:none;stroke:#1A4F9C;stroke-width:2;stroke-linejoin:round}
+.spark text{font-family:'IBM Plex Mono',monospace;font-size:10px;fill:#5B6169}
 .mx{display:grid;grid-template-columns:minmax(120px,0.8fr) 1fr 1fr;gap:8px;font-size:13px}
 .mx .h{font-weight:600;color:#5B6169;padding:4px 8px;display:flex;align-items:center}
 .mx .c{border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
 .mx .n{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500}
 .mx .t{font-weight:600;font-size:14px}
 .mx .s{color:#4A4F56;font-size:12.5px}
-.attr{display:grid;grid-template-columns:minmax(150px,1fr) 2fr 48px;align-items:center;gap:6px 12px;font-size:13px;margin-top:10px}
-.attr .bar{height:10px;border-radius:5px;background:#EEF0ED;overflow:hidden}
-.attr .bar div{height:100%;background:#1A4F9C;border-radius:5px}
+.seg{min-height:36px;padding:0 12px;border:1px solid #C9CDD2;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#4A4F56}
+.seg.on{background:#16191D;border-color:#16191D;color:#fff}
+.seg:first-child{border-radius:8px 0 0 8px}.seg:last-child{border-radius:0 8px 8px 0;margin-left:-1px}
+.brow{display:grid;grid-template-columns:120px 52px 1fr auto;align-items:center;gap:10px;width:100%;min-height:40px;padding:6px 10px;border:0;border-bottom:1px solid #EEF0ED;background:#fff;font:14px 'IBM Plex Sans',sans-serif;color:#16191D;text-align:left;cursor:pointer}
+.brow.on{background:#F5F8FD;box-shadow:inset 3px 0 0 #1A4F9C}
+.pchain{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid #E1E4E0;border-radius:8px}
+.cbar{height:8px;border-radius:4px;background:#EEF0ED;overflow:hidden;flex:1 1 120px}
+.cbar div{height:100%;background:#B42318;border-radius:4px}
+.kv{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px}
 </style>
 </head>
 <body>
@@ -74,45 +71,46 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </header>
 <main class="wrap" style="display: flex; flex-direction: column; gap: 24px">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
-<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 900px">
 <a href="line-overview.html" style="font-size: 14px; text-decoration: none">← Line overview</a>
 <div class="eyebrow">Investigation INV-0142 · CTRL-BRD-A · stg-B0003 · 2,560 boards · 2 defects · Night shift</div>
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">Root cause analysis</h1>
+
 </div>
-<div style="display: flex; flex-wrap: wrap; gap: 8px">
 <a class="btn" href="containment.html">View containment</a>
 </div>
-</div>
+
 
 <div aria-label="Defect" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E1E4E0">
 <a class="tab" href="rca-packet.html" style="display:inline-flex;align-items:center;text-decoration:none">Solder bridging · 61 boards</a>
 <a class="tab on" href="rca-packet-open-circuit.html" style="display:inline-flex;align-items:center;text-decoration:none">Open circuit · 31 boards</a>
 </div>
 
+
 <div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
-<span class="chip info">Linked root cause #1</span>
-<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">Paste viscosity was above USL 03:40–04:30. The model attributes 28 of 31 boards with open circuit to it.</div>
-<div class="mono" style="font-size: 13px; color: #4A4F56">2 unit rules checked by the model · 1 linked</div>
+<span class="chip info">Root cause chains</span>
+<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">28 of 31 boards with open circuit show at least one root cause chain. The 2 most frequent are below; a board can show more than one, so the counts can add up to more than 31.</div>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 13px; color: #4A4F56">
 <span class="chip muted">RCA model · trained on synthetic data</span>
-<span>Evidence from the RCA model. It agreed with electrical test on 99% of boards in this batch. Retrained on your line's data at onboarding.</span>
+<span>Chains from the RCA model and the Failure Library. The model agreed with electrical test on 99% of boards in this batch. Retrained on your line's data at onboarding.</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
-<div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
-<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Linked and contributing root causes">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Most frequent root cause chains">
 <div style="display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Linked and contributing root causes</h2>
-<div style="font-size: 14px; color: #5B6169">Failure Library rules the model checked on this batch and that passed the checks.</div>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Most frequent root cause chains</h2>
+<div style="font-size: 14px; color: #5B6169">Each board with open circuit gets its root cause chains from the RCA model and the Failure Library. Ranked by how many boards show each chain.</div>
 </div>
 
 <article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#1</span>
-<span class="chip info">Linked</span>
-<span class="chip crit">Rule condition true · 190 boards</span>
+<span class="chip muted">Material</span>
+
+
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <div class="node n-root">High paste viscosity<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder paste</div></div>
@@ -121,85 +119,94 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span class="arrow" aria-hidden="true">→</span>
 <div class="node n-def">Open circuit<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<span class="rule">Rule: PasteViscosity &gt; USL</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="big"><span class="v">28 of 31</span><span class="l">boards with open circuit show this chain</span></div>
+<div class="big"><span class="v">162</span><span class="l">boards that passed electrical test show this chain</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 15px">Paste lot [paste lot] · built 03:40–04:30</span>
+<span style="font-size: 12px; color: #5B6169">Paste viscosity (Pa·s) · 20-minute averages, spec band shaded</span>
+</div>
+<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Paste viscosity over the batch, with the window when this chain appeared" style="flex: 0 1 260px; max-width: 100%">
+<rect class="band" x="0" y="21" width="260" height="23" opacity="1"></rect>
+<rect class="near" x="0" y="0" width="260" height="0"></rect>
+<rect class="win" x="186" y="0" width="34" height="52"></rect>
+<line class="lim" x1="0" x2="260" y1="21" y2="21" opacity="1"></line>
+<line class="lim" x1="0" x2="260" y1="44" y2="44" opacity="1"></line>
+<polyline class="line" points="0,28 11,29 23,28 34,30 45,29 57,29 68,30 79,28 90,28 102,29 113,28 124,30 136,29 147,29 158,30 170,28 181,28 192,11 203,8 215,10 226,29 237,29 249,30 260,28"></polyline>
+<text x="0" y="63">22:00</text>
+<text x="260" y="63" text-anchor="end">05:40</text>
+</svg>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
+<div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Suggested action: </span>Replace the paste; check paste age and floor life.</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a class="btn" href="rca-packet-open-circuit-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
 
+<button class="btn" type="button">Reject</button>
+<button class="btn primary" type="button">Confirm chain</button>
+
+</div>
+</div>
+</article>
+
+<article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#2</span>
+<span class="chip muted">Environment</span>
+
+
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<div class="node n-root">High ambient RH<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Line</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-mech">Poor paste transfer<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-def">Open circuit<div style="font-size: 12px; font-weight: 400">Defect</div></div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<div class="stat"><span class="v">28 of 31</span><span class="l">Boards with open circuit the model attributes to this root cause</span></div>
-<div class="stat"><span class="v">30 → 4</span><span class="l">Predicted boards with open circuit, with paste viscosity at nominal</span></div>
-<div class="stat"><span class="v">26 of 28</span><span class="l">Attributed boards where the predicted mechanism is poor paste transfer</span></div>
+<div class="big"><span class="v">4 of 31</span><span class="l">boards with open circuit show this chain</span></div>
+<div class="big"><span class="v">18</span><span class="l">boards that passed electrical test show this chain</span></div>
 </div>
-
-<div style="display: flex; flex-direction: column; gap: 8px">
-<div class="eyebrow">Evidence</div>
-<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5">
-<li>190 boards were above USL 03:40–04:30: paste viscosity 236–246 Pa·s (spec 180–220 Pa·s).</li><li>The model attributes 28 boards with open circuit built 03:40–04:30 to this root cause.</li>
-</ul>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 15px">Built 03:40–04:30</span>
+<span style="font-size: 12px; color: #5B6169">Ambient RH (%RH) · 20-minute averages; limit [your limit]</span>
 </div>
-
-<div class="evi"><span style="font-weight: 600">Supported by: </span>Paste volume per aperture was below LSL on 74 boards, 70 of them built 03:40–04:30; 22 of 31 boards with open circuit were among the 74.</div>
-
-<details style="font-size: 14px">
-<summary style="cursor: pointer; color: #1A4F9C; font-weight: 600; min-height: 32px">How this was calculated</summary>
-<div style="font-size: 13px; color: #4A4F56; margin-top: 8px">Share of predicted risk, averaged over the 28 attributed boards with open circuit:</div>
-<div class="attr">
-
-<span>Paste viscosity</span><div class="bar"><div style="width: 88%"></div></div><span class="mono" style="text-align: right">88%</span>
-
-<span>Ambient RH</span><div class="bar"><div style="width: 3%"></div></div><span class="mono" style="text-align: right">3%</span>
-
-<span>Other parameters</span><div class="bar"><div style="width: 9%"></div></div><span class="mono" style="text-align: right">9%</span>
-
+<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Ambient RH over the batch, with the window when this chain appeared" style="flex: 0 1 260px; max-width: 100%">
+<rect class="band" x="0" y="0" width="260" height="0" opacity="0"></rect>
+<rect class="near" x="0" y="0" width="260" height="0"></rect>
+<rect class="win" x="186" y="0" width="34" height="52"></rect>
+<line class="lim" x1="0" x2="260" y1="0" y2="0" opacity="0"></line>
+<line class="lim" x1="0" x2="260" y1="0" y2="0" opacity="0"></line>
+<polyline class="line" points="0,34 11,40 23,32 34,42 45,38 57,36 68,44 79,34 90,34 102,40 113,32 124,42 136,38 147,36 158,44 170,34 181,34 192,13 203,8 215,16 226,38 237,36 249,44 260,34"></polyline>
+<text x="0" y="63">22:00</text>
+<text x="260" y="63" text-anchor="end">05:40</text>
+</svg>
 </div>
-<ul style="margin: 12px 0 0; padding-left: 20px; color: #4A4F56; line-height: 1.6">
-<li>Failure Library path: <span class="mono" style="font-size: 13px">PasteViscosity &gt; USL</span> → Poor paste transfer → Open circuit</li>
-<li>Attributed: the model attributes 28 of 31 boards with open circuit (90%) to this root cause. Needs 20% or more.</li>
-<li>Predicted mechanism: poor paste transfer on 26 of 28 attributed boards (93%). Needs 50% or more.</li>
-<li>Model agreement with electrical test on stg-B0003: 99%. Needs 90% or more.</li>
-<li>What-if: with paste viscosity (200 Pa·s) at nominal, predicted boards with open circuit fall from 30 to 4.</li>
-</ul>
-</details>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
-<div style="font-size: 14px; flex: 1 1 320px"><span style="font-weight: 600">Suggested action: </span>Replace the paste; check paste age and floor life.</div>
+<div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Suggested action: </span>Control humidity; check paste exposure time.</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a class="btn" href="rca-packet-open-circuit-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
 
-
-<div style="display: flex; gap: 8px">
 <button class="btn" type="button">Reject</button>
-<button class="btn primary" type="button">Accept</button>
-</div>
+<button class="btn primary" type="button">Confirm chain</button>
 
+</div>
 </div>
 </article>
 
 </section>
 
-<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Model vs inspection">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
-<div style="display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs electrical test · open circuit</h2>
-<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0003, by model risk and electrical test result.</div>
-</div>
-<span class="chip ok">Agreement 99%</span>
-</div>
-<div class="mx">
-<span></span><span class="h">Electrical test: open circuit</span><span class="h">Electrical test: pass</span>
-<span class="h">Model risk High</span>
-<div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">28</span><span class="t">Confirmed</span><span class="s">Explained by the root causes above</span></div>
-<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">30</span><span class="t">Hidden risk</span><span class="s">Passed electrical test; hold in containment</span></div>
-<span class="h">Model risk Medium or Low</span>
-<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">3</span><span class="t">Unexplained</span><span class="s">Listed below</span></div>
-<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,499</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards go to review</span></div>
-</div>
-</section>
 
-<section class="card" style="overflow: hidden" aria-label="Unexplained boards">
+
+<section class="card" style="overflow: hidden" aria-label="No root cause chain found">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Unexplained: 3 of 31 boards with open circuit</h2>
-<span class="chip muted">Not explained</span>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">No root cause chain found · 3 boards</h2>
 </div>
-<div style="font-size: 14px; color: #4A4F56">Electrical test found open circuit, but the model risk was Low and no parameter raised it.</div>
+<div style="font-size: 14px; color: #4A4F56">Electrical test found open circuit, but the model risk was Low and no parameter raised it, so no chain was assigned.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 
@@ -225,78 +232,48 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 
 </div>
-<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED">
-<ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #4A4F56">
-<li>Built 22:18, 01:47, 05:26: not grouped in one window.</li><li>Check the electrical test logs. If the defect is real, its cause is not among the model's inputs.</li>
-</ul>
-</div>
+<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED; font-size: 14px; color: #4A4F56">Check the electrical test logs. If the defect is real, its cause is not among the model's inputs.</div>
 </section>
 
-<section class="card" style="overflow: hidden" aria-label="Checked and not linked">
-<div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Checked and not linked · 1</h2>
-<div style="font-size: 14px; color: #5B6169">Every other unit rule in the Failure Library for open circuit, with what the model found.</div>
-</div>
-<div style="display: flex; flex-direction: column">
-
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED">
-<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 2px">
-<span style="font-weight: 600; font-size: 14px">High ambient RH</span>
-<span style="font-size: 12px; color: #5B6169">via Poor paste transfer</span>
-</div>
-<span class="chip ok">Rule condition true · 0 boards</span>
-<span style="flex: 1 1 280px; font-size: 14px; color: #4A4F56">Measured 38–55 %RH on all 2,560 boards (spec [your limit]).</span>
-</div>
-
-</div>
-</section>
-</div>
-
-<aside style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="Trend and containment">
-<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Model vs inspection">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
 <div style="display: flex; flex-direction: column; gap: 4px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Paste viscosity (Pa·s)</h2>
-<div style="font-size: 14px; color: #5B6169">Linked root cause #1 · 20-minute averages, stg-B0003</div>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs electrical test · open circuit</h2>
+<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0003, by model risk and electrical test result.</div>
 </div>
-<svg class="trend" viewBox="0 0 520 250" width="100%" role="img" aria-label="Paste viscosity is above USL only during 03:40–04:30">
-<rect class="win" x="375" y="30" width="59" height="184"></rect>
-<text class="wintxt" x="405" y="22" text-anchor="middle">03:40–04:30</text>
-<rect class="band" x="48" y="106" width="456" height="93" opacity="0.6"></rect>
-<line class="lim" x1="48" x2="504" y1="106" y2="106"></line>
-<line class="lim" x1="48" x2="504" y1="199" y2="199"></line>
-<text class="limtxt" x="500" y="100" text-anchor="end">USL 220</text>
-<text class="limtxt" x="500" y="215" text-anchor="end">LSL 180</text>
-<polyline class="line" points="48,141 68,136 88,143 107,134 127,139 147,146 167,136 187,141 207,139 226,143 246,134 266,139 286,141 306,136 326,143 345,139 365,141 385,64 405,53 425,60 445,139 464,143 484,136 504,141"></polyline>
-<line class="base" x1="48" x2="504" y1="214" y2="214"></line>
-<text x="48" y="236">22:00</text>
-<text x="286" y="236" text-anchor="middle">02:00</text>
-<text x="504" y="236" text-anchor="end">05:40</text>
-</svg>
-<div style="font-size: 14px; line-height: 1.5">Paste viscosity averaged 206 Pa·s outside 03:40–04:30 and reached 246 Pa·s during it.</div>
+<span class="chip ok">Agreement 99%</span>
+</div>
+<div class="mx">
+<span></span><span class="h">Electrical test: open circuit</span><span class="h">Electrical test: pass</span>
+<span class="h">Model risk High</span>
+<div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">28</span><span class="t">Confirmed</span><span class="s">Both found open circuit</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">30</span><span class="t">Hidden risk</span><span class="s">Passed electrical test; hold in containment</span></div>
+<span class="h">Model risk Medium or Low</span>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">3</span><span class="t">Unexplained</span><span class="s">No root cause chain found</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,499</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards go to review</span></div>
+</div>
 </section>
+</div>
+
+<aside style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="Containment">
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><div style="display: flex; gap: 6px"><span class="chip crit">30 hold</span><span class="chip warn">135 review</span></div></div>
-<ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; display: flex; flex-direction: column; gap: 6px">
-<li>30 boards passed electrical test but have High model risk for open circuit: hold.</li><li>135 more have Medium model risk: review before release.</li>
-</ul>
+<div style="font-size: 14px; line-height: 1.5">165 boards passed electrical test but show a open circuit chain: 30 with High model risk (hold), 135 with Medium (review).</div>
 <a class="btn" href="containment.html">Review boards to hold</a>
 </section>
-
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
-<h2 style="margin: 0; font-size: 16px; font-weight: 600">How a root cause is linked</h2>
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">How root cause chains are found</h2>
 <ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 6px">
-<li>The Failure Library gives the path: rule → mechanism → defect. Rules with OR are split into unit rules joined only by AND.</li>
-<li>The RCA model scores every board and works out which parameters raised its risk. For each unit rule:
-<ul style="margin: 4px 0 0; padding-left: 18px">
-<li>Boards with the defect the model attributes to it: 20% or more</li>
-<li>Predicted mechanism matches the path: 50% or more of those boards</li>
-<li>Model agrees with inspection on the batch: 90% or more</li>
-</ul></li>
+<li>For every board, the RCA model predicts the defect and the mechanism, and attribution finds the parameters that raised the board's risk.</li>
+<li>The Failure Library's cause-and-effect ontology turns each of those parameters into a chain: root cause → mechanism → defect. Chains below the display threshold are left out.</li>
+<li>This page groups boards by chain. A board can show more than one chain.</li>
 </ol>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56"><span style="font-weight: 600; color: #16191D">Linked:</span> passes all three. <span style="font-weight: 600; color: #16191D">Contributing:</span> under 20% on its own, but the mechanism's root causes together reach 20%.</div>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">What-if re-scores the boards with the root cause at nominal. Model risk bands: High 5% or more, Medium 1–5%, Low under 1%.</div>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Contribution is the share of a board's predicted risk that comes from the root cause. Model risk bands: High 5% or more, Medium 1–5%, Low under 1%.</div>
 </section>
+
+
+
 </aside>
 </div>
 </main>

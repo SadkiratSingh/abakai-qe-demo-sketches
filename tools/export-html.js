@@ -22,11 +22,14 @@ const NAMES = {
 // Pages to export: source, output name, title, optional state override.
 const PAGES = [
   { src: 'Main.dc.html', out: 'line-overview.html', label: '1 · Line overview', desc: 'Shift KPIs, excursion alerts, defects by hour, batch table' },
-  { src: 'RcaPacket.dc.html', out: 'rca-packet.html', label: '2 · RCA packet: solder bridging', desc: 'Root causes linked by model attribution, what-if and predicted mechanism; model vs AOI' },
-  { src: 'RcaPacket.dc.html', out: 'rca-packet-open-circuit.html', label: '2 · RCA packet: open circuit', desc: 'Same screen with the open circuit tab selected', state: { tab: 'open' } },
-  { src: 'RcaNearLimit.dc.html', out: 'rca-packet-near-limit.html', label: '2b · RCA packet: in spec (INV-0143)', desc: 'No parameter out of spec: the model links squeegee speed near LSL; hold vs review by model risk' },
+  { src: 'RcaPacket.dc.html', out: 'rca-packet.html', label: '2 · Investigation: solder bridging', desc: 'Top 3 root cause chains with board counts, when they appeared, fix and confirm; model vs AOI', links: { 'h.view': 'rca-packet-boards.html' } },
+  { src: 'RcaPacket.dc.html', out: 'rca-packet-boards.html', label: '2 · Investigation: boards with chain #1', desc: 'Board list and one board\'s RCA packet in the side panel', state: { panel: 0, board: 4 }, links: { closePanel: 'rca-packet.html', 'h.view': 'rca-packet-boards.html' } },
+  { src: 'RcaPacket.dc.html', out: 'rca-packet-open-circuit.html', label: '2 · Investigation: open circuit', desc: 'Same screen with the open circuit tab selected', state: { tab: 'open' }, links: { 'h.view': 'rca-packet-open-circuit-boards.html' } },
+  { src: 'RcaPacket.dc.html', out: 'rca-packet-open-circuit-boards.html', label: '2 · Investigation: open circuit boards', desc: 'Open circuit chain #1 with one board\'s RCA packet', state: { tab: 'open', panel: 0, board: 1 }, links: { closePanel: 'rca-packet-open-circuit.html', 'h.view': 'rca-packet-open-circuit-boards.html' } },
+  { src: 'RcaNearLimit.dc.html', out: 'rca-packet-near-limit.html', label: '2b · Investigation: in spec (INV-0143)', desc: 'No parameter out of spec: one chain, squeegee speed near LSL', links: { 'h.view': 'rca-packet-near-limit-boards.html' } },
+  { src: 'RcaNearLimit.dc.html', out: 'rca-packet-near-limit-boards.html', label: '2b · Investigation: INV-0143 boards', desc: 'Board list and one board\'s RCA packet', state: { panel: 0, board: 3 }, links: { closePanel: 'rca-packet-near-limit.html', 'h.view': 'rca-packet-near-limit-boards.html' } },
   { src: 'Containment.dc.html', out: 'containment.html', label: '3 · Containment', desc: 'Boards that passed inspection, held or reviewed by model risk' },
-  { src: 'Board.dc.html', out: 'board-detail.html', label: '3a · Board detail', desc: 'One board: linked root cause, parameter fingerprint, disposition, history' },
+  { src: 'Board.dc.html', out: 'board-detail.html', label: '3a · Board detail', desc: 'One board\'s full RCA packet: model risk, chain, contribution per parameter, fingerprint, disposition' },
   { src: 'Manager.dc.html', out: 'manager-overview.html', label: '5 · Manager overview', desc: 'Open investigations, recurring root causes, overdue actions' },
   { src: 'Library.dc.html', out: 'failure-library.html', label: '6 · Failure Library: solder bridging', desc: 'Root cause → mechanism → defect, with specs and fixes' },
   { src: 'Library.dc.html', out: 'failure-library-open-circuit.html', label: '6 · Failure Library: open circuit', desc: 'Same screen with open circuit selected', state: { d: 'o' } },
@@ -36,6 +39,8 @@ const TAB_LINKS = {
   showBridge: 'rca-packet.html', showOpen: 'rca-packet-open-circuit.html',
   showB: 'failure-library.html', showO: 'failure-library-open-circuit.html',
 };
+
+let LINKS = TAB_LINKS;
 
 const PARSE_OPTS = { lowerCaseAttributeNames: false, lowerCaseTags: false, recognizeSelfClosing: true, decodeEntities: false };
 
@@ -111,8 +116,8 @@ function renderNode(node, scope) {
   }
   // Tab buttons that switch state become links between the exported variants.
   const handler = (node.attribs.onClick || '').replace(/[{}\s]/g, '');
-  if (name === 'button' && TAB_LINKS[handler]) {
-    const a = Object.assign({}, attribs, { href: TAB_LINKS[handler], style: 'display:inline-flex;align-items:center;text-decoration:none' });
+  if (name === 'button' && LINKS[handler]) {
+    const a = Object.assign({}, attribs, { href: LINKS[handler], style: 'display:inline-flex;align-items:center;text-decoration:none' });
     delete a.type; delete a['aria-pressed']; delete a['aria-selected'];
     if (a.role === 'tab') delete a.role;
     return [new Element('a', a, renderNodes(node.children, scope))];
@@ -145,6 +150,7 @@ function exportPage(page) {
   const Component = new Function('DCLogic', code + '\nreturn Component;')(DCLogic);
   const comp = new Component({});
   if (page.state) Object.assign(comp.state, page.state);
+  LINKS = Object.assign({}, TAB_LINKS, page.links || {});
   const vals = comp.renderVals();
 
   const headExtra = render(helmet.children, { decodeEntities: false, selfClosingTags: false });

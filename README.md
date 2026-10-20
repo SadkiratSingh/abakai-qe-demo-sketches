@@ -9,10 +9,10 @@ The main story follows batch stg-B0003 of CTRL-BRD-A on the night shift of SMT l
 | File | Screen | What it shows |
 | --- | --- | --- |
 | `sketches/Main.dc.html` | 1 · Line overview | Shift KPIs including model agreement, excursion alerts, defects by hour, batch table |
-| `sketches/RcaPacket.dc.html` | 2 · RCA packet | Root causes linked by model attribution, what-if and predicted mechanism; model vs AOI matrix; unexplained boards; checked and not linked |
-| `sketches/RcaNearLimit.dc.html` | 2b · RCA packet, in spec | INV-0143: mechanism seen in SPI with every setting in spec, the model links squeegee speed near LSL, predicted risk by squeegee speed |
+| `sketches/RcaPacket.dc.html` | 2 · Investigation (INV-0142) | Top 3 root cause chains per defect with board counts, when they appeared and the fix; other chains; no chain found; model vs AOI matrix; side panel with each board's RCA packet |
+| `sketches/RcaNearLimit.dc.html` | 2b · Investigation, in spec (INV-0143) | Same template as INV-0142: one chain, low squeegee speed near LSL and in spec |
 | `sketches/Containment.dc.html` | 3 · Containment | Boards that passed inspection, held (High model risk) or reviewed (Medium) |
-| `sketches/Board.dc.html` | 3a · Board detail | One board's model risk, predicted mechanism, attribution per parameter, what-if, parameter fingerprint, disposition, history |
+| `sketches/Board.dc.html` | 3a · Board RCA packet (full page) | One board's model risk, mechanisms, contribution per parameter, what-if, parameter fingerprint, disposition, history |
 | `sketches/Manager.dc.html` | 5 · Manager overview | Open investigations, repeat root causes, Failure Library summary |
 | `sketches/Library.dc.html` | 6 · Failure Library | Root cause → mechanism → defect knowledge, with specs and fixes |
 
@@ -33,30 +33,21 @@ npm install
 npm run export
 ```
 
-## Linking model (v4: model evidence)
+## Root cause chains (v5)
 
-1. Engineers write Failure Library rules per mechanism (rule → mechanism), with a separate mechanism → defect link. Rules may use OR and are split automatically into **unit rules** joined only by AND, each keeping its parent rule. Rules supply the **path** and the **fix**.
-2. The **RCA model** scores every board from its settings, materials and environment (not from measurements):
-   - **Defect head:** predicted probability of no defect, solder bridging or open circuit.
-   - **Mechanism heads:** predicted mechanism on the printing side and the reflow side.
-   - **Feature attribution** on the defect head: how much each parameter moved the board's predicted risk compared with a typical in-spec board. A board with a defect is **attributed** to the unit rule whose parameters account for most of its risk.
-   - **What-if:** the boards are re-scored with the root cause's parameters at nominal.
-   - There are no per-parameter risk heads.
-3. Three checks per unit rule:
-   - Boards with the defect attributed to it: 20% or more.
-   - Predicted mechanism matches the Failure Library path: on 50% or more of those boards.
-   - Model agrees with inspection (AOI or electrical test) on the batch: 90% or more.
-4. **Linked:** passes all three. **Contributing:** under 20% on its own, but the mechanism's root causes together reach 20%. **Checked and not linked:** shows what the model found (attributed boards and the what-if).
-5. Only settings, materials and environment can be root causes. **Measurements** (SPI) are linked to mechanisms by *supported_by* and show as "Supported by" evidence, or as "{mechanism} seen without an out-of-spec root cause".
-6. The model can link a root cause that stayed in spec (INV-0143). Charts shade a **near-limit zone**, the last 20% of the way from nominal to each limit, for reading only; it is not a check.
-7. **Model vs inspection matrix** per defect: Confirmed (High risk, defect found), Hidden risk (High risk, passed), Unexplained (not High, defect found), Agree: no defect.
-8. **Model risk bands:** High 5% or more, Medium 1–5%, Low under 1% predicted probability. Screens show the band; the percentage appears on hover until the model is calibrated on real line data.
-9. **Containment:** boards that passed inspection with High model risk are held; Medium are reviewed; Low are released. Each board is counted once, under the root cause the model attributes most of its risk to.
-10. No statistical tests (rate ratio, Fisher's exact test) appear on any screen.
+1. **Per board:** for every board, the RCA model (defect head and mechanism heads) predicts the defect and the mechanisms, and feature attribution finds the parameters that raised the board's risk. The Failure Library, the cause-and-effect (Ishikawa) ontology, turns each of those parameters into a **root cause chain**: root cause → mechanism → defect. Chains below the display threshold (τ = 0.60) are left out.
+2. **Per batch:** the investigation groups boards by chain and shows the **top 3** chains per defect, ranked by how many boards with the defect show them. The rest are under "Other chains". Boards with no chain are listed under "No root cause chain found".
+3. **A board can show more than one chain**, so the counts across chains can add up to more than the number of boards with the defect.
+4. **Each chain card** shows: the chain; boards with the defect that show it; boards that passed inspection and show it (the containment list); when it appeared (time window, material lot, or "spread across the shift") with a small trend line of the root cause parameter; the Failure Library fix; and View boards / Reject / **Confirm chain**, which records the QE's decision.
+5. **View boards** opens a side panel: the boards with the chain, and the selected board's **RCA packet** (defect and mechanisms with risk bands, the board's chains ranked by **contribution**, the evidence value against spec, any supporting measurement, an interpretation, and the assessment time, model version and τ). Previous/next move through the boards; "Open full page" opens the board's full packet.
+6. **Contribution** is the share of a board's predicted risk that comes from the root cause (feature attribution). There are no per-parameter risk heads and no statistical tests.
+7. **Model vs inspection matrix** per defect: Confirmed, Hidden risk (held in containment), Unexplained (the no-chain boards), Agree: no defect.
+8. **Model risk bands:** High 5% or more, Medium 1–5%, Low under 1%. The band is shown; the percentage appears on hover until the model is calibrated on real line data.
+9. Only settings, materials and environment can be root causes. Measurements (SPI) appear as supporting measurements. A root cause that stayed in spec is named with "(in spec, near LSL)".
 
 ## Wording templates
 
-Every generated sentence on the screens comes from one of these templates, so the same fact is always said the same way. `{…}` is filled from data. The RCA packets build their text from them in code (`const T` in `sketches/RcaPacket.dc.html` and `sketches/RcaNearLimit.dc.html`).
+Every generated sentence on the screens comes from one of these templates, so the same fact is always said the same way. `{…}` is filled from data. The investigation screens build their text from them in code (`const T` in `sketches/RcaPacket.dc.html`; `sketches/RcaNearLimit.dc.html` is generated from the same template).
 
 **Vocabulary**
 
@@ -67,49 +58,33 @@ Every generated sentence on the screens comes from one of these templates, so th
 | `boards with {defect}`, e.g. `boards with solder bridging` | bridged boards, bridges, opens |
 | `root cause` (the parameter cause), `mechanism`, `defect` | cause, possible cause, signature |
 | Spec as a range `{LSL}–{USL} {unit}`, or `≥ {min}` | nominal ± tolerance |
-| `linked root cause #{n}`, `checked and not linked` | most likely cause, matches batch cause |
+| `chain #{n}`, `other chains`, `no root cause chain found` | most likely cause, linked, contributing |
 | `excursion` / `no excursion` | spike, cluster, in control (that is SPC language) |
 | `model risk` with a band `High` / `Medium` / `Low` | probability, confidence, score |
 | `attributes`, `attributed`, `what-if`, `predicted mechanism` | explains, SHAP value, counterfactual, mechanism head |
 | `RCA model` | the AI, the MLP, the network |
+| `root cause chain`, `contribution`, `Confirm chain` | hypothesis, score, terminal parameter risk |
 
-**Status chip:** `Rule condition true · {n} boards` (or `In spec · near LSL on {n} boards` when the linked root cause stayed in spec)
+**Investigation summary:** `{k} of {K} boards with {defect} show at least one root cause chain. The {n} most frequent are below; a board can show more than one, so the counts can add up to more than {K}.`
 
-**The three linking checks** (in "How this was calculated"):
+**Chain card:** `{root cause} → {mechanism} → {defect}` · `{k} of {K}` boards with {defect} show this chain · `{n}` boards that passed {inspection} show this chain · `Built {window}` | `Paste lot {lot} · built {window}` | `Spread across the shift` · Suggested action: the Failure Library fix.
 
-- `Attributed: the model attributes {k} of {K} boards with {defect} ({pct}) to this root cause. Needs 20% or more.`
-- `Predicted mechanism: {mechanism} on {k} of {K} attributed boards ({pct}). Needs 50% or more.`
-- `Model agreement with {inspection} on {batch}: {pct}. Needs 90% or more.`
+**Other chains:** `{chain}` · `{k} with {defect} · {n} passed` · `{when}`
 
-Plus: `What-if: with {parameter} ({nominal}) at nominal, predicted boards with {defect} fall from {a} to {b}.`
+**No chain:** `No root cause chain found · {n} boards` · `{Inspection} found {defect}, but the model risk was Low and no parameter raised it, so no chain was assigned.` · `Check the {AOI images | electrical test logs}. If the defect is real, its cause is not among the model's inputs.`
 
-Stat boxes: `{k} of {K}` · Boards with {defect} the model attributes to this root cause; `{a} → {b}` · Predicted boards with {defect}, with {parameter} at nominal; `{k} of {K}` · Attributed boards where the predicted mechanism is {mechanism}.
+**Board RCA packet (side panel):** `Built {time}, {date} · {panel} · slot {n} · {inspection}: {result} · {location}` · `Defect: {defect}` + band · `{Printing | Reflow} mechanism: {mechanism | none predicted}` + band · per chain: `#{n} {chain}`, `Contribution {pct}`, `{Parameter} {value} {unit} (spec {spec})` + status (`Above USL`, `Below LSL`, `Near LSL · in spec`, `In spec`) · `Supporting measurement: {measurement} {value} (spec {spec}), {above USL}. Supports {mechanism}.` · `Interpretation: Top chain: {mechanism} from {parameter} {status}. Second: ….` · `Assessed {time} · RCA model v2.0 · display threshold τ = 0.60`
 
-Contributing: `Contributing: the model attributes {k} of {K} boards with {defect} ({pct}) to it on its own. Together with the other {mechanism} root causes: {k2} of {K} ({pct2}).`
-
-Checked and not linked: `Attributed 0 boards with {defect}. With {parameter} at nominal, predicted boards with {defect}: {a} → {b}.` One whose condition was true on 0 boards shows `Measured {value or range} on {stencil ID | all {N} boards} (spec {spec}).`
-
-Unexplained: `Unexplained: {k} of {K} boards with {defect}` · `{Inspection} found {defect}, but the model risk was Low and no parameter raised it.` · `Built {times}: not grouped in one window.` · `Check the {AOI images | electrical test logs}. If the defect is real, its cause is not among the model's inputs.`
-
-Mechanism without an out-of-spec root cause: `{Mechanism} seen without an out-of-spec root cause` · `{Measurement} was {above USL} on {n} boards, while every setting was in spec.`
-
-Supported by: `{Measurement} was {above USL} on {n} boards, {x} of them {where}.`
+**Containment line:** `{n} boards passed {inspection} but show a {defect} chain: {h} with High model risk (hold), {m} with Medium (review).`
 
 **Sentences**
 
 | Where | Template |
 | --- | --- |
-| RCA summary | `{Parameter} was {above USL} {window}. The model attributes {k} of {K} boards with {defect} to it.` |
-| Root causes checked | `{n} unit rules checked by the model · {m} linked · {c} contributing` |
-| Model line | `Evidence from the RCA model. It agreed with {inspection} on {pct} of boards in this batch. Retrained on your line's data at onboarding.` |
-| Evidence, out of spec | `{n} boards were {above USL} {window}: {parameter} {min}–{max} {unit} (spec {spec}).` |
-| Evidence, attributed | `The model attributes {k} boards with {defect} built {window} to this root cause.` |
-| Evidence, compound rule | `{n} boards met the rule condition {window}: {detail}.` |
-| Trend note | `{Parameter} averaged {mean} {unit} outside {window} and reached {max} {unit} during it.` |
-| Containment | `{n} boards passed {inspection} but have High model risk for {defect}: hold.` · `{n} more have Medium model risk: review before release.` |
+| Model line | `Chains from the RCA model and the Failure Library. The model agreed with {inspection} on {pct} of boards in this batch. Retrained on your line's data at onboarding.` |
 | Containment scope check | `Also checked: other batches through {line} during {windows}: {none | list}.` |
-| Line alert | `{K} boards with {defect}; the model attributes {k} to {root cause} ({window}). Root cause analysis is ready.` |
-| Board banner | `Passed {inspections}, but the model risk for {defect} is High. {Parameter} was {above USL} ({value}, spec {spec}). Built {time}, during {window}: attributed to linked root cause #{n} of {investigation}.` |
+| Line alert | `{K} boards with {defect}. Most frequent root cause chain: {root cause} → {mechanism} ({k} boards, {window}). Root cause analysis is ready.` |
+| Board banner | `Passed {inspections}, but the model risk for {defect} is High. {Parameter} was {above USL} ({value}, spec {spec}). Built {time}, during {window}: same root cause chain as chain #{n} of {investigation}.` |
 | Board what-if | `With {parameter} at nominal ({nominal}), this board's model risk would be {band}.` |
 | Suggested action | The root cause's **Fix** text from the Failure Library, word for word |
 
@@ -127,6 +102,7 @@ All numbers are story data, not output from the backend or the model. Before a r
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2 (branch `sketches-v2`): rule-based linking with unit rules, contributing state and measurements as evidence; squeegee wear added to the story.
 - v3 (branch `sketches-v3`): statistics only, no model output. Unexplained boards per defect, compared with batches with no excursion; near-limit investigation INV-0143 linked through near-limit rule variants.
+- v5 (branch `sketches-v5`): investigations show root cause chains instead of linked/contributing root causes. Every board gets chains from the RCA model and the Failure Library; the investigation shows the top 3 chains per defect with boards with the defect (44, 14, 7 of 61) and boards that passed AOI with the same chain (112, 61, 33), when each appeared with a trend line, the fix and Confirm chain; other chains collapsed; no chain found (3 boards); model vs AOI matrix. View boards opens a side panel with the board list and each board's RCA packet (chains ranked by contribution). Rule text, stat boxes, the evidence list, "How this was calculated" and "Checked and not linked" are removed. Both investigations share one template.
 - v4 (branch `sketches-v4`): evidence from the RCA model. The three checks become attributed boards, predicted mechanism and model agreement with inspection, with a what-if per root cause; board counts and statistical tests are removed. New model vs inspection matrix, risk-band containment (75 hold, 263 review for INV-0142; 26 hold, 657 review for INV-0143), attribution bars on board detail, a model risk curve for squeegee speed in INV-0143, and model agreement on the line overview. Near-limit rule variants are dropped; the model links in-spec root causes directly.
 - v1.x: short-excursion story (reflow 02:00–02:40, paste viscosity 03:40–04:30).
 - One investigation per batch excursion (INV-0142 for stg-B0003). 8D screens, report recommendation, investigation stages and overdue tracking are out of scope for this demo.

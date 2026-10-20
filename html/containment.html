@@ -62,7 +62,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0"><div class="eyebrow" style="color: #9B1C12">Hold · High model risk</div><div class="mono" style="font-size: 32px; font-weight: 500">75</div><div style="font-size: 13px; color: #5B6169">WIP 34 · finished goods 36 · shipped 5</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F1D3B5"><div class="eyebrow" style="color: #8A3505">Review · Medium model risk</div><div class="mono" style="font-size: 32px; font-weight: 500">263</div><div style="font-size: 13px; color: #5B6169">WIP 119 · finished goods 129 · shipped 15</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0; background: #FFF8F7"><div class="eyebrow" style="color: #9B1C12">Shipped</div><div class="mono" style="font-size: 32px; font-weight: 500; color: #9B1C12">20</div><div style="font-size: 13px; color: #7E160E; font-weight: 600">5 at High risk: customer notification needed</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">By attributed root cause · hold / review</div><div style="font-size: 14px; line-height: 1.6"><span class="mono" style="font-weight: 600">38 / 74</span> · High peak reflow temperature · 02:00–02:40<br><span class="mono" style="font-weight: 600">7 / 54</span> · Low squeegee angle with low speed or high pressure · 23:10–00:20<br><span class="mono" style="font-weight: 600">30 / 135</span> · High paste viscosity · 03:40–04:30<br><span style="color: #5B6169">Each board counted once, under the root cause the model attributes most of its risk to</span></div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">By root cause chain · hold / review</div><div style="font-size: 14px; line-height: 1.6"><span class="mono" style="font-weight: 600">38 / 74</span> · High peak reflow temperature · 02:00–02:40<br><span class="mono" style="font-weight: 600">7 / 54</span> · Low squeegee angle with low speed or high pressure · 23:10–00:20<br><span class="mono" style="font-weight: 600">30 / 135</span> · High paste viscosity · 03:40–04:30<br><span style="color: #5B6169">A board with more than one chain is counted once, under its top chain</span></div></div>
 </section>
 
 <section class="card" style="overflow: hidden" aria-label="Boards at risk">
@@ -82,7 +82,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </div>
 <div style="overflow-x: auto">
 <table>
-<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Attributed root cause</th><th>Measured</th><th>Model risk</th><th>Location</th></tr></thead>
+<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Top root cause chain</th><th>Measured</th><th>Model risk</th><th>Location</th></tr></thead>
 <tbody>
 
 <tr>

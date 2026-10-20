@@ -89,7 +89,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <div style="padding: 20px 24px 8px; display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Open investigations</h2><div style="font-size: 14px; color: #5B6169">One investigation per batch excursion.</div></div>
 <div style="overflow-x: auto">
 <table>
-<thead><tr><th>Investigation · batch</th><th>Defects</th><th>Product · line</th><th>Owner</th><th>Age</th><th>Linked root causes</th></tr></thead>
+<thead><tr><th>Investigation · batch</th><th>Defects</th><th>Product · line</th><th>Owner</th><th>Age</th><th>Top root cause chains</th></tr></thead>
 <tbody>
 <sc-for list="{{invs}}" as="r" hint-placeholder-count="5">
 <tr>
@@ -115,7 +115,7 @@ class Component extends DCLogic {
     const causes = raw.map((c, i) => ({ name: c[0], n: c[1], w: (c[1] / 5 * 100) + '%', color: i === 0 ? '#1A4F9C' : '#8FA9D3' }));
     const inv = [
       ['INV-0143', 'stg-B0005', 'Solder bridging', 'CTRL-BRD-A · Line 2', 'Wei C.', '3 h', 'Low squeegee speed (in spec, near LSL)'],
-      ['INV-0142', 'stg-B0003', 'Solder bridging, open circuit', 'CTRL-BRD-A · Line 2', 'Priya S.', '6 h', 'High peak reflow temperature; high paste viscosity; low squeegee angle (contributing)'],
+      ['INV-0142', 'stg-B0003', 'Solder bridging, open circuit', 'CTRL-BRD-A · Line 2', 'Priya S.', '6 h', 'High peak reflow temperature; low squeegee angle; high paste viscosity'],
       ['INV-0139', 'stg-C0211', 'Solder bridging', 'PWR-BRD-C · Line 1', 'Marco L.', '4 d', 'High stencil thickness'],
       ['INV-0137', 'stg-A0185', 'Solder bridging', 'CTRL-BRD-A · Line 2', 'Wei C.', '6 d', 'Low squeegee speed'],
       ['INV-0135', 'stg-I0092', 'Solder bridging', 'IO-BRD-B · Line 2', 'Wei C.', '9 d', 'High peak reflow temperature'],

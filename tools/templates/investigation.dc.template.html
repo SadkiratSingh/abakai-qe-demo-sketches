@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>__TITLE__</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'IBM Plex Sans',sans-serif;color:#16191D;background:#F4F5F3}
+a{color:#1A4F9C}a:hover{color:#123A73}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:24px;padding:8px 32px;background:#16191D;color:#fff}
+.brand{font-weight:600;font-size:17px;letter-spacing:-.01em;color:#fff}
+.nav{display:flex;flex-wrap:wrap;gap:4px}
+.nav a{color:#C9CDD2;text-decoration:none;font-size:14px;padding:12px 14px;border-radius:6px}
+.nav a:hover{color:#fff;background:#2A2F35}
+.nav a.on{color:#fff;background:#2A2F35}
+.wrap{max-width:1280px;margin:0 auto;padding:32px}
+.card{background:#fff;border:1px solid #E1E4E0;border-radius:10px}
+.mono{font-family:'IBM Plex Mono',monospace}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5B6169;font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.crit{background:#FDECEA;color:#9B1C12}.warn{background:#FDF0E3;color:#8A3505}.ok{background:#E7F3EC;color:#1D6B3F}.info{background:#E8EFFA;color:#1A4F9C}.muted{background:#EEF0ED;color:#4A4F56}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;text-decoration:none;border:1px solid #C9CDD2;background:#fff;color:#16191D;cursor:pointer;box-sizing:border-box}
+.btn.primary{background:#1A4F9C;border-color:#1A4F9C;color:#fff}
+.btn.primary:hover{background:#123A73;color:#fff}
+.btn.sm{min-height:36px;padding:0 12px;font-size:13px}
+.tab{min-height:48px;padding:0 20px;border:0;border-bottom:3px solid transparent;background:none;font:600 15px 'IBM Plex Sans',sans-serif;color:#5B6169;cursor:pointer}
+.tab.on{color:#16191D;border-bottom-color:#1A4F9C}
+.node{padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600;line-height:1.3}
+.n-root{background:#F4F5F3;border:1px solid #C9CDD2}
+.n-mech{background:#E8EFFA;border:1px solid #B7CBEA;color:#123A73}
+.n-def{background:#FDECEA;border:1px solid #F3C5C0;color:#7E160E}
+.arrow{color:#5B6169;font-size:18px}
+.big{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:#F4F5F3;border-radius:8px;flex:1 1 180px}
+.big .v{font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500}
+.big .l{font-size:13px;color:#4A4F56}
+.spark .band{fill:#E7F3EC}.spark .near{fill:#FDF0E3}.spark .win{fill:#16191D;opacity:.07}
+.spark .lim{stroke:#B42318;stroke-width:1;stroke-dasharray:4 3}
+.spark .line{fill:none;stroke:#1A4F9C;stroke-width:2;stroke-linejoin:round}
+.spark text{font-family:'IBM Plex Mono',monospace;font-size:10px;fill:#5B6169}
+.mx{display:grid;grid-template-columns:minmax(120px,0.8fr) 1fr 1fr;gap:8px;font-size:13px}
+.mx .h{font-weight:600;color:#5B6169;padding:4px 8px;display:flex;align-items:center}
+.mx .c{border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.mx .n{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500}
+.mx .t{font-weight:600;font-size:14px}
+.mx .s{color:#4A4F56;font-size:12.5px}
+.seg{min-height:36px;padding:0 12px;border:1px solid #C9CDD2;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#4A4F56}
+.seg.on{background:#16191D;border-color:#16191D;color:#fff}
+.seg:first-child{border-radius:8px 0 0 8px}.seg:last-child{border-radius:0 8px 8px 0;margin-left:-1px}
+.brow{display:grid;grid-template-columns:120px 52px 1fr auto;align-items:center;gap:10px;width:100%;min-height:40px;padding:6px 10px;border:0;border-bottom:1px solid #EEF0ED;background:#fff;font:14px 'IBM Plex Sans',sans-serif;color:#16191D;text-align:left;cursor:pointer}
+.brow.on{background:#F5F8FD;box-shadow:inset 3px 0 0 #1A4F9C}
+.pchain{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid #E1E4E0;border-radius:8px}
+.cbar{height:8px;border-radius:4px;background:#EEF0ED;overflow:hidden;flex:1 1 120px}
+.cbar div{height:100%;background:#B42318;border-radius:4px}
+.kv{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F5F3">
+<header class="top">
+<div class="brand">RCA Studio</div>
+<nav class="nav" aria-label="Main">
+<a href="Main.dc.html">Line</a>
+<a class="on" href="RcaPacket.dc.html">Investigations</a>
+<a href="Containment.dc.html">Containment</a>
+<a href="Manager.dc.html">Overview</a>
+<a href="Library.dc.html">Failure Library</a>
+</nav>
+</header>
+<main class="wrap" style="display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 900px">
+<a href="{{inv.backHref}}" style="font-size: 14px; text-decoration: none">← {{inv.back}}</a>
+<div class="eyebrow">{{inv.eyebrow}}</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">{{inv.title}}</h1>
+<sc-if value="{{inv.hasSub}}" hint-placeholder-val="{{ false }}"><div style="font-size: 15px; color: #4A4F56">{{inv.sub}}</div></sc-if>
+</div>
+<a class="btn" href="Containment.dc.html">View containment</a>
+</div>
+
+<sc-if value="{{inv.hasTabs}}" hint-placeholder-val="{{ true }}">
+<div role="tablist" aria-label="Defect" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E1E4E0">
+<button role="tab" class="{{bridgeTabClass}}" aria-selected="{{isBridge}}" onClick="{{showBridge}}">Solder bridging · 61 boards</button>
+<button role="tab" class="{{openTabClass}}" aria-selected="{{isOpen}}" onClick="{{showOpen}}">Open circuit · 31 boards</button>
+</div>
+</sc-if>
+
+<div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
+<span class="chip info">Root cause chains</span>
+<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">{{c.summary}}</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 13px; color: #4A4F56">
+<span class="chip muted">RCA model · trained on synthetic data</span>
+<span>{{c.modelLine}}</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Most frequent root cause chains">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Most frequent root cause chains</h2>
+<div style="font-size: 14px; color: #5B6169">Each board with {{c.defLower}} gets its root cause chains from the RCA model and the Failure Library. Ranked by how many boards show each chain.</div>
+</div>
+<sc-for list="{{c.top}}" as="h" hint-placeholder-count="3">
+<article class="card" style="{{h.cardStyle}}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#{{h.rank}}</span>
+<span class="chip muted">{{h.stage}}</span>
+<sc-if value="{{h.inSpec}}" hint-placeholder-val="{{ false }}"><span class="chip warn">In spec · near LSL</span></sc-if>
+<sc-if value="{{h.confirmed}}" hint-placeholder-val="{{ false }}"><span class="chip ok">Confirmed by Priya S.</span></sc-if>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<div class="node n-root">{{h.root}}<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · {{h.equip}}</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-mech">{{h.mech}}<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-def">{{c.title}}<div style="font-size: 12px; font-weight: 400">Defect</div></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="big"><span class="v">{{h.k}} of {{c.K}}</span><span class="l">boards with {{c.defLower}} show this chain</span></div>
+<div class="big"><span class="v">{{h.passed}}</span><span class="l">boards that passed {{c.inspLower}} show this chain</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 15px">{{h.when}}</span>
+<span style="font-size: 12px; color: #5B6169">{{h.sparkSub}}</span>
+</div>
+<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="{{h.sparkLabel}}" style="flex: 0 1 260px; max-width: 100%">
+<rect class="band" x="0" y="{{h.sp.bandY}}" width="260" height="{{h.sp.bandH}}" opacity="{{h.sp.bandOp}}"></rect>
+<rect class="near" x="0" y="{{h.sp.nearY}}" width="260" height="{{h.sp.nearH}}"></rect>
+<rect class="win" x="{{h.sp.winX}}" y="0" width="{{h.sp.winW}}" height="52"></rect>
+<line class="lim" x1="0" x2="260" y1="{{h.sp.uslY}}" y2="{{h.sp.uslY}}" opacity="{{h.sp.bandOp}}"></line>
+<line class="lim" x1="0" x2="260" y1="{{h.sp.lslY}}" y2="{{h.sp.lslY}}" opacity="{{h.sp.bandOp}}"></line>
+<polyline class="line" points="{{h.sp.points}}"></polyline>
+<text x="0" y="63">{{inv.t0}}</text>
+<text x="260" y="63" text-anchor="end">{{inv.t1}}</text>
+</svg>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
+<div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Suggested action: </span>{{h.action}}</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button class="btn" type="button" onClick="{{h.view}}">View boards</button>
+<sc-if value="{{h.open}}" hint-placeholder-val="{{ true }}">
+<button class="btn" type="button">Reject</button>
+<button class="btn primary" type="button" onClick="{{h.confirm}}">Confirm chain</button>
+</sc-if>
+</div>
+</div>
+</article>
+</sc-for>
+</section>
+
+<sc-if value="{{c.hasOther}}" hint-placeholder-val="{{ true }}">
+<details class="card" style="overflow: hidden">
+<summary style="cursor: pointer; padding: 18px 24px; font-size: 16px; font-weight: 600; min-height: 24px">Other chains · {{c.otherCount}}</summary>
+<div style="display: flex; flex-direction: column">
+<sc-for list="{{c.other}}" as="o" hint-placeholder-count="2">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<span style="flex: 1 1 340px; font-weight: 600">{{o.chain}}</span>
+<span class="mono" style="flex: 0 0 auto">{{o.k}} with {{c.defLower}} · {{o.passed}} passed</span>
+<span style="flex: 0 0 auto; color: #4A4F56">{{o.when}}</span>
+</div>
+</sc-for>
+</div>
+</details>
+</sc-if>
+
+<section class="card" style="overflow: hidden" aria-label="No root cause chain found">
+<div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">No root cause chain found · {{c.none.length}} boards</h2>
+</div>
+<div style="font-size: 14px; color: #4A4F56">{{c.noneWhy}}</div>
+</div>
+<div style="display: flex; flex-direction: column">
+<sc-for list="{{c.none}}" as="b" hint-placeholder-count="3">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<a class="mono" href="Board.dc.html" style="flex: 0 0 120px">{{b.id}}</a>
+<span class="mono" style="flex: 0 0 56px; color: #4A4F56">{{b.time}}</span>
+<span class="chip ok" title="{{b.pct}}">Low</span>
+<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+</div>
+</sc-for>
+</div>
+<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED; font-size: 14px; color: #4A4F56">{{c.noneNext}}</div>
+</section>
+
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Model vs inspection">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs {{c.inspLower}} · {{c.defLower}}</h2>
+<div style="font-size: 14px; color: #5B6169">All 2,560 boards in {{inv.batch}}, by model risk and {{c.inspLower}} result.</div>
+</div>
+<span class="chip ok">Agreement {{c.agree}}</span>
+</div>
+<div class="mx">
+<span></span><span class="h">{{c.insp}}: {{c.defLower}}</span><span class="h">{{c.insp}}: pass</span>
+<span class="h">Model risk High</span>
+<div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">{{c.mx.conf}}</span><span class="t">Confirmed</span><span class="s">Both found {{c.defLower}}</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">{{c.mx.hidden}}</span><span class="t">Hidden risk</span><span class="s">Passed {{c.inspLower}}; hold in containment</span></div>
+<span class="h">Model risk Medium or Low</span>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">{{c.mx.unexpl}}</span><span class="t">Unexplained</span><span class="s">No root cause chain found</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">{{c.mx.good}}</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards go to review</span></div>
+</div>
+</section>
+</div>
+
+<aside style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="{{asideLabel}}">
+<sc-if value="{{panelClosed}}" hint-placeholder-val="{{ true }}">
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Containment</h2><div style="display: flex; gap: 6px"><span class="chip crit">{{c.hold}} hold</span><span class="chip warn">{{c.review}} review</span></div></div>
+<div style="font-size: 14px; line-height: 1.5">{{c.containLine}}</div>
+<a class="btn" href="Containment.dc.html">Review boards to hold</a>
+</section>
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 16px; font-weight: 600">How root cause chains are found</h2>
+<ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 6px">
+<li>For every board, the RCA model predicts the defect and the mechanism, and attribution finds the parameters that raised the board's risk.</li>
+<li>The Failure Library's cause-and-effect ontology turns each of those parameters into a chain: root cause → mechanism → defect. Chains below the display threshold are left out.</li>
+<li>This page groups boards by chain. A board can show more than one chain.</li>
+</ol>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Contribution is the share of a board's predicted risk that comes from the root cause. Model risk bands: High 5% or more, Medium 1–5%, Low under 1%.</div>
+</section>
+</sc-if>
+
+<sc-if value="{{panelOpen}}" hint-placeholder-val="{{ false }}">
+<section class="card" style="display: flex; flex-direction: column; border-color: #B7CBEA; box-shadow: 0 8px 24px rgba(22,25,29,.10)" aria-label="Boards with this chain">
+<div style="padding: 18px 20px 12px; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid #E1E4E0">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<span class="eyebrow">Chain #{{p.rank}} · boards</span>
+<button class="btn sm" type="button" onClick="{{closePanel}}">Close</button>
+</div>
+<div style="font-size: 14px; font-weight: 600; line-height: 1.4">{{p.chain}}</div>
+<div style="display: flex">
+<span class="seg on">With {{c.defLower}} · {{p.k}}</span>
+<span class="seg">Passed {{c.inspLower}} · {{p.passed}}</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column">
+<sc-for list="{{p.boards}}" as="b" hint-placeholder-count="6">
+<button type="button" class="{{b.cls}}" onClick="{{b.pick}}"><span class="mono">{{b.id}}</span><span class="mono" style="color: #4A4F56">{{b.time}}</span><span style="color: #4A4F56; font-size: 13px">{{b.val}}</span><span class="chip crit" title="{{b.pct}}">High</span></button>
+</sc-for>
+<div style="padding: 8px 12px; font-size: 13px; color: #5B6169">Showing 6 of {{p.k}} · sorted by build time</div>
+</div>
+
+<div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; border-top: 1px solid #E1E4E0; background: #FCFCFB">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">RCA packet · <span class="mono">{{bp.id}}</span></h2>
+<div style="display: flex; gap: 6px"><button class="btn sm" type="button" onClick="{{prevBoard}}" aria-label="Previous board">←</button><button class="btn sm" type="button" onClick="{{nextBoard}}" aria-label="Next board">→</button></div>
+</div>
+<div style="font-size: 13px; color: #4A4F56">{{bp.meta}}</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; background: #fff; border: 1px solid #E1E4E0; border-radius: 8px">
+<div class="kv"><span>Defect: <span style="font-weight: 600">{{c.title}}</span></span><span class="chip crit" title="{{bp.pct}}">High</span></div>
+<sc-for list="{{bp.mechs}}" as="m" hint-placeholder-count="2">
+<div class="kv"><span style="color: #4A4F56">{{m.side}} mechanism: <span style="color: #16191D; font-weight: 600">{{m.name}}</span></span><span class="{{m.cls}}" title="{{m.pct}}">{{m.band}}</span></div>
+</sc-for>
+</div>
+<div class="eyebrow">Root cause chains on this board</div>
+<sc-for list="{{bp.chains}}" as="x" hint-placeholder-count="2">
+<div class="pchain" style="background: #fff">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px"><span class="mono" style="font-weight: 500">#{{x.n}}</span><span style="font-weight: 600; font-size: 14px; flex: 1 1 260px">{{x.chain}}</span><span class="chip muted">{{x.stage}}</span></div>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 13px"><span style="color: #4A4F56; white-space: nowrap">Contribution</span><div class="cbar"><div style="width: {{x.contrib}}"></div></div><span class="mono">{{x.contrib}}</span></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 13px; color: #4A4F56"><span>{{x.ev}}</span><span class="{{x.cls}}">{{x.status}}</span></div>
+</div>
+</sc-for>
+<sc-if value="{{bp.hasSupport}}" hint-placeholder-val="{{ false }}">
+<div style="font-size: 13px; line-height: 1.5; padding: 10px 12px; background: #F5F8FD; border: 1px solid #B7CBEA; border-radius: 8px"><span style="font-weight: 600">Supporting measurement: </span>{{bp.support}}</div>
+</sc-if>
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Interpretation: </span>{{bp.interp}}</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; padding-top: 12px; border-top: 1px solid #EEF0ED; font-size: 12px; color: #5B6169">
+<span>Assessed {{bp.assessed}} · RCA model v2.0 · display threshold τ = 0.60</span>
+<a href="Board.dc.html" style="font-size: 14px; font-weight: 600">Open full page</a>
+</div>
+</div>
+</section>
+</sc-if>
+</aside>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":__HEIGHT__}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { inv: '__INV__', tab: 'bridge', panel: -1, board: 4, confirmed: {} };
+  }
+  // Small trend line for a chain card: parameter averages over the batch, spec band, near-limit zone and the window when the chain appeared.
+  spark(s) {
+    const W = 260, H = 52, vals = s.vals;
+    const hasLim = s.lsl != null;
+    const lo = Math.min(hasLim ? s.lsl : Infinity, ...vals), hi = Math.max(hasLim ? s.usl : -Infinity, ...vals);
+    const pad = (hi - lo) * 0.12 || 1;
+    const Y = v => Math.round(H - 4 - (v - (lo - pad)) / (hi - lo + 2 * pad) * (H - 8));
+    const step = W / (vals.length - 1);
+    const X = i => Math.round(i * step);
+    const uslY = hasLim ? Y(s.usl) : 0, lslY = hasLim ? Y(s.lsl) : 0;
+    const nearY = s.near != null ? Y(s.near) : 0;
+    return {
+      points: vals.map((v, i) => X(i) + ',' + Y(v)).join(' '),
+      bandY: uslY, bandH: hasLim ? lslY - uslY : 0, bandOp: hasLim ? 1 : 0, uslY, lslY,
+      nearY, nearH: s.near != null ? lslY - nearY : 0,
+      winX: s.w0 == null ? 0 : Math.round(X(s.w0) - step / 2), winW: s.w0 == null ? 0 : Math.round((s.w1 - s.w0 + 1) * step)
+    };
+  }
+  renderVals() {
+    // Text templates (see README, "Wording templates").
+    const T = {
+      summary: (k, K, d, n) => `${k} of ${K} boards with ${d} show at least one root cause chain. The ${n} most frequent are below; a board can show more than one, so the counts can add up to more than ${K}.`,
+      summaryOne: (k, K, d) => `${k} of ${K} boards with ${d} show a root cause chain, and no parameter was out of spec on any of them.`,
+      model: (insp, pct) => `Chains from the RCA model and the Failure Library. The model agreed with ${insp} on ${pct} of boards in this batch. Retrained on your line's data at onboarding.`,
+      chain: (r, m, d) => `${r} → ${m} → ${d}`,
+      contain: (n, insp, d, hold, rev) => `${n} boards passed ${insp} but show a ${d} chain: ${hold} with High model risk (hold), ${rev} with Medium (review).`,
+      meta: (time, panel, slot, insp, res, loc) => `Built ${time} · ${panel} · slot ${slot} · ${insp}: ${res} · ${loc}`,
+      ev: (param, val, unit, spec) => `${param} ${val}${unit === '°' ? '' : ' '}${unit} (spec ${spec})`,
+      interpTwo: (a, b) => `Top chain: ${a}. Second: ${b}.`,
+      interpOne: (a) => `Top chain: ${a}. No other chain above the display threshold.`,
+      noneWhy: (insp, d) => `${insp} found ${d}, but the model risk was Low and no parameter raised it, so no chain was assigned.`,
+      noneNext: (rec) => `Check the ${rec}. If the defect is real, its cause is not among the model's inputs.`
+    };
+    // Parameters a chain can end in (the root cause), with the facts the packet shows.
+    const P = {
+      reflow: { root: 'High peak reflow temperature', mech: 'Excess reflow spreading', side: 'Reflow', stage: 'Reflow', equip: 'Reflow oven', param: 'Peak reflow temperature', unit: '°C', spec: '245–255 °C', status: 'Above USL', cls: 'chip crit', short: 'reflow spreading from peak reflow temperature above USL' },
+      angle: { root: 'Low squeegee angle', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', equip: 'Solder printer', param: 'Squeegee angle', unit: '°', spec: '55–65°', status: 'Below LSL', cls: 'chip crit', short: 'aperture overfill from squeegee angle below LSL' },
+      speed: { root: 'Low squeegee speed', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', equip: 'Solder printer', param: 'Squeegee speed', unit: 'mm/s', spec: '56–84 mm/s', status: 'Below LSL', cls: 'chip crit', short: 'aperture overfill from squeegee speed below LSL' },
+      speedNear: { root: 'Low squeegee speed', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', equip: 'Solder printer', param: 'Squeegee speed', unit: 'mm/s', spec: '56–84 mm/s', status: 'Near LSL · in spec', cls: 'chip warn', short: 'aperture overfill from squeegee speed near LSL, in spec' },
+      pressure: { root: 'High squeegee pressure', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', equip: 'Solder printer', param: 'Squeegee pressure', unit: 'MPa', spec: '0.27–0.33 MPa', status: 'Above USL', cls: 'chip crit', short: 'aperture overfill from squeegee pressure above USL' },
+      ambient: { root: 'High ambient temperature', mech: 'Excess reflow spreading', side: 'Reflow', stage: 'Reflow', equip: 'Line', param: 'Ambient temperature', unit: '°C', spec: '[your limit]', status: 'Above USL', cls: 'chip crit', short: 'reflow spreading from ambient temperature above USL' },
+      visc: { root: 'High paste viscosity', mech: 'Poor paste transfer', side: 'Printing', stage: 'Material', equip: 'Solder paste', param: 'Paste viscosity', unit: 'Pa·s', spec: '180–220 Pa·s', status: 'Above USL', cls: 'chip crit', short: 'poor paste transfer from paste viscosity above USL' },
+      rh: { root: 'High ambient RH', mech: 'Poor paste transfer', side: 'Printing', stage: 'Environment', equip: 'Line', param: 'Ambient RH', unit: '%RH', spec: '[your limit]', status: 'Above USL', cls: 'chip crit', short: 'poor paste transfer from ambient RH above USL' }
+    };
+    const FIX = {
+      reflow: 'Restore the approved reflow recipe; lock recipe changes behind sign-off.',
+      angle: 'Replace the squeegee blade; check angle, speed and pressure against the recipe.',
+      speed: 'Raise the speed to nominal (70 mm/s).',
+      visc: 'Replace the paste; check paste age and floor life.',
+      rh: 'Control humidity; check paste exposure time.'
+    };
+    const night = { t0: '22:00', t1: '05:40' }, day = { t0: '06:00', t1: '13:40' };
+    const flat = (base, jit, win, wv) => Array.from({ length: 24 }, (_, i) => (win && i >= win[0] && i <= win[1]) ? wv[i - win[0]] : +(base + jit[i % jit.length]).toFixed(2));
+    const J = [0.2, -0.1, 0.3, -0.2, 0.0, 0.1, -0.3, 0.2];
+    const S = {
+      reflow: { vals: flat(251.8, J, [12, 13], [258.6, 258.9]), lsl: 245, usl: 255, w0: 12, w1: 13, sub: 'Peak reflow temperature (°C) · 20-minute averages, spec band shaded' },
+      angle: { vals: flat(60, J, [4, 6], [52.4, 52.1, 52.8]), lsl: 55, usl: 65, w0: 4, w1: 6, sub: 'Squeegee angle (°) · 20-minute averages, spec band shaded' },
+      speed: { vals: flat(70, J.map(v => v * 4), [4, 6], [52.6, 51.9, 53.1]), lsl: 56, usl: 84, w0: 4, w1: 6, sub: 'Squeegee speed (mm/s) · 20-minute averages, spec band shaded' },
+      visc: { vals: flat(206, J.map(v => v * 6), [17, 19], [238, 243, 240]), lsl: 180, usl: 220, w0: 17, w1: 19, sub: 'Paste viscosity (Pa·s) · 20-minute averages, spec band shaded' },
+      rh: { vals: flat(46, J.map(v => v * 8), [17, 19], [56, 58, 55]), lsl: null, usl: null, w0: 17, w1: 19, sub: 'Ambient RH (%RH) · 20-minute averages; limit [your limit]' },
+      speedDay: { vals: flat(70.1, J, [13, 19], [57.9, 57.4, 57.6, 56.9, 57.8, 57.5, 58.1]), lsl: 56, usl: 84, near: 58.8, w0: 13, w1: 19, sub: 'Squeegee speed (mm/s) · spec band green, near-LSL zone amber' }
+    };
+    // A board row: [id, built, model risk, value of the chain's root cause, contribution %, second chain key, second value, second contribution %].
+    const INV = {
+      '0142': {
+        eyebrow: 'Investigation INV-0142 · CTRL-BRD-A · stg-B0003 · 2,560 boards · 2 defects · Night shift', title: 'Root cause analysis', hasSub: false, sub: '',
+        back: 'Line overview', backHref: 'Main.dc.html', batch: 'stg-B0003', hasTabs: true, times: night, assessed: '15 Oct 2026 06:05', date: '15 Oct',
+        defects: {
+          bridge: {
+            title: 'Solder bridging', defLower: 'solder bridging', K: 61, withChain: 58, insp: 'AOI', inspLower: 'AOI', record: 'AOI images', agree: '98%',
+            mx: { conf: 58, hidden: 45, unexpl: 3, good: '2,454' }, hold: 45, review: 128, passedAny: 173,
+            top: [
+              { key: 'reflow', k: 44, passed: 112, when: 'Built 02:00–02:40', spark: 'reflow', fix: 'reflow', panel: 'stg-B0003-P0374',
+                boards: [['PCB-0006471', '02:01', '31%', '258.4', 76], ['PCB-0006502', '02:06', '29%', '258.9', 81], ['PCB-0006538', '02:12', '33%', '259.6', 79, 'speedNear', '58.3', 11], ['PCB-0006579', '02:20', '30%', '259.2', 83], ['PCB-0006612', '02:31', '34%', '259.1', 78, 'speedNear', '58.1', 12], ['PCB-0006633', '02:36', '28%', '258.0', 74, 'ambient', '28.4', 13]] },
+              { key: 'angle', k: 14, passed: 61, when: 'Built 23:10–00:20', spark: 'angle', fix: 'angle', panel: 'stg-B0003-P0152',
+                boards: [['PCB-0005598', '23:12', '12%', '52.6', 48, 'speed', '52', 38], ['PCB-0005640', '23:19', '9%', '52.2', 51, 'pressure', '0.35', 36], ['PCB-0005702', '23:31', '14%', '51.8', 46, 'speed', '51', 39], ['PCB-0005779', '23:46', '8%', '52.9', 55, 'pressure', '0.34', 33], ['PCB-0005851', '23:58', '11%', '52.4', 49, 'speed', '53', 37], ['PCB-0005930', '00:08', '10%', '53.1', 52, 'pressure', '0.35', 35]] },
+              { key: 'speed', k: 7, passed: 33, when: 'Built 23:10–00:20', spark: 'speed', fix: 'speed', panel: 'stg-B0003-P0152',
+                boards: [['PCB-0005598', '23:12', '12%', '52', 38, 'angle', '52.6', 48], ['PCB-0005655', '23:22', '10%', '51', 40, 'angle', '52.0', 47], ['PCB-0005702', '23:31', '14%', '51', 39, 'angle', '51.8', 46], ['PCB-0005738', '23:37', '13%', '52', 36, 'angle', '52.5', 50], ['PCB-0005810', '23:51', '9%', '53', 35, 'angle', '53.0', 51], ['PCB-0005851', '23:58', '11%', '53', 37, 'angle', '52.4', 49]] }
+            ],
+            other: [['pressure', 7, 28, 'Built 23:10–00:20'], ['speedNear', 5, 20, 'Built 02:00–02:40'], ['ambient', 2, 9, 'Built 02:00–02:40']],
+            none: [['PCB-0005451', '22:41', '0.3%'], ['PCB-0006244', '01:15', '0.2%'], ['PCB-0007351', '05:02', '0.4%']]
+          },
+          open: {
+            title: 'Open circuit', defLower: 'open circuit', K: 31, withChain: 28, insp: 'Electrical test', inspLower: 'electrical test', record: 'electrical test logs', agree: '99%',
+            mx: { conf: 28, hidden: 30, unexpl: 3, good: '2,499' }, hold: 30, review: 135, passedAny: 165,
+            top: [
+              { key: 'visc', k: 28, passed: 162, when: 'Paste lot [paste lot] · built 03:40–04:30', spark: 'visc', fix: 'visc', panel: 'stg-B0003-P0462', support: 'Paste volume per aperture 0.033 mm³ (spec 0.036–0.044 mm³), below LSL. Supports poor paste transfer.',
+                boards: [['PCB-0006925', '03:43', '24%', '238', 84], ['PCB-0006961', '03:50', '27%', '241', 86, 'rh', '58', 9], ['PCB-0006997', '03:57', '22%', '239', 82], ['PCB-0007034', '04:04', '29%', '244', 88], ['PCB-0007072', '04:11', '26%', '242', 85, 'rh', '57', 8], ['PCB-0007118', '04:19', '25%', '240', 83]] },
+              { key: 'rh', k: 4, passed: 18, when: 'Built 03:40–04:30', spark: 'rh', fix: 'rh', panel: 'stg-B0003-P0462', support: 'Paste volume per aperture 0.034 mm³ (spec 0.036–0.044 mm³), below LSL. Supports poor paste transfer.',
+                boards: [['PCB-0006961', '03:50', '27%', '58', 9, 'visc', '241', 86], ['PCB-0006988', '03:55', '24%', '57', 8, 'visc', '241', 84], ['PCB-0007072', '04:11', '26%', '57', 8, 'visc', '242', 85], ['PCB-0007101', '04:16', '23%', '58', 10, 'visc', '239', 81]] }
+            ],
+            other: [],
+            none: [['PCB-0005334', '22:18', '0.2%'], ['PCB-0006407', '01:47', '0.1%'], ['PCB-0007473', '05:26', '0.3%']]
+          }
+        }
+      },
+      '0143': {
+        eyebrow: 'Investigation INV-0143 · CTRL-BRD-A · stg-B0005 · 2,560 boards · 1 defect · Day shift, 16 Oct 2026', title: 'No parameter was out of spec, yet 23 boards had solder bridging', hasSub: true,
+        sub: 'Batches with no excursion on line 2 this week had 2–3 boards with solder bridging each.',
+        back: 'Open investigations', backHref: 'Manager.dc.html', batch: 'stg-B0005', hasTabs: false, times: day, assessed: '16 Oct 2026 14:10', date: '16 Oct',
+        defects: {
+          bridge: {
+            title: 'Solder bridging', defLower: 'solder bridging', K: 23, withChain: 19, insp: 'AOI', inspLower: 'AOI', record: 'AOI images', agree: '99%', one: true,
+            mx: { conf: 19, hidden: 26, unexpl: 4, good: '2,511' }, hold: 26, review: 657, passedAny: 683,
+            top: [
+              { key: 'speedNear', k: 19, passed: 683, when: 'Built 10:20–12:30', spark: 'speedDay', fix: 'speed', inSpec: true, panel: 'stg-B0005-P0371', support: 'Paste volume per aperture 0.0452 mm³ (spec 0.036–0.044 mm³), above USL. Supports aperture overfill.',
+                boards: [['PCB-0009410', '10:23', '6.2%', '57.9', 69], ['PCB-0009486', '10:37', '7.4%', '57.1', 72], ['PCB-0009561', '10:51', '5.8%', '58.2', 66, 'angleIn', '58.6', 7], ['PCB-0009610', '11:05', '8.1%', '56.9', 74], ['PCB-0009702', '11:22', '6.9%', '57.5', 71], ['PCB-0009815', '11:44', '7.7%', '57.2', 73, 'angleIn', '58.4', 6]] }
+            ],
+            other: [],
+            none: [['PCB-0008174', '06:48', '0.3%'], ['PCB-0008637', '08:15', '0.2%'], ['PCB-0010031', '13:02', '0.4%'], ['PCB-0010239', '13:41', '0.3%']]
+          }
+        }
+      }
+    };
+    P.angleIn = { root: 'Low squeegee angle', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', equip: 'Solder printer', param: 'Squeegee angle', unit: '°', spec: '55–65°', status: 'In spec', cls: 'chip ok', short: 'aperture overfill from squeegee angle, in spec' };
+
+    const inv = INV[this.state.inv];
+    const tab = inv.defects[this.state.tab] ? this.state.tab : 'bridge';
+    const d = inv.defects[tab];
+    const chainText = key => T.chain(P[key].root + (P[key].status === 'In spec' ? ' (in spec)' : (P[key].status.indexOf('in spec') >= 0 ? ' (in spec, near LSL)' : '')), P[key].mech, d.title);
+    const top = d.top.map((h, i) => {
+      const p = P[h.key], conf = !!this.state.confirmed[tab + i], sp = S[h.spark];
+      return {
+        rank: i + 1, stage: p.stage, inSpec: !!h.inSpec, confirmed: conf, open: !conf,
+        root: p.root, mech: p.mech, equip: p.equip, k: h.k, passed: h.passed, when: h.when,
+        sparkSub: sp.sub, sparkLabel: p.param + ' over the batch, with the window when this chain appeared', sp: this.spark(sp),
+        action: FIX[h.fix],
+        cardStyle: 'padding: 24px; display: flex; flex-direction: column; gap: 16px' + (this.state.panel === i ? '; border-color: #1A4F9C; box-shadow: inset 4px 0 0 #1A4F9C' : ''),
+        view: () => this.setState({ panel: i, board: 0 }),
+        confirm: () => this.setState({ confirmed: Object.assign({}, this.state.confirmed, { [tab + i]: true }) })
+      };
+    });
+    const panelOpen = this.state.panel >= 0 && this.state.panel < d.top.length;
+    let p = {}, bp = {};
+    if (panelOpen) {
+      const h = d.top[this.state.panel], hp = P[h.key];
+      const bi = Math.min(this.state.board, h.boards.length - 1);
+      p = {
+        rank: this.state.panel + 1, chain: chainText(h.key), k: h.k, passed: h.passed,
+        boards: h.boards.map((b, i) => ({ id: b[0], time: b[1], pct: 'Model risk ' + b[2], val: b[3] + (hp.unit === '°' ? '' : ' ') + hp.unit, cls: i === bi ? 'brow on' : 'brow', pick: () => this.setState({ board: i }) }))
+      };
+      const b = h.boards[bi];
+      const chains = [{ key: h.key, val: b[3], c: b[4] }];
+      if (b[5]) chains.push({ key: b[5], val: b[6], c: b[7] });
+      chains.sort((x, y) => y.c - x.c);
+      const sides = {};
+      chains.forEach(x => { const q = P[x.key]; if (!sides[q.side]) sides[q.side] = q.mech; });
+      const slot = (parseInt(b[0].slice(-2), 10) % 4) + 1;
+      bp = {
+        id: b[0], pct: 'Model risk ' + b[2],
+        meta: T.meta(b[1] + ', ' + inv.date, h.panel, slot, d.inspLower, d.defLower, 'rework'),
+        mechs: ['Printing', 'Reflow'].map(side => sides[side]
+          ? (side === P[chains[0].key].side ? { side, name: sides[side], band: 'High', cls: 'chip crit', pct: 'Predicted 97%' } : { side, name: sides[side], band: 'Medium', cls: 'chip warn', pct: 'Predicted 38%' })
+          : { side, name: 'none predicted', band: 'Low', cls: 'chip ok', pct: 'Predicted 4%' }),
+        chains: chains.map((x, i) => { const q = P[x.key]; return { n: i + 1, chain: chainText(x.key), stage: q.stage, contrib: x.c + '%', ev: T.ev(q.param, x.val, q.unit, q.spec), status: q.status, cls: q.cls }; }),
+        hasSupport: !!h.support, support: h.support || '',
+        interp: chains.length > 1 ? T.interpTwo(P[chains[0].key].short, P[chains[1].key].short) : T.interpOne(P[chains[0].key].short),
+        assessed: inv.assessed
+      };
+    }
+    const n = d.top.length;
+    const c = Object.assign({}, d, {
+      summary: d.one ? T.summaryOne(d.withChain, d.K, d.defLower) : T.summary(d.withChain, d.K, d.defLower, n),
+      modelLine: T.model(d.inspLower, d.agree),
+      top, hasOther: d.other.length > 0, otherCount: d.other.length,
+      other: d.other.map(o => ({ chain: chainText(o[0]), k: o[1], passed: o[2], when: o[3] })),
+      none: d.none.map(b => ({ id: b[0], time: b[1], pct: 'Model risk ' + b[2] })),
+      noneWhy: T.noneWhy(d.insp, d.defLower), noneNext: T.noneNext(d.record),
+      containLine: T.contain(d.passedAny, d.inspLower, d.defLower, d.hold, d.review)
+    });
+    const last = panelOpen ? d.top[this.state.panel].boards.length - 1 : 0;
+    return {
+      inv: Object.assign({}, inv, inv.times), c, p, bp, panelOpen, panelClosed: !panelOpen,
+      asideLabel: panelOpen ? 'Boards with this chain' : 'Containment',
+      isBridge: tab === 'bridge', isOpen: tab === 'open',
+      bridgeTabClass: tab === 'bridge' ? 'tab on' : 'tab', openTabClass: tab === 'open' ? 'tab on' : 'tab',
+      showBridge: () => this.setState({ tab: 'bridge', panel: -1 }),
+      showOpen: () => this.setState({ tab: 'open', panel: -1 }),
+      closePanel: () => this.setState({ panel: -1 }),
+      prevBoard: () => this.setState({ board: Math.max(0, this.state.board - 1) }),
+      nextBoard: () => this.setState({ board: Math.min(last, this.state.board + 1) })
+    };
+  }
+}
+</script>
+</body>
+</html>

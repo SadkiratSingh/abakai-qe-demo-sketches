@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investigation: INV-0143 boards · RCA Studio</title>
+<!-- Static export of sketches/RcaNearLimit.dc.html. Regenerate from the sketches; do not edit by hand. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'IBM Plex Sans',sans-serif;color:#16191D;background:#F4F5F3}
+a{color:#1A4F9C}a:hover{color:#123A73}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:24px;padding:8px 32px;background:#16191D;color:#fff}
+.brand{font-weight:600;font-size:17px;letter-spacing:-.01em;color:#fff}
+.nav{display:flex;flex-wrap:wrap;gap:4px}
+.nav a{color:#C9CDD2;text-decoration:none;font-size:14px;padding:12px 14px;border-radius:6px}
+.nav a:hover{color:#fff;background:#2A2F35}
+.nav a.on{color:#fff;background:#2A2F35}
+.wrap{max-width:1280px;margin:0 auto;padding:32px}
+.card{background:#fff;border:1px solid #E1E4E0;border-radius:10px}
+.mono{font-family:'IBM Plex Mono',monospace}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5B6169;font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.crit{background:#FDECEA;color:#9B1C12}.warn{background:#FDF0E3;color:#8A3505}.ok{background:#E7F3EC;color:#1D6B3F}.info{background:#E8EFFA;color:#1A4F9C}.muted{background:#EEF0ED;color:#4A4F56}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;text-decoration:none;border:1px solid #C9CDD2;background:#fff;color:#16191D;cursor:pointer;box-sizing:border-box}
+.btn.primary{background:#1A4F9C;border-color:#1A4F9C;color:#fff}
+.btn.primary:hover{background:#123A73;color:#fff}
+.btn.sm{min-height:36px;padding:0 12px;font-size:13px}
+.tab{min-height:48px;padding:0 20px;border:0;border-bottom:3px solid transparent;background:none;font:600 15px 'IBM Plex Sans',sans-serif;color:#5B6169;cursor:pointer}
+.tab.on{color:#16191D;border-bottom-color:#1A4F9C}
+.node{padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600;line-height:1.3}
+.n-root{background:#F4F5F3;border:1px solid #C9CDD2}
+.n-mech{background:#E8EFFA;border:1px solid #B7CBEA;color:#123A73}
+.n-def{background:#FDECEA;border:1px solid #F3C5C0;color:#7E160E}
+.arrow{color:#5B6169;font-size:18px}
+.big{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:#F4F5F3;border-radius:8px;flex:1 1 180px}
+.big .v{font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500}
+.big .l{font-size:13px;color:#4A4F56}
+.spark .band{fill:#E7F3EC}.spark .near{fill:#FDF0E3}.spark .win{fill:#16191D;opacity:.07}
+.spark .lim{stroke:#B42318;stroke-width:1;stroke-dasharray:4 3}
+.spark .line{fill:none;stroke:#1A4F9C;stroke-width:2;stroke-linejoin:round}
+.spark text{font-family:'IBM Plex Mono',monospace;font-size:10px;fill:#5B6169}
+.mx{display:grid;grid-template-columns:minmax(120px,0.8fr) 1fr 1fr;gap:8px;font-size:13px}
+.mx .h{font-weight:600;color:#5B6169;padding:4px 8px;display:flex;align-items:center}
+.mx .c{border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.mx .n{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500}
+.mx .t{font-weight:600;font-size:14px}
+.mx .s{color:#4A4F56;font-size:12.5px}
+.seg{min-height:36px;padding:0 12px;border:1px solid #C9CDD2;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#4A4F56}
+.seg.on{background:#16191D;border-color:#16191D;color:#fff}
+.seg:first-child{border-radius:8px 0 0 8px}.seg:last-child{border-radius:0 8px 8px 0;margin-left:-1px}
+.brow{display:grid;grid-template-columns:120px 52px 1fr auto;align-items:center;gap:10px;width:100%;min-height:40px;padding:6px 10px;border:0;border-bottom:1px solid #EEF0ED;background:#fff;font:14px 'IBM Plex Sans',sans-serif;color:#16191D;text-align:left;cursor:pointer}
+.brow.on{background:#F5F8FD;box-shadow:inset 3px 0 0 #1A4F9C}
+.pchain{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid #E1E4E0;border-radius:8px}
+.cbar{height:8px;border-radius:4px;background:#EEF0ED;overflow:hidden;flex:1 1 120px}
+.cbar div{height:100%;background:#B42318;border-radius:4px}
+.kv{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: #F4F5F3">
+<header class="top">
+<div class="brand">RCA Studio</div>
+<nav class="nav" aria-label="Main">
+<a href="line-overview.html">Line</a>
+<a class="on" href="rca-packet.html">Investigations</a>
+<a href="containment.html">Containment</a>
+<a href="manager-overview.html">Overview</a>
+<a href="failure-library.html">Failure Library</a>
+</nav>
+</header>
+<main class="wrap" style="display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 900px">
+<a href="manager-overview.html" style="font-size: 14px; text-decoration: none">← Open investigations</a>
+<div class="eyebrow">Investigation INV-0143 · CTRL-BRD-A · stg-B0005 · 2,560 boards · 1 defect · Day shift, 16 Oct 2026</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">No parameter was out of spec, yet 23 boards had solder bridging</h1>
+<div style="font-size: 15px; color: #4A4F56">Batches with no excursion on line 2 this week had 2–3 boards with solder bridging each.</div>
+</div>
+<a class="btn" href="containment.html">View containment</a>
+</div>
+
+
+
+<div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
+<span class="chip info">Root cause chains</span>
+<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">19 of 23 boards with solder bridging show a root cause chain, and no parameter was out of spec on any of them.</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 13px; color: #4A4F56">
+<span class="chip muted">RCA model · trained on synthetic data</span>
+<span>Chains from the RCA model and the Failure Library. The model agreed with AOI on 99% of boards in this batch. Retrained on your line's data at onboarding.</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Most frequent root cause chains">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Most frequent root cause chains</h2>
+<div style="font-size: 14px; color: #5B6169">Each board with solder bridging gets its root cause chains from the RCA model and the Failure Library. Ranked by how many boards show each chain.</div>
+</div>
+
+<article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px; border-color: #1A4F9C; box-shadow: inset 4px 0 0 #1A4F9C">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#1</span>
+<span class="chip muted">Printing</span>
+<span class="chip warn">In spec · near LSL</span>
+
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<div class="node n-root">Low squeegee speed<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-mech">Aperture overfill<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="big"><span class="v">19 of 23</span><span class="l">boards with solder bridging show this chain</span></div>
+<div class="big"><span class="v">683</span><span class="l">boards that passed AOI show this chain</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 15px">Built 10:20–12:30</span>
+<span style="font-size: 12px; color: #5B6169">Squeegee speed (mm/s) · spec band green, near-LSL zone amber</span>
+</div>
+<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Squeegee speed over the batch, with the window when this chain appeared" style="flex: 0 1 260px; max-width: 100%">
+<rect class="band" x="0" y="8" width="260" height="36" opacity="1"></rect>
+<rect class="near" x="0" y="40" width="260" height="4"></rect>
+<rect class="win" x="141" y="0" width="79" height="52"></rect>
+<line class="lim" x1="0" x2="260" y1="8" y2="8" opacity="1"></line>
+<line class="lim" x1="0" x2="260" y1="44" y2="44" opacity="1"></line>
+<polyline class="line" points="0,26 11,26 23,25 34,26 45,26 57,26 68,26 79,26 90,26 102,26 113,25 124,26 136,26 147,41 158,42 170,42 181,43 192,41 203,42 215,41 226,26 237,26 249,26 260,26"></polyline>
+<text x="0" y="63">06:00</text>
+<text x="260" y="63" text-anchor="end">13:40</text>
+</svg>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
+<div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Suggested action: </span>Raise the speed to nominal (70 mm/s).</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a class="btn" href="rca-packet-near-limit-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
+
+<button class="btn" type="button">Reject</button>
+<button class="btn primary" type="button">Confirm chain</button>
+
+</div>
+</div>
+</article>
+
+</section>
+
+
+
+<section class="card" style="overflow: hidden" aria-label="No root cause chain found">
+<div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">No root cause chain found · 4 boards</h2>
+</div>
+<div style="font-size: 14px; color: #4A4F56">AOI found solder bridging, but the model risk was Low and no parameter raised it, so no chain was assigned.</div>
+</div>
+<div style="display: flex; flex-direction: column">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0008174</a>
+<span class="mono" style="flex: 0 0 56px; color: #4A4F56">06:48</span>
+<span class="chip ok" title="Model risk 0.3%">Low</span>
+<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0008637</a>
+<span class="mono" style="flex: 0 0 56px; color: #4A4F56">08:15</span>
+<span class="chip ok" title="Model risk 0.2%">Low</span>
+<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0010031</a>
+<span class="mono" style="flex: 0 0 56px; color: #4A4F56">13:02</span>
+<span class="chip ok" title="Model risk 0.4%">Low</span>
+<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0010239</a>
+<span class="mono" style="flex: 0 0 56px; color: #4A4F56">13:41</span>
+<span class="chip ok" title="Model risk 0.3%">Low</span>
+<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+</div>
+
+</div>
+<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED; font-size: 14px; color: #4A4F56">Check the AOI images. If the defect is real, its cause is not among the model's inputs.</div>
+</section>
+
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Model vs inspection">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs AOI · solder bridging</h2>
+<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0005, by model risk and AOI result.</div>
+</div>
+<span class="chip ok">Agreement 99%</span>
+</div>
+<div class="mx">
+<span></span><span class="h">AOI: solder bridging</span><span class="h">AOI: pass</span>
+<span class="h">Model risk High</span>
+<div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">19</span><span class="t">Confirmed</span><span class="s">Both found solder bridging</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">26</span><span class="t">Hidden risk</span><span class="s">Passed AOI; hold in containment</span></div>
+<span class="h">Model risk Medium or Low</span>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">4</span><span class="t">Unexplained</span><span class="s">No root cause chain found</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,511</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards go to review</span></div>
+</div>
+</section>
+</div>
+
+<aside style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="Boards with this chain">
+
+
+
+<section class="card" style="display: flex; flex-direction: column; border-color: #B7CBEA; box-shadow: 0 8px 24px rgba(22,25,29,.10)" aria-label="Boards with this chain">
+<div style="padding: 18px 20px 12px; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid #E1E4E0">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<span class="eyebrow">Chain #1 · boards</span>
+<a class="btn sm" href="rca-packet-near-limit.html" style="display:inline-flex;align-items:center;text-decoration:none">Close</a>
+</div>
+<div style="font-size: 14px; font-weight: 600; line-height: 1.4">Low squeegee speed (in spec, near LSL) → Aperture overfill → Solder bridging</div>
+<div style="display: flex">
+<span class="seg on">With solder bridging · 19</span>
+<span class="seg">Passed AOI · 683</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column">
+
+<button type="button" class="brow"><span class="mono">PCB-0009410</span><span class="mono" style="color: #4A4F56">10:23</span><span style="color: #4A4F56; font-size: 13px">57.9 mm/s</span><span class="chip crit" title="Model risk 6.2%">High</span></button>
+
+<button type="button" class="brow"><span class="mono">PCB-0009486</span><span class="mono" style="color: #4A4F56">10:37</span><span style="color: #4A4F56; font-size: 13px">57.1 mm/s</span><span class="chip crit" title="Model risk 7.4%">High</span></button>
+
+<button type="button" class="brow"><span class="mono">PCB-0009561</span><span class="mono" style="color: #4A4F56">10:51</span><span style="color: #4A4F56; font-size: 13px">58.2 mm/s</span><span class="chip crit" title="Model risk 5.8%">High</span></button>
+
+<button type="button" class="brow on"><span class="mono">PCB-0009610</span><span class="mono" style="color: #4A4F56">11:05</span><span style="color: #4A4F56; font-size: 13px">56.9 mm/s</span><span class="chip crit" title="Model risk 8.1%">High</span></button>
+
+<button type="button" class="brow"><span class="mono">PCB-0009702</span><span class="mono" style="color: #4A4F56">11:22</span><span style="color: #4A4F56; font-size: 13px">57.5 mm/s</span><span class="chip crit" title="Model risk 6.9%">High</span></button>
+
+<button type="button" class="brow"><span class="mono">PCB-0009815</span><span class="mono" style="color: #4A4F56">11:44</span><span style="color: #4A4F56; font-size: 13px">57.2 mm/s</span><span class="chip crit" title="Model risk 7.7%">High</span></button>
+
+<div style="padding: 8px 12px; font-size: 13px; color: #5B6169">Showing 6 of 19 · sorted by build time</div>
+</div>
+
+<div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; border-top: 1px solid #E1E4E0; background: #FCFCFB">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">RCA packet · <span class="mono">PCB-0009610</span></h2>
+<div style="display: flex; gap: 6px"><button class="btn sm" type="button" aria-label="Previous board">←</button><button class="btn sm" type="button" aria-label="Next board">→</button></div>
+</div>
+<div style="font-size: 13px; color: #4A4F56">Built 11:05, 16 Oct · stg-B0005-P0371 · slot 3 · AOI: solder bridging · rework</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; background: #fff; border: 1px solid #E1E4E0; border-radius: 8px">
+<div class="kv"><span>Defect: <span style="font-weight: 600">Solder bridging</span></span><span class="chip crit" title="Model risk 8.1%">High</span></div>
+
+<div class="kv"><span style="color: #4A4F56">Printing mechanism: <span style="color: #16191D; font-weight: 600">Aperture overfill</span></span><span class="chip crit" title="Predicted 97%">High</span></div>
+
+<div class="kv"><span style="color: #4A4F56">Reflow mechanism: <span style="color: #16191D; font-weight: 600">none predicted</span></span><span class="chip ok" title="Predicted 4%">Low</span></div>
+
+</div>
+<div class="eyebrow">Root cause chains on this board</div>
+
+<div class="pchain" style="background: #fff">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px"><span class="mono" style="font-weight: 500">#1</span><span style="font-weight: 600; font-size: 14px; flex: 1 1 260px">Low squeegee speed (in spec, near LSL) → Aperture overfill → Solder bridging</span><span class="chip muted">Printing</span></div>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 13px"><span style="color: #4A4F56; white-space: nowrap">Contribution</span><div class="cbar"><div style="width: 74%"></div></div><span class="mono">74%</span></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 13px; color: #4A4F56"><span>Squeegee speed 56.9 mm/s (spec 56–84 mm/s)</span><span class="chip warn">Near LSL · in spec</span></div>
+</div>
+
+
+<div style="font-size: 13px; line-height: 1.5; padding: 10px 12px; background: #F5F8FD; border: 1px solid #B7CBEA; border-radius: 8px"><span style="font-weight: 600">Supporting measurement: </span>Paste volume per aperture 0.0452 mm³ (spec 0.036–0.044 mm³), above USL. Supports aperture overfill.</div>
+
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Interpretation: </span>Top chain: aperture overfill from squeegee speed near LSL, in spec. No other chain above the display threshold.</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; padding-top: 12px; border-top: 1px solid #EEF0ED; font-size: 12px; color: #5B6169">
+<span>Assessed 16 Oct 2026 14:10 · RCA model v2.0 · display threshold τ = 0.60</span>
+<a href="board-detail.html" style="font-size: 14px; font-weight: 600">Open full page</a>
+</div>
+</div>
+</section>
+
+</aside>
+</div>
+</main>
+</div>
+</body>
+</html>
