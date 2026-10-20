@@ -46,7 +46,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-direction: column; gap: 6px; max-width: 720px">
 <div class="eyebrow">Failure Library · Solder printing and reflow</div>
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">What causes each defect, and how to fix it</h1>
-<div style="font-size: 15px; color: #4A4F56; line-height: 1.5">Your engineers' process knowledge as rules, linked to your specs. Rules with OR are split into unit rules joined only by AND, and every investigation checks each one. Every root cause chain in an investigation comes from these rules. Measurements are evidence for a mechanism, never a root cause.</div>
+<div style="font-size: 15px; color: #4A4F56; line-height: 1.5">The cause-and-effect rules behind every root cause chain, with specs and fixes.</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
 <div role="group" aria-label="Defect" style="display: flex">
@@ -63,13 +63,9 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="padding: 6px 12px; border-radius: 6px; background: #E8EFFA; border: 1px solid #B7CBEA; color: #123A73; font-weight: 600">Mechanism</span>
 <span aria-hidden="true" style="color: #5B6169">→</span>
 <span style="padding: 6px 12px; border-radius: 6px; background: #FDECEA; border: 1px solid #F3C5C0; color: #7E160E; font-weight: 600">Open circuit</span>
-<span style="margin-left: auto; color: #5B6169">2 rules · 2 unit rules · last edited 12 Oct 2026 by Wei C.</span>
+<span style="margin-left: auto; color: #5B6169">2 rules · last edited 12 Oct 2026 by Wei C.</span>
 </div>
 
-<div class="card" style="padding: 16px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; font-size: 14px; line-height: 1.5; border-color: #B7CBEA; background: #F5F8FD">
-<span class="chip info">RCA model</span>
-<span style="flex: 1 1 560px">This library is the cause-and-effect ontology behind every root cause chain. For each board, the RCA model predicts the defect and mechanism and finds the parameters that raised its risk; the library turns them into chains (root cause → mechanism → defect) and supplies the fix. Charts shade a near-limit zone (the last 20% of the way from nominal to each limit) for reading only.</span>
-</div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; align-items: start">
 
@@ -86,7 +82,6 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span class="chip info">Seen 4×</span>
 </div>
 <div class="mono" style="font-size: 12.5px; color: #4A4F56; background: #F4F5F3; border-radius: 6px; padding: 6px 10px">PasteViscosity &gt; USL</div>
-
 <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
 <span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec 180–220 Pa·s</span>
 <span>Solder paste · Material</span>
@@ -100,7 +95,6 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span class="chip muted">Not seen yet</span>
 </div>
 <div class="mono" style="font-size: 12.5px; color: #4A4F56; background: #F4F5F3; border-radius: 6px; padding: 6px 10px">AmbientRh &gt; USL</div>
-
 <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
 <span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">Spec [your limit]</span>
 <span>Line · Environment</span>
@@ -110,7 +104,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 
 
 <div style="padding: 14px 20px; background: #F5F8FD; display: flex; flex-direction: column; gap: 4px">
-<span class="eyebrow">Supported by (measurement, not a root cause)</span>
+<span class="eyebrow">Supported by measurement</span>
 <span style="font-size: 14px">Paste volume per aperture below LSL · SPI · spec 0.036–0.044 mm³</span>
 </div>
 

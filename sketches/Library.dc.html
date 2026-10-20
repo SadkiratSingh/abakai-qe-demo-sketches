@@ -48,7 +48,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-direction: column; gap: 6px; max-width: 720px">
 <div class="eyebrow">Failure Library · Solder printing and reflow</div>
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">What causes each defect, and how to fix it</h1>
-<div style="font-size: 15px; color: #4A4F56; line-height: 1.5">Your engineers' process knowledge as rules, linked to your specs. Rules with OR are split into unit rules joined only by AND, and every investigation checks each one. Every root cause chain in an investigation comes from these rules. Measurements are evidence for a mechanism, never a root cause.</div>
+<div style="font-size: 15px; color: #4A4F56; line-height: 1.5">The cause-and-effect rules behind every root cause chain, with specs and fixes.</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
 <div role="group" aria-label="Defect" style="display: flex">
@@ -68,10 +68,6 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="margin-left: auto; color: #5B6169">{{d.meta}}</span>
 </div>
 
-<div class="card" style="padding: 16px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; font-size: 14px; line-height: 1.5; border-color: #B7CBEA; background: #F5F8FD">
-<span class="chip info">RCA model</span>
-<span style="flex: 1 1 560px">This library is the cause-and-effect ontology behind every root cause chain. For each board, the RCA model predicts the defect and mechanism and finds the parameters that raised its risk; the library turns them into chains (root cause → mechanism → defect) and supplies the fix. Charts shade a near-limit zone (the last 20% of the way from nominal to each limit) for reading only.</span>
-</div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; align-items: start">
 <sc-for list="{{d.mechs}}" as="m" hint-placeholder-count="3">
@@ -88,12 +84,6 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span class="{{r.seenCls}}">{{r.seen}}</span>
 </div>
 <div class="mono" style="font-size: 12.5px; color: #4A4F56; background: #F4F5F3; border-radius: 6px; padding: 6px 10px">{{r.code}}</div>
-<sc-if value="{{r.split}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #4A4F56">
-<span>Split into {{r.unitCount}} unit rules:</span>
-<sc-for list="{{r.units}}" as="u" hint-placeholder-count="2"><span class="mono" style="font-size: 12px; padding-left: 12px">{{u}}</span></sc-for>
-</div>
-</sc-if>
 <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #4A4F56">
 <span class="mono" style="padding: 2px 8px; background: #F4F5F3; border-radius: 4px">{{r.spec}}</span>
 <span>{{r.where}} · {{r.kind}}</span>
@@ -103,7 +93,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </sc-for>
 <sc-if value="{{m.hasSupport}}" hint-placeholder-val="{{ false }}">
 <div style="padding: 14px 20px; background: #F5F8FD; display: flex; flex-direction: column; gap: 4px">
-<span class="eyebrow">Supported by (measurement, not a root cause)</span>
+<span class="eyebrow">Supported by measurement</span>
 <sc-for list="{{m.support}}" as="x" hint-placeholder-count="1"><span style="font-size: 14px">{{x}}</span></sc-for>
 </div>
 </sc-if>
@@ -121,9 +111,9 @@ class Component extends DCLogic {
     this.state = { d: 'b' };
   }
   renderVals() {
-    const R = (name, code, units, spec, where, kind, fix, seen) => ({ name, code, units, unitCount: units.length, split: units.length > 1, spec, where, kind, fix, seen: seen ? 'Seen ' + seen + '×' : 'Not seen yet', seenCls: seen ? 'chip info' : 'chip muted' });
+    const R = (name, code, units, spec, where, kind, fix, seen) => ({ name, code, spec, where, kind, fix, seen: seen ? 'Seen ' + seen + '×' : 'Not seen yet', seenCls: seen ? 'chip info' : 'chip muted' });
     const lib = {
-      b: { name: 'Solder bridging', meta: '7 rules · 9 unit rules · last edited 15 Oct 2026 by Priya S.', mechs: [
+      b: { name: 'Solder bridging', meta: '7 rules · last edited 15 Oct 2026 by Priya S.', mechs: [
         { name: 'Aperture overfill', support: ['Paste volume per aperture above USL · SPI · spec 0.036–0.044 mm³'], rules: [
           R('Low aperture area ratio or high stencil thickness', 'ApertureAreaRatio < LSL OR StencilThickness > USL', ['ApertureAreaRatio < LSL', 'StencilThickness > USL'], 'Spec ≥ 0.66 · 95–105 µm', 'Stencil', 'Setting', 'Use a thinner foil or step-down stencil; redesign apertures below the area ratio limit.', 3),
           R('Low squeegee angle with low speed or high pressure', 'SqueegeeAngle < LSL AND (SqueegeeSpeed < LSL OR SqueegeePressure > USL)', ['SqueegeeAngle < LSL AND SqueegeeSpeed < LSL', 'SqueegeeAngle < LSL AND SqueegeePressure > USL'], 'Spec 55–65° · 56–84 mm/s · 0.27–0.33 MPa', 'Solder printer', 'Setting', 'Replace the squeegee blade; check angle, speed and pressure against the recipe.', 2),
@@ -138,7 +128,7 @@ class Component extends DCLogic {
           R('High ambient RH', 'AmbientRh > USL', ['AmbientRh > USL'], 'Spec [your limit]', 'Line', 'Environment', 'Control humidity; check paste exposure time.', 1)
         ]}
       ]},
-      o: { name: 'Open circuit', meta: '2 rules · 2 unit rules · last edited 12 Oct 2026 by Wei C.', mechs: [
+      o: { name: 'Open circuit', meta: '2 rules · last edited 12 Oct 2026 by Wei C.', mechs: [
         { name: 'Poor paste transfer', support: ['Paste volume per aperture below LSL · SPI · spec 0.036–0.044 mm³'], rules: [
           R('High paste viscosity', 'PasteViscosity > USL', ['PasteViscosity > USL'], 'Spec 180–220 Pa·s', 'Solder paste', 'Material', 'Replace the paste; check paste age and floor life.', 4),
           R('High ambient RH', 'AmbientRh > USL', ['AmbientRh > USL'], 'Spec [your limit]', 'Line', 'Environment', 'Control humidity; check paste exposure time.', 0)
