@@ -68,12 +68,12 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px" aria-label="Alerts">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Needs attention</h2>
-<span class="chip crit">2 excursions</span>
+<span class="chip crit">2 defects · INV-0142</span>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px; border: 1px solid #F3C5C0; background: #FFF8F7; border-radius: 8px">
 <span class="chip crit">Critical</span>
 <div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 4px">
-<div style="font-weight: 600">Solder bridging excursion in stg-B0003</div>
+<div style="font-weight: 600">Solder bridging in stg-B0003</div>
 <div style="font-size: 14px; color: #4A4F56">61 boards with solder bridging. Most frequent root cause chain: high peak reflow temperature → excess reflow spreading (44 boards, 02:00–02:40). Root cause analysis is ready.</div>
 </div>
 <a class="btn primary" href="rca-packet.html">Open RCA packet</a>
@@ -81,7 +81,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px; border: 1px solid #F1D3B5; background: #FFFAF4; border-radius: 8px">
 <span class="chip warn">High</span>
 <div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 4px">
-<div style="font-weight: 600">Open circuit excursion in stg-B0003</div>
+<div style="font-weight: 600">Open circuit in stg-B0003</div>
 <div style="font-size: 14px; color: #4A4F56">31 boards with open circuit. Most frequent root cause chain: high paste viscosity → poor paste transfer (28 boards, 03:40–04:30). Root cause analysis is ready.</div>
 </div>
 <a class="btn" href="rca-packet.html">Open RCA packet</a>
@@ -169,9 +169,9 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <table>
 <thead><tr><th>Batch</th><th>Panels</th><th>Boards</th><th>Bridging</th><th>Open circuit</th><th>Status</th><th></th></tr></thead>
 <tbody>
-<tr><td class="mono">stg-B0001</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono">3</td><td class="mono">2</td><td><span class="chip ok">No excursion</span></td><td></td></tr>
-<tr><td class="mono">stg-B0002</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono">2</td><td class="mono">1</td><td><span class="chip ok">No excursion</span></td><td></td></tr>
-<tr><td class="mono" style="font-weight: 500">stg-B0003</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono" style="color: #9B1C12; font-weight: 500">61</td><td class="mono" style="color: #8A3505; font-weight: 500">31</td><td><span class="chip crit">2 excursions</span></td><td style="text-align: right"><a href="rca-packet.html">Investigate</a></td></tr>
+<tr><td class="mono">stg-B0001</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono">3</td><td class="mono">2</td><td><span class="chip ok">Normal</span></td><td></td></tr>
+<tr><td class="mono">stg-B0002</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono">2</td><td class="mono">1</td><td><span class="chip ok">Normal</span></td><td></td></tr>
+<tr><td class="mono" style="font-weight: 500">stg-B0003</td><td class="mono">640</td><td class="mono">2,560</td><td class="mono" style="color: #9B1C12; font-weight: 500">61</td><td class="mono" style="color: #8A3505; font-weight: 500">31</td><td><a class="chip crit" href="rca-packet.html" style="text-decoration: none">Investigation INV-0142</a></td><td></td></tr>
 </tbody>
 </table>
 </div>

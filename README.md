@@ -60,7 +60,7 @@ Every generated sentence on the screens comes from one of these templates, so th
 | Spec as a range `{LSL}–{USL} {unit}`, or `≥ {min}` | nominal ± tolerance |
 | `chain #{n}`, `other chains`, `no root cause chain found` | most likely cause, linked, contributing |
 | `re-inspection`, `re-inspect`, `verify the call` (boards where the model and inspection disagree) | containment, hold, quarantine, customer notification: in a factory these mean product held because inspection found it bad |
-| `excursion` / `no excursion` | spike, cluster, in control (that is SPC language) |
+| `Normal` for a batch, `Investigation {id}` for a batch with one; `{defect} in {batch}` for an alert | excursion, spike, cluster, in control |
 | `Model: {defect class}` or `Model: no defect` | model risk, probability, confidence, score |
 | `attributes`, `attributed`, `what-if`, `predicted mechanism` | explains, SHAP value, counterfactual, mechanism head |
 | `RCA model` | the AI, the MLP, the network |
@@ -103,6 +103,7 @@ All numbers are story data, not output from the backend or the model. Before a r
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2 (branch `sketches-v2`): rule-based linking with unit rules, contributing state and measurements as evidence; squeegee wear added to the story.
 - v3 (branch `sketches-v3`): statistics only, no model output. Unexplained boards per defect, compared with batches with no excursion; near-limit investigation INV-0143 linked through near-limit rule variants.
+- v6.7: "excursion" is removed. The line overview says "2 defects · INV-0142", alerts read "Solder bridging in stg-B0003", and batches show "Normal" or "Investigation INV-0142".
 - v6.6: the model agreement figure is removed from the line overview; agreement shows only in the investigation matrix.
 - v6.4: "Fix" and "Suggested action" are now "Corrective action" everywhere.
 - v6.3: the Failure Library drops the unit-rule split and its explanation banner; rules are shown as written, with a one-line subtitle.
