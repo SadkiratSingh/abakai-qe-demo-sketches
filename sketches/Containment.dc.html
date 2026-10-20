@@ -50,8 +50,8 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <div style="display: flex; flex-direction: column; gap: 8px">
 <a href="RcaPacket.dc.html" style="font-size: 14px; text-decoration: none">← INV-0142 root cause analysis</a>
 <div class="eyebrow">Re-inspection · INV-0142 · stg-B0003</div>
-<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">344 boards where the RCA model and inspection disagree</h1>
-<div style="font-size: 15px; color: #4A4F56">On the other 2,216 boards in stg-B0003, the model and inspection agree.</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">81 boards where the RCA model and inspection disagree</h1>
+<div style="font-size: 15px; color: #4A4F56">On the other 2,479 boards in stg-B0003, the model and inspection agree.</div>
 <div style="font-size: 14px; color: #5B6169">Also checked: other batches through line 2 during 23:10–00:20, 02:00–02:40 and 03:40–04:30: none.</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
@@ -60,11 +60,10 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </div>
 </div>
 
-<section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px" aria-label="Where the boards are">
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0"><div class="eyebrow" style="color: #9B1C12">Re-inspect · High model risk</div><div class="mono" style="font-size: 32px; font-weight: 500">75</div><div style="font-size: 13px; color: #5B6169">WIP 34 · finished goods 36 · shipped 5</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F1D3B5"><div class="eyebrow" style="color: #8A3505">If needed · Medium model risk</div><div class="mono" style="font-size: 32px; font-weight: 500">263</div><div style="font-size: 13px; color: #5B6169">WIP 119 · finished goods 129 · shipped 15</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Verify the call · no chain</div><div class="mono" style="font-size: 32px; font-weight: 500">6</div><div style="font-size: 13px; color: #5B6169">Failed inspection, but the model saw no risk: 3 solder bridging (AOI), 3 open circuit (electrical test)</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">By root cause · re-inspect / if needed</div><div style="font-size: 14px; line-height: 1.6"><span class="mono" style="font-weight: 600">38 / 74</span> · High peak reflow temperature · 02:00–02:40<br><span class="mono" style="font-weight: 600">7 / 54</span> · Low squeegee angle, speed or pressure · 23:10–00:20<br><span class="mono" style="font-weight: 600">30 / 135</span> · High paste viscosity · 03:40–04:30<br><span style="color: #5B6169">A board with more than one root cause is counted once, under the one with the largest contribution</span></div></div>
+<section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px" aria-label="Where the boards are">
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0"><div class="eyebrow" style="color: #9B1C12">Re-inspect</div><div class="mono" style="font-size: 32px; font-weight: 500">75</div><div style="font-size: 13px; color: #4A4F56">Passed inspection; model predicts a defect: 45 solder bridging, 30 open circuit</div><div style="font-size: 13px; color: #5B6169">WIP 34 · finished goods 36 · shipped 5</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Verify the call</div><div class="mono" style="font-size: 32px; font-weight: 500">6</div><div style="font-size: 13px; color: #4A4F56">Failed inspection; model predicts no defect: 3 solder bridging (AOI), 3 open circuit (electrical test)</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Re-inspect by root cause</div><div style="font-size: 14px; line-height: 1.6"><span class="mono" style="font-weight: 600">38</span> · High peak reflow temperature · 02:00–02:40<br><span class="mono" style="font-weight: 600">7</span> · Low squeegee angle, speed or pressure · 23:10–00:20<br><span class="mono" style="font-weight: 600">30</span> · High paste viscosity · 03:40–04:30<br><span style="color: #5B6169">A board with more than one root cause is counted once, under the one with the largest contribution</span></div></div>
 </section>
 
 <section class="card" style="overflow: hidden" aria-label="Boards to inspect again">
@@ -72,7 +71,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Boards to inspect again</h2>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Group
-<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All groups</option><option>Re-inspect (High)</option><option>If needed (Medium)</option><option>Verify the call</option></select>
+<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>Re-inspect</option><option>Verify the call</option></select>
 </label>
 <label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Root cause
 <select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>High peak reflow temperature</option><option>Low squeegee angle</option><option>Low squeegee speed</option><option>High squeegee pressure</option><option>High paste viscosity</option></select>
@@ -84,7 +83,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </div>
 <div style="overflow-x: auto">
 <table>
-<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Root causes</th><th>Measured</th><th>Model risk</th><th>Location</th></tr></thead>
+<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Root causes</th><th>Measured</th><th>Model</th><th>Inspection</th><th>Location</th></tr></thead>
 <tbody>
 <sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
 <tr>
@@ -94,7 +93,8 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">{{r.time}}</td>
 <td>{{r.sig}}</td>
 <td class="mono">{{r.meas}}</td>
-<td><span class="{{r.riskCls}}" title="{{r.riskPct}}">{{r.risk}}</span></td>
+<td><span class="{{r.modelCls}}">{{r.model}}</span></td>
+<td>{{r.insp}}</td>
 <td><span class="{{r.locCls}}">{{r.loc}}</span></td>
 </tr>
 </sc-for>
@@ -102,7 +102,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </table>
 </div>
 <div style="padding: 16px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; color: #5B6169">
-<span style="display: flex; flex-direction: column; gap: 4px"><span>Showing 10 of 344 boards</span><span>Model risk is the RCA model's predicted probability of the defect for each board: High 5% or more, Medium 1–5%, Low under 1%.</span></span>
+<span style="display: flex; flex-direction: column; gap: 4px"><span>Showing 10 of 81 boards</span><span>Model: the defect class the RCA model predicts for the board (no defect, solder bridging or open circuit).</span></span>
 <div style="display: flex; gap: 8px"><button class="btn" type="button">Previous</button><button class="btn" type="button">Next</button></div>
 </div>
 </section>
@@ -112,25 +112,24 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1150}}'>
 class Component extends DCLogic {
   renderVals() {
+    // [board, panel, built, root causes, measured, model prediction, inspection result, location]
     const data = [
-      ['PCB-0005671', 'stg-B0003-P0139', '23:24', 'Low squeegee angle, low squeegee speed', '52° · 51 mm/s', '3.8%', 'Shipped'],
-      ['PCB-0005902', 'stg-B0003-P0196', '00:02', 'Low squeegee angle, high squeegee pressure', '53° · 0.35 MPa', '6.4%', 'Finished goods'],
-      ['PCB-0006489', 'stg-B0003-P0343', '02:03', 'High peak reflow temperature', '258.9 °C', '24%', 'Shipped'],
-      ['PCB-0006557', 'stg-B0003-P0360', '02:16', 'High peak reflow temperature', '259.6 °C', '29%', 'Finished goods'],
-      ['PCB-0006615', 'stg-B0003-P0374', '02:31', 'High peak reflow temperature', '259.4 °C', '27%', 'Finished goods'],
-      ['PCB-0006640', 'stg-B0003-P0381', '02:38', 'High peak reflow temperature', '257.9 °C', '4.1%', 'Finished goods'],
-      ['PCB-0006921', 'stg-B0003-P0451', '03:42', 'High paste viscosity', '237 Pa·s', '3.2%', 'WIP'],
-      ['PCB-0006988', 'stg-B0003-P0468', '03:55', 'High paste viscosity', '241 Pa·s', '12%', 'WIP'],
-      ['PCB-0007064', 'stg-B0003-P0487', '04:08', 'High paste viscosity', '244 Pa·s', '15%', 'WIP'],
-      ['PCB-0007130', 'stg-B0003-P0503', '04:21', 'High paste viscosity', '239 Pa·s', '4.4%', 'WIP']
+      ['PCB-0005614', 'stg-B0003-P0146', '23:16', 'Low squeegee angle, low squeegee speed', '52° · 50 mm/s', 'Solder bridging', 'Pass', 'Shipped'],
+      ['PCB-0005902', 'stg-B0003-P0196', '00:02', 'Low squeegee angle, high squeegee pressure', '53° · 0.35 MPa', 'Solder bridging', 'Pass', 'Finished goods'],
+      ['PCB-0006489', 'stg-B0003-P0343', '02:03', 'High peak reflow temperature', '258.9 °C', 'Solder bridging', 'Pass', 'Shipped'],
+      ['PCB-0006521', 'stg-B0003-P0352', '02:09', 'High peak reflow temperature', '259.3 °C', 'Solder bridging', 'Pass', 'Finished goods'],
+      ['PCB-0006557', 'stg-B0003-P0360', '02:16', 'High peak reflow temperature', '259.6 °C', 'Solder bridging', 'Pass', 'Finished goods'],
+      ['PCB-0006615', 'stg-B0003-P0374', '02:31', 'High peak reflow temperature', '259.4 °C', 'Solder bridging', 'Pass', 'Finished goods'],
+      ['PCB-0006950', 'stg-B0003-P0459', '03:48', 'High paste viscosity', '240 Pa·s', 'Open circuit', 'Pass', 'WIP'],
+      ['PCB-0006988', 'stg-B0003-P0468', '03:55', 'High paste viscosity', '241 Pa·s', 'Open circuit', 'Pass', 'WIP'],
+      ['PCB-0007064', 'stg-B0003-P0487', '04:08', 'High paste viscosity', '244 Pa·s', 'Open circuit', 'Pass', 'WIP'],
+      ['PCB-0005451', 'stg-B0003-P0118', '22:41', 'None found', 'All in spec', 'No defect', 'Solder bridging', 'Rework']
     ];
     const rows = data.map(d => ({
-      id: d[0], panel: d[1], time: d[2], sig: d[3], meas: d[4], loc: d[6],
-      risk: parseFloat(d[5]) >= 5 ? 'High' : (parseFloat(d[5]) >= 1 ? 'Medium' : 'Low'),
-      riskCls: parseFloat(d[5]) >= 5 ? 'chip crit' : (parseFloat(d[5]) >= 1 ? 'chip warn' : 'chip ok'),
-      riskPct: 'Model risk ' + d[5],
+      id: d[0], panel: d[1], time: d[2], sig: d[3], meas: d[4], model: d[5], insp: d[6], loc: d[7],
       sel: true,
-      locCls: d[6] === 'Shipped' ? 'chip crit' : (d[6] === 'WIP' ? 'chip info' : 'chip muted')
+      modelCls: d[5] === 'No defect' ? 'chip ok' : 'chip crit',
+      locCls: d[7] === 'Shipped' ? 'chip crit' : (d[7] === 'WIP' ? 'chip info' : 'chip muted')
     }));
     return { rows };
   }

@@ -73,8 +73,8 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 </div>
 
 <section class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #F1D3B5; background: #FFFAF4">
-<span class="chip crit" title="Model risk 27%">High risk · re-inspect</span>
-<div style="flex: 1 1 520px; font-size: 16px; line-height: 1.5">Passed AOI and electrical test, but the model risk for solder bridging is High. Peak reflow temperature was above USL (259.4 °C, spec 245–255 °C). Built 02:31, during 02:00–02:40: same root cause chain as chain #1 of INV-0142.</div>
+<span class="chip crit">Re-inspect</span>
+<div style="flex: 1 1 520px; font-size: 16px; line-height: 1.5">Passed AOI and electrical test, but the model predicts solder bridging. Peak reflow temperature was above USL (259.4 °C, spec 245–255 °C). Built 02:31, during 02:00–02:40: same root cause chain as chain #1 of INV-0142.</div>
 <a href="rca-packet.html" style="font-size: 14px; font-weight: 600">See batch analysis</a>
 </section>
 
@@ -83,7 +83,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px" aria-label="Why this board was flagged">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">RCA packet</h2>
-<div style="display: flex; align-items: center; gap: 8px"><span style="font-size: 13px; color: #5B6169">Model risk · solder bridging</span><span class="chip crit" title="Model risk 27%">High</span></div>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 14px"><span style="color: #5B6169">Model:</span><span class="chip crit">Solder bridging</span><span style="color: #5B6169">AOI:</span><span class="chip ok">Pass</span></div>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <div class="node n-root">High peak reflow temperature</div>
@@ -92,7 +92,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <span aria-hidden="true" style="color: #5B6169">→</span>
 <div class="node n-def">Solder bridging</div>
 </div>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 14px"><span class="chip info">Top chain · same as chain #1 of INV-0142</span><span style="color: #4A4F56">Reflow mechanism: excess reflow spreading (High) · Printing mechanism: none predicted (Low)</span></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 14px"><span class="chip info">Top chain · same as chain #1 of INV-0142</span><span style="color: #4A4F56">Reflow mechanism: excess reflow spreading · Printing mechanism: none</span></div>
 <div class="eyebrow">Contribution by parameter</div>
 <div class="attr2">
 
@@ -122,8 +122,8 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <span class="mono" style="text-align: right">−2%</span>
 
 </div>
-<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #F5F8FD; border: 1px solid #B7CBEA; border-radius: 8px"><span style="font-weight: 600">What-if: </span>with peak reflow temperature at nominal (250 °C), this board's model risk would be Low.</div>
-<div style="font-size: 13px; color: #5B6169; line-height: 1.5; padding-top: 10px; border-top: 1px solid #EEF0ED">Attribution shows how much each parameter moved this board's predicted risk compared with a typical in-spec board. Bars to the right raised it; bars to the left lowered it. Bridges under the QFN may not be visible to AOI.<br>Assessed 15 Oct 2026 06:05 · RCA model v2.0 · display threshold τ = 0.60</div>
+<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #F5F8FD; border: 1px solid #B7CBEA; border-radius: 8px"><span style="font-weight: 600">What-if: </span>with peak reflow temperature at nominal (250 °C), the model would predict no defect for this board.</div>
+<div style="font-size: 13px; color: #5B6169; line-height: 1.5; padding-top: 10px; border-top: 1px solid #EEF0ED">Contribution shows how much each parameter pushed the model towards predicting solder bridging for this board, compared with a typical in-spec board. Bars to the right raised it; bars to the left lowered it. Bridges under the QFN may not be visible to AOI.<br>Assessed 15 Oct 2026 06:05 · RCA model v2.0 · display threshold τ = 0.60</div>
 </section>
 
 <section class="card" style="overflow: hidden" aria-label="Parameter fingerprint">

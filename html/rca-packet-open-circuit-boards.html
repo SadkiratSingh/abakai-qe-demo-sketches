@@ -116,7 +116,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <div class="big"><span class="v">28 of 31</span><span class="l">boards with open circuit show this chain</span></div>
-<div class="big"><span class="v">162</span><span class="l">boards that passed electrical test show this chain</span></div>
+<div class="big"><span class="v">30</span><span class="l">boards that passed electrical test show this chain</span></div>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
 <div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
@@ -162,7 +162,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <div class="big"><span class="v">4 of 31</span><span class="l">boards with open circuit show this chain</span></div>
-<div class="big"><span class="v">18</span><span class="l">boards that passed electrical test show this chain</span></div>
+<div class="big"><span class="v">2</span><span class="l">boards that passed electrical test show this chain</span></div>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
 <div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
@@ -201,29 +201,29 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">No root cause chain found · 3 boards</h2>
 </div>
-<div style="font-size: 14px; color: #4A4F56">Electrical test found open circuit, but the model risk was Low and no parameter raised it, so no chain was assigned.</div>
+<div style="font-size: 14px; color: #4A4F56">Electrical test found open circuit, but the model predicts no defect, so no chain was assigned.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0005334</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">22:18</span>
-<span class="chip ok" title="Model risk 0.2%">Low</span>
-<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+<span class="chip ok">Model: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">Electrical test: open circuit</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0006407</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">01:47</span>
-<span class="chip ok" title="Model risk 0.1%">Low</span>
-<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+<span class="chip ok">Model: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">Electrical test: open circuit</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0007473</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">05:26</span>
-<span class="chip ok" title="Model risk 0.3%">Low</span>
-<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+<span class="chip ok">Model: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">Electrical test: open circuit</span>
 </div>
 
 </div>
@@ -234,18 +234,18 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs electrical test · open circuit</h2>
-<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0003, by model risk and electrical test result.</div>
+<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0003, by model prediction and electrical test result.</div>
 </div>
 <span class="chip ok">Agreement 99%</span>
 </div>
 <div class="mx">
 <span></span><span class="h">Electrical test: open circuit</span><span class="h">Electrical test: pass</span>
-<span class="h">Model risk High</span>
+<span class="h">Model: open circuit</span>
 <div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">28</span><span class="t">Confirmed</span><span class="s">Both found open circuit</span></div>
-<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">30</span><span class="t">Hidden risk</span><span class="s">Passed electrical test; re-inspect</span></div>
-<span class="h">Model risk Medium or Low</span>
-<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">3</span><span class="t">Unexplained</span><span class="s">No chain found; verify the electrical test call</span></div>
-<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,499</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards: re-inspect if needed</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">30</span><span class="t">Re-inspect</span><span class="s">Passed electrical test</span></div>
+<span class="h">Model: no defect</span>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">3</span><span class="t">Verify the call</span><span class="s">No root cause chain found</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,499</span><span class="t">Agree: no defect</span><span class="s">&nbsp;</span></div>
 </div>
 </section>
 </div>
@@ -263,22 +263,22 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="font-size: 14px; font-weight: 600; line-height: 1.4">High paste viscosity → Poor paste transfer → Open circuit</div>
 <div style="display: flex">
 <span class="seg on">With open circuit · 28</span>
-<span class="seg">Passed electrical test · 162</span>
+<span class="seg">Passed electrical test · 30</span>
 </div>
 </div>
 <div style="display: flex; flex-direction: column">
 
-<button type="button" class="brow"><span class="mono">PCB-0006925</span><span class="mono" style="color: #4A4F56">03:43</span><span style="color: #4A4F56; font-size: 13px">238 Pa·s</span><span class="chip crit" title="Model risk 24%">High</span></button>
+<button type="button" class="brow"><span class="mono">PCB-0006925</span><span class="mono" style="color: #4A4F56">03:43</span><span style="color: #4A4F56; font-size: 13px">238 Pa·s</span><span></span></button>
 
-<button type="button" class="brow on"><span class="mono">PCB-0006961</span><span class="mono" style="color: #4A4F56">03:50</span><span style="color: #4A4F56; font-size: 13px">241 Pa·s</span><span class="chip crit" title="Model risk 27%">High</span></button>
+<button type="button" class="brow on"><span class="mono">PCB-0006961</span><span class="mono" style="color: #4A4F56">03:50</span><span style="color: #4A4F56; font-size: 13px">241 Pa·s</span><span></span></button>
 
-<button type="button" class="brow"><span class="mono">PCB-0006997</span><span class="mono" style="color: #4A4F56">03:57</span><span style="color: #4A4F56; font-size: 13px">239 Pa·s</span><span class="chip crit" title="Model risk 22%">High</span></button>
+<button type="button" class="brow"><span class="mono">PCB-0006997</span><span class="mono" style="color: #4A4F56">03:57</span><span style="color: #4A4F56; font-size: 13px">239 Pa·s</span><span></span></button>
 
-<button type="button" class="brow"><span class="mono">PCB-0007034</span><span class="mono" style="color: #4A4F56">04:04</span><span style="color: #4A4F56; font-size: 13px">244 Pa·s</span><span class="chip crit" title="Model risk 29%">High</span></button>
+<button type="button" class="brow"><span class="mono">PCB-0007034</span><span class="mono" style="color: #4A4F56">04:04</span><span style="color: #4A4F56; font-size: 13px">244 Pa·s</span><span></span></button>
 
-<button type="button" class="brow"><span class="mono">PCB-0007072</span><span class="mono" style="color: #4A4F56">04:11</span><span style="color: #4A4F56; font-size: 13px">242 Pa·s</span><span class="chip crit" title="Model risk 26%">High</span></button>
+<button type="button" class="brow"><span class="mono">PCB-0007072</span><span class="mono" style="color: #4A4F56">04:11</span><span style="color: #4A4F56; font-size: 13px">242 Pa·s</span><span></span></button>
 
-<button type="button" class="brow"><span class="mono">PCB-0007118</span><span class="mono" style="color: #4A4F56">04:19</span><span style="color: #4A4F56; font-size: 13px">240 Pa·s</span><span class="chip crit" title="Model risk 25%">High</span></button>
+<button type="button" class="brow"><span class="mono">PCB-0007118</span><span class="mono" style="color: #4A4F56">04:19</span><span style="color: #4A4F56; font-size: 13px">240 Pa·s</span><span></span></button>
 
 <div style="padding: 8px 12px; font-size: 13px; color: #5B6169">Showing 6 of 28 · sorted by build time</div>
 </div>
@@ -290,11 +290,11 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 <div style="font-size: 13px; color: #4A4F56">Built 03:50, 15 Oct · stg-B0003-P0462 · slot 2 · electrical test: open circuit · rework</div>
 <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; background: #fff; border: 1px solid #E1E4E0; border-radius: 8px">
-<div class="kv"><span>Defect: <span style="font-weight: 600">Open circuit</span></span><span class="chip crit" title="Model risk 27%">High</span></div>
+<div class="kv"><span style="color: #4A4F56">Model: <span style="color: #16191D; font-weight: 600">Open circuit</span></span><span style="color: #4A4F56">Electrical test: <span style="color: #16191D; font-weight: 600">open circuit</span></span></div>
 
-<div class="kv"><span style="color: #4A4F56">Printing mechanism: <span style="color: #16191D; font-weight: 600">Poor paste transfer</span></span><span class="chip crit" title="Predicted 97%">High</span></div>
+<div class="kv"><span style="color: #4A4F56">Printing mechanism: <span style="color: #16191D; font-weight: 600">Poor paste transfer</span></span></div>
 
-<div class="kv"><span style="color: #4A4F56">Reflow mechanism: <span style="color: #16191D; font-weight: 600">none predicted</span></span><span class="chip ok" title="Predicted 4%">Low</span></div>
+<div class="kv"><span style="color: #4A4F56">Reflow mechanism: <span style="color: #16191D; font-weight: 600">none</span></span></div>
 
 </div>
 <div class="eyebrow">Root cause chains on this board</div>

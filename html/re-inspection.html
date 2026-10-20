@@ -48,8 +48,8 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <div style="display: flex; flex-direction: column; gap: 8px">
 <a href="rca-packet.html" style="font-size: 14px; text-decoration: none">← INV-0142 root cause analysis</a>
 <div class="eyebrow">Re-inspection · INV-0142 · stg-B0003</div>
-<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">344 boards where the RCA model and inspection disagree</h1>
-<div style="font-size: 15px; color: #4A4F56">On the other 2,216 boards in stg-B0003, the model and inspection agree.</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">81 boards where the RCA model and inspection disagree</h1>
+<div style="font-size: 15px; color: #4A4F56">On the other 2,479 boards in stg-B0003, the model and inspection agree.</div>
 <div style="font-size: 14px; color: #5B6169">Also checked: other batches through line 2 during 23:10–00:20, 02:00–02:40 and 03:40–04:30: none.</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
@@ -58,11 +58,10 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </div>
 </div>
 
-<section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px" aria-label="Where the boards are">
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0"><div class="eyebrow" style="color: #9B1C12">Re-inspect · High model risk</div><div class="mono" style="font-size: 32px; font-weight: 500">75</div><div style="font-size: 13px; color: #5B6169">WIP 34 · finished goods 36 · shipped 5</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F1D3B5"><div class="eyebrow" style="color: #8A3505">If needed · Medium model risk</div><div class="mono" style="font-size: 32px; font-weight: 500">263</div><div style="font-size: 13px; color: #5B6169">WIP 119 · finished goods 129 · shipped 15</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Verify the call · no chain</div><div class="mono" style="font-size: 32px; font-weight: 500">6</div><div style="font-size: 13px; color: #5B6169">Failed inspection, but the model saw no risk: 3 solder bridging (AOI), 3 open circuit (electrical test)</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">By root cause · re-inspect / if needed</div><div style="font-size: 14px; line-height: 1.6"><span class="mono" style="font-weight: 600">38 / 74</span> · High peak reflow temperature · 02:00–02:40<br><span class="mono" style="font-weight: 600">7 / 54</span> · Low squeegee angle, speed or pressure · 23:10–00:20<br><span class="mono" style="font-weight: 600">30 / 135</span> · High paste viscosity · 03:40–04:30<br><span style="color: #5B6169">A board with more than one root cause is counted once, under the one with the largest contribution</span></div></div>
+<section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px" aria-label="Where the boards are">
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0"><div class="eyebrow" style="color: #9B1C12">Re-inspect</div><div class="mono" style="font-size: 32px; font-weight: 500">75</div><div style="font-size: 13px; color: #4A4F56">Passed inspection; model predicts a defect: 45 solder bridging, 30 open circuit</div><div style="font-size: 13px; color: #5B6169">WIP 34 · finished goods 36 · shipped 5</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Verify the call</div><div class="mono" style="font-size: 32px; font-weight: 500">6</div><div style="font-size: 13px; color: #4A4F56">Failed inspection; model predicts no defect: 3 solder bridging (AOI), 3 open circuit (electrical test)</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Re-inspect by root cause</div><div style="font-size: 14px; line-height: 1.6"><span class="mono" style="font-weight: 600">38</span> · High peak reflow temperature · 02:00–02:40<br><span class="mono" style="font-weight: 600">7</span> · Low squeegee angle, speed or pressure · 23:10–00:20<br><span class="mono" style="font-weight: 600">30</span> · High paste viscosity · 03:40–04:30<br><span style="color: #5B6169">A board with more than one root cause is counted once, under the one with the largest contribution</span></div></div>
 </section>
 
 <section class="card" style="overflow: hidden" aria-label="Boards to inspect again">
@@ -70,7 +69,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Boards to inspect again</h2>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Group
-<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All groups</option><option>Re-inspect (High)</option><option>If needed (Medium)</option><option>Verify the call</option></select>
+<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>Re-inspect</option><option>Verify the call</option></select>
 </label>
 <label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Root cause
 <select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>High peak reflow temperature</option><option>Low squeegee angle</option><option>Low squeegee speed</option><option>High squeegee pressure</option><option>High paste viscosity</option></select>
@@ -82,17 +81,18 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </div>
 <div style="overflow-x: auto">
 <table>
-<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Root causes</th><th>Measured</th><th>Model risk</th><th>Location</th></tr></thead>
+<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Root causes</th><th>Measured</th><th>Model</th><th>Inspection</th><th>Location</th></tr></thead>
 <tbody>
 
 <tr>
-<td><input type="checkbox" aria-label="Select PCB-0005671" checked></td>
-<td class="mono"><a href="board-detail.html">PCB-0005671</a></td>
-<td class="mono">stg-B0003-P0139</td>
-<td class="mono">23:24</td>
+<td><input type="checkbox" aria-label="Select PCB-0005614" checked></td>
+<td class="mono"><a href="board-detail.html">PCB-0005614</a></td>
+<td class="mono">stg-B0003-P0146</td>
+<td class="mono">23:16</td>
 <td>Low squeegee angle, low squeegee speed</td>
-<td class="mono">52° · 51 mm/s</td>
-<td><span class="chip warn" title="Model risk 3.8%">Medium</span></td>
+<td class="mono">52° · 50 mm/s</td>
+<td><span class="chip crit">Solder bridging</span></td>
+<td>Pass</td>
 <td><span class="chip crit">Shipped</span></td>
 </tr>
 
@@ -103,7 +103,8 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">00:02</td>
 <td>Low squeegee angle, high squeegee pressure</td>
 <td class="mono">53° · 0.35 MPa</td>
-<td><span class="chip crit" title="Model risk 6.4%">High</span></td>
+<td><span class="chip crit">Solder bridging</span></td>
+<td>Pass</td>
 <td><span class="chip muted">Finished goods</span></td>
 </tr>
 
@@ -114,8 +115,21 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">02:03</td>
 <td>High peak reflow temperature</td>
 <td class="mono">258.9 °C</td>
-<td><span class="chip crit" title="Model risk 24%">High</span></td>
+<td><span class="chip crit">Solder bridging</span></td>
+<td>Pass</td>
 <td><span class="chip crit">Shipped</span></td>
+</tr>
+
+<tr>
+<td><input type="checkbox" aria-label="Select PCB-0006521" checked></td>
+<td class="mono"><a href="board-detail.html">PCB-0006521</a></td>
+<td class="mono">stg-B0003-P0352</td>
+<td class="mono">02:09</td>
+<td>High peak reflow temperature</td>
+<td class="mono">259.3 °C</td>
+<td><span class="chip crit">Solder bridging</span></td>
+<td>Pass</td>
+<td><span class="chip muted">Finished goods</span></td>
 </tr>
 
 <tr>
@@ -125,7 +139,8 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">02:16</td>
 <td>High peak reflow temperature</td>
 <td class="mono">259.6 °C</td>
-<td><span class="chip crit" title="Model risk 29%">High</span></td>
+<td><span class="chip crit">Solder bridging</span></td>
+<td>Pass</td>
 <td><span class="chip muted">Finished goods</span></td>
 </tr>
 
@@ -136,29 +151,20 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">02:31</td>
 <td>High peak reflow temperature</td>
 <td class="mono">259.4 °C</td>
-<td><span class="chip crit" title="Model risk 27%">High</span></td>
+<td><span class="chip crit">Solder bridging</span></td>
+<td>Pass</td>
 <td><span class="chip muted">Finished goods</span></td>
 </tr>
 
 <tr>
-<td><input type="checkbox" aria-label="Select PCB-0006640" checked></td>
-<td class="mono"><a href="board-detail.html">PCB-0006640</a></td>
-<td class="mono">stg-B0003-P0381</td>
-<td class="mono">02:38</td>
-<td>High peak reflow temperature</td>
-<td class="mono">257.9 °C</td>
-<td><span class="chip warn" title="Model risk 4.1%">Medium</span></td>
-<td><span class="chip muted">Finished goods</span></td>
-</tr>
-
-<tr>
-<td><input type="checkbox" aria-label="Select PCB-0006921" checked></td>
-<td class="mono"><a href="board-detail.html">PCB-0006921</a></td>
-<td class="mono">stg-B0003-P0451</td>
-<td class="mono">03:42</td>
+<td><input type="checkbox" aria-label="Select PCB-0006950" checked></td>
+<td class="mono"><a href="board-detail.html">PCB-0006950</a></td>
+<td class="mono">stg-B0003-P0459</td>
+<td class="mono">03:48</td>
 <td>High paste viscosity</td>
-<td class="mono">237 Pa·s</td>
-<td><span class="chip warn" title="Model risk 3.2%">Medium</span></td>
+<td class="mono">240 Pa·s</td>
+<td><span class="chip crit">Open circuit</span></td>
+<td>Pass</td>
 <td><span class="chip info">WIP</span></td>
 </tr>
 
@@ -169,7 +175,8 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">03:55</td>
 <td>High paste viscosity</td>
 <td class="mono">241 Pa·s</td>
-<td><span class="chip crit" title="Model risk 12%">High</span></td>
+<td><span class="chip crit">Open circuit</span></td>
+<td>Pass</td>
 <td><span class="chip info">WIP</span></td>
 </tr>
 
@@ -180,26 +187,28 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">04:08</td>
 <td>High paste viscosity</td>
 <td class="mono">244 Pa·s</td>
-<td><span class="chip crit" title="Model risk 15%">High</span></td>
+<td><span class="chip crit">Open circuit</span></td>
+<td>Pass</td>
 <td><span class="chip info">WIP</span></td>
 </tr>
 
 <tr>
-<td><input type="checkbox" aria-label="Select PCB-0007130" checked></td>
-<td class="mono"><a href="board-detail.html">PCB-0007130</a></td>
-<td class="mono">stg-B0003-P0503</td>
-<td class="mono">04:21</td>
-<td>High paste viscosity</td>
-<td class="mono">239 Pa·s</td>
-<td><span class="chip warn" title="Model risk 4.4%">Medium</span></td>
-<td><span class="chip info">WIP</span></td>
+<td><input type="checkbox" aria-label="Select PCB-0005451" checked></td>
+<td class="mono"><a href="board-detail.html">PCB-0005451</a></td>
+<td class="mono">stg-B0003-P0118</td>
+<td class="mono">22:41</td>
+<td>None found</td>
+<td class="mono">All in spec</td>
+<td><span class="chip ok">No defect</span></td>
+<td>Solder bridging</td>
+<td><span class="chip muted">Rework</span></td>
 </tr>
 
 </tbody>
 </table>
 </div>
 <div style="padding: 16px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; color: #5B6169">
-<span style="display: flex; flex-direction: column; gap: 4px"><span>Showing 10 of 344 boards</span><span>Model risk is the RCA model's predicted probability of the defect for each board: High 5% or more, Medium 1–5%, Low under 1%.</span></span>
+<span style="display: flex; flex-direction: column; gap: 4px"><span>Showing 10 of 81 boards</span><span>Model: the defect class the RCA model predicts for the board (no defect, solder bridging or open circuit).</span></span>
 <div style="display: flex; gap: 8px"><button class="btn" type="button">Previous</button><button class="btn" type="button">Next</button></div>
 </div>
 </section>

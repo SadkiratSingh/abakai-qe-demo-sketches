@@ -111,7 +111,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <div class="big"><span class="v">19 of 23</span><span class="l">boards with solder bridging show this chain</span></div>
-<div class="big"><span class="v">683</span><span class="l">boards that passed AOI show this chain</span></div>
+<div class="big"><span class="v">26</span><span class="l">boards that passed AOI show this chain</span></div>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
 <div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
@@ -150,36 +150,36 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">No root cause chain found · 4 boards</h2>
 </div>
-<div style="font-size: 14px; color: #4A4F56">AOI found solder bridging, but the model risk was Low and no parameter raised it, so no chain was assigned.</div>
+<div style="font-size: 14px; color: #4A4F56">AOI found solder bridging, but the model predicts no defect, so no chain was assigned.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0008174</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">06:48</span>
-<span class="chip ok" title="Model risk 0.3%">Low</span>
-<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+<span class="chip ok">Model: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">AOI: solder bridging</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0008637</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">08:15</span>
-<span class="chip ok" title="Model risk 0.2%">Low</span>
-<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+<span class="chip ok">Model: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">AOI: solder bridging</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0010031</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">13:02</span>
-<span class="chip ok" title="Model risk 0.4%">Low</span>
-<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+<span class="chip ok">Model: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">AOI: solder bridging</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0010239</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">13:41</span>
-<span class="chip ok" title="Model risk 0.3%">Low</span>
-<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+<span class="chip ok">Model: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">AOI: solder bridging</span>
 </div>
 
 </div>
@@ -190,18 +190,18 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs AOI · solder bridging</h2>
-<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0005, by model risk and AOI result.</div>
+<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0005, by model prediction and AOI result.</div>
 </div>
 <span class="chip ok">Agreement 99%</span>
 </div>
 <div class="mx">
 <span></span><span class="h">AOI: solder bridging</span><span class="h">AOI: pass</span>
-<span class="h">Model risk High</span>
+<span class="h">Model: solder bridging</span>
 <div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">19</span><span class="t">Confirmed</span><span class="s">Both found solder bridging</span></div>
-<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">26</span><span class="t">Hidden risk</span><span class="s">Passed AOI; re-inspect</span></div>
-<span class="h">Model risk Medium or Low</span>
-<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">4</span><span class="t">Unexplained</span><span class="s">No chain found; verify the AOI call</span></div>
-<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,511</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards: re-inspect if needed</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">26</span><span class="t">Re-inspect</span><span class="s">Passed AOI</span></div>
+<span class="h">Model: no defect</span>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">4</span><span class="t">Verify the call</span><span class="s">No root cause chain found</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,511</span><span class="t">Agree: no defect</span><span class="s">&nbsp;</span></div>
 </div>
 </section>
 </div>
@@ -209,19 +209,19 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <aside style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="Re-inspection">
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Re-inspection</h2><div style="display: flex; flex-wrap: wrap; gap: 6px"><span class="chip crit">26 re-inspect</span><span class="chip warn">657 if needed</span><span class="chip muted">4 verify call</span></div></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Re-inspection</h2><div style="display: flex; flex-wrap: wrap; gap: 6px"><span class="chip crit">26 re-inspect</span><span class="chip muted">4 verify the call</span></div></div>
 <div style="font-size: 13px; color: #5B6169">Boards where the RCA model and AOI disagree.</div>
-<div style="font-size: 14px; line-height: 1.5">683 boards passed AOI but show a solder bridging chain: 26 with High model risk to re-inspect, 657 with Medium to re-inspect if needed. 4 boards failed AOI with no chain: verify the AOI call.</div>
+<div style="font-size: 14px; line-height: 1.5">26 boards passed AOI, but the model predicts solder bridging: re-inspect. 4 boards failed AOI, but the model predicts no defect: verify the AOI call.</div>
 <a class="btn" href="re-inspection.html">Open re-inspection list</a>
 </section>
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
 <h2 style="margin: 0; font-size: 16px; font-weight: 600">How root cause chains are found</h2>
 <ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 6px">
-<li>For every board, the RCA model predicts the defect and the mechanism, and attribution finds the parameters that raised the board's risk.</li>
+<li>For every board, the RCA model predicts the defect class (or no defect) and the mechanism on each side, and attribution finds the parameters behind the prediction.</li>
 <li>The Failure Library's cause-and-effect ontology turns each of those parameters into a chain: root cause → mechanism → defect. Chains below the display threshold are left out.</li>
 <li>This page groups boards by chain. A board can show more than one chain.</li>
 </ol>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Contribution is the share of a board's predicted risk that comes from the root cause. Model risk bands: High 5% or more, Medium 1–5%, Low under 1%.</div>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Contribution is the share of the prediction that comes from the root cause.</div>
 </section>
 
 

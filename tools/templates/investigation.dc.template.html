@@ -177,8 +177,8 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="Board.dc.html" style="flex: 0 0 120px">{{b.id}}</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">{{b.time}}</span>
-<span class="chip ok" title="{{b.pct}}">Low</span>
-<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+<span class="chip ok">Model: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">{{c.insp}}: {{c.defLower}}</span>
 </div>
 </sc-for>
 </div>
@@ -189,18 +189,18 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs {{c.inspLower}} · {{c.defLower}}</h2>
-<div style="font-size: 14px; color: #5B6169">All 2,560 boards in {{inv.batch}}, by model risk and {{c.inspLower}} result.</div>
+<div style="font-size: 14px; color: #5B6169">All 2,560 boards in {{inv.batch}}, by model prediction and {{c.inspLower}} result.</div>
 </div>
 <span class="chip ok">Agreement {{c.agree}}</span>
 </div>
 <div class="mx">
 <span></span><span class="h">{{c.insp}}: {{c.defLower}}</span><span class="h">{{c.insp}}: pass</span>
-<span class="h">Model risk High</span>
+<span class="h">Model: {{c.defLower}}</span>
 <div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">{{c.mx.conf}}</span><span class="t">Confirmed</span><span class="s">Both found {{c.defLower}}</span></div>
-<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">{{c.mx.hidden}}</span><span class="t">Hidden risk</span><span class="s">Passed {{c.inspLower}}; re-inspect</span></div>
-<span class="h">Model risk Medium or Low</span>
-<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">{{c.mx.unexpl}}</span><span class="t">Unexplained</span><span class="s">No chain found; verify the {{c.inspLower}} call</span></div>
-<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">{{c.mx.good}}</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards: re-inspect if needed</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">{{c.mx.hidden}}</span><span class="t">Re-inspect</span><span class="s">Passed {{c.inspLower}}</span></div>
+<span class="h">Model: no defect</span>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">{{c.mx.unexpl}}</span><span class="t">Verify the call</span><span class="s">No root cause chain found</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">{{c.mx.good}}</span><span class="t">Agree: no defect</span><span class="s">&nbsp;</span></div>
 </div>
 </section>
 </div>
@@ -208,7 +208,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <aside style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="{{asideLabel}}">
 <sc-if value="{{panelClosed}}" hint-placeholder-val="{{ true }}">
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Re-inspection</h2><div style="display: flex; flex-wrap: wrap; gap: 6px"><span class="chip crit">{{c.hold}} re-inspect</span><span class="chip warn">{{c.review}} if needed</span><span class="chip muted">{{c.mx.unexpl}} verify call</span></div></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Re-inspection</h2><div style="display: flex; flex-wrap: wrap; gap: 6px"><span class="chip crit">{{c.hold}} re-inspect</span><span class="chip muted">{{c.mx.unexpl}} verify the call</span></div></div>
 <div style="font-size: 13px; color: #5B6169">Boards where the RCA model and {{c.inspLower}} disagree.</div>
 <div style="font-size: 14px; line-height: 1.5">{{c.containLine}}</div>
 <a class="btn" href="Containment.dc.html">Open re-inspection list</a>
@@ -216,11 +216,11 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
 <h2 style="margin: 0; font-size: 16px; font-weight: 600">How root cause chains are found</h2>
 <ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 6px">
-<li>For every board, the RCA model predicts the defect and the mechanism, and attribution finds the parameters that raised the board's risk.</li>
+<li>For every board, the RCA model predicts the defect class (or no defect) and the mechanism on each side, and attribution finds the parameters behind the prediction.</li>
 <li>The Failure Library's cause-and-effect ontology turns each of those parameters into a chain: root cause → mechanism → defect. Chains below the display threshold are left out.</li>
 <li>This page groups boards by chain. A board can show more than one chain.</li>
 </ol>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Contribution is the share of a board's predicted risk that comes from the root cause. Model risk bands: High 5% or more, Medium 1–5%, Low under 1%.</div>
+<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Contribution is the share of the prediction that comes from the root cause.</div>
 </section>
 </sc-if>
 
@@ -239,7 +239,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 <div style="display: flex; flex-direction: column">
 <sc-for list="{{p.boards}}" as="b" hint-placeholder-count="6">
-<button type="button" class="{{b.cls}}" onClick="{{b.pick}}"><span class="mono">{{b.id}}</span><span class="mono" style="color: #4A4F56">{{b.time}}</span><span style="color: #4A4F56; font-size: 13px">{{b.val}}</span><span class="chip crit" title="{{b.pct}}">High</span></button>
+<button type="button" class="{{b.cls}}" onClick="{{b.pick}}"><span class="mono">{{b.id}}</span><span class="mono" style="color: #4A4F56">{{b.time}}</span><span style="color: #4A4F56; font-size: 13px">{{b.val}}</span><span></span></button>
 </sc-for>
 <div style="padding: 8px 12px; font-size: 13px; color: #5B6169">Showing 6 of {{p.k}} · sorted by build time</div>
 </div>
@@ -251,9 +251,9 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 <div style="font-size: 13px; color: #4A4F56">{{bp.meta}}</div>
 <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; background: #fff; border: 1px solid #E1E4E0; border-radius: 8px">
-<div class="kv"><span>Defect: <span style="font-weight: 600">{{c.title}}</span></span><span class="chip crit" title="{{bp.pct}}">High</span></div>
+<div class="kv"><span style="color: #4A4F56">Model: <span style="color: #16191D; font-weight: 600">{{c.title}}</span></span><span style="color: #4A4F56">{{c.insp}}: <span style="color: #16191D; font-weight: 600">{{c.defLower}}</span></span></div>
 <sc-for list="{{bp.mechs}}" as="m" hint-placeholder-count="2">
-<div class="kv"><span style="color: #4A4F56">{{m.side}} mechanism: <span style="color: #16191D; font-weight: 600">{{m.name}}</span></span><span class="{{m.cls}}" title="{{m.pct}}">{{m.band}}</span></div>
+<div class="kv"><span style="color: #4A4F56">{{m.side}} mechanism: <span style="color: #16191D; font-weight: 600">{{m.name}}</span></span></div>
 </sc-for>
 </div>
 <div class="eyebrow">Root cause chains on this board</div>
@@ -310,12 +310,12 @@ class Component extends DCLogic {
       summary: (k, K, d, n) => `${k} of ${K} boards with ${d} show at least one root cause chain. The ${n} most frequent are below; a board can show more than one, so the counts can add up to more than ${K}.`,
       summaryOne: (k, K, d) => `${k} of ${K} boards with ${d} show a root cause chain, and no parameter was out of spec on any of them.`,
       chain: (r, m, d) => `${r} → ${m} → ${d}`,
-      contain: (n, insp, d, hi, med, v) => `${n} boards passed ${insp} but show a ${d} chain: ${hi} with High model risk to re-inspect, ${med} with Medium to re-inspect if needed. ${v} boards failed ${insp} with no chain: verify the ${insp} call.`,
+      contain: (n, insp, d, v) => `${n} boards passed ${insp}, but the model predicts ${d}: re-inspect. ${v} boards failed ${insp}, but the model predicts no defect: verify the ${insp} call.`,
       meta: (time, panel, slot, insp, res, loc) => `Built ${time} · ${panel} · slot ${slot} · ${insp}: ${res} · ${loc}`,
       ev: (param, val, unit, spec) => `${param} ${val}${unit === '°' ? '' : ' '}${unit} (spec ${spec})`,
       interpTwo: (a, b) => `Top chain: ${a}. Second: ${b}.`,
       interpOne: (a) => `Top chain: ${a}. No other chain above the display threshold.`,
-      noneWhy: (insp, d) => `${insp} found ${d}, but the model risk was Low and no parameter raised it, so no chain was assigned.`,
+      noneWhy: (insp, d) => `${insp} found ${d}, but the model predicts no defect, so no chain was assigned.`,
       noneNext: (rec) => `These boards are on the re-inspection list to verify the call: check the ${rec}. If the defect is real, its cause is not among the model's inputs.`
     };
     // Parameters a chain can end in (the root cause), with the facts the packet shows.
@@ -355,25 +355,25 @@ class Component extends DCLogic {
         defects: {
           bridge: {
             title: 'Solder bridging', defLower: 'solder bridging', K: 61, withChain: 58, insp: 'AOI', inspLower: 'AOI', record: 'AOI images', agree: '98%',
-            mx: { conf: 58, hidden: 45, unexpl: 3, good: '2,454' }, hold: 45, review: 128, passedAny: 173,
+            mx: { conf: 58, hidden: 45, unexpl: 3, good: '2,454' }, hold: 45,
             top: [
-              { key: 'reflow', k: 44, passed: 112, when: 'Built 02:00–02:40', spark: 'reflow', fix: 'reflow', panel: 'stg-B0003-P0374',
+              { key: 'reflow', k: 44, passed: 38, when: 'Built 02:00–02:40', spark: 'reflow', fix: 'reflow', panel: 'stg-B0003-P0374',
                 boards: [['PCB-0006471', '02:01', '31%', '258.4', 76], ['PCB-0006502', '02:06', '29%', '258.9', 81], ['PCB-0006538', '02:12', '33%', '259.6', 79, 'speedNear', '58.3', 11], ['PCB-0006579', '02:20', '30%', '259.2', 83], ['PCB-0006612', '02:31', '34%', '259.1', 78, 'speedNear', '58.1', 12], ['PCB-0006633', '02:36', '28%', '258.0', 74, 'ambient', '28.4', 13]] },
-              { key: 'angle', k: 14, passed: 61, when: 'Built 23:10–00:20', spark: 'angle', fix: 'angle', panel: 'stg-B0003-P0152',
+              { key: 'angle', k: 14, passed: 7, when: 'Built 23:10–00:20', spark: 'angle', fix: 'angle', panel: 'stg-B0003-P0152',
                 boards: [['PCB-0005598', '23:12', '12%', '52.6', 48, 'speed', '52', 38], ['PCB-0005640', '23:19', '9%', '52.2', 51, 'pressure', '0.35', 36], ['PCB-0005702', '23:31', '14%', '51.8', 46, 'speed', '51', 39], ['PCB-0005779', '23:46', '8%', '52.9', 55, 'pressure', '0.34', 33], ['PCB-0005851', '23:58', '11%', '52.4', 49, 'speed', '53', 37], ['PCB-0005930', '00:08', '10%', '53.1', 52, 'pressure', '0.35', 35]] },
-              { key: 'speed', k: 7, passed: 33, when: 'Built 23:10–00:20', spark: 'speed', fix: 'speed', panel: 'stg-B0003-P0152',
+              { key: 'speed', k: 7, passed: 4, when: 'Built 23:10–00:20', spark: 'speed', fix: 'speed', panel: 'stg-B0003-P0152',
                 boards: [['PCB-0005598', '23:12', '12%', '52', 38, 'angle', '52.6', 48], ['PCB-0005655', '23:22', '10%', '51', 40, 'angle', '52.0', 47], ['PCB-0005702', '23:31', '14%', '51', 39, 'angle', '51.8', 46], ['PCB-0005738', '23:37', '13%', '52', 36, 'angle', '52.5', 50], ['PCB-0005810', '23:51', '9%', '53', 35, 'angle', '53.0', 51], ['PCB-0005851', '23:58', '11%', '53', 37, 'angle', '52.4', 49]] }
             ],
-            other: [['pressure', 7, 28, 'Built 23:10–00:20'], ['speedNear', 5, 20, 'Built 02:00–02:40'], ['ambient', 2, 9, 'Built 02:00–02:40']],
+            other: [['pressure', 7, 3, 'Built 23:10–00:20'], ['speedNear', 5, 2, 'Built 02:00–02:40'], ['ambient', 2, 1, 'Built 02:00–02:40']],
             none: [['PCB-0005451', '22:41', '0.3%'], ['PCB-0006244', '01:15', '0.2%'], ['PCB-0007351', '05:02', '0.4%']]
           },
           open: {
             title: 'Open circuit', defLower: 'open circuit', K: 31, withChain: 28, insp: 'Electrical test', inspLower: 'electrical test', record: 'electrical test logs', agree: '99%',
-            mx: { conf: 28, hidden: 30, unexpl: 3, good: '2,499' }, hold: 30, review: 135, passedAny: 165,
+            mx: { conf: 28, hidden: 30, unexpl: 3, good: '2,499' }, hold: 30,
             top: [
-              { key: 'visc', k: 28, passed: 162, when: 'Paste lot [paste lot] · built 03:40–04:30', spark: 'visc', fix: 'visc', panel: 'stg-B0003-P0462', support: 'Paste volume per aperture 0.033 mm³ (spec 0.036–0.044 mm³), below LSL. Supports poor paste transfer.',
+              { key: 'visc', k: 28, passed: 30, when: 'Paste lot [paste lot] · built 03:40–04:30', spark: 'visc', fix: 'visc', panel: 'stg-B0003-P0462', support: 'Paste volume per aperture 0.033 mm³ (spec 0.036–0.044 mm³), below LSL. Supports poor paste transfer.',
                 boards: [['PCB-0006925', '03:43', '24%', '238', 84], ['PCB-0006961', '03:50', '27%', '241', 86, 'rh', '58', 9], ['PCB-0006997', '03:57', '22%', '239', 82], ['PCB-0007034', '04:04', '29%', '244', 88], ['PCB-0007072', '04:11', '26%', '242', 85, 'rh', '57', 8], ['PCB-0007118', '04:19', '25%', '240', 83]] },
-              { key: 'rh', k: 4, passed: 18, when: 'Built 03:40–04:30', spark: 'rh', fix: 'rh', panel: 'stg-B0003-P0462', support: 'Paste volume per aperture 0.034 mm³ (spec 0.036–0.044 mm³), below LSL. Supports poor paste transfer.',
+              { key: 'rh', k: 4, passed: 2, when: 'Built 03:40–04:30', spark: 'rh', fix: 'rh', panel: 'stg-B0003-P0462', support: 'Paste volume per aperture 0.034 mm³ (spec 0.036–0.044 mm³), below LSL. Supports poor paste transfer.',
                 boards: [['PCB-0006961', '03:50', '27%', '58', 9, 'visc', '241', 86], ['PCB-0006988', '03:55', '24%', '57', 8, 'visc', '241', 84], ['PCB-0007072', '04:11', '26%', '57', 8, 'visc', '242', 85], ['PCB-0007101', '04:16', '23%', '58', 10, 'visc', '239', 81]] }
             ],
             other: [],
@@ -388,9 +388,9 @@ class Component extends DCLogic {
         defects: {
           bridge: {
             title: 'Solder bridging', defLower: 'solder bridging', K: 23, withChain: 19, insp: 'AOI', inspLower: 'AOI', record: 'AOI images', agree: '99%', one: true,
-            mx: { conf: 19, hidden: 26, unexpl: 4, good: '2,511' }, hold: 26, review: 657, passedAny: 683,
+            mx: { conf: 19, hidden: 26, unexpl: 4, good: '2,511' }, hold: 26,
             top: [
-              { key: 'speedNear', k: 19, passed: 683, when: 'Built 10:20–12:30', spark: 'speedDay', fix: 'speed', inSpec: true, panel: 'stg-B0005-P0371', support: 'Paste volume per aperture 0.0452 mm³ (spec 0.036–0.044 mm³), above USL. Supports aperture overfill.',
+              { key: 'speedNear', k: 19, passed: 26, when: 'Built 10:20–12:30', spark: 'speedDay', fix: 'speed', inSpec: true, panel: 'stg-B0005-P0371', support: 'Paste volume per aperture 0.0452 mm³ (spec 0.036–0.044 mm³), above USL. Supports aperture overfill.',
                 boards: [['PCB-0009410', '10:23', '6.2%', '57.9', 69], ['PCB-0009486', '10:37', '7.4%', '57.1', 72], ['PCB-0009561', '10:51', '5.8%', '58.2', 66, 'angleIn', '58.6', 7], ['PCB-0009610', '11:05', '8.1%', '56.9', 74], ['PCB-0009702', '11:22', '6.9%', '57.5', 71], ['PCB-0009815', '11:44', '7.7%', '57.2', 73, 'angleIn', '58.4', 6]] }
             ],
             other: [],
@@ -436,9 +436,7 @@ class Component extends DCLogic {
       bp = {
         id: b[0], pct: 'Model risk ' + b[2],
         meta: T.meta(b[1] + ', ' + inv.date, h.panel, slot, d.inspLower, d.defLower, 'rework'),
-        mechs: ['Printing', 'Reflow'].map(side => sides[side]
-          ? (side === P[chains[0].key].side ? { side, name: sides[side], band: 'High', cls: 'chip crit', pct: 'Predicted 97%' } : { side, name: sides[side], band: 'Medium', cls: 'chip warn', pct: 'Predicted 38%' })
-          : { side, name: 'none predicted', band: 'Low', cls: 'chip ok', pct: 'Predicted 4%' }),
+        mechs: ['Printing', 'Reflow'].map(side => ({ side, name: sides[side] || 'none' })),
         chains: chains.map((x, i) => { const q = P[x.key]; return { n: i + 1, chain: chainText(x.key), stage: q.stage, contrib: x.c + '%', ev: T.ev(q.param, x.val, q.unit, q.spec), status: q.status, cls: q.cls }; }),
         hasSupport: !!h.support, support: h.support || '',
         interp: chains.length > 1 ? T.interpTwo(P[chains[0].key].short, P[chains[1].key].short) : T.interpOne(P[chains[0].key].short),
@@ -452,7 +450,7 @@ class Component extends DCLogic {
       other: d.other.map(o => ({ chain: chainText(o[0]), k: o[1], passed: o[2], when: o[3] })),
       none: d.none.map(b => ({ id: b[0], time: b[1], pct: 'Model risk ' + b[2] })),
       noneWhy: T.noneWhy(d.insp, d.defLower), noneNext: T.noneNext(d.record),
-      containLine: T.contain(d.passedAny, d.inspLower, d.defLower, d.hold, d.review, d.mx.unexpl)
+      containLine: T.contain(d.hold, d.inspLower, d.defLower, d.mx.unexpl)
     });
     const last = panelOpen ? d.top[this.state.panel].boards.length - 1 : 0;
     return {

@@ -111,7 +111,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <div class="big"><span class="v">19 of 23</span><span class="l">boards with solder bridging show this chain</span></div>
-<div class="big"><span class="v">683</span><span class="l">boards that passed AOI show this chain</span></div>
+<div class="big"><span class="v">26</span><span class="l">boards that passed AOI show this chain</span></div>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
 <div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
@@ -150,36 +150,36 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">No root cause chain found · 4 boards</h2>
 </div>
-<div style="font-size: 14px; color: #4A4F56">AOI found solder bridging, but the model risk was Low and no parameter raised it, so no chain was assigned.</div>
+<div style="font-size: 14px; color: #4A4F56">AOI found solder bridging, but the model predicts no defect, so no chain was assigned.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0008174</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">06:48</span>
-<span class="chip ok" title="Model risk 0.3%">Low</span>
-<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+<span class="chip ok">Model: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">AOI: solder bridging</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0008637</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">08:15</span>
-<span class="chip ok" title="Model risk 0.2%">Low</span>
-<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+<span class="chip ok">Model: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">AOI: solder bridging</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0010031</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">13:02</span>
-<span class="chip ok" title="Model risk 0.4%">Low</span>
-<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+<span class="chip ok">Model: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">AOI: solder bridging</span>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0010239</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">13:41</span>
-<span class="chip ok" title="Model risk 0.3%">Low</span>
-<span style="flex: 1 1 240px; color: #4A4F56">No parameter raised its risk by more than 5%</span>
+<span class="chip ok">Model: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">AOI: solder bridging</span>
 </div>
 
 </div>
@@ -190,18 +190,18 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs AOI · solder bridging</h2>
-<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0005, by model risk and AOI result.</div>
+<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0005, by model prediction and AOI result.</div>
 </div>
 <span class="chip ok">Agreement 99%</span>
 </div>
 <div class="mx">
 <span></span><span class="h">AOI: solder bridging</span><span class="h">AOI: pass</span>
-<span class="h">Model risk High</span>
+<span class="h">Model: solder bridging</span>
 <div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">19</span><span class="t">Confirmed</span><span class="s">Both found solder bridging</span></div>
-<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">26</span><span class="t">Hidden risk</span><span class="s">Passed AOI; re-inspect</span></div>
-<span class="h">Model risk Medium or Low</span>
-<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">4</span><span class="t">Unexplained</span><span class="s">No chain found; verify the AOI call</span></div>
-<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,511</span><span class="t">Agree: no defect</span><span class="s">Medium-risk boards: re-inspect if needed</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">26</span><span class="t">Re-inspect</span><span class="s">Passed AOI</span></div>
+<span class="h">Model: no defect</span>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">4</span><span class="t">Verify the call</span><span class="s">No root cause chain found</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,511</span><span class="t">Agree: no defect</span><span class="s">&nbsp;</span></div>
 </div>
 </section>
 </div>
@@ -219,22 +219,22 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="font-size: 14px; font-weight: 600; line-height: 1.4">Low squeegee speed (in spec, near LSL) → Aperture overfill → Solder bridging</div>
 <div style="display: flex">
 <span class="seg on">With solder bridging · 19</span>
-<span class="seg">Passed AOI · 683</span>
+<span class="seg">Passed AOI · 26</span>
 </div>
 </div>
 <div style="display: flex; flex-direction: column">
 
-<button type="button" class="brow"><span class="mono">PCB-0009410</span><span class="mono" style="color: #4A4F56">10:23</span><span style="color: #4A4F56; font-size: 13px">57.9 mm/s</span><span class="chip crit" title="Model risk 6.2%">High</span></button>
+<button type="button" class="brow"><span class="mono">PCB-0009410</span><span class="mono" style="color: #4A4F56">10:23</span><span style="color: #4A4F56; font-size: 13px">57.9 mm/s</span><span></span></button>
 
-<button type="button" class="brow"><span class="mono">PCB-0009486</span><span class="mono" style="color: #4A4F56">10:37</span><span style="color: #4A4F56; font-size: 13px">57.1 mm/s</span><span class="chip crit" title="Model risk 7.4%">High</span></button>
+<button type="button" class="brow"><span class="mono">PCB-0009486</span><span class="mono" style="color: #4A4F56">10:37</span><span style="color: #4A4F56; font-size: 13px">57.1 mm/s</span><span></span></button>
 
-<button type="button" class="brow"><span class="mono">PCB-0009561</span><span class="mono" style="color: #4A4F56">10:51</span><span style="color: #4A4F56; font-size: 13px">58.2 mm/s</span><span class="chip crit" title="Model risk 5.8%">High</span></button>
+<button type="button" class="brow"><span class="mono">PCB-0009561</span><span class="mono" style="color: #4A4F56">10:51</span><span style="color: #4A4F56; font-size: 13px">58.2 mm/s</span><span></span></button>
 
-<button type="button" class="brow on"><span class="mono">PCB-0009610</span><span class="mono" style="color: #4A4F56">11:05</span><span style="color: #4A4F56; font-size: 13px">56.9 mm/s</span><span class="chip crit" title="Model risk 8.1%">High</span></button>
+<button type="button" class="brow on"><span class="mono">PCB-0009610</span><span class="mono" style="color: #4A4F56">11:05</span><span style="color: #4A4F56; font-size: 13px">56.9 mm/s</span><span></span></button>
 
-<button type="button" class="brow"><span class="mono">PCB-0009702</span><span class="mono" style="color: #4A4F56">11:22</span><span style="color: #4A4F56; font-size: 13px">57.5 mm/s</span><span class="chip crit" title="Model risk 6.9%">High</span></button>
+<button type="button" class="brow"><span class="mono">PCB-0009702</span><span class="mono" style="color: #4A4F56">11:22</span><span style="color: #4A4F56; font-size: 13px">57.5 mm/s</span><span></span></button>
 
-<button type="button" class="brow"><span class="mono">PCB-0009815</span><span class="mono" style="color: #4A4F56">11:44</span><span style="color: #4A4F56; font-size: 13px">57.2 mm/s</span><span class="chip crit" title="Model risk 7.7%">High</span></button>
+<button type="button" class="brow"><span class="mono">PCB-0009815</span><span class="mono" style="color: #4A4F56">11:44</span><span style="color: #4A4F56; font-size: 13px">57.2 mm/s</span><span></span></button>
 
 <div style="padding: 8px 12px; font-size: 13px; color: #5B6169">Showing 6 of 19 · sorted by build time</div>
 </div>
@@ -246,11 +246,11 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 <div style="font-size: 13px; color: #4A4F56">Built 11:05, 16 Oct · stg-B0005-P0371 · slot 3 · AOI: solder bridging · rework</div>
 <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; background: #fff; border: 1px solid #E1E4E0; border-radius: 8px">
-<div class="kv"><span>Defect: <span style="font-weight: 600">Solder bridging</span></span><span class="chip crit" title="Model risk 8.1%">High</span></div>
+<div class="kv"><span style="color: #4A4F56">Model: <span style="color: #16191D; font-weight: 600">Solder bridging</span></span><span style="color: #4A4F56">AOI: <span style="color: #16191D; font-weight: 600">solder bridging</span></span></div>
 
-<div class="kv"><span style="color: #4A4F56">Printing mechanism: <span style="color: #16191D; font-weight: 600">Aperture overfill</span></span><span class="chip crit" title="Predicted 97%">High</span></div>
+<div class="kv"><span style="color: #4A4F56">Printing mechanism: <span style="color: #16191D; font-weight: 600">Aperture overfill</span></span></div>
 
-<div class="kv"><span style="color: #4A4F56">Reflow mechanism: <span style="color: #16191D; font-weight: 600">none predicted</span></span><span class="chip ok" title="Predicted 4%">Low</span></div>
+<div class="kv"><span style="color: #4A4F56">Reflow mechanism: <span style="color: #16191D; font-weight: 600">none</span></span></div>
 
 </div>
 <div class="eyebrow">Root cause chains on this board</div>
