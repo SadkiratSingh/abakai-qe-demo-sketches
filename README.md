@@ -4,13 +4,12 @@ This repository contains sketches for rca demo for quality engineers and manager
 
 Clickable screen sketches for a root cause analysis (RCA) demo aimed at quality engineers (QEs) and quality managers (QMs) in SMT/PCB assembly. Evidence in investigations comes from the **RCA model** (a multilayer perceptron with a defect head and mechanism heads, explained with feature attribution), not from statistical tests.
 
-The main story follows batch stg-B0003 of CTRL-BRD-A on the night shift of SMT line 2: a worn squeegee blade from 23:10 to 00:20 and the reflow oven on the wrong profile from 02:00 to 02:40 (61 boards with solder bridging), and an out-of-spec paste jar from 03:40 to 04:30 (31 boards with open circuit). A second investigation, INV-0143 (stg-B0005, day shift), has no parameter out of spec: squeegee speed sat near LSL from 10:20 to 12:30 and 23 boards had solder bridging.
+The main story follows batch stg-B0003 of CTRL-BRD-A on the night shift of SMT line 2: a worn squeegee blade from 23:10 to 00:20 and the reflow oven on the wrong profile from 02:00 to 02:40 (61 boards with solder bridging), and an out-of-spec paste jar from 03:40 to 04:30 (31 boards with open circuit).
 
 | File | Screen | What it shows |
 | --- | --- | --- |
 | `sketches/Main.dc.html` | 1 · Line overview | Shift KPIs including model agreement, excursion alerts, defects by hour, batch table |
 | `sketches/RcaPacket.dc.html` | 2 · Investigation (INV-0142) | Top 3 root cause chains per defect with board counts, when they appeared and the fix; other chains; no chain found; model vs AOI matrix; side panel with each board's RCA packet |
-| `sketches/RcaNearLimit.dc.html` | 2b · Investigation, in spec (INV-0143) | Same template as INV-0142: one chain, low squeegee speed near LSL and in spec |
 | `sketches/Containment.dc.html` | 3 · Re-inspection | Boards where the RCA model and inspection disagree: re-inspect (inspection passed, model predicts a defect) and verify the call (inspection failed, model predicts no defect). Exported as `re-inspection.html` |
 | `sketches/Board.dc.html` | 3a · Board RCA packet (full page) | One board's model prediction and inspection result, mechanisms, contribution per parameter, what-if, parameter fingerprint, disposition, history |
 | `sketches/Manager.dc.html` | 5 · Manager overview | Open investigations, repeat root causes, Failure Library summary |
@@ -47,7 +46,7 @@ npm run export
 
 ## Wording templates
 
-Every generated sentence on the screens comes from one of these templates, so the same fact is always said the same way. `{…}` is filled from data. The investigation screens build their text from them in code (`const T` in `sketches/RcaPacket.dc.html`; `sketches/RcaNearLimit.dc.html` is generated from the same template).
+Every generated sentence on the screens comes from one of these templates, so the same fact is always said the same way. `{…}` is filled from data. The investigation screens build their text from them in code (`const T` in `sketches/RcaPacket.dc.html`, generated from `tools/templates/investigation.dc.template.html`).
 
 **Vocabulary**
 
@@ -103,6 +102,7 @@ All numbers are story data, not output from the backend or the model. Before a r
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2 (branch `sketches-v2`): rule-based linking with unit rules, contributing state and measurements as evidence; squeegee wear added to the story.
 - v3 (branch `sketches-v3`): statistics only, no model output. Unexplained boards per defect, compared with batches with no excursion; near-limit investigation INV-0143 linked through near-limit rule variants.
+- v5.5: investigation INV-0143 (no parameter out of spec) is removed from the canvas, the export and the manager overview. Its data stays in the investigation template for later use; in-spec root causes still appear in INV-0142 board packets and under "Other chains".
 - v5.4: the re-inspection header shows only the title; the "other boards agree" and "also checked" lines are removed.
 - v5.3: model output is a class, not a risk band: no defect, solder bridging or open circuit, plus the mechanism per side or none. Re-inspection is now 81 boards (75 re-inspect: inspection passed, model predicts a defect; 6 verify the call); the Medium "if needed" group is gone, and "boards that passed AOI with this chain" counts are the re-inspect boards (38, 7, 4 for solder bridging; 30, 2 for open circuit; 26 for INV-0143).
 - v5.2: the re-inspection table lists the root causes found on each board instead of a top chain, and states the basis of model risk under the table. Explanatory filler ("Not a hold", hover hints) is removed from labels.

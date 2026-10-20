@@ -12,7 +12,6 @@ const [, , srcDir, outDir] = process.argv;
 const NAMES = {
   'Main.dc.html': 'line-overview.html',
   'RcaPacket.dc.html': 'rca-packet.html',
-  'RcaNearLimit.dc.html': 'rca-packet-near-limit.html',
   'Containment.dc.html': 're-inspection.html',
   'Board.dc.html': 'board-detail.html',
   'Manager.dc.html': 'manager-overview.html',
@@ -26,8 +25,6 @@ const PAGES = [
   { src: 'RcaPacket.dc.html', out: 'rca-packet-boards.html', label: '2 · Investigation: boards with chain #1', desc: 'Board list and one board\'s RCA packet in the side panel', state: { panel: 0, board: 4 }, links: { closePanel: 'rca-packet.html', 'h.view': 'rca-packet-boards.html' } },
   { src: 'RcaPacket.dc.html', out: 'rca-packet-open-circuit.html', label: '2 · Investigation: open circuit', desc: 'Same screen with the open circuit tab selected', state: { tab: 'open' }, links: { 'h.view': 'rca-packet-open-circuit-boards.html' } },
   { src: 'RcaPacket.dc.html', out: 'rca-packet-open-circuit-boards.html', label: '2 · Investigation: open circuit boards', desc: 'Open circuit chain #1 with one board\'s RCA packet', state: { tab: 'open', panel: 0, board: 1 }, links: { closePanel: 'rca-packet-open-circuit.html', 'h.view': 'rca-packet-open-circuit-boards.html' } },
-  { src: 'RcaNearLimit.dc.html', out: 'rca-packet-near-limit.html', label: '2b · Investigation: in spec (INV-0143)', desc: 'No parameter out of spec: one chain, squeegee speed near LSL', links: { 'h.view': 'rca-packet-near-limit-boards.html' } },
-  { src: 'RcaNearLimit.dc.html', out: 'rca-packet-near-limit-boards.html', label: '2b · Investigation: INV-0143 boards', desc: 'Board list and one board\'s RCA packet', state: { panel: 0, board: 3 }, links: { closePanel: 'rca-packet-near-limit.html', 'h.view': 'rca-packet-near-limit-boards.html' } },
   { src: 'Containment.dc.html', out: 're-inspection.html', label: '3 · Re-inspection', desc: 'Boards where the model and inspection disagree: re-inspect or verify the call' },
   { src: 'Board.dc.html', out: 'board-detail.html', label: '3a · Board detail', desc: 'One board\'s full RCA packet: model prediction, chain, contribution per parameter, fingerprint, disposition' },
   { src: 'Manager.dc.html', out: 'manager-overview.html', label: '5 · Manager overview', desc: 'Open investigations, recurring root causes, overdue actions' },

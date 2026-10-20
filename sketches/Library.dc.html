@@ -127,7 +127,7 @@ class Component extends DCLogic {
         { name: 'Aperture overfill', support: ['Paste volume per aperture above USL · SPI · spec 0.036–0.044 mm³'], rules: [
           R('Low aperture area ratio or high stencil thickness', 'ApertureAreaRatio < LSL OR StencilThickness > USL', ['ApertureAreaRatio < LSL', 'StencilThickness > USL'], 'Spec ≥ 0.66 · 95–105 µm', 'Stencil', 'Setting', 'Use a thinner foil or step-down stencil; redesign apertures below the area ratio limit.', 3),
           R('Low squeegee angle with low speed or high pressure', 'SqueegeeAngle < LSL AND (SqueegeeSpeed < LSL OR SqueegeePressure > USL)', ['SqueegeeAngle < LSL AND SqueegeeSpeed < LSL', 'SqueegeeAngle < LSL AND SqueegeePressure > USL'], 'Spec 55–65° · 56–84 mm/s · 0.27–0.33 MPa', 'Solder printer', 'Setting', 'Replace the squeegee blade; check angle, speed and pressure against the recipe.', 2),
-          R('Low squeegee speed', 'SqueegeeSpeed < LSL', ['SqueegeeSpeed < LSL'], 'Spec 56–84 mm/s', 'Solder printer', 'Setting', 'Raise the speed to nominal (70 mm/s).', 3),
+          R('Low squeegee speed', 'SqueegeeSpeed < LSL', ['SqueegeeSpeed < LSL'], 'Spec 56–84 mm/s', 'Solder printer', 'Setting', 'Raise the speed to nominal (70 mm/s).', 2),
           R('High bead size of solder paste', 'PasteBeadSize > USL', ['PasteBeadSize > USL'], 'Spec 3.6–4.4 mm³', 'Solder printer', 'Setting', 'Reduce bead width and mass.', 1)
         ]},
         { name: 'Excess reflow spreading', support: [], rules: [
