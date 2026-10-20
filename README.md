@@ -103,6 +103,7 @@ All numbers are story data, not output from the backend or the model. Before a r
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2 (branch `sketches-v2`): rule-based linking with unit rules, contributing state and measurements as evidence; squeegee wear added to the story.
 - v3 (branch `sketches-v3`): statistics only, no model output. Unexplained boards per defect, compared with batches with no excursion; near-limit investigation INV-0143 linked through near-limit rule variants.
+- v6.6: the model agreement figure is removed from the line overview; agreement shows only in the investigation matrix.
 - v6.4: "Fix" and "Suggested action" are now "Corrective action" everywhere.
 - v6.3: the Failure Library drops the unit-rule split and its explanation banner; rules are shown as written, with a one-line subtitle.
 - v6.2: Re-inspection is removed from the top menu. It opens from the investigation (header button and sidebar card) and from D3 of the 8D report; on the re-inspection and board pages, Investigations is the active menu item.
