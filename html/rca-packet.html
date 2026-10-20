@@ -329,15 +329,6 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="font-size: 14px; line-height: 1.5">45 boards passed AOI, but the model predicts solder bridging: re-inspect. 3 boards failed AOI, but the model predicts no defect: verify the AOI call.</div>
 <a class="btn" href="re-inspection.html">Open re-inspection list</a>
 </section>
-<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 10px">
-<h2 style="margin: 0; font-size: 16px; font-weight: 600">How root cause chains are found</h2>
-<ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 6px">
-<li>For every board, the RCA model predicts the defect class (or no defect) and the mechanism on each side, and attribution finds the parameters behind the prediction.</li>
-<li>The Failure Library's cause-and-effect ontology turns each of those parameters into a chain: root cause → mechanism → defect. Chains below the display threshold are left out.</li>
-<li>This page groups boards by chain. A board can show more than one chain.</li>
-</ol>
-<div style="font-size: 14px; line-height: 1.5; color: #4A4F56">Contribution is the share of the prediction that comes from the root cause.</div>
-</section>
 
 
 

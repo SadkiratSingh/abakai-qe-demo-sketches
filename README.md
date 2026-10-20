@@ -102,6 +102,7 @@ All numbers are story data, not output from the backend or the model. Before a r
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2 (branch `sketches-v2`): rule-based linking with unit rules, contributing state and measurements as evidence; squeegee wear added to the story.
 - v3 (branch `sketches-v3`): statistics only, no model output. Unexplained boards per defect, compared with batches with no excursion; near-limit investigation INV-0143 linked through near-limit rule variants.
+- v5.6: the "How root cause chains are found" card is removed from the investigation sidebar.
 - v5.5: investigation INV-0143 (no parameter out of spec) is removed from the canvas, the export and the manager overview. Its data stays in the investigation template for later use; in-spec root causes still appear in INV-0142 board packets and under "Other chains".
 - v5.4: the re-inspection header shows only the title; the "other boards agree" and "also checked" lines are removed.
 - v5.3: model output is a class, not a risk band: no defect, solder bridging or open circuit, plus the mechanism per side or none. Re-inspection is now 81 boards (75 re-inspect: inspection passed, model predicts a defect; 6 verify the call); the Medium "if needed" group is gone, and "boards that passed AOI with this chain" counts are the re-inspect boards (38, 7, 4 for solder bridging; 30, 2 for open circuit; 26 for INV-0143).
