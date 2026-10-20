@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8D report: open circuit · RCA Studio</title>
+<!-- Static export of sketches/Report8D.dc.html. Regenerate from the sketches; do not edit by hand. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'IBM Plex Sans',sans-serif;color:#16191D;background:#F4F5F3}
+a{color:#1A4F9C}a:hover{color:#123A73}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:24px;padding:8px 32px;background:#16191D;color:#fff}
+.brand{font-weight:600;font-size:17px;letter-spacing:-.01em;color:#fff}
+.nav{display:flex;flex-wrap:wrap;gap:4px}
+.nav a{color:#C9CDD2;text-decoration:none;font-size:14px;padding:12px 14px;border-radius:6px}
+.nav a:hover{color:#fff;background:#2A2F35}
+.nav a.on{color:#fff;background:#2A2F35}
+.wrap{max-width:1280px;margin:0 auto;padding:32px}
+.card{background:#fff;border:1px solid #E1E4E0;border-radius:10px}
+.mono{font-family:'IBM Plex Mono',monospace}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5B6169;font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.crit{background:#FDECEA;color:#9B1C12}.warn{background:#FDF0E3;color:#8A3505}.ok{background:#E7F3EC;color:#1D6B3F}.info{background:#E8EFFA;color:#1A4F9C}.muted{background:#EEF0ED;color:#4A4F56}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;text-decoration:none;border:1px solid #C9CDD2;background:#fff;color:#16191D;cursor:pointer;box-sizing:border-box}
+.btn.primary{background:#1A4F9C;border-color:#1A4F9C;color:#fff}
+.btn.primary:hover{background:#123A73;color:#fff}
+.btn.sm{min-height:34px;padding:0 12px;font-size:13px}
+.tab{min-height:48px;padding:0 20px;border:0;border-bottom:3px solid transparent;background:none;font:600 15px 'IBM Plex Sans',sans-serif;color:#5B6169;cursor:pointer}
+.tab.on{color:#16191D;border-bottom-color:#1A4F9C}
+.step{display:flex;justify-content:space-between;align-items:center;gap:10px;white-space:nowrap;padding:10px 12px;border-radius:8px;text-decoration:none;color:#16191D;font-size:14px;font-weight:500}
+.step:hover{background:#F4F5F3}
+.sec{padding:22px 24px;display:flex;flex-direction:column;gap:12px}
+.sec h2{margin:0;font-size:17px;font-weight:600}
+.field{font-size:15px;line-height:1.55;padding:12px 14px;background:#F5F8FD;border:1px solid #B7CBEA;border-radius:8px}
+.need{font-size:14px;line-height:1.5;padding:12px 14px;background:#FFFAF4;border:1px dashed #E0A86A;border-radius:8px;color:#6B2C05}
+.wait{font-size:14px;line-height:1.5;padding:12px 14px;background:#F4F5F3;border:1px dashed #C9CDD2;border-radius:8px;color:#4A4F56}
+.src{font-size:12px;color:#5B6169}
+.t{width:100%;border-collapse:collapse;font-size:14px}
+.t th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#5B6169;font-weight:600;padding:8px 10px;border-bottom:1px solid #E1E4E0}
+.t td{padding:10px;border-bottom:1px solid #EEF0ED;vertical-align:top}
+.node{padding:8px 12px;border-radius:8px;font-size:13px;font-weight:600;line-height:1.3}
+.n-root{background:#F4F5F3;border:1px solid #C9CDD2}
+.n-mech{background:#E8EFFA;border:1px solid #B7CBEA;color:#123A73}
+.n-def{background:#FDECEA;border:1px solid #F3C5C0;color:#7E160E}
+select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px;font:14px 'IBM Plex Sans',sans-serif;background:#fff}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: #F4F5F3">
+<header class="top">
+<div class="brand">RCA Studio</div>
+<nav class="nav" aria-label="Main">
+<a href="line-overview.html">Line</a>
+<a href="rca-packet.html">Investigations</a>
+<a href="re-inspection.html">Re-inspection</a>
+<a class="on" href="8d-report.html">8D reports</a>
+<a href="manager-overview.html">Overview</a>
+<a href="failure-library.html">Failure Library</a>
+</nav>
+</header>
+<main class="wrap" style="display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<a href="rca-packet.html" style="font-size: 14px; text-decoration: none">← INV-0142 root cause analysis</a>
+<div class="eyebrow">8D-0142-B · Open circuit · CTRL-BRD-A · stg-B0003 · Customer: [customer]</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">8D report: open circuit</h1>
+<div style="font-size: 14px; color: #4A4F56">Created automatically from INV-0142 on 15 Oct 2026, 06:05 · last updated 06:20</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button class="btn" type="button">Send for review</button>
+<button class="btn" type="button">Export PDF</button>
+<a class="btn primary" href="8d-report-export.html" style="display:inline-flex;align-items:center;text-decoration:none">Export to customer template</a>
+</div>
+</div>
+
+<div aria-label="8D reports for INV-0142" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E1E4E0">
+<a class="tab" href="8d-report.html" style="display:inline-flex;align-items:center;text-decoration:none">8D-0142-A · Solder bridging</a>
+<a class="tab on" href="8d-report-open-circuit.html" style="display:inline-flex;align-items:center;text-decoration:none">8D-0142-B · Open circuit</a>
+</div>
+
+
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<aside style="flex: 1 1 300px; max-width: 340px; display: flex; flex-direction: column; gap: 16px">
+<nav class="card" aria-label="8D steps" style="padding: 12px; display: flex; flex-direction: column; gap: 2px">
+
+<a class="step" href="#d1"><span>D1 Team</span><span class="chip warn">Needs input</span></a>
+
+<a class="step" href="#d2"><span>D2 Problem</span><span class="chip ok">Auto-filled</span></a>
+
+<a class="step" href="#d3"><span>D3 Containment</span><span class="chip warn">Needs decision</span></a>
+
+<a class="step" href="#d4"><span>D4 Root cause</span><span class="chip muted">Waiting for a confirmed chain</span></a>
+
+<a class="step" href="#d5"><span>D5 Corrective action</span><span class="chip muted">Waiting for a confirmed chain</span></a>
+
+<a class="step" href="#d6"><span>D6 Verification</span><span class="chip muted">Waiting for data</span></a>
+
+<a class="step" href="#d7"><span>D7 Prevention</span><span class="chip ok">Auto-filled</span></a>
+
+<a class="step" href="#d8"><span>D8 Closure</span><span class="chip muted">Not started</span></a>
+
+<div style="margin-top: 8px; padding: 12px; font-size: 13px; color: #5B6169; line-height: 1.5; border-top: 1px solid #EEF0ED">3 of 8 steps filled from the investigation. D4 and D5 fill in when a chain is confirmed in INV-0142.</div>
+</nav>
+<section class="card" style="padding: 18px 20px; display: flex; flex-direction: column; gap: 10px" aria-label="Updates">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Updates</h2>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+
+<li style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #EEF0ED; font-size: 13px; line-height: 1.45"><span class="mono" style="color: #5B6169; flex: none">06:05</span><span>Created from INV-0142: D2, D3 and D7 filled.</span></li>
+
+<li style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #EEF0ED; font-size: 13px; line-height: 1.45"><span class="mono" style="color: #5B6169; flex: none">06:20</span><span>D3: 30 boards that passed electrical test added from the re-inspection list.</span></li>
+
+<li style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #EEF0ED; font-size: 13px; line-height: 1.45"><span class="mono" style="color: #5B6169; flex: none">Next</span><span>D4 and D5 update when chain #1 (high paste viscosity) is confirmed.</span></li>
+
+</ol>
+</section>
+</aside>
+
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<section id="d1" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D1 · Team</h2><span class="chip warn">Needs input</span></div>
+<table class="t">
+<thead><tr><th>Role</th><th>Name</th></tr></thead>
+<tbody>
+<tr><td>Quality engineer (owner)</td><td>Priya S. <span class="src">· from INV-0142</span></td></tr>
+
+<tr><td>Printing process engineer</td><td><span style="color: #8A3505">[add name]</span></td></tr>
+
+<tr><td>Materials engineer</td><td><span style="color: #8A3505">[add name]</span></td></tr>
+
+<tr><td>Line 2 supervisor</td><td><span style="color: #8A3505">[add name]</span></td></tr>
+
+</tbody>
+</table>
+</section>
+
+<section id="d2" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D2 · Problem description</h2><span class="chip ok">Auto-filled</span></div>
+<div class="field">On the night shift of 15 Oct 2026, 31 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 failed electrical test with open circuit.</div>
+<table class="t">
+<thead><tr><th></th><th>Is</th><th>Is not</th></tr></thead>
+<tbody>
+
+<tr><td style="font-weight: 600">What</td><td>Open circuit on CTRL-BRD-A</td><td style="color: #4A4F56">Other defects on these boards, apart from solder bridging (8D-0142-A)</td></tr>
+
+<tr><td style="font-weight: 600">Where</td><td>SMT line 2</td><td style="color: #4A4F56">Other lines</td></tr>
+
+<tr><td style="font-weight: 600">When</td><td>03:40–04:30 (28 boards)</td><td style="color: #4A4F56">The rest of the shift; batches stg-B0001 and stg-B0002 (2 and 1 boards)</td></tr>
+
+<tr><td style="font-weight: 600">How many</td><td>31 boards</td><td style="color: #4A4F56"></td></tr>
+
+</tbody>
+</table>
+<span class="src">From INV-0142 and electrical test results</span>
+</section>
+
+<section id="d3" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D3 · Containment</h2><span class="chip warn">Needs decision</span></div>
+<table class="t">
+<thead><tr><th>Boards</th><th>Where</th><th>Action</th><th>Status</th></tr></thead>
+<tbody>
+
+<tr><td>31 boards with open circuit at electrical test</td><td style="color: #4A4F56">Rework area</td><td>Rework or scrap per MRB</td><td><span class="chip info">In rework</span></td></tr>
+
+<tr><td>30 boards that passed electrical test, where the model predicts open circuit</td><td style="color: #4A4F56">WIP 28 · finished goods 2</td><td>Hold and re-inspect</td><td><span class="chip warn">Needs decision</span></td></tr>
+
+<tr><td>Paste lot [paste lot] still on the line</td><td style="color: #4A4F56">Solder printer, line 2</td><td>Quarantine the lot</td><td><span class="chip warn">Needs decision</span></td></tr>
+
+</tbody>
+</table>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<span class="src">Boards that passed electrical test come from the re-inspection list. Holding them is the QE's decision.</span>
+<a class="btn sm" href="re-inspection.html">Open re-inspection list</a>
+</div>
+</section>
+
+<section id="d4" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D4 · Root cause</h2><span class="chip muted">Waiting for a confirmed chain</span></div>
+<div class="eyebrow">Occurrence · confirmed root cause chains</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border: 1px solid #E1E4E0; border-radius: 8px; background: #fff">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><div class="node n-root">High paste viscosity</div><span style="color: #5B6169">→</span><div class="node n-mech">Poor paste transfer</div><span style="color: #5B6169">→</span><div class="node n-def">Open circuit</div><span class="chip muted" style="margin-left: auto">Not confirmed yet</span></div>
+<div style="font-size: 14px; color: #4A4F56">28 of 31 boards with open circuit, built 03:40–04:30, paste lot [paste lot]. Added here when confirmed in INV-0142.</div>
+</div>
+
+<div class="eyebrow" style="margin-top: 4px">Escape · why inspection did not catch it</div>
+<div class="field">30 boards passed electrical test although the model predicts open circuit, all built 03:40–04:30.</div>
+<div class="need">Add: why paste outside its viscosity spec reached the printer.</div>
+</section>
+
+<section id="d5" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D5 · Corrective action</h2><span class="chip muted">Waiting for a confirmed chain</span></div>
+<table class="t">
+<thead><tr><th>Action</th><th>For</th><th>Owner</th><th>Due</th></tr></thead>
+<tbody>
+
+<tr style="color: #8A9097"><td>Replace the paste; check paste age and floor life.</td><td style="color: #4A4F56">Chain #1, when confirmed</td><td style="color: #8A3505"></td><td style="color: #8A3505"></td></tr>
+
+</tbody>
+</table>
+<span class="src">Fixes from the Failure Library for each confirmed chain</span>
+</section>
+
+<section id="d6" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D6 · Verification</h2><span class="chip muted">Waiting for data</span></div>
+<div class="wait">After the D5 actions are done: chain #1 on new boards from line 2, and agreement between the model and electrical test on the next [N] panels.</div>
+</section>
+
+<section id="d7" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D7 · Prevention</h2><span class="chip ok">Auto-filled</span></div>
+<ul class="field" style="margin: 0; padding-left: 32px; display: flex; flex-direction: column; gap: 6px">
+<li>Check paste viscosity at incoming inspection for every lot.</li><li>Failure Library: high paste viscosity has been confirmed in 4 investigations.</li>
+</ul>
+</section>
+
+<section id="d8" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D8 · Closure</h2><span class="chip muted">Not started</span></div>
+<p style="margin: 0; color: #5B6169">Available once D6 is verified.</p>
+</section>
+</div>
+</div>
+</main>
+</div>
+</body>
+</html>

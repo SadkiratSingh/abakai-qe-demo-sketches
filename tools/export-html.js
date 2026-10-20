@@ -16,6 +16,7 @@ const NAMES = {
   'Board.dc.html': 'board-detail.html',
   'Manager.dc.html': 'manager-overview.html',
   'Library.dc.html': 'failure-library.html',
+  'Report8D.dc.html': '8d-report.html',
 };
 
 // Pages to export: source, output name, title, optional state override.
@@ -27,6 +28,9 @@ const PAGES = [
   { src: 'RcaPacket.dc.html', out: 'rca-packet-open-circuit-boards.html', label: '2 · Investigation: open circuit boards', desc: 'Open circuit chain #1 with one board\'s RCA packet', state: { tab: 'open', panel: 0, board: 1 }, links: { closePanel: 'rca-packet-open-circuit.html', 'h.view': 'rca-packet-open-circuit-boards.html' } },
   { src: 'Containment.dc.html', out: 're-inspection.html', label: '3 · Re-inspection', desc: 'Boards where the model and inspection disagree: re-inspect or verify the call' },
   { src: 'Board.dc.html', out: 'board-detail.html', label: '3a · Board detail', desc: 'One board\'s full RCA packet: model prediction, chain, contribution per parameter, fingerprint, disposition' },
+  { src: 'Report8D.dc.html', out: '8d-report.html', label: '4 · 8D report: solder bridging', desc: '8D-0142-A created from the investigation: step status, auto-filled D2–D7, updates', links: { showSB: '8d-report.html', showOC: '8d-report-open-circuit.html', openExport: '8d-report-export.html' } },
+  { src: 'Report8D.dc.html', out: '8d-report-open-circuit.html', label: '4 · 8D report: open circuit', desc: '8D-0142-B, waiting for a confirmed chain', state: { d: 'b' }, links: { showSB: '8d-report.html', showOC: '8d-report-open-circuit.html', openExport: '8d-report-export.html' } },
+  { src: 'Report8D.dc.html', out: '8d-report-export.html', label: '4 · 8D report: export to customer template', desc: 'Template picker and field mapping with status', state: { exp: true }, links: { closeExport: '8d-report.html', showSB: '8d-report.html', showOC: '8d-report-open-circuit.html' } },
   { src: 'Manager.dc.html', out: 'manager-overview.html', label: '5 · Manager overview', desc: 'Open investigations, recurring root causes, overdue actions' },
   { src: 'Library.dc.html', out: 'failure-library.html', label: '6 · Failure Library: solder bridging', desc: 'Root cause → mechanism → defect, with specs and fixes' },
   { src: 'Library.dc.html', out: 'failure-library-open-circuit.html', label: '6 · Failure Library: open circuit', desc: 'Same screen with open circuit selected', state: { d: 'o' } },

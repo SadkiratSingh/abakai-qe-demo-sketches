@@ -37,6 +37,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <a href="Main.dc.html">Line</a>
 <a href="RcaPacket.dc.html">Investigations</a>
 <a href="Containment.dc.html">Re-inspection</a>
+<a href="Report8D.dc.html">8D reports</a>
 <a class="on" href="Manager.dc.html">Overview</a>
 <a href="Library.dc.html">Failure Library</a>
 </nav>
@@ -89,7 +90,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <div style="padding: 20px 24px 8px; display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Open investigations</h2><div style="font-size: 14px; color: #5B6169">One investigation per batch excursion.</div></div>
 <div style="overflow-x: auto">
 <table>
-<thead><tr><th>Investigation · batch</th><th>Defects</th><th>Product · line</th><th>Owner</th><th>Age</th><th>Top root cause chains</th></tr></thead>
+<thead><tr><th>Investigation · batch</th><th>Defects</th><th>Product · line</th><th>Owner</th><th>Age</th><th>Top root cause chains</th><th>8D reports</th></tr></thead>
 <tbody>
 <sc-for list="{{invs}}" as="r" hint-placeholder-count="5">
 <tr>
@@ -99,6 +100,7 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <td style="white-space: nowrap">{{r.owner}}</td>
 <td class="mono" style="white-space: nowrap">{{r.age}}</td>
 <td>{{r.causes}}</td>
+<td class="mono" style="white-space: nowrap"><a href="Report8D.dc.html">{{r.eightD}}</a></td>
 </tr>
 </sc-for>
 </tbody>
@@ -120,7 +122,8 @@ class Component extends DCLogic {
       ['INV-0135', 'stg-I0092', 'Solder bridging', 'IO-BRD-B · Line 2', 'Wei C.', '9 d', 'High peak reflow temperature'],
       ['INV-0131', 'stg-C0198', 'Open circuit', 'PWR-BRD-C · Line 1', 'Marco L.', '12 d', 'High paste viscosity']
     ];
-    const invs = inv.map(r => ({ href: 'RcaPacket.dc.html', id: r[0], batch: r[1], defects: r[2], prod: r[3], owner: r[4], age: r[5], causes: r[6] }));
+    const eight = { 'INV-0142': '8D-0142-A, -B', 'INV-0139': '8D-0139-A', 'INV-0137': '8D-0137-A', 'INV-0135': '8D-0135-A', 'INV-0131': '8D-0131-A' };
+    const invs = inv.map(r => ({ href: 'RcaPacket.dc.html', eightD: eight[r[0]] || '', id: r[0], batch: r[1], defects: r[2], prod: r[3], owner: r[4], age: r[5], causes: r[6] }));
     return { causes, invs };
   }
 }

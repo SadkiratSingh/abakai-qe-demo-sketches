@@ -67,6 +67,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <a href="Main.dc.html">Line</a>
 <a class="on" href="RcaPacket.dc.html">Investigations</a>
 <a href="Containment.dc.html">Re-inspection</a>
+<a href="Report8D.dc.html">8D reports</a>
 <a href="Manager.dc.html">Overview</a>
 <a href="Library.dc.html">Failure Library</a>
 </nav>
@@ -79,7 +80,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">{{inv.title}}</h1>
 <sc-if value="{{inv.hasSub}}" hint-placeholder-val="{{ false }}"><div style="font-size: 15px; color: #4A4F56">{{inv.sub}}</div></sc-if>
 </div>
-<a class="btn" href="Containment.dc.html">View re-inspection list</a>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><a class="btn" href="Containment.dc.html">View re-inspection list</a><a class="btn primary" href="Report8D.dc.html">{{c.eightD}}</a></div>
 </div>
 
 <sc-if value="{{inv.hasTabs}}" hint-placeholder-val="{{ true }}">
@@ -345,7 +346,7 @@ class Component extends DCLogic {
         back: 'Line overview', backHref: 'Main.dc.html', batch: 'stg-B0003', hasTabs: true, times: night, assessed: '15 Oct 2026 06:05', date: '15 Oct',
         defects: {
           bridge: {
-            title: 'Solder bridging', defLower: 'solder bridging', K: 61, withChain: 58, insp: 'AOI', inspLower: 'AOI', record: 'AOI images', agree: '98%',
+            title: 'Solder bridging', defLower: 'solder bridging', eightD: '8D report · 8D-0142-A', K: 61, withChain: 58, insp: 'AOI', inspLower: 'AOI', record: 'AOI images', agree: '98%',
             mx: { conf: 58, hidden: 45, unexpl: 3, good: '2,454' }, hold: 45,
             top: [
               { key: 'reflow', k: 44, passed: 38, when: 'Built 02:00–02:40', spark: 'reflow', fix: 'reflow', panel: 'stg-B0003-P0374',
@@ -359,7 +360,7 @@ class Component extends DCLogic {
             none: [['PCB-0005451', '22:41', '0.3%'], ['PCB-0006244', '01:15', '0.2%'], ['PCB-0007351', '05:02', '0.4%']]
           },
           open: {
-            title: 'Open circuit', defLower: 'open circuit', K: 31, withChain: 28, insp: 'Electrical test', inspLower: 'electrical test', record: 'electrical test logs', agree: '99%',
+            title: 'Open circuit', defLower: 'open circuit', eightD: '8D report · 8D-0142-B', K: 31, withChain: 28, insp: 'Electrical test', inspLower: 'electrical test', record: 'electrical test logs', agree: '99%',
             mx: { conf: 28, hidden: 30, unexpl: 3, good: '2,499' }, hold: 30,
             top: [
               { key: 'visc', k: 28, passed: 30, when: 'Paste lot [paste lot] · built 03:40–04:30', spark: 'visc', fix: 'visc', panel: 'stg-B0003-P0462', support: 'Paste volume per aperture 0.033 mm³ (spec 0.036–0.044 mm³), below LSL. Supports poor paste transfer.',
@@ -378,7 +379,7 @@ class Component extends DCLogic {
         back: 'Open investigations', backHref: 'Manager.dc.html', batch: 'stg-B0005', hasTabs: false, times: day, assessed: '16 Oct 2026 14:10', date: '16 Oct',
         defects: {
           bridge: {
-            title: 'Solder bridging', defLower: 'solder bridging', K: 23, withChain: 19, insp: 'AOI', inspLower: 'AOI', record: 'AOI images', agree: '99%', one: true,
+            title: 'Solder bridging', defLower: 'solder bridging', eightD: '8D report · 8D-0143-A', K: 23, withChain: 19, insp: 'AOI', inspLower: 'AOI', record: 'AOI images', agree: '99%', one: true,
             mx: { conf: 19, hidden: 26, unexpl: 4, good: '2,511' }, hold: 26,
             top: [
               { key: 'speedNear', k: 19, passed: 26, when: 'Built 10:20–12:30', spark: 'speedDay', fix: 'speed', inSpec: true, panel: 'stg-B0005-P0371', support: 'Paste volume per aperture 0.0452 mm³ (spec 0.036–0.044 mm³), above USL. Supports aperture overfill.',

@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>8D report</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'IBM Plex Sans',sans-serif;color:#16191D;background:#F4F5F3}
+a{color:#1A4F9C}a:hover{color:#123A73}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:24px;padding:8px 32px;background:#16191D;color:#fff}
+.brand{font-weight:600;font-size:17px;letter-spacing:-.01em;color:#fff}
+.nav{display:flex;flex-wrap:wrap;gap:4px}
+.nav a{color:#C9CDD2;text-decoration:none;font-size:14px;padding:12px 14px;border-radius:6px}
+.nav a:hover{color:#fff;background:#2A2F35}
+.nav a.on{color:#fff;background:#2A2F35}
+.wrap{max-width:1280px;margin:0 auto;padding:32px}
+.card{background:#fff;border:1px solid #E1E4E0;border-radius:10px}
+.mono{font-family:'IBM Plex Mono',monospace}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5B6169;font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.crit{background:#FDECEA;color:#9B1C12}.warn{background:#FDF0E3;color:#8A3505}.ok{background:#E7F3EC;color:#1D6B3F}.info{background:#E8EFFA;color:#1A4F9C}.muted{background:#EEF0ED;color:#4A4F56}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;text-decoration:none;border:1px solid #C9CDD2;background:#fff;color:#16191D;cursor:pointer;box-sizing:border-box}
+.btn.primary{background:#1A4F9C;border-color:#1A4F9C;color:#fff}
+.btn.primary:hover{background:#123A73;color:#fff}
+.btn.sm{min-height:34px;padding:0 12px;font-size:13px}
+.tab{min-height:48px;padding:0 20px;border:0;border-bottom:3px solid transparent;background:none;font:600 15px 'IBM Plex Sans',sans-serif;color:#5B6169;cursor:pointer}
+.tab.on{color:#16191D;border-bottom-color:#1A4F9C}
+.step{display:flex;justify-content:space-between;align-items:center;gap:10px;white-space:nowrap;padding:10px 12px;border-radius:8px;text-decoration:none;color:#16191D;font-size:14px;font-weight:500}
+.step:hover{background:#F4F5F3}
+.sec{padding:22px 24px;display:flex;flex-direction:column;gap:12px}
+.sec h2{margin:0;font-size:17px;font-weight:600}
+.field{font-size:15px;line-height:1.55;padding:12px 14px;background:#F5F8FD;border:1px solid #B7CBEA;border-radius:8px}
+.need{font-size:14px;line-height:1.5;padding:12px 14px;background:#FFFAF4;border:1px dashed #E0A86A;border-radius:8px;color:#6B2C05}
+.wait{font-size:14px;line-height:1.5;padding:12px 14px;background:#F4F5F3;border:1px dashed #C9CDD2;border-radius:8px;color:#4A4F56}
+.src{font-size:12px;color:#5B6169}
+.t{width:100%;border-collapse:collapse;font-size:14px}
+.t th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#5B6169;font-weight:600;padding:8px 10px;border-bottom:1px solid #E1E4E0}
+.t td{padding:10px;border-bottom:1px solid #EEF0ED;vertical-align:top}
+.node{padding:8px 12px;border-radius:8px;font-size:13px;font-weight:600;line-height:1.3}
+.n-root{background:#F4F5F3;border:1px solid #C9CDD2}
+.n-mech{background:#E8EFFA;border:1px solid #B7CBEA;color:#123A73}
+.n-def{background:#FDECEA;border:1px solid #F3C5C0;color:#7E160E}
+select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px;font:14px 'IBM Plex Sans',sans-serif;background:#fff}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F5F3">
+<header class="top">
+<div class="brand">RCA Studio</div>
+<nav class="nav" aria-label="Main">
+<a href="Main.dc.html">Line</a>
+<a href="RcaPacket.dc.html">Investigations</a>
+<a href="Containment.dc.html">Re-inspection</a>
+<a class="on" href="Report8D.dc.html">8D reports</a>
+<a href="Manager.dc.html">Overview</a>
+<a href="Library.dc.html">Failure Library</a>
+</nav>
+</header>
+<main class="wrap" style="display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<a href="RcaPacket.dc.html" style="font-size: 14px; text-decoration: none">← INV-0142 root cause analysis</a>
+<div class="eyebrow">{{r.id}} · {{r.defect}} · CTRL-BRD-A · stg-B0003 · Customer: [customer]</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">8D report: {{r.defectLower}}</h1>
+<div style="font-size: 14px; color: #4A4F56">{{r.created}}</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button class="btn" type="button">Send for review</button>
+<button class="btn" type="button">Export PDF</button>
+<button class="btn primary" type="button" onClick="{{openExport}}">Export to customer template</button>
+</div>
+</div>
+
+<div role="tablist" aria-label="8D reports for INV-0142" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E1E4E0">
+<button role="tab" class="{{tabA}}" aria-selected="{{isA}}" onClick="{{showSB}}">8D-0142-A · Solder bridging</button>
+<button role="tab" class="{{tabB}}" aria-selected="{{isB}}" onClick="{{showOC}}">8D-0142-B · Open circuit</button>
+</div>
+
+<sc-if value="{{exp}}" hint-placeholder-val="{{ false }}">
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px; border-color: #1A4F9C; box-shadow: 0 8px 24px rgba(22,25,29,.10)" aria-label="Export to customer template">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 600">Export to customer template</h2>
+<button class="btn sm" type="button" onClick="{{closeExport}}">Close</button>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 24px">
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5B6169; font-weight: 600">Template
+<select><option>[Customer] 8D form · .xlsx · uploaded 2 Oct by Priya S.</option><option>Standard 8D report · .docx</option><option>Standard 8D report · .pdf</option></select>
+</label>
+<button class="btn" type="button">Upload a template</button>
+<div style="flex: 1 1 240px; font-size: 14px; color: #4A4F56">{{r.expSummary}}</div>
+</div>
+<table class="t">
+<thead><tr><th>Template field</th><th>Filled from</th><th>Status</th></tr></thead>
+<tbody>
+<sc-for list="{{r.map}}" as="f" hint-placeholder-count="9">
+<tr><td style="font-weight: 500">{{f.field}}</td><td style="color: #4A4F56">{{f.from}}</td><td><span class="{{f.cls}}">{{f.status}}</span></td></tr>
+</sc-for>
+</tbody>
+</table>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<span style="font-size: 13px; color: #5B6169">Fields that are not ready stay blank in the file.</span>
+<div style="display: flex; gap: 8px"><button class="btn" type="button" onClick="{{closeExport}}">Cancel</button><button class="btn primary" type="button">Download .xlsx</button></div>
+</div>
+</section>
+</sc-if>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<aside style="flex: 1 1 300px; max-width: 340px; display: flex; flex-direction: column; gap: 16px">
+<nav class="card" aria-label="8D steps" style="padding: 12px; display: flex; flex-direction: column; gap: 2px">
+<sc-for list="{{r.steps}}" as="s" hint-placeholder-count="8">
+<a class="step" href="{{s.href}}"><span>{{s.name}}</span><span class="{{s.cls}}">{{s.status}}</span></a>
+</sc-for>
+<div style="margin-top: 8px; padding: 12px; font-size: 13px; color: #5B6169; line-height: 1.5; border-top: 1px solid #EEF0ED">{{r.progress}}</div>
+</nav>
+<section class="card" style="padding: 18px 20px; display: flex; flex-direction: column; gap: 10px" aria-label="Updates">
+<h2 style="margin: 0; font-size: 15px; font-weight: 600">Updates</h2>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<sc-for list="{{r.log}}" as="l" hint-placeholder-count="4">
+<li style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #EEF0ED; font-size: 13px; line-height: 1.45"><span class="mono" style="color: #5B6169; flex: none">{{l.t}}</span><span>{{l.e}}</span></li>
+</sc-for>
+</ol>
+</section>
+</aside>
+
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<section id="d1" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D1 · Team</h2><span class="chip warn">Needs input</span></div>
+<table class="t">
+<thead><tr><th>Role</th><th>Name</th></tr></thead>
+<tbody>
+<tr><td>Quality engineer (owner)</td><td>Priya S. <span class="src">· from INV-0142</span></td></tr>
+<sc-for list="{{r.team}}" as="m" hint-placeholder-count="3">
+<tr><td>{{m}}</td><td><span style="color: #8A3505">[add name]</span></td></tr>
+</sc-for>
+</tbody>
+</table>
+</section>
+
+<section id="d2" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D2 · Problem description</h2><span class="chip ok">Auto-filled</span></div>
+<div class="field">{{r.problem}}</div>
+<table class="t">
+<thead><tr><th></th><th>Is</th><th>Is not</th></tr></thead>
+<tbody>
+<sc-for list="{{r.isnot}}" as="x" hint-placeholder-count="4">
+<tr><td style="font-weight: 600">{{x.q}}</td><td>{{x.is}}</td><td style="color: #4A4F56">{{x.not}}</td></tr>
+</sc-for>
+</tbody>
+</table>
+<span class="src">From INV-0142 and {{r.insp}} results</span>
+</section>
+
+<section id="d3" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D3 · Containment</h2><span class="chip warn">Needs decision</span></div>
+<table class="t">
+<thead><tr><th>Boards</th><th>Where</th><th>Action</th><th>Status</th></tr></thead>
+<tbody>
+<sc-for list="{{r.contain}}" as="x" hint-placeholder-count="3">
+<tr><td>{{x.what}}</td><td style="color: #4A4F56">{{x.where}}</td><td>{{x.action}}</td><td><span class="{{x.cls}}">{{x.status}}</span></td></tr>
+</sc-for>
+</tbody>
+</table>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<span class="src">Boards that passed {{r.insp}} come from the re-inspection list. Holding them is the QE's decision.</span>
+<a class="btn sm" href="Containment.dc.html">Open re-inspection list</a>
+</div>
+</section>
+
+<section id="d4" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D4 · Root cause</h2><span class="{{r.d4cls}}">{{r.d4status}}</span></div>
+<div class="eyebrow">Occurrence · confirmed root cause chains</div>
+<sc-for list="{{r.chains}}" as="x" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border: 1px solid {{x.border}}; border-radius: 8px; background: {{x.bg}}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><div class="node n-root">{{x.root}}</div><span style="color: #5B6169">→</span><div class="node n-mech">{{x.mech}}</div><span style="color: #5B6169">→</span><div class="node n-def">{{r.defect}}</div><span class="{{x.cls}}" style="margin-left: auto">{{x.status}}</span></div>
+<div style="font-size: 14px; color: #4A4F56">{{x.detail}}</div>
+</div>
+</sc-for>
+<div class="eyebrow" style="margin-top: 4px">Escape · why inspection did not catch it</div>
+<div class="field">{{r.escape}}</div>
+<div class="need">{{r.escapeNeed}}</div>
+</section>
+
+<section id="d5" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D5 · Corrective action</h2><span class="{{r.d5cls}}">{{r.d5status}}</span></div>
+<table class="t">
+<thead><tr><th>Action</th><th>For</th><th>Owner</th><th>Due</th></tr></thead>
+<tbody>
+<sc-for list="{{r.actions}}" as="x" hint-placeholder-count="2">
+<tr style="{{x.style}}"><td>{{x.action}}</td><td style="color: #4A4F56">{{x.for}}</td><td style="color: #8A3505">{{x.owner}}</td><td style="color: #8A3505">{{x.due}}</td></tr>
+</sc-for>
+</tbody>
+</table>
+<span class="src">Fixes from the Failure Library for each confirmed chain</span>
+</section>
+
+<section id="d6" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D6 · Verification</h2><span class="chip muted">Waiting for data</span></div>
+<div class="wait">{{r.verify}}</div>
+</section>
+
+<section id="d7" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D7 · Prevention</h2><span class="{{r.d7cls}}">{{r.d7status}}</span></div>
+<ul class="field" style="margin: 0; padding-left: 32px; display: flex; flex-direction: column; gap: 6px">
+<sc-for list="{{r.prevent}}" as="x" hint-placeholder-count="2"><li>{{x}}</li></sc-for>
+</ul>
+</section>
+
+<section id="d8" class="card sec">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D8 · Closure</h2><span class="chip muted">Not started</span></div>
+<p style="margin: 0; color: #5B6169">Available once D6 is verified.</p>
+</section>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2400}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { d: 'a', exp: false };
+  }
+  renderVals() {
+    const S = {
+      ok: ['Auto-filled', 'chip ok'], need: ['Needs input', 'chip warn'], dec: ['Needs decision', 'chip warn'],
+      wait: ['Waiting for data', 'chip muted'], none: ['Not started', 'chip muted'], pend: ['Waiting for a confirmed chain', 'chip muted']
+    };
+    const steps = st => [['D1 Team', '#d1'], ['D2 Problem', '#d2'], ['D3 Containment', '#d3'], ['D4 Root cause', '#d4'], ['D5 Corrective action', '#d5'], ['D6 Verification', '#d6'], ['D7 Prevention', '#d7'], ['D8 Closure', '#d8']]
+      .map((s, i) => ({ name: s[0], href: s[1], status: S[st[i]][0], cls: S[st[i]][1] }));
+    const F = (field, from, st) => ({ field, from, status: { r: 'Ready', n: 'Needs input', d: 'Needs decision', w: 'Waiting for data', x: 'Not started' }[st], cls: st === 'r' ? 'chip ok' : (st === 'n' || st === 'd' ? 'chip warn' : 'chip muted') });
+    const R = {
+      a: {
+        id: '8D-0142-A', defect: 'Solder bridging', defectLower: 'solder bridging', insp: 'AOI',
+        created: 'Created automatically from INV-0142 on 15 Oct 2026, 06:05 · last updated 06:42, when chain #1 was confirmed',
+        steps: steps(['need', 'ok', 'dec', 'ok', 'need', 'wait', 'ok', 'none']),
+        progress: '4 of 8 steps filled from the investigation. Steps update as chains are confirmed and data comes in.',
+        log: [
+          { t: '06:05', e: 'Created from INV-0142: D2, D3 and D7 filled.' },
+          { t: '06:20', e: 'D3: 45 boards that passed AOI added from the re-inspection list.' },
+          { t: '06:42', e: 'D4 and D5: chain #1 confirmed by Priya S.' },
+          { t: 'Next', e: 'D4 and D5 update when chains #2 and #3 are confirmed or rejected.' }
+        ],
+        team: ['Reflow process engineer', 'Printing process engineer', 'Line 2 supervisor'],
+        problem: 'On the night shift of 15 Oct 2026, 61 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 had solder bridging at AOI.',
+        isnot: [
+          { q: 'What', is: 'Solder bridging on CTRL-BRD-A', not: 'Other defects on these boards, apart from open circuit (8D-0142-B)' },
+          { q: 'Where', is: 'SMT line 2', not: 'Other lines' },
+          { q: 'When', is: '02:00–02:40 (44 boards) and 23:10–00:20 (14 boards)', not: 'The rest of the shift; batches stg-B0001 and stg-B0002 (3 and 2 boards)' },
+          { q: 'How many', is: '61 boards', not: '' }
+        ],
+        contain: [
+          { what: '61 boards with solder bridging at AOI', where: 'Rework area', action: 'Rework or scrap per MRB', status: 'In rework', cls: 'chip info' },
+          { what: '45 boards that passed AOI, where the model predicts solder bridging', where: 'WIP 6 · finished goods 34 · shipped 5', action: 'Hold and re-inspect with X-ray', status: 'Needs decision', cls: 'chip warn' },
+          { what: 'Other batches through line 2 during 23:10–00:20 and 02:00–02:40', where: '–', action: 'None found', status: 'Checked', cls: 'chip ok' }
+        ],
+        d4status: '1 of 3 chains confirmed', d4cls: 'chip ok',
+        chains: [
+          { root: 'High peak reflow temperature', mech: 'Excess reflow spreading', status: 'Confirmed by Priya S.', cls: 'chip ok', border: '#B7CBEA', bg: '#F5F8FD', detail: '44 of 61 boards with solder bridging, built 02:00–02:40. Peak reflow temperature 257.9–259.8 °C (spec 245–255 °C).' },
+          { root: 'Low squeegee angle', mech: 'Aperture overfill', status: 'Not confirmed yet', cls: 'chip muted', border: '#E1E4E0', bg: '#fff', detail: '14 of 61 boards, built 23:10–00:20. Added here when confirmed in INV-0142.' },
+          { root: 'Low squeegee speed', mech: 'Aperture overfill', status: 'Not confirmed yet', cls: 'chip muted', border: '#E1E4E0', bg: '#fff', detail: '7 of 61 boards, built 23:10–00:20. Added here when confirmed in INV-0142.' }
+        ],
+        escape: '45 boards passed AOI although the model predicts solder bridging: 38 built 02:00–02:40 and 7 built 23:10–00:20. Bridges under the QFN may not be visible to AOI.',
+        escapeNeed: 'Add: why the oven ran on the wrong profile for 40 minutes without an alarm.',
+        d5status: 'Needs input', d5cls: 'chip warn',
+        actions: [
+          { action: 'Restore the approved reflow recipe; lock recipe changes behind sign-off.', for: 'Chain #1', owner: '[add owner]', due: '[add date]', style: '' },
+          { action: 'Replace the squeegee blade; check angle, speed and pressure against the recipe.', for: 'Chain #2, when confirmed', owner: '', due: '', style: 'color: #8A9097' }
+        ],
+        verify: 'After the D5 actions are done: chain #1 on new boards from line 2, and agreement between the model and AOI on the next [N] panels.',
+        d7status: 'Auto-filled', d7cls: 'chip ok',
+        prevent: ['Add a peak reflow temperature USL alarm on line 2.', 'Failure Library: chain #1 recorded for CTRL-BRD-A; high peak reflow temperature has now been confirmed in 5 investigations.'],
+        expSummary: '5 of 9 template fields ready.',
+        map: [
+          F('Team members', 'D1 Team', 'n'), F('Problem description (5W2H)', 'D2 Problem, Is / Is not', 'r'), F('Containment actions and quantities', 'D3 Containment', 'd'),
+          F('Root cause: occurrence', 'D4 confirmed chains (1 of 3)', 'r'), F('Root cause: non-detection', 'D4 escape', 'r'), F('Permanent corrective actions', 'D5 Corrective action', 'n'),
+          F('Verification of effectiveness', 'D6 Verification', 'w'), F('Preventive actions', 'D7 Prevention', 'r'), F('Approval and closure', 'D8 Closure', 'x')
+        ]
+      },
+      b: {
+        id: '8D-0142-B', defect: 'Open circuit', defectLower: 'open circuit', insp: 'electrical test',
+        created: 'Created automatically from INV-0142 on 15 Oct 2026, 06:05 · last updated 06:20',
+        steps: steps(['need', 'ok', 'dec', 'pend', 'pend', 'wait', 'ok', 'none']),
+        progress: '3 of 8 steps filled from the investigation. D4 and D5 fill in when a chain is confirmed in INV-0142.',
+        log: [
+          { t: '06:05', e: 'Created from INV-0142: D2, D3 and D7 filled.' },
+          { t: '06:20', e: 'D3: 30 boards that passed electrical test added from the re-inspection list.' },
+          { t: 'Next', e: 'D4 and D5 update when chain #1 (high paste viscosity) is confirmed.' }
+        ],
+        team: ['Printing process engineer', 'Materials engineer', 'Line 2 supervisor'],
+        problem: 'On the night shift of 15 Oct 2026, 31 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 failed electrical test with open circuit.',
+        isnot: [
+          { q: 'What', is: 'Open circuit on CTRL-BRD-A', not: 'Other defects on these boards, apart from solder bridging (8D-0142-A)' },
+          { q: 'Where', is: 'SMT line 2', not: 'Other lines' },
+          { q: 'When', is: '03:40–04:30 (28 boards)', not: 'The rest of the shift; batches stg-B0001 and stg-B0002 (2 and 1 boards)' },
+          { q: 'How many', is: '31 boards', not: '' }
+        ],
+        contain: [
+          { what: '31 boards with open circuit at electrical test', where: 'Rework area', action: 'Rework or scrap per MRB', status: 'In rework', cls: 'chip info' },
+          { what: '30 boards that passed electrical test, where the model predicts open circuit', where: 'WIP 28 · finished goods 2', action: 'Hold and re-inspect', status: 'Needs decision', cls: 'chip warn' },
+          { what: 'Paste lot [paste lot] still on the line', where: 'Solder printer, line 2', action: 'Quarantine the lot', status: 'Needs decision', cls: 'chip warn' }
+        ],
+        d4status: 'Waiting for a confirmed chain', d4cls: 'chip muted',
+        chains: [
+          { root: 'High paste viscosity', mech: 'Poor paste transfer', status: 'Not confirmed yet', cls: 'chip muted', border: '#E1E4E0', bg: '#fff', detail: '28 of 31 boards with open circuit, built 03:40–04:30, paste lot [paste lot]. Added here when confirmed in INV-0142.' }
+        ],
+        escape: '30 boards passed electrical test although the model predicts open circuit, all built 03:40–04:30.',
+        escapeNeed: 'Add: why paste outside its viscosity spec reached the printer.',
+        d5status: 'Waiting for a confirmed chain', d5cls: 'chip muted',
+        actions: [
+          { action: 'Replace the paste; check paste age and floor life.', for: 'Chain #1, when confirmed', owner: '', due: '', style: 'color: #8A9097' }
+        ],
+        verify: 'After the D5 actions are done: chain #1 on new boards from line 2, and agreement between the model and electrical test on the next [N] panels.',
+        d7status: 'Auto-filled', d7cls: 'chip ok',
+        prevent: ['Check paste viscosity at incoming inspection for every lot.', 'Failure Library: high paste viscosity has been confirmed in 4 investigations.'],
+        expSummary: '3 of 9 template fields ready.',
+        map: [
+          F('Team members', 'D1 Team', 'n'), F('Problem description (5W2H)', 'D2 Problem, Is / Is not', 'r'), F('Containment actions and quantities', 'D3 Containment', 'd'),
+          F('Root cause: occurrence', 'D4 confirmed chains (0 of 1)', 'w'), F('Root cause: non-detection', 'D4 escape', 'r'), F('Permanent corrective actions', 'D5 Corrective action', 'w'),
+          F('Verification of effectiveness', 'D6 Verification', 'w'), F('Preventive actions', 'D7 Prevention', 'r'), F('Approval and closure', 'D8 Closure', 'x')
+        ]
+      }
+    };
+    const d = this.state.d;
+    return {
+      r: R[d], exp: !!this.state.exp,
+      isA: d === 'a', isB: d === 'b', tabA: d === 'a' ? 'tab on' : 'tab', tabB: d === 'b' ? 'tab on' : 'tab',
+      showSB: () => this.setState({ d: 'a' }), showOC: () => this.setState({ d: 'b' }),
+      openExport: () => this.setState({ exp: true }), closeExport: () => this.setState({ exp: false })
+    };
+  }
+}
+</script>
+</body>
+</html>
