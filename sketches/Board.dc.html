@@ -64,18 +64,18 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 <main class="wrap" style="display: flex; flex-direction: column; gap: 24px">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
 <div style="display: flex; flex-direction: column; gap: 8px">
-<a href="Containment.dc.html" style="font-size: 14px; text-decoration: none">← Re-inspection · stg-B0003</a>
+<a href="Containment.dc.html" style="font-size: 14px; text-decoration: none">← Proposed hold list · stg-B0003</a>
 <div class="eyebrow">CTRL-BRD-A · stg-B0003-P0374 · slot 4 · built 02:31, 15 Oct 2026</div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
 <h1 class="mono" style="margin: 0; font-size: 30px; font-weight: 500; letter-spacing: -0.01em">PCB-0006615</h1>
-<span class="chip crit">Re-inspect</span>
+<span class="chip crit">Proposed hold</span>
 <span class="chip muted">Finished goods</span>
 </div>
 </div>
 </div>
 
 <section class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #F1D3B5; background: #FFFAF4">
-<span class="chip crit">Re-inspect</span>
+<span class="chip crit">Proposed hold</span>
 <div style="flex: 1 1 520px; font-size: 16px; line-height: 1.5">Passed AOI and electrical test, but the model predicts solder bridging. Peak reflow temperature was above USL (259.4 °C, spec 245–255 °C). Built 02:31, during 02:00–02:40: same root cause chain as chain #1 of INV-0142.</div>
 <a href="RcaPacket.dc.html" style="font-size: 14px; font-weight: 600">See batch analysis</a>
 </section>
@@ -146,8 +146,8 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED;white-space:nowrap}
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
 <div style="padding: 14px; border: 1px solid #F3C5C0; background: #FFF8F7; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 1 · PCB-0006612</span><span class="chip crit" style="align-self: flex-start">Solder bridging at AOI</span></div>
-<div style="padding: 14px; border: 1px solid #F1D3B5; background: #FFFAF4; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 2 · PCB-0006613</span><span class="chip warn" style="align-self: flex-start">Re-inspect</span></div>
-<div style="padding: 14px; border: 1px solid #F1D3B5; background: #FFFAF4; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 3 · PCB-0006614</span><span class="chip warn" style="align-self: flex-start">Re-inspect</span></div>
+<div style="padding: 14px; border: 1px solid #F1D3B5; background: #FFFAF4; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 2 · PCB-0006613</span><span class="chip warn" style="align-self: flex-start">Proposed hold</span></div>
+<div style="padding: 14px; border: 1px solid #F1D3B5; background: #FFFAF4; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 3 · PCB-0006614</span><span class="chip warn" style="align-self: flex-start">Proposed hold</span></div>
 <div style="padding: 14px; border: 2px solid #16191D; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px; font-weight: 500">Slot 4 · PCB-0006615</span><span style="font-size: 13px; color: #4A4F56">This board</span></div>
 </div>
 </section>
@@ -227,7 +227,7 @@ class Component extends DCLogic {
       { t: '02:31', e: 'Reflow · peak 259.4 °C', s: 'Above USL', cls: 'chip crit' },
       { t: '02:38', e: 'AOI', s: 'Pass', cls: 'chip ok' },
       { t: '02:55', e: 'Electrical test', s: 'Pass', cls: 'chip ok' },
-      { t: '06:12', e: 'Added to the re-inspection list by INV-0142', s: 'Re-inspect', cls: 'chip warn' }
+      { t: '06:12', e: 'Added to the proposed hold list by INV-0142', s: 'Proposed hold', cls: 'chip warn' }
     ];
     const pick = this.state.pick;
     const cls = (k, base) => 'btn' + (base ? ' ' + base : '') + (pick === k ? ' sel' : '');

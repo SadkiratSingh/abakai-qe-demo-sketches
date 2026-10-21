@@ -77,7 +77,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">Root cause analysis</h1>
 
 </div>
-<div style="display: flex; flex-wrap: wrap; gap: 8px"><a class="btn" href="re-inspection.html">Proposed hold list</a><a class="btn primary" href="8d-report.html">8D report · 8D-0142-B</a></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><a class="btn" href="proposed-hold-list.html">Proposed hold list</a><a class="btn primary" href="8d-report.html">8D report · 8D-0142-B</a></div>
 </div>
 
 
@@ -227,7 +227,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 
 </div>
-<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED; font-size: 14px; color: #4A4F56">These boards are on the re-inspection list to verify the call: check the electrical test logs. If the defect is real, its cause is not among the model's inputs.</div>
+<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED; font-size: 14px; color: #4A4F56">These boards are on the proposed hold list to verify the call: check the electrical test logs. If the defect is real, its cause is not among the model's inputs.</div>
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Model vs inspection">
@@ -242,7 +242,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span></span><span class="h">Electrical test: open circuit</span><span class="h">Electrical test: pass</span>
 <span class="h">Model: open circuit</span>
 <div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">28</span><span class="t">Confirmed</span><span class="s">Both found open circuit</span></div>
-<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">30</span><span class="t">Re-inspect</span><span class="s">Passed electrical test</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">30</span><span class="t">Proposed hold</span><span class="s">Passed electrical test</span></div>
 <span class="h">Model: no defect</span>
 <div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">3</span><span class="t">Verify the call</span><span class="s">No root cause chain found</span></div>
 <div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,499</span><span class="t">Agree: no defect</span><span class="s">&nbsp;</span></div>
@@ -250,13 +250,13 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </section>
 </div>
 
-<aside style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="Re-inspection">
+<aside style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="Proposed hold list">
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Re-inspection</h2><div style="display: flex; flex-wrap: wrap; gap: 6px"><span class="chip crit">30 re-inspect</span><span class="chip muted">3 verify the call</span></div></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Proposed hold list</h2><div style="display: flex; flex-wrap: wrap; gap: 6px"><span class="chip crit">30 proposed hold</span><span class="chip muted">3 verify the call</span></div></div>
 <div style="font-size: 13px; color: #5B6169">Boards where the RCA model and electrical test disagree.</div>
-<div style="font-size: 14px; line-height: 1.5">30 boards passed electrical test, but the model predicts open circuit: re-inspect. 3 boards failed electrical test, but the model predicts no defect: verify the electrical test call.</div>
-<a class="btn" href="re-inspection.html">Open re-inspection list</a>
+<div style="font-size: 14px; line-height: 1.5">30 boards passed electrical test, but the model predicts open circuit: proposed for hold. 3 boards failed electrical test, but the model predicts no defect: verify the electrical test call.</div>
+<a class="btn" href="proposed-hold-list.html">Open proposed hold list</a>
 </section>
 
 

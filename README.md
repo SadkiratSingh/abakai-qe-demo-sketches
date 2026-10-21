@@ -10,7 +10,7 @@ The main story follows batch stg-B0003 of CTRL-BRD-A on the night shift of SMT l
 | --- | --- | --- |
 | `sketches/Main.dc.html` | 1 · Line overview | Shift KPIs including model agreement, excursion alerts, defects by hour, batch table |
 | `sketches/RcaPacket.dc.html` | 2 · Investigation (INV-0142) | Top 3 root cause chains per defect with board counts, when they appeared and the fix; other chains; no chain found; model vs AOI matrix; side panel with each board's RCA packet |
-| `sketches/Containment.dc.html` | 3 · Re-inspection | Boards where the RCA model and inspection disagree: re-inspect (inspection passed, model predicts a defect) and verify the call (inspection failed, model predicts no defect). Exported as `re-inspection.html` |
+| `sketches/Containment.dc.html` | 3 · Proposed hold list | Boards where the RCA model and inspection disagree: re-inspect (inspection passed, model predicts a defect) and verify the call (inspection failed, model predicts no defect). Exported as `proposed-hold-list.html` |
 | `sketches/Board.dc.html` | 3a · Board RCA packet (full page) | One board's model prediction and inspection result, mechanisms, contribution per parameter, what-if, parameter fingerprint, disposition, history |
 | `sketches/Report8D.dc.html` | 4 · 8D report | One 8D per defect (8D-0142-A solder bridging, 8D-0142-B open circuit), created automatically from the investigation and updated as chains are confirmed: step list with status, D1–D8 filled from the investigation, updates log, export to a customer template with field mapping |
 | `sketches/Manager.dc.html` | 5 · Manager overview | Open investigations, repeat root causes, Failure Library summary |
@@ -103,6 +103,7 @@ All numbers are story data, not output from the backend or the model. Before a r
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2 (branch `sketches-v2`): rule-based linking with unit rules, contributing state and measurements as evidence; squeegee wear added to the story.
 - v3 (branch `sketches-v3`): statistics only, no model output. Unexplained boards per defect, compared with batches with no excursion; near-limit investigation INV-0143 linked through near-limit rule variants.
+- v6.9: "Re-inspection" is renamed **Proposed hold list** everywhere (page, investigation sidebar and matrix, board page, 8D), following the product principal: the system proposes boards to hold, the QE decides in D3. The page title is "75 boards proposed for hold"; the 6 "verify the call" boards stay on the same page. Exported as `proposed-hold-list.html`.
 - v6.8: the investigation header button and the 8D report (D3 button and updates log) say "Proposed hold list".
 - v6.7: "excursion" is removed. The line overview says "2 defects · INV-0142", alerts read "Solder bridging in stg-B0003", and batches show "Normal" or "Investigation INV-0142".
 - v6.6: the model agreement figure is removed from the line overview; agreement shows only in the investigation matrix.

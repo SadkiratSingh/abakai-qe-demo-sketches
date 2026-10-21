@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Re-inspection · RCA Studio</title>
+<title>Proposed hold list · RCA Studio</title>
 <!-- Static export of sketches/Containment.dc.html. Regenerate from the sketches; do not edit by hand. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
@@ -47,8 +47,8 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <a href="rca-packet.html" style="font-size: 14px; text-decoration: none">← INV-0142 root cause analysis</a>
-<div class="eyebrow">Re-inspection · INV-0142 · stg-B0003</div>
-<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">81 boards where the RCA model and inspection disagree</h1>
+<div class="eyebrow">Proposed hold list · INV-0142 · stg-B0003</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">75 boards proposed for hold</h1>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <button class="btn" type="button">Export list (CSV)</button>
@@ -57,17 +57,17 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </div>
 
 <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px" aria-label="Where the boards are">
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0"><div class="eyebrow" style="color: #9B1C12">Re-inspect</div><div class="mono" style="font-size: 32px; font-weight: 500">75</div><div style="font-size: 13px; color: #4A4F56">Passed inspection; model predicts a defect: 45 solder bridging, 30 open circuit</div><div style="font-size: 13px; color: #5B6169">WIP 34 · finished goods 36 · shipped 5</div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px; border-color: #F3C5C0"><div class="eyebrow" style="color: #9B1C12">Proposed hold</div><div class="mono" style="font-size: 32px; font-weight: 500">75</div><div style="font-size: 13px; color: #4A4F56">Passed inspection; model predicts a defect: 45 solder bridging, 30 open circuit</div><div style="font-size: 13px; color: #5B6169">WIP 34 · finished goods 36 · shipped 5</div></div>
 <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Verify the call</div><div class="mono" style="font-size: 32px; font-weight: 500">6</div><div style="font-size: 13px; color: #4A4F56">Failed inspection; model predicts no defect: 3 solder bridging (AOI), 3 open circuit (electrical test)</div></div>
-<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Re-inspect by root cause</div><div style="font-size: 14px; line-height: 1.6"><span class="mono" style="font-weight: 600">38</span> · High peak reflow temperature · 02:00–02:40<br><span class="mono" style="font-weight: 600">7</span> · Low squeegee angle, speed or pressure · 23:10–00:20<br><span class="mono" style="font-weight: 600">30</span> · High paste viscosity · 03:40–04:30<br><span style="color: #5B6169">A board with more than one root cause is counted once, under the one with the largest contribution</span></div></div>
+<div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px"><div class="eyebrow">Proposed hold by root cause</div><div style="font-size: 14px; line-height: 1.6"><span class="mono" style="font-weight: 600">38</span> · High peak reflow temperature · 02:00–02:40<br><span class="mono" style="font-weight: 600">7</span> · Low squeegee angle, speed or pressure · 23:10–00:20<br><span class="mono" style="font-weight: 600">30</span> · High paste viscosity · 03:40–04:30<br><span style="color: #5B6169">A board with more than one root cause is counted once, under the one with the largest contribution</span></div></div>
 </section>
 
-<section class="card" style="overflow: hidden" aria-label="Boards to inspect again">
+<section class="card" style="overflow: hidden" aria-label="Boards">
 <div style="padding: 20px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">Boards to inspect again</h2>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Boards</h2>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Group
-<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>Re-inspect</option><option>Verify the call</option></select>
+<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>Proposed hold</option><option>Verify the call</option></select>
 </label>
 <label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Root cause
 <select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>High peak reflow temperature</option><option>Low squeegee angle</option><option>Low squeegee speed</option><option>High squeegee pressure</option><option>High paste viscosity</option></select>
