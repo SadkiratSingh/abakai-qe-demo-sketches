@@ -66,7 +66,7 @@ Every generated sentence on the screens comes from one of these templates, so th
 | `RCA model` | the AI, the MLP, the network |
 | `root cause chain`, `contribution`, `Confirm chain` | hypothesis, score, terminal parameter risk |
 
-**Investigation summary:** `{k} of {K} boards with {defect} show at least one root cause chain. The {n} most frequent are below; a board can show more than one, so the counts can add up to more than {K}.`
+**Investigation summary:** `{k} of {K} boards with {defect} show at least one root cause chain. The top {n} are below; a board can show more than one, so the counts can add up to more than {K}.`
 
 **Chain card:** `{root cause} → {mechanism} → {defect}` · `{k} of {K}` boards with {defect} show this chain · `{n}` boards that passed {inspection} show this chain · `Built {window}` | `Paste lot {lot} · built {window}` | `Spread across the shift` · Corrective action: from the Failure Library.
 
@@ -84,7 +84,7 @@ Every generated sentence on the screens comes from one of these templates, so th
 | --- | --- |
 | Model line | `Chains from the RCA model and the Failure Library. The model agreed with {inspection} on {pct} of boards in this batch. Retrained on your line's data at onboarding.` |
 | Re-inspection scope check | `Also checked: other batches through {line} during {windows}: {none | list}.` |
-| Line alert | `{K} boards with {defect}. Most frequent root cause chain: {root cause} → {mechanism} ({k} boards, {window}). Root cause analysis is ready.` |
+| Line alert | `{K} boards with {defect}. Top root cause chain: {root cause} → {mechanism} ({k} boards, {window}). Root cause analysis is ready.` |
 | Board banner | `Passed {inspections}, but the model predicts {defect}. {Parameter} was {above USL} ({value}, spec {spec}). Built {time}, during {window}: same root cause chain as chain #{n} of {investigation}.` |
 | Board what-if | `With {parameter} at nominal ({nominal}), the model would predict no defect for this board.` |
 | Suggested action | The root cause's **Fix** text from the Failure Library, word for word |
@@ -103,6 +103,7 @@ All numbers are story data, not output from the backend or the model. Before a r
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2 (branch `sketches-v2`): rule-based linking with unit rules, contributing state and measurements as evidence; squeegee wear added to the story.
 - v3 (branch `sketches-v3`): statistics only, no model output. Unexplained boards per defect, compared with batches with no excursion; near-limit investigation INV-0143 linked through near-limit rule variants.
+- v6.16: "Most frequent root cause chains" is now "Top root cause chains" (investigation and line alerts).
 - v6.15: the "Send to inspection queue" button is removed from the proposed hold list; only "Export list (CSV)" remains.
 - v6.14: board disposition is Rework / Release / Scrap (standard MRB dispositions); "Re-inspect (X-ray)" is renamed Rework, and X-ray is mentioned as the check before rework.
 - v6.13: every board where the model and inspection disagree is proposed for hold: 81 in INV-0142 (48 solder bridging: 45 model defect / AOI pass + 3 AOI defect / model none; 33 open circuit: 30 + 3). "Verify the call" is no longer a separate group; both matrix disagreement cells read "Proposed hold".
