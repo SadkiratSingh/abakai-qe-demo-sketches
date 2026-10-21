@@ -103,6 +103,7 @@ All numbers are story data, not output from the backend or the model. Before a r
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2 (branch `sketches-v2`): rule-based linking with unit rules, contributing state and measurements as evidence; squeegee wear added to the story.
 - v3 (branch `sketches-v3`): statistics only, no model output. Unexplained boards per defect, compared with batches with no excursion; near-limit investigation INV-0143 linked through near-limit rule variants.
+- v6.14: board disposition is Rework / Release / Scrap (standard MRB dispositions); "Re-inspect (X-ray)" is renamed Rework, and X-ray is mentioned as the check before rework.
 - v6.13: every board where the model and inspection disagree is proposed for hold: 81 in INV-0142 (48 solder bridging: 45 model defect / AOI pass + 3 AOI defect / model none; 33 open circuit: 30 + 3). "Verify the call" is no longer a separate group; both matrix disagreement cells read "Proposed hold".
 - v6.12: labels say "Model prediction" and "AOI prediction" / "Electrical test prediction" (the proposed hold list column is "AOI / electrical test prediction"), following the product principal.
 - v6.11: location depends on the defect: solder bridging boards are at "Post-AOI inspection", open circuit boards at "Post-electrical test inspection". The location column and filter are back on the proposed hold list; board page, board packet and 8D D3 match.
