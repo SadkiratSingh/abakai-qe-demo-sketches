@@ -229,7 +229,7 @@ class Component extends DCLogic {
         progress: '4 of 8 steps filled from the investigation. Steps update as chains are confirmed and data comes in.',
         log: [
           { t: '06:05', e: 'Created from INV-0142: D2, D3 and D7 filled.' },
-          { t: '06:20', e: 'D3: 45 boards that passed AOI added from the proposed hold list.' },
+          { t: '06:20', e: 'D3: 48 boards added from the proposed hold list.' },
           { t: '06:42', e: 'D4 and D5: chain #1 confirmed by Priya S.' },
           { t: 'Next', e: 'D4 and D5 update when chains #2 and #3 are confirmed or rejected.' }
         ],
@@ -237,7 +237,7 @@ class Component extends DCLogic {
         problem: ['On the night shift of 15 Oct 2026, 61 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 had solder bridging at AOI.', '44 of them were built 02:00–02:40 and 14 during 23:10–00:20. The other two batches on line 2 that night, stg-B0001 and stg-B0002, had 3 and 2 boards with solder bridging, which is normal for this line.', 'The same batch also had 31 boards with open circuit, covered in 8D-0142-B.'],
         contain: [
           { what: '61 boards with solder bridging at AOI', where: 'Post-AOI inspection', action: 'Rework or scrap per MRB', status: 'Waiting for MRB', cls: 'chip info' },
-          { what: '45 boards that passed AOI, where the model predicts solder bridging', where: 'Post-AOI inspection', action: 'Hold and re-inspect with X-ray', status: 'Needs decision', cls: 'chip warn' },
+          { what: '48 boards on the proposed hold list: 45 passed AOI but the model predicts solder bridging; 3 failed AOI but the model predicts no defect', where: 'Post-AOI inspection', action: 'Hold; re-inspect the 45 with X-ray and check the AOI images of the 3', status: 'Needs decision', cls: 'chip warn' },
           { what: 'Other batches through line 2 during 23:10–00:20 and 02:00–02:40', where: '–', action: 'None found', status: 'Checked', cls: 'chip ok' }
         ],
         d4status: '1 of 3 chains confirmed', d4cls: 'chip ok',
@@ -270,14 +270,14 @@ class Component extends DCLogic {
         progress: '3 of 8 steps filled from the investigation. D4 and D5 fill in when a chain is confirmed in INV-0142.',
         log: [
           { t: '06:05', e: 'Created from INV-0142: D2, D3 and D7 filled.' },
-          { t: '06:20', e: 'D3: 30 boards that passed electrical test added from the proposed hold list.' },
+          { t: '06:20', e: 'D3: 33 boards added from the proposed hold list.' },
           { t: 'Next', e: 'D4 and D5 update when chain #1 (high paste viscosity) is confirmed.' }
         ],
         team: ['Printing process engineer', 'Materials engineer', 'Line 2 supervisor'],
         problem: ['On the night shift of 15 Oct 2026, 31 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 failed electrical test with open circuit.', '28 of them were built 03:40–04:30, all with paste lot [paste lot]. The other two batches on line 2 that night, stg-B0001 and stg-B0002, had 2 and 1 boards with open circuit, which is normal for this line.', 'The same batch also had 61 boards with solder bridging, covered in 8D-0142-A.'],
         contain: [
           { what: '31 boards with open circuit at electrical test', where: 'Post-electrical test inspection', action: 'Rework or scrap per MRB', status: 'Waiting for MRB', cls: 'chip info' },
-          { what: '30 boards that passed electrical test, where the model predicts open circuit', where: 'Post-electrical test inspection', action: 'Hold and re-inspect', status: 'Needs decision', cls: 'chip warn' },
+          { what: '33 boards on the proposed hold list: 30 passed electrical test but the model predicts open circuit; 3 failed electrical test but the model predicts no defect', where: 'Post-electrical test inspection', action: 'Hold; re-inspect the 30 and check the test logs of the 3', status: 'Needs decision', cls: 'chip warn' },
           { what: 'Paste lot [paste lot] still on the line', where: 'Solder printer, line 2', action: 'Quarantine the lot', status: 'Needs decision', cls: 'chip warn' }
         ],
         d4status: 'Waiting for a confirmed chain', d4cls: 'chip muted',

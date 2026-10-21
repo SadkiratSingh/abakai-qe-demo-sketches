@@ -199,7 +199,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">{{c.mx.conf}}</span><span class="t">Confirmed</span><span class="s">Both found {{c.defLower}}</span></div>
 <div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">{{c.mx.hidden}}</span><span class="t">Proposed hold</span><span class="s">Passed {{c.inspLower}}</span></div>
 <span class="h">Model prediction: no defect</span>
-<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">{{c.mx.unexpl}}</span><span class="t">Verify the call</span><span class="s">No root cause chain found</span></div>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">{{c.mx.unexpl}}</span><span class="t">Proposed hold</span><span class="s">No root cause chain found</span></div>
 <div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">{{c.mx.good}}</span><span class="t">Agree: no defect</span><span class="s">&nbsp;</span></div>
 </div>
 </section>
@@ -208,7 +208,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <aside style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="{{asideLabel}}">
 <sc-if value="{{panelClosed}}" hint-placeholder-val="{{ true }}">
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Proposed hold list</h2><div style="display: flex; flex-wrap: wrap; gap: 6px"><span class="chip crit">{{c.hold}} proposed hold</span><span class="chip muted">{{c.mx.unexpl}} verify the call</span></div></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Proposed hold list</h2><div style="display: flex; flex-wrap: wrap; gap: 6px"><span class="chip crit">{{c.holdTotal}} proposed hold</span></div></div>
 <div style="font-size: 13px; color: #5B6169">Boards where the RCA model and {{c.inspLower}} disagree.</div>
 <div style="font-size: 14px; line-height: 1.5">{{c.containLine}}</div>
 <a class="btn" href="Containment.dc.html">Open proposed hold list</a>
@@ -301,13 +301,13 @@ class Component extends DCLogic {
       summary: (k, K, d, n) => `${k} of ${K} boards with ${d} show at least one root cause chain. The ${n} most frequent are below; a board can show more than one, so the counts can add up to more than ${K}.`,
       summaryOne: (k, K, d) => `${k} of ${K} boards with ${d} show a root cause chain, and no parameter was out of spec on any of them.`,
       chain: (r, m, d) => `${r} → ${m} → ${d}`,
-      contain: (n, insp, d, v) => `${n} boards passed ${insp}, but the model predicts ${d}: proposed for hold. ${v} boards failed ${insp}, but the model predicts no defect: verify the ${insp} call.`,
+      contain: (n, insp, d, v) => `${n + v} boards proposed for hold: ${n} passed ${insp} but the model predicts ${d}, and ${v} failed ${insp} but the model predicts no defect.`,
       meta: (time, panel, slot, insp, res, loc) => `Built ${time} · ${panel} · slot ${slot} · ${insp}: ${res} · ${loc}`,
       ev: (param, val, unit, spec) => `${param} ${val}${unit === '°' ? '' : ' '}${unit} (spec ${spec})`,
       interpTwo: (a, b) => `Top chain: ${a}. Second: ${b}.`,
       interpOne: (a) => `Top chain: ${a}. No other chain above the display threshold.`,
       noneWhy: (insp, d) => `${insp} found ${d}, but the model predicts no defect, so no chain was assigned.`,
-      noneNext: (rec) => `These boards are on the proposed hold list to verify the call: check the ${rec}. If the defect is real, its cause is not among the model's inputs.`
+      noneNext: (rec) => `These boards are on the proposed hold list. Check the ${rec}; if the defect is real, its cause is not among the model's inputs.`
     };
     // Parameters a chain can end in (the root cause), with the facts the packet shows.
     const P = {
@@ -441,7 +441,7 @@ class Component extends DCLogic {
       other: d.other.map(o => ({ chain: chainText(o[0]), k: o[1], passed: o[2], when: o[3] })),
       none: d.none.map(b => ({ id: b[0], time: b[1], pct: 'Model risk ' + b[2] })),
       noneWhy: T.noneWhy(d.insp, d.defLower), noneNext: T.noneNext(d.record),
-      containLine: T.contain(d.hold, d.inspLower, d.defLower, d.mx.unexpl)
+      containLine: T.contain(d.hold, d.inspLower, d.defLower, d.mx.unexpl), holdTotal: d.hold + d.mx.unexpl
     });
     const last = panelOpen ? d.top[this.state.panel].boards.length - 1 : 0;
     return {
