@@ -47,7 +47,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <a href="rca-packet.html" style="font-size: 14px; text-decoration: none">← INV-0142 root cause analysis</a>
-<div class="eyebrow">Proposed hold list · INV-0142 · stg-B0003 · at post-test inspection</div>
+<div class="eyebrow">Proposed hold list · INV-0142 · stg-B0003</div>
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">75 boards proposed for hold</h1>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
@@ -69,6 +69,9 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Group
 <select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>Proposed hold</option><option>Verify the call</option></select>
 </label>
+<label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Location
+<select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>Post-AOI inspection</option><option>Post-electrical test inspection</option></select>
+</label>
 <label style="display: flex; align-items: center; gap: 8px; font-size: 14px">Root cause
 <select style="min-height: 40px; padding: 0 10px; border: 1px solid #C9CDD2; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif; background: #fff"><option>All</option><option>High peak reflow temperature</option><option>Low squeegee angle</option><option>Low squeegee speed</option><option>High squeegee pressure</option><option>High paste viscosity</option></select>
 </label>
@@ -76,7 +79,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 </div>
 <div style="overflow-x: auto">
 <table>
-<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Root causes</th><th>Measured</th><th>Model</th><th>Inspection</th></tr></thead>
+<thead><tr><th><input type="checkbox" aria-label="Select all"></th><th>Board</th><th>Panel</th><th>Built</th><th>Root causes</th><th>Measured</th><th>Model</th><th>Inspection</th><th>Location</th></tr></thead>
 <tbody>
 
 <tr>
@@ -88,6 +91,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">52° · 50 mm/s</td>
 <td><span class="chip crit">Solder bridging</span></td>
 <td>Pass</td>
+<td style="white-space: nowrap">Post-AOI inspection</td>
 </tr>
 
 <tr>
@@ -99,6 +103,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">53° · 0.35 MPa</td>
 <td><span class="chip crit">Solder bridging</span></td>
 <td>Pass</td>
+<td style="white-space: nowrap">Post-AOI inspection</td>
 </tr>
 
 <tr>
@@ -110,6 +115,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">258.9 °C</td>
 <td><span class="chip crit">Solder bridging</span></td>
 <td>Pass</td>
+<td style="white-space: nowrap">Post-AOI inspection</td>
 </tr>
 
 <tr>
@@ -121,6 +127,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">259.3 °C</td>
 <td><span class="chip crit">Solder bridging</span></td>
 <td>Pass</td>
+<td style="white-space: nowrap">Post-AOI inspection</td>
 </tr>
 
 <tr>
@@ -132,6 +139,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">259.6 °C</td>
 <td><span class="chip crit">Solder bridging</span></td>
 <td>Pass</td>
+<td style="white-space: nowrap">Post-AOI inspection</td>
 </tr>
 
 <tr>
@@ -143,6 +151,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">259.4 °C</td>
 <td><span class="chip crit">Solder bridging</span></td>
 <td>Pass</td>
+<td style="white-space: nowrap">Post-AOI inspection</td>
 </tr>
 
 <tr>
@@ -154,6 +163,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">240 Pa·s</td>
 <td><span class="chip crit">Open circuit</span></td>
 <td>Pass</td>
+<td style="white-space: nowrap">Post-electrical test inspection</td>
 </tr>
 
 <tr>
@@ -165,6 +175,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">241 Pa·s</td>
 <td><span class="chip crit">Open circuit</span></td>
 <td>Pass</td>
+<td style="white-space: nowrap">Post-electrical test inspection</td>
 </tr>
 
 <tr>
@@ -176,6 +187,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">244 Pa·s</td>
 <td><span class="chip crit">Open circuit</span></td>
 <td>Pass</td>
+<td style="white-space: nowrap">Post-electrical test inspection</td>
 </tr>
 
 <tr>
@@ -187,6 +199,7 @@ input[type=checkbox]{width:18px;height:18px;accent-color:#1A4F9C}
 <td class="mono">All in spec</td>
 <td><span class="chip ok">No defect</span></td>
 <td>Solder bridging</td>
+<td style="white-space: nowrap">Post-AOI inspection</td>
 </tr>
 
 </tbody>

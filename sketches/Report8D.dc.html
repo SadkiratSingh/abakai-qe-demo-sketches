@@ -236,8 +236,8 @@ class Component extends DCLogic {
         team: ['Reflow process engineer', 'Printing process engineer', 'Line 2 supervisor'],
         problem: ['On the night shift of 15 Oct 2026, 61 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 had solder bridging at AOI.', '44 of them were built 02:00–02:40 and 14 during 23:10–00:20. The other two batches on line 2 that night, stg-B0001 and stg-B0002, had 3 and 2 boards with solder bridging, which is normal for this line.', 'The same batch also had 31 boards with open circuit, covered in 8D-0142-B.'],
         contain: [
-          { what: '61 boards with solder bridging at AOI', where: 'Post-test inspection', action: 'Rework or scrap per MRB', status: 'Waiting for MRB', cls: 'chip info' },
-          { what: '45 boards that passed AOI, where the model predicts solder bridging', where: 'Post-test inspection', action: 'Hold and re-inspect with X-ray', status: 'Needs decision', cls: 'chip warn' },
+          { what: '61 boards with solder bridging at AOI', where: 'Post-AOI inspection', action: 'Rework or scrap per MRB', status: 'Waiting for MRB', cls: 'chip info' },
+          { what: '45 boards that passed AOI, where the model predicts solder bridging', where: 'Post-AOI inspection', action: 'Hold and re-inspect with X-ray', status: 'Needs decision', cls: 'chip warn' },
           { what: 'Other batches through line 2 during 23:10–00:20 and 02:00–02:40', where: '–', action: 'None found', status: 'Checked', cls: 'chip ok' }
         ],
         d4status: '1 of 3 chains confirmed', d4cls: 'chip ok',
@@ -276,8 +276,8 @@ class Component extends DCLogic {
         team: ['Printing process engineer', 'Materials engineer', 'Line 2 supervisor'],
         problem: ['On the night shift of 15 Oct 2026, 31 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 failed electrical test with open circuit.', '28 of them were built 03:40–04:30, all with paste lot [paste lot]. The other two batches on line 2 that night, stg-B0001 and stg-B0002, had 2 and 1 boards with open circuit, which is normal for this line.', 'The same batch also had 61 boards with solder bridging, covered in 8D-0142-A.'],
         contain: [
-          { what: '31 boards with open circuit at electrical test', where: 'Post-test inspection', action: 'Rework or scrap per MRB', status: 'Waiting for MRB', cls: 'chip info' },
-          { what: '30 boards that passed electrical test, where the model predicts open circuit', where: 'Post-test inspection', action: 'Hold and re-inspect', status: 'Needs decision', cls: 'chip warn' },
+          { what: '31 boards with open circuit at electrical test', where: 'Post-electrical test inspection', action: 'Rework or scrap per MRB', status: 'Waiting for MRB', cls: 'chip info' },
+          { what: '30 boards that passed electrical test, where the model predicts open circuit', where: 'Post-electrical test inspection', action: 'Hold and re-inspect', status: 'Needs decision', cls: 'chip warn' },
           { what: 'Paste lot [paste lot] still on the line', where: 'Solder printer, line 2', action: 'Quarantine the lot', status: 'Needs decision', cls: 'chip warn' }
         ],
         d4status: 'Waiting for a confirmed chain', d4cls: 'chip muted',
