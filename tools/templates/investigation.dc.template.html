@@ -177,8 +177,8 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
 <a class="mono" href="Board.dc.html" style="flex: 0 0 120px">{{b.id}}</a>
 <span class="mono" style="flex: 0 0 56px; color: #4A4F56">{{b.time}}</span>
-<span class="chip ok">Model: no defect</span>
-<span style="flex: 1 1 240px; color: #4A4F56">{{c.insp}}: {{c.defLower}}</span>
+<span class="chip ok">Model prediction: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">{{c.insp}} prediction: {{c.defLower}}</span>
 </div>
 </sc-for>
 </div>
@@ -194,11 +194,11 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span class="chip ok">Agreement {{c.agree}}</span>
 </div>
 <div class="mx">
-<span></span><span class="h">{{c.insp}}: {{c.defLower}}</span><span class="h">{{c.insp}}: pass</span>
-<span class="h">Model: {{c.defLower}}</span>
+<span></span><span class="h">{{c.insp}} prediction: {{c.defLower}}</span><span class="h">{{c.insp}} prediction: pass</span>
+<span class="h">Model prediction: {{c.defLower}}</span>
 <div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">{{c.mx.conf}}</span><span class="t">Confirmed</span><span class="s">Both found {{c.defLower}}</span></div>
 <div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">{{c.mx.hidden}}</span><span class="t">Proposed hold</span><span class="s">Passed {{c.inspLower}}</span></div>
-<span class="h">Model: no defect</span>
+<span class="h">Model prediction: no defect</span>
 <div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">{{c.mx.unexpl}}</span><span class="t">Verify the call</span><span class="s">No root cause chain found</span></div>
 <div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">{{c.mx.good}}</span><span class="t">Agree: no defect</span><span class="s">&nbsp;</span></div>
 </div>
@@ -242,7 +242,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 <div style="font-size: 13px; color: #4A4F56">{{bp.meta}}</div>
 <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; background: #fff; border: 1px solid #E1E4E0; border-radius: 8px">
-<div class="kv"><span style="color: #4A4F56">Model: <span style="color: #16191D; font-weight: 600">{{c.title}}</span></span><span style="color: #4A4F56">{{c.insp}}: <span style="color: #16191D; font-weight: 600">{{c.defLower}}</span></span></div>
+<div class="kv"><span style="color: #4A4F56">Model prediction: <span style="color: #16191D; font-weight: 600">{{c.title}}</span></span><span style="color: #4A4F56">{{c.insp}} prediction: <span style="color: #16191D; font-weight: 600">{{c.defLower}}</span></span></div>
 <sc-for list="{{bp.mechs}}" as="m" hint-placeholder-count="2">
 <div class="kv"><span style="color: #4A4F56">{{m.side}} mechanism: <span style="color: #16191D; font-weight: 600">{{m.name}}</span></span></div>
 </sc-for>
