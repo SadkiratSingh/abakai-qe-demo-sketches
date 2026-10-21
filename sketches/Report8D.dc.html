@@ -156,7 +156,7 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 </sc-for>
 </tbody>
 </table>
-<div style="display: flex; justify-content: flex-end"><a class="btn sm" href="Containment.dc.html">Open re-inspection list</a></div>
+<div style="display: flex; justify-content: flex-end"><a class="btn sm" href="Containment.dc.html">Proposed hold list</a></div>
 </section>
 
 <section id="d4" class="card sec">
@@ -229,7 +229,7 @@ class Component extends DCLogic {
         progress: '4 of 8 steps filled from the investigation. Steps update as chains are confirmed and data comes in.',
         log: [
           { t: '06:05', e: 'Created from INV-0142: D2, D3 and D7 filled.' },
-          { t: '06:20', e: 'D3: 45 boards that passed AOI added from the re-inspection list.' },
+          { t: '06:20', e: 'D3: 45 boards that passed AOI added from the proposed hold list.' },
           { t: '06:42', e: 'D4 and D5: chain #1 confirmed by Priya S.' },
           { t: 'Next', e: 'D4 and D5 update when chains #2 and #3 are confirmed or rejected.' }
         ],
@@ -270,7 +270,7 @@ class Component extends DCLogic {
         progress: '3 of 8 steps filled from the investigation. D4 and D5 fill in when a chain is confirmed in INV-0142.',
         log: [
           { t: '06:05', e: 'Created from INV-0142: D2, D3 and D7 filled.' },
-          { t: '06:20', e: 'D3: 30 boards that passed electrical test added from the re-inspection list.' },
+          { t: '06:20', e: 'D3: 30 boards that passed electrical test added from the proposed hold list.' },
           { t: 'Next', e: 'D4 and D5 update when chain #1 (high paste viscosity) is confirmed.' }
         ],
         team: ['Printing process engineer', 'Materials engineer', 'Line 2 supervisor'],
