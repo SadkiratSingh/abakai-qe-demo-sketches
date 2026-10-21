@@ -426,7 +426,7 @@ class Component extends DCLogic {
       const slot = (parseInt(b[0].slice(-2), 10) % 4) + 1;
       bp = {
         id: b[0], pct: 'Model risk ' + b[2],
-        meta: T.meta(b[1] + ', ' + inv.date, h.panel, slot, d.inspLower, d.defLower, 'rework'),
+        meta: T.meta(b[1] + ', ' + inv.date, h.panel, slot, d.inspLower, d.defLower, 'post-test inspection'),
         mechs: ['Printing', 'Reflow'].map(side => ({ side, name: sides[side] || 'none' })),
         chains: chains.map((x, i) => { const q = P[x.key]; return { n: i + 1, chain: chainText(x.key), stage: q.stage, contrib: x.c + '%', ev: T.ev(q.param, x.val, q.unit, q.spec), status: q.status, cls: q.cls }; }),
         hasSupport: !!h.support, support: h.support || '',
