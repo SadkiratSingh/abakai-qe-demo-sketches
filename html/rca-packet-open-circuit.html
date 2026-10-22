@@ -56,6 +56,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .mx .t{font-weight:600;font-size:14px}
 .mx .s{color:#4A4F56;font-size:12.5px}
 .seg{min-height:36px;padding:0 12px;border:1px solid #C9CDD2;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#4A4F56;cursor:pointer}
+.stf{min-height:36px;padding:0 14px;border:1px solid #C9CDD2;border-radius:999px;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#4A4F56;cursor:pointer}.stf.on{background:#16191D;border-color:#16191D;color:#fff}
 .seg.on{background:#16191D;border-color:#16191D;color:#fff}
 .seg:first-child{border-radius:8px 0 0 8px}.seg:last-child{border-radius:0 8px 8px 0;margin-left:-1px}
 .brow{display:grid;grid-template-columns:120px 52px 1fr auto;align-items:center;gap:10px;width:100%;min-height:40px;padding:6px 10px;border:0;border-bottom:1px solid #EEF0ED;background:#fff;font:14px 'IBM Plex Sans',sans-serif;color:#16191D;text-align:left;cursor:pointer}
@@ -107,6 +108,14 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Top root cause chains</h2>
 <div style="font-size: 14px; color: #5B6169">Each board with open circuit gets its root cause chains from the RCA model and the Failure Library. Ranked by how many boards show each chain.</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px" role="group" aria-label="Filter chains by stage">
+<span style="font-size: 13px; font-weight: 600; color: #5B6169; margin-right: 4px">Stage</span>
+<a class="stf on" href="rca-packet-open-circuit.html" style="display:inline-flex;align-items:center;text-decoration:none">All · 2</a>
+
+
+<button type="button" class="stf">Material · 1</button>
+<button type="button" class="stf">Environment · 1</button>
 </div>
 
 <article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">

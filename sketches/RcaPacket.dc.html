@@ -59,6 +59,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .mx .t{font-weight:600;font-size:14px}
 .mx .s{color:#4A4F56;font-size:12.5px}
 .seg{min-height:36px;padding:0 12px;border:1px solid #C9CDD2;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#4A4F56;cursor:pointer}
+.stf{min-height:36px;padding:0 14px;border:1px solid #C9CDD2;border-radius:999px;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#4A4F56;cursor:pointer}.stf.on{background:#16191D;border-color:#16191D;color:#fff}
 .seg.on{background:#16191D;border-color:#16191D;color:#fff}
 .seg:first-child{border-radius:8px 0 0 8px}.seg:last-child{border-radius:0 8px 8px 0;margin-left:-1px}
 .brow{display:grid;grid-template-columns:120px 52px 1fr auto;align-items:center;gap:10px;width:100%;min-height:40px;padding:6px 10px;border:0;border-bottom:1px solid #EEF0ED;background:#fff;font:14px 'IBM Plex Sans',sans-serif;color:#16191D;text-align:left;cursor:pointer}
@@ -109,6 +110,14 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Top root cause chains</h2>
 <div style="font-size: 14px; color: #5B6169">Each board with {{c.defLower}} gets its root cause chains from the RCA model and the Failure Library. Ranked by how many boards show each chain.</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px" role="group" aria-label="Filter chains by stage">
+<span style="font-size: 13px; font-weight: 600; color: #5B6169; margin-right: 4px">Stage</span>
+<button type="button" class="{{f.allCls}}" onClick="{{stageAll}}">All · {{f.all}}</button>
+<sc-if value="{{f.hasPrinting}}" hint-placeholder-val="{{ true }}"><button type="button" class="{{f.printingCls}}" onClick="{{stagePrinting}}">Printing · {{f.printing}}</button></sc-if>
+<sc-if value="{{f.hasReflow}}" hint-placeholder-val="{{ true }}"><button type="button" class="{{f.reflowCls}}" onClick="{{stageReflow}}">Reflow · {{f.reflow}}</button></sc-if>
+<sc-if value="{{f.hasMaterial}}" hint-placeholder-val="{{ false }}"><button type="button" class="{{f.materialCls}}" onClick="{{stageMaterial}}">Material · {{f.material}}</button></sc-if>
+<sc-if value="{{f.hasEnvironment}}" hint-placeholder-val="{{ true }}"><button type="button" class="{{f.environmentCls}}" onClick="{{stageEnvironment}}">Environment · {{f.environment}}</button></sc-if>
 </div>
 <sc-for list="{{c.cards}}" as="h" hint-placeholder-count="3">
 <article class="card" style="{{h.cardStyle}}">
@@ -320,7 +329,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { inv: '0142', tab: 'bridge', panel: -1, board: 4, confirmed: {}, showOther: false, zoom: -1, zr: 'all' };
+    this.state = { inv: '0142', tab: 'bridge', panel: -1, board: 4, confirmed: {}, showOther: false, zoom: -1, zr: 'all', stage: 'all' };
   }
   // Small trend line for a chain card: parameter averages over the batch, spec band, near-limit zone and the window when the chain appeared.
   // Chart geometry for a parameter trend: 20-minute averages, spec band, near-limit zone, the window when the chain appeared,
@@ -490,11 +499,18 @@ class Component extends DCLogic {
     const d = inv.defects[tab];
     const chainText = key => T.chain(P[key].root + (P[key].status === 'In spec' ? ' (in spec)' : (P[key].status.indexOf('in spec') >= 0 ? ' (in spec, near LSL)' : '')), P[key].mech, d.title);
     const all = d.top.concat(d.other);
-    const shown = this.state.showOther ? all : d.top;
+    const stg = this.state.stage;
+    const indexed = all.map((h, i) => ({ h, i }));
+    const shown = stg === 'all' ? (this.state.showOther ? indexed : indexed.slice(0, d.top.length)) : indexed.filter(x => P[x.h.key].stage.toLowerCase() === stg);
+    const f = { all: all.length, allCls: stg === 'all' ? 'stf on' : 'stf' };
+    ['printing', 'reflow', 'material', 'environment'].forEach(s => {
+      const n = all.filter(h => P[h.key].stage.toLowerCase() === s).length;
+      f[s] = n; f['has' + s[0].toUpperCase() + s.slice(1)] = n > 0; f[s + 'Cls'] = stg === s ? 'stf on' : 'stf';
+    });
     const t0m = parseInt(inv.times.t0, 10) * 60;
     const low = p => /Below|Near LSL|Low /.test(p.status + ' ' + p.root);
     const win = w => (w.match(/\d\d:\d\d–\d\d:\d\d/) || [''])[0];
-    const cards = shown.map((h, i) => {
+    const cards = shown.map(({ h, i }) => {
       const p = P[h.key], conf = !!this.state.confirmed[tab + i], sp = S[h.spark], zoomed = this.state.zoom === i;
       return {
         rank: i + 1, stage: 'Stage: ' + p.stage.toLowerCase(), inSpec: !!h.inSpec, confirmed: conf, open: !conf,
@@ -542,7 +558,7 @@ class Component extends DCLogic {
     const n = d.top.length;
     const c = Object.assign({}, d, {
       summary: d.one ? T.summaryOne(d.withChain, d.K, d.defLower) : T.summary(d.withChain, d.K, d.defLower, n),
-      cards, hasMore: d.other.length > 0,
+      cards, hasMore: stg === 'all' && d.other.length > 0,
       toggleLabel: this.state.showOther ? 'Hide ' + d.other.length + ' more chains' : T.more(d.other.length, d.other.map(o => o.k), d.defLower),
       none: d.none.map(b => ({ id: b[0], time: b[1], pct: 'Model risk ' + b[2] })),
       noneWhy: T.noneWhy(d.insp, d.defLower), noneNext: T.noneNext(d.record),
@@ -550,12 +566,17 @@ class Component extends DCLogic {
     });
     const last = panelOpen ? all[this.state.panel].boards.length - 1 : 0;
     return {
-      inv: Object.assign({}, inv, inv.times), c, p, bp, panelOpen, panelClosed: !panelOpen,
+      inv: Object.assign({}, inv, inv.times), c, f, p, bp, panelOpen, panelClosed: !panelOpen,
       asideLabel: panelOpen ? 'Boards with this chain' : 'Proposed hold list',
       isBridge: tab === 'bridge', isOpen: tab === 'open',
       bridgeTabClass: tab === 'bridge' ? 'tab on' : 'tab', openTabClass: tab === 'open' ? 'tab on' : 'tab',
-      showBridge: () => this.setState({ tab: 'bridge', panel: -1 }),
-      showOpen: () => this.setState({ tab: 'open', panel: -1 }),
+      showBridge: () => this.setState({ tab: 'bridge', panel: -1, stage: 'all', zoom: -1 }),
+      showOpen: () => this.setState({ tab: 'open', panel: -1, stage: 'all', zoom: -1 }),
+      stageAll: () => this.setState({ stage: 'all', panel: -1, zoom: -1 }),
+      stagePrinting: () => this.setState({ stage: 'printing', panel: -1, zoom: -1 }),
+      stageReflow: () => this.setState({ stage: 'reflow', panel: -1, zoom: -1 }),
+      stageMaterial: () => this.setState({ stage: 'material', panel: -1, zoom: -1 }),
+      stageEnvironment: () => this.setState({ stage: 'environment', panel: -1, zoom: -1 }),
       closePanel: () => this.setState({ panel: -1 }),
       toggleOther: () => this.setState({ showOther: !this.state.showOther }),
       zoomAll: () => this.setState({ zr: 'all' }), zoomWin: () => this.setState({ zr: 'win' }),

@@ -26,8 +26,9 @@ const PAGES = [
   { src: 'RcaPacket.dc.html', out: 'rca-packet-zoom.html', label: '2 · Investigation: zoomed chart', desc: 'Chain #1 trend, whole shift, with axes, limits and a value per point', state: { zoom: 0 }, links: { 'h.view': 'rca-packet-boards.html', toggleOther: 'rca-packet-all-chains.html', 'h.zoom': 'rca-packet.html', zoomAll: 'rca-packet-zoom.html', zoomWin: 'rca-packet-zoom-window.html' } },
   { src: 'RcaPacket.dc.html', out: 'rca-packet-zoom-window.html', label: '2 · Investigation: zoomed around the window', desc: 'Chain #1 trend, the hour either side of 02:00–02:40', state: { zoom: 0, zr: 'win' }, links: { 'h.view': 'rca-packet-boards.html', toggleOther: 'rca-packet-all-chains.html', 'h.zoom': 'rca-packet.html', zoomAll: 'rca-packet-zoom.html', zoomWin: 'rca-packet-zoom-window.html' } },
   { src: 'RcaPacket.dc.html', out: 'rca-packet-all-chains.html', label: '2 · Investigation: all chains', desc: 'Top 3 chains plus the 3 more chains shown', state: { showOther: true }, links: { 'h.view': 'rca-packet-boards.html', toggleOther: 'rca-packet.html', 'h.zoom': 'rca-packet-zoom.html' } },
+  { src: 'RcaPacket.dc.html', out: 'rca-packet-stage-printing.html', label: '2 · Investigation: printing stage only', desc: 'Chains filtered to stage: printing, original ranks kept', state: { stage: 'printing' }, links: { 'h.view': 'rca-packet-boards.html', 'h.zoom': 'rca-packet-zoom.html' } },
   { src: 'RcaPacket.dc.html', out: 'rca-packet-boards.html', label: '2 · Investigation: boards with chain #1', desc: 'Board list and one board\'s RCA packet in the side panel', state: { panel: 0, board: 4 }, links: { closePanel: 'rca-packet.html', 'h.view': 'rca-packet-boards.html' } },
-  { src: 'RcaPacket.dc.html', out: 'rca-packet-open-circuit.html', label: '2 · Investigation: open circuit', desc: 'Same screen with the open circuit tab selected', state: { tab: 'open' }, links: { 'h.view': 'rca-packet-open-circuit-boards.html' } },
+  { src: 'RcaPacket.dc.html', out: 'rca-packet-open-circuit.html', label: '2 · Investigation: open circuit', desc: 'Same screen with the open circuit tab selected', state: { tab: 'open' }, links: { 'h.view': 'rca-packet-open-circuit-boards.html', stageAll: 'rca-packet-open-circuit.html' } },
   { src: 'RcaPacket.dc.html', out: 'rca-packet-open-circuit-boards.html', label: '2 · Investigation: open circuit boards', desc: 'Open circuit chain #1 with one board\'s RCA packet', state: { tab: 'open', panel: 0, board: 1 }, links: { closePanel: 'rca-packet-open-circuit.html', 'h.view': 'rca-packet-open-circuit-boards.html' } },
   { src: 'Containment.dc.html', out: 'proposed-hold-list.html', label: '3 · Proposed hold list', desc: 'All boards where the model and inspection disagree: 81 proposed for hold' },
   { src: 'Board.dc.html', out: 'board-detail.html', label: '3a · Board detail', desc: 'One board\'s full RCA packet: model prediction, chain, contribution per parameter, fingerprint, disposition' },
@@ -42,6 +43,7 @@ const PAGES = [
 const TAB_LINKS = {
   showBridge: 'rca-packet.html', showOpen: 'rca-packet-open-circuit.html',
   showB: 'failure-library.html', showO: 'failure-library-open-circuit.html',
+  stageAll: 'rca-packet.html', stagePrinting: 'rca-packet-stage-printing.html',
 };
 
 let LINKS = TAB_LINKS;
