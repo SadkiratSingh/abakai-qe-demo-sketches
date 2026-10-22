@@ -116,14 +116,13 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <button type="button" class="{{f.allCls}}" onClick="{{stageAll}}">All · {{f.all}}</button>
 <sc-if value="{{f.hasPrinting}}" hint-placeholder-val="{{ true }}"><button type="button" class="{{f.printingCls}}" onClick="{{stagePrinting}}">Printing · {{f.printing}}</button></sc-if>
 <sc-if value="{{f.hasReflow}}" hint-placeholder-val="{{ true }}"><button type="button" class="{{f.reflowCls}}" onClick="{{stageReflow}}">Reflow · {{f.reflow}}</button></sc-if>
-<sc-if value="{{f.hasMaterial}}" hint-placeholder-val="{{ false }}"><button type="button" class="{{f.materialCls}}" onClick="{{stageMaterial}}">Material · {{f.material}}</button></sc-if>
-<sc-if value="{{f.hasEnvironment}}" hint-placeholder-val="{{ true }}"><button type="button" class="{{f.environmentCls}}" onClick="{{stageEnvironment}}">Environment · {{f.environment}}</button></sc-if>
 </div>
 <sc-for list="{{c.cards}}" as="h" hint-placeholder-count="3">
 <article class="card" style="{{h.cardStyle}}">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#{{h.rank}}</span>
 <span class="chip muted">{{h.stage}}</span>
+<span class="chip muted">{{h.cat}}</span>
 <sc-if value="{{h.inSpec}}" hint-placeholder-val="{{ false }}"><span class="chip warn">In spec · near LSL</span></sc-if>
 <sc-if value="{{h.confirmed}}" hint-placeholder-val="{{ false }}"><span class="chip ok">Confirmed by Priya S.</span></sc-if>
 </div>
@@ -304,7 +303,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div class="eyebrow">Root cause chains on this board</div>
 <sc-for list="{{bp.chains}}" as="x" hint-placeholder-count="2">
 <div class="pchain" style="background: #fff">
-<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px"><span class="mono" style="font-weight: 500">#{{x.n}}</span><span style="font-weight: 600; font-size: 14px; flex: 1 1 260px">{{x.chain}}</span><span class="chip muted">{{x.stage}}</span></div>
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px"><span class="mono" style="font-weight: 500">#{{x.n}}</span><span style="font-weight: 600; font-size: 14px; flex: 1 1 260px">{{x.chain}}</span><span class="chip muted">{{x.stage}}</span><span class="chip muted">{{x.cat}}</span></div>
 <div style="display: flex; align-items: center; gap: 10px; font-size: 13px"><span style="color: #4A4F56; white-space: nowrap">Contribution</span><div class="cbar"><div style="width: {{x.contrib}}"></div></div><span class="mono">{{x.contrib}}</span></div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 13px; color: #4A4F56"><span>{{x.ev}}</span><span class="{{x.cls}}">{{x.status}}</span></div>
 </div>
@@ -402,14 +401,14 @@ class Component extends DCLogic {
     };
     // Parameters a chain can end in (the root cause), with the facts the packet shows.
     const P = {
-      reflow: { root: 'High peak reflow temperature', mech: 'Excess reflow spreading', side: 'Reflow', stage: 'Reflow', equip: 'Reflow oven', param: 'Peak reflow temperature', unit: '°C', spec: '245–255 °C', status: 'Above USL', cls: 'chip crit', short: 'reflow spreading from peak reflow temperature above USL' },
-      angle: { root: 'Low squeegee angle', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', equip: 'Solder printer', param: 'Squeegee angle', unit: '°', spec: '55–65°', status: 'Below LSL', cls: 'chip crit', short: 'aperture overfill from squeegee angle below LSL' },
-      speed: { root: 'Low squeegee speed', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', equip: 'Solder printer', param: 'Squeegee speed', unit: 'mm/s', spec: '56–84 mm/s', status: 'Below LSL', cls: 'chip crit', short: 'aperture overfill from squeegee speed below LSL' },
-      speedNear: { root: 'Low squeegee speed', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', equip: 'Solder printer', param: 'Squeegee speed', unit: 'mm/s', spec: '56–84 mm/s', status: 'Near LSL · in spec', cls: 'chip warn', short: 'aperture overfill from squeegee speed near LSL, in spec' },
-      pressure: { root: 'High squeegee pressure', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', equip: 'Solder printer', param: 'Squeegee pressure', unit: 'MPa', spec: '0.27–0.33 MPa', status: 'Above USL', cls: 'chip crit', short: 'aperture overfill from squeegee pressure above USL' },
-      ambient: { root: 'High ambient temperature', mech: 'Excess reflow spreading', side: 'Reflow', stage: 'Reflow', equip: 'Line', param: 'Ambient temperature', unit: '°C', spec: '[your limit]', status: 'Above USL', cls: 'chip crit', short: 'reflow spreading from ambient temperature above USL' },
-      visc: { root: 'High paste viscosity', mech: 'Poor paste transfer', side: 'Printing', stage: 'Material', equip: 'Solder paste', param: 'Paste viscosity', unit: 'Pa·s', spec: '180–220 Pa·s', status: 'Above USL', cls: 'chip crit', short: 'poor paste transfer from paste viscosity above USL' },
-      rh: { root: 'High ambient RH', mech: 'Poor paste transfer', side: 'Printing', stage: 'Environment', equip: 'Line', param: 'Ambient RH', unit: '%RH', spec: '[your limit]', status: 'Above USL', cls: 'chip crit', short: 'poor paste transfer from ambient RH above USL' }
+      reflow: { root: 'High peak reflow temperature', mech: 'Excess reflow spreading', side: 'Reflow', stage: 'Reflow', cat: 'Machine', equip: 'Reflow oven', param: 'Peak reflow temperature', unit: '°C', spec: '245–255 °C', status: 'Above USL', cls: 'chip crit', short: 'reflow spreading from peak reflow temperature above USL' },
+      angle: { root: 'Low squeegee angle', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Machine', equip: 'Solder printer', param: 'Squeegee angle', unit: '°', spec: '55–65°', status: 'Below LSL', cls: 'chip crit', short: 'aperture overfill from squeegee angle below LSL' },
+      speed: { root: 'Low squeegee speed', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Machine', equip: 'Solder printer', param: 'Squeegee speed', unit: 'mm/s', spec: '56–84 mm/s', status: 'Below LSL', cls: 'chip crit', short: 'aperture overfill from squeegee speed below LSL' },
+      speedNear: { root: 'Low squeegee speed', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Machine', equip: 'Solder printer', param: 'Squeegee speed', unit: 'mm/s', spec: '56–84 mm/s', status: 'Near LSL · in spec', cls: 'chip warn', short: 'aperture overfill from squeegee speed near LSL, in spec' },
+      pressure: { root: 'High squeegee pressure', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Machine', equip: 'Solder printer', param: 'Squeegee pressure', unit: 'MPa', spec: '0.27–0.33 MPa', status: 'Above USL', cls: 'chip crit', short: 'aperture overfill from squeegee pressure above USL' },
+      ambient: { root: 'High ambient temperature', mech: 'Excess reflow spreading', side: 'Reflow', stage: 'Reflow', cat: 'Environment', equip: 'Line', param: 'Ambient temperature', unit: '°C', spec: '[your limit]', status: 'Above USL', cls: 'chip crit', short: 'reflow spreading from ambient temperature above USL' },
+      visc: { root: 'High paste viscosity', mech: 'Poor paste transfer', side: 'Printing', stage: 'Printing', cat: 'Material', equip: 'Solder paste', param: 'Paste viscosity', unit: 'Pa·s', spec: '180–220 Pa·s', status: 'Above USL', cls: 'chip crit', short: 'poor paste transfer from paste viscosity above USL' },
+      rh: { root: 'High ambient RH', mech: 'Poor paste transfer', side: 'Printing', stage: 'Printing', cat: 'Environment', equip: 'Line', param: 'Ambient RH', unit: '%RH', spec: '[your limit]', status: 'Above USL', cls: 'chip crit', short: 'poor paste transfer from ambient RH above USL' }
     };
     const FIX = {
       reflow: 'Restore the approved reflow recipe; lock recipe changes behind sign-off.',
@@ -492,7 +491,7 @@ class Component extends DCLogic {
         }
       }
     };
-    P.angleIn = { root: 'Low squeegee angle', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', equip: 'Solder printer', param: 'Squeegee angle', unit: '°', spec: '55–65°', status: 'In spec', cls: 'chip ok', short: 'aperture overfill from squeegee angle, in spec' };
+    P.angleIn = { root: 'Low squeegee angle', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Machine', equip: 'Solder printer', param: 'Squeegee angle', unit: '°', spec: '55–65°', status: 'In spec', cls: 'chip ok', short: 'aperture overfill from squeegee angle, in spec' };
 
     const inv = INV[this.state.inv];
     const tab = inv.defects[this.state.tab] ? this.state.tab : 'bridge';
@@ -503,7 +502,7 @@ class Component extends DCLogic {
     const indexed = all.map((h, i) => ({ h, i }));
     const shown = stg === 'all' ? (this.state.showOther ? indexed : indexed.slice(0, d.top.length)) : indexed.filter(x => P[x.h.key].stage.toLowerCase() === stg);
     const f = { all: all.length, allCls: stg === 'all' ? 'stf on' : 'stf' };
-    ['printing', 'reflow', 'material', 'environment'].forEach(s => {
+    ['printing', 'reflow'].forEach(s => {
       const n = all.filter(h => P[h.key].stage.toLowerCase() === s).length;
       f[s] = n; f['has' + s[0].toUpperCase() + s.slice(1)] = n > 0; f[s + 'Cls'] = stg === s ? 'stf on' : 'stf';
     });
@@ -513,7 +512,7 @@ class Component extends DCLogic {
     const cards = shown.map(({ h, i }) => {
       const p = P[h.key], conf = !!this.state.confirmed[tab + i], sp = S[h.spark], zoomed = this.state.zoom === i;
       return {
-        rank: i + 1, stage: 'Stage: ' + p.stage.toLowerCase(), inSpec: !!h.inSpec, confirmed: conf, open: !conf,
+        rank: i + 1, stage: 'Stage: ' + p.stage.toLowerCase(), cat: '5M+E: ' + p.cat.toLowerCase(), inSpec: !!h.inSpec, confirmed: conf, open: !conf,
         root: p.root, mech: p.mech, equip: p.equip, k: h.k, passed: h.passed, when: h.when,
         sparkSub: sp.sub, sparkLabel: p.param + ' over the batch, with the window when this chain appeared',
         sp: this.chart(sp, { W: 300, H: 84, padL: 0, padR: 0, padT: 16, padB: 18, i0: 0, i1: sp.vals.length - 1, t0: t0m, low: low(p), unit: p.unit }),
@@ -549,7 +548,7 @@ class Component extends DCLogic {
         id: b[0], pct: 'Model risk ' + b[2],
         meta: T.meta(b[1] + ', ' + inv.date, h.panel, slot, d.inspLower, d.defLower, d.loc),
         mechs: ['Printing', 'Reflow'].map(side => ({ side, name: sides[side] || 'none' })),
-        chains: chains.map((x, i) => { const q = P[x.key]; return { n: i + 1, chain: chainText(x.key), stage: 'Stage: ' + q.stage.toLowerCase(), contrib: x.c + '%', ev: T.ev(q.param, x.val, q.unit, q.spec), status: q.status, cls: q.cls }; }),
+        chains: chains.map((x, i) => { const q = P[x.key]; return { n: i + 1, chain: chainText(x.key), stage: 'Stage: ' + q.stage.toLowerCase(), cat: '5M+E: ' + q.cat.toLowerCase(), contrib: x.c + '%', ev: T.ev(q.param, x.val, q.unit, q.spec), status: q.status, cls: q.cls }; }),
         hasSupport: !!h.support, support: h.support || '',
         interp: chains.length > 1 ? T.interpTwo(P[chains[0].key].short, P[chains[1].key].short) : T.interpOne(P[chains[0].key].short),
         assessed: inv.assessed
@@ -575,8 +574,6 @@ class Component extends DCLogic {
       stageAll: () => this.setState({ stage: 'all', panel: -1, zoom: -1 }),
       stagePrinting: () => this.setState({ stage: 'printing', panel: -1, zoom: -1 }),
       stageReflow: () => this.setState({ stage: 'reflow', panel: -1, zoom: -1 }),
-      stageMaterial: () => this.setState({ stage: 'material', panel: -1, zoom: -1 }),
-      stageEnvironment: () => this.setState({ stage: 'environment', panel: -1, zoom: -1 }),
       closePanel: () => this.setState({ panel: -1 }),
       toggleOther: () => this.setState({ showOther: !this.state.showOther }),
       zoomAll: () => this.setState({ zr: 'all' }), zoomWin: () => this.setState({ zr: 'win' }),
