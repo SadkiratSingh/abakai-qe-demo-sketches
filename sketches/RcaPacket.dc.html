@@ -401,11 +401,11 @@ class Component extends DCLogic {
     };
     // Parameters a chain can end in (the root cause), with the facts the packet shows.
     const P = {
-      reflow: { root: 'High peak reflow temperature', mech: 'Excess reflow spreading', side: 'Reflow', stage: 'Reflow', cat: 'Machine', equip: 'Reflow oven', param: 'Peak reflow temperature', unit: '°C', spec: '245–255 °C', status: 'Above USL', cls: 'chip crit', short: 'reflow spreading from peak reflow temperature above USL' },
-      angle: { root: 'Low squeegee angle', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Machine', equip: 'Solder printer', param: 'Squeegee angle', unit: '°', spec: '55–65°', status: 'Below LSL', cls: 'chip crit', short: 'aperture overfill from squeegee angle below LSL' },
-      speed: { root: 'Low squeegee speed', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Machine', equip: 'Solder printer', param: 'Squeegee speed', unit: 'mm/s', spec: '56–84 mm/s', status: 'Below LSL', cls: 'chip crit', short: 'aperture overfill from squeegee speed below LSL' },
-      speedNear: { root: 'Low squeegee speed', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Machine', equip: 'Solder printer', param: 'Squeegee speed', unit: 'mm/s', spec: '56–84 mm/s', status: 'Near LSL · in spec', cls: 'chip warn', short: 'aperture overfill from squeegee speed near LSL, in spec' },
-      pressure: { root: 'High squeegee pressure', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Machine', equip: 'Solder printer', param: 'Squeegee pressure', unit: 'MPa', spec: '0.27–0.33 MPa', status: 'Above USL', cls: 'chip crit', short: 'aperture overfill from squeegee pressure above USL' },
+      reflow: { root: 'High peak reflow temperature', mech: 'Excess reflow spreading', side: 'Reflow', stage: 'Reflow', cat: 'Method', equip: 'Reflow oven', param: 'Peak reflow temperature', unit: '°C', spec: '245–255 °C', status: 'Above USL', cls: 'chip crit', short: 'reflow spreading from peak reflow temperature above USL' },
+      angle: { root: 'Low squeegee angle', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Method', equip: 'Solder printer', param: 'Squeegee angle', unit: '°', spec: '55–65°', status: 'Below LSL', cls: 'chip crit', short: 'aperture overfill from squeegee angle below LSL' },
+      speed: { root: 'Low squeegee speed', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Method', equip: 'Solder printer', param: 'Squeegee speed', unit: 'mm/s', spec: '56–84 mm/s', status: 'Below LSL', cls: 'chip crit', short: 'aperture overfill from squeegee speed below LSL' },
+      speedNear: { root: 'Low squeegee speed', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Method', equip: 'Solder printer', param: 'Squeegee speed', unit: 'mm/s', spec: '56–84 mm/s', status: 'Near LSL · in spec', cls: 'chip warn', short: 'aperture overfill from squeegee speed near LSL, in spec' },
+      pressure: { root: 'High squeegee pressure', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Method', equip: 'Solder printer', param: 'Squeegee pressure', unit: 'MPa', spec: '0.27–0.33 MPa', status: 'Above USL', cls: 'chip crit', short: 'aperture overfill from squeegee pressure above USL' },
       ambient: { root: 'High ambient temperature', mech: 'Excess reflow spreading', side: 'Reflow', stage: 'Reflow', cat: 'Environment', equip: 'Line', param: 'Ambient temperature', unit: '°C', spec: '[your limit]', status: 'Above USL', cls: 'chip crit', short: 'reflow spreading from ambient temperature above USL' },
       visc: { root: 'High paste viscosity', mech: 'Poor paste transfer', side: 'Printing', stage: 'Printing', cat: 'Material', equip: 'Solder paste', param: 'Paste viscosity', unit: 'Pa·s', spec: '180–220 Pa·s', status: 'Above USL', cls: 'chip crit', short: 'poor paste transfer from paste viscosity above USL' },
       rh: { root: 'High ambient RH', mech: 'Poor paste transfer', side: 'Printing', stage: 'Printing', cat: 'Environment', equip: 'Line', param: 'Ambient RH', unit: '%RH', spec: '[your limit]', status: 'Above USL', cls: 'chip crit', short: 'poor paste transfer from ambient RH above USL' }
@@ -491,7 +491,7 @@ class Component extends DCLogic {
         }
       }
     };
-    P.angleIn = { root: 'Low squeegee angle', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Machine', equip: 'Solder printer', param: 'Squeegee angle', unit: '°', spec: '55–65°', status: 'In spec', cls: 'chip ok', short: 'aperture overfill from squeegee angle, in spec' };
+    P.angleIn = { root: 'Low squeegee angle', mech: 'Aperture overfill', side: 'Printing', stage: 'Printing', cat: 'Method', equip: 'Solder printer', param: 'Squeegee angle', unit: '°', spec: '55–65°', status: 'In spec', cls: 'chip ok', short: 'aperture overfill from squeegee angle, in spec' };
 
     const inv = INV[this.state.inv];
     const tab = inv.defects[this.state.tab] ? this.state.tab : 'bridge';
