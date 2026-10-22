@@ -103,6 +103,7 @@ All numbers are story data, not output from the backend or the model. Before a r
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2 (branch `sketches-v2`): rule-based linking with unit rules, contributing state and measurements as evidence; squeegee wear added to the story.
 - v3 (branch `sketches-v3`): statistics only, no model output. Unexplained boards per defect, compared with batches with no excursion; near-limit investigation INV-0143 linked through near-limit rule variants.
+- v6.17: stage chips on the investigation read "Stage: printing", "Stage: reflow", "Stage: material", "Stage: environment".
 - v6.16: "Most frequent root cause chains" is now "Top root cause chains" (investigation and line alerts).
 - v6.15: the "Send to inspection queue" button is removed from the proposed hold list; only "Export list (CSV)" remains.
 - v6.14: board disposition is Rework / Release / Scrap (standard MRB dispositions); "Re-inspect (X-ray)" is renamed Rework, and X-ray is mentioned as the check before rework.
