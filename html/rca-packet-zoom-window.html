@@ -39,7 +39,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .spark .band{fill:#E7F3EC}.spark .near{fill:#FDF0E3}.spark .win{fill:#16191D;opacity:.07}
 .spark .lim{stroke:#B42318;stroke-width:1;stroke-dasharray:4 3}
 .spark .line{fill:none;stroke:#1A4F9C;stroke-width:2;stroke-linejoin:round}
-.spark text{font-family:'IBM Plex Mono',monospace;font-size:10px;fill:#5B6169}
+.spark text{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:#4A4F56}
 .spark .lt{fill:#9B1C12;font-weight:500}.spark .pk{fill:#16191D;font-weight:500}
 .zc .band{fill:#E7F3EC}.zc .near{fill:#FDF0E3}.zc .win{fill:#16191D;opacity:.06}
 .zc .grid{stroke:#EEF0ED;stroke-width:1}.zc .axis{stroke:#C9CDD2;stroke-width:1}
@@ -131,7 +131,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 15px">Built 02:00–02:40</span>
 <span style="font-size: 12px; color: #5B6169">Peak reflow temperature (°C) · 20-minute averages, spec band shaded</span>
 </div>
-<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Peak reflow temperature over the batch, with the window when this chain appeared" style="flex: 0 1 300px; max-width: 100%">
+<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Peak reflow temperature over the batch, with the window when this chain appeared" style="flex: 0 0 300px; max-width: 100%">
 <rect class="band" x="0" y="32.2" width="300" height="29"></rect>
 <rect class="near" x="0" y="0" width="300" height="0"></rect>
 <rect class="win" x="150" y="4" width="26.1" height="62"></rect>
@@ -155,7 +155,12 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <svg class="zc" viewBox="0 0 760 290" width="100%" role="img" aria-label="Peak reflow temperature over the batch, with the window when this chain appeared">
 <rect class="band" x="56" y="95.7" width="688" height="132.2"></rect>
 <rect class="near" x="56" y="0" width="688" height="0"></rect>
-<line class="grid" x1="56" x2="744" y1="227.9" y2="227.9"></line><text x="50" y="231.9" text-anchor="end">245</text><line class="grid" x1="56" x2="744" y1="161.8" y2="161.8"></line><text x="50" y="165.8" text-anchor="end">250</text><line class="grid" x1="56" x2="744" y1="95.7" y2="95.7"></line><text x="50" y="99.7" text-anchor="end">255</text><line class="grid" x1="56" x2="744" y1="29.5" y2="29.5"></line><text x="50" y="33.5" text-anchor="end">260</text>
+<line class="grid" x1="56" x2="744" y1="227.9" y2="227.9" opacity="1"></line><text x="50" y="231.9" text-anchor="end">245</text>
+<line class="grid" x1="56" x2="744" y1="161.8" y2="161.8" opacity="1"></line><text x="50" y="165.8" text-anchor="end">250</text>
+<line class="grid" x1="56" x2="744" y1="95.7" y2="95.7" opacity="1"></line><text x="50" y="99.7" text-anchor="end">255</text>
+<line class="grid" x1="56" x2="744" y1="29.5" y2="29.5" opacity="1"></line><text x="50" y="33.5" text-anchor="end">260</text>
+<line class="grid" x1="56" x2="744" y1="0" y2="0" opacity="0"></line><text x="50" y="0" text-anchor="end"></text>
+<line class="grid" x1="56" x2="744" y1="0" y2="0" opacity="0"></line><text x="50" y="0" text-anchor="end"></text>
 <rect class="win" x="301.8" y="22" width="196.6" height="228"></rect>
 <text class="wl" x="400" y="16" text-anchor="middle">02:00–02:40</text>
 <line class="lim" x1="56" x2="744" y1="95.7" y2="95.7" opacity="1"></line>
@@ -163,9 +168,40 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <text class="lt" x="742" y="91.7" text-anchor="end" opacity="1">USL 255 °C</text>
 <text class="lt" x="742" y="239.9" text-anchor="end" opacity="1">LSL 245 °C</text>
 <line class="axis" x1="56" x2="744" y1="250" y2="250"></line>
-<line class="axis" x1="56" x2="56" y1="250" y2="255"></line><text x="56" y="268" text-anchor="middle">01:00</text><line class="axis" x1="154.3" x2="154.3" y1="250" y2="255"></line><text x="154.3" y="268" text-anchor="middle">01:20</text><line class="axis" x1="252.6" x2="252.6" y1="250" y2="255"></line><text x="252.6" y="268" text-anchor="middle">01:40</text><line class="axis" x1="350.9" x2="350.9" y1="250" y2="255"></line><text x="350.9" y="268" text-anchor="middle">02:00</text><line class="axis" x1="449.1" x2="449.1" y1="250" y2="255"></line><text x="449.1" y="268" text-anchor="middle">02:20</text><line class="axis" x1="547.4" x2="547.4" y1="250" y2="255"></line><text x="547.4" y="268" text-anchor="middle">02:40</text><line class="axis" x1="645.7" x2="645.7" y1="250" y2="255"></line><text x="645.7" y="268" text-anchor="middle">03:00</text><line class="axis" x1="744" x2="744" y1="250" y2="255"></line><text x="744" y="268" text-anchor="middle">03:20</text>
+<line class="axis" x1="56" x2="56" y1="250" y2="255" opacity="1"></line><text x="56" y="268" text-anchor="middle">01:00</text>
+<line class="axis" x1="154.3" x2="154.3" y1="250" y2="255" opacity="1"></line><text x="154.3" y="268" text-anchor="middle">01:20</text>
+<line class="axis" x1="252.6" x2="252.6" y1="250" y2="255" opacity="1"></line><text x="252.6" y="268" text-anchor="middle">01:40</text>
+<line class="axis" x1="350.9" x2="350.9" y1="250" y2="255" opacity="1"></line><text x="350.9" y="268" text-anchor="middle">02:00</text>
+<line class="axis" x1="449.1" x2="449.1" y1="250" y2="255" opacity="1"></line><text x="449.1" y="268" text-anchor="middle">02:20</text>
+<line class="axis" x1="547.4" x2="547.4" y1="250" y2="255" opacity="1"></line><text x="547.4" y="268" text-anchor="middle">02:40</text>
+<line class="axis" x1="645.7" x2="645.7" y1="250" y2="255" opacity="1"></line><text x="645.7" y="268" text-anchor="middle">03:00</text>
+<line class="axis" x1="744" x2="744" y1="250" y2="255" opacity="1"></line><text x="744" y="268" text-anchor="middle">03:20</text>
+<line class="axis" x1="0" x2="0" y1="250" y2="0" opacity="0"></line><text x="0" y="0" text-anchor="middle"></text>
 <polyline class="line" points="56,139.3 154.3,134 252.6,140.6 350.9,48 449.1,44.1 547.4,142 645.7,135.3 744,135.3"></polyline>
-<circle cx="56" cy="139.3" r="3.5"><title>01:00 · 251.7 °C</title></circle><circle cx="154.3" cy="134" r="3.5"><title>01:20 · 252.1 °C</title></circle><circle cx="252.6" cy="140.6" r="3.5"><title>01:40 · 251.6 °C</title></circle><circle cx="350.9" cy="48" r="3.5"><title>02:00 · 258.6 °C</title></circle><circle cx="449.1" cy="44.1" r="3.5"><title>02:20 · 258.9 °C</title></circle><circle cx="547.4" cy="142" r="3.5"><title>02:40 · 251.5 °C</title></circle><circle cx="645.7" cy="135.3" r="3.5"><title>03:00 · 252 °C</title></circle><circle cx="744" cy="135.3" r="3.5"><title>03:20 · 252 °C</title></circle>
+<circle cx="56" cy="139.3" r="3.5"><title>01:00 · 251.7 °C</title></circle>
+<circle cx="154.3" cy="134" r="3.5"><title>01:20 · 252.1 °C</title></circle>
+<circle cx="252.6" cy="140.6" r="3.5"><title>01:40 · 251.6 °C</title></circle>
+<circle cx="350.9" cy="48" r="3.5"><title>02:00 · 258.6 °C</title></circle>
+<circle cx="449.1" cy="44.1" r="3.5"><title>02:20 · 258.9 °C</title></circle>
+<circle cx="547.4" cy="142" r="3.5"><title>02:40 · 251.5 °C</title></circle>
+<circle cx="645.7" cy="135.3" r="3.5"><title>03:00 · 252 °C</title></circle>
+<circle cx="744" cy="135.3" r="3.5"><title>03:20 · 252 °C</title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
+<circle cx="0" cy="0" r="0"><title></title></circle>
 <text class="pk" x="449.1" y="38.1" text-anchor="middle">258.9 °C</text>
 </svg>
 <div style="font-size: 12px; color: #5B6169">Shaded green: spec window; grey: 02:00–02:40, when this chain appeared.</div>
@@ -206,7 +242,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 15px">Built 23:10–00:20</span>
 <span style="font-size: 12px; color: #5B6169">Squeegee angle (°) · 20-minute averages, spec band shaded</span>
 </div>
-<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Squeegee angle over the batch, with the window when this chain appeared" style="flex: 0 1 300px; max-width: 100%">
+<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Squeegee angle over the batch, with the window when this chain appeared" style="flex: 0 0 300px; max-width: 100%">
 <rect class="band" x="0" y="20.8" width="300" height="31.3"></rect>
 <rect class="near" x="0" y="0" width="300" height="0"></rect>
 <rect class="win" x="45.7" y="4" width="39.1" height="62"></rect>
@@ -257,7 +293,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 15px">Built 23:10–00:20</span>
 <span style="font-size: 12px; color: #5B6169">Squeegee speed (mm/s) · 20-minute averages, spec band shaded</span>
 </div>
-<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Squeegee speed over the batch, with the window when this chain appeared" style="flex: 0 1 300px; max-width: 100%">
+<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Squeegee speed over the batch, with the window when this chain appeared" style="flex: 0 0 300px; max-width: 100%">
 <rect class="band" x="0" y="20.8" width="300" height="35.2"></rect>
 <rect class="near" x="0" y="0" width="300" height="0"></rect>
 <rect class="win" x="45.7" y="4" width="39.1" height="62"></rect>
