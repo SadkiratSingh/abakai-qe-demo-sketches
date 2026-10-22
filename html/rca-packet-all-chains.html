@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investigation: all chains · RCA Studio</title>
+<!-- Static export of sketches/RcaPacket.dc.html. Regenerate from the sketches; do not edit by hand. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'IBM Plex Sans',sans-serif;color:#16191D;background:#F4F5F3}
+a{color:#1A4F9C}a:hover{color:#123A73}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:24px;padding:8px 32px;background:#16191D;color:#fff}
+.brand{font-weight:600;font-size:17px;letter-spacing:-.01em;color:#fff}
+.nav{display:flex;flex-wrap:wrap;gap:4px}
+.nav a{color:#C9CDD2;text-decoration:none;font-size:14px;padding:12px 14px;border-radius:6px}
+.nav a:hover{color:#fff;background:#2A2F35}
+.nav a.on{color:#fff;background:#2A2F35}
+.wrap{max-width:1280px;margin:0 auto;padding:32px}
+.card{background:#fff;border:1px solid #E1E4E0;border-radius:10px}
+.mono{font-family:'IBM Plex Mono',monospace}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5B6169;font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.crit{background:#FDECEA;color:#9B1C12}.warn{background:#FDF0E3;color:#8A3505}.ok{background:#E7F3EC;color:#1D6B3F}.info{background:#E8EFFA;color:#1A4F9C}.muted{background:#EEF0ED;color:#4A4F56}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;text-decoration:none;border:1px solid #C9CDD2;background:#fff;color:#16191D;cursor:pointer;box-sizing:border-box}
+.btn.primary{background:#1A4F9C;border-color:#1A4F9C;color:#fff}
+.btn.primary:hover{background:#123A73;color:#fff}
+.btn.sm{min-height:36px;padding:0 12px;font-size:13px}
+.tab{min-height:48px;padding:0 20px;border:0;border-bottom:3px solid transparent;background:none;font:600 15px 'IBM Plex Sans',sans-serif;color:#5B6169;cursor:pointer}
+.tab.on{color:#16191D;border-bottom-color:#1A4F9C}
+.node{padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600;line-height:1.3}
+.n-root{background:#F4F5F3;border:1px solid #C9CDD2}
+.n-mech{background:#E8EFFA;border:1px solid #B7CBEA;color:#123A73}
+.n-def{background:#FDECEA;border:1px solid #F3C5C0;color:#7E160E}
+.arrow{color:#5B6169;font-size:18px}
+.big{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:#F4F5F3;border-radius:8px;flex:1 1 180px}
+.big .v{font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500}
+.big .l{font-size:13px;color:#4A4F56}
+.spark .band{fill:#E7F3EC}.spark .near{fill:#FDF0E3}.spark .win{fill:#16191D;opacity:.07}
+.spark .lim{stroke:#B42318;stroke-width:1;stroke-dasharray:4 3}
+.spark .line{fill:none;stroke:#1A4F9C;stroke-width:2;stroke-linejoin:round}
+.spark text{font-family:'IBM Plex Mono',monospace;font-size:10px;fill:#5B6169}
+.mx{display:grid;grid-template-columns:minmax(120px,0.8fr) 1fr 1fr;gap:8px;font-size:13px}
+.mx .h{font-weight:600;color:#5B6169;padding:4px 8px;display:flex;align-items:center}
+.mx .c{border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.mx .n{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500}
+.mx .t{font-weight:600;font-size:14px}
+.mx .s{color:#4A4F56;font-size:12.5px}
+.seg{min-height:36px;padding:0 12px;border:1px solid #C9CDD2;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#4A4F56}
+.seg.on{background:#16191D;border-color:#16191D;color:#fff}
+.seg:first-child{border-radius:8px 0 0 8px}.seg:last-child{border-radius:0 8px 8px 0;margin-left:-1px}
+.brow{display:grid;grid-template-columns:120px 52px 1fr auto;align-items:center;gap:10px;width:100%;min-height:40px;padding:6px 10px;border:0;border-bottom:1px solid #EEF0ED;background:#fff;font:14px 'IBM Plex Sans',sans-serif;color:#16191D;text-align:left;cursor:pointer}
+.brow.on{background:#F5F8FD;box-shadow:inset 3px 0 0 #1A4F9C}
+.pchain{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid #E1E4E0;border-radius:8px}
+.cbar{height:8px;border-radius:4px;background:#EEF0ED;overflow:hidden;flex:1 1 120px}
+.cbar div{height:100%;background:#B42318;border-radius:4px}
+.kv{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; background: #F4F5F3">
+<header class="top">
+<div class="brand">RCA Studio</div>
+<nav class="nav" aria-label="Main">
+<a href="line-overview.html">Line</a>
+<a class="on" href="rca-packet.html">Investigations</a>
+<a href="8d-report.html">8D reports</a>
+<a href="manager-overview.html">Overview</a>
+<a href="failure-library.html">Failure Library</a>
+</nav>
+</header>
+<main class="wrap" style="display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 900px">
+<a href="line-overview.html" style="font-size: 14px; text-decoration: none">← Line overview</a>
+<div class="eyebrow">Investigation INV-0142 · CTRL-BRD-A · stg-B0003 · 2,560 boards · 2 defects · Night shift</div>
+<h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">Root cause analysis</h1>
+
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><a class="btn" href="proposed-hold-list.html">Proposed hold list</a><a class="btn primary" href="8d-report.html">8D report · 8D-0142-A</a></div>
+</div>
+
+
+<div aria-label="Defect" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E1E4E0">
+<a class="tab on" href="rca-packet.html" style="display:inline-flex;align-items:center;text-decoration:none">Solder bridging · 61 boards</a>
+<a class="tab" href="rca-packet-open-circuit.html" style="display:inline-flex;align-items:center;text-decoration:none">Open circuit · 31 boards</a>
+</div>
+
+
+<div class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #B7CBEA; background: #F5F8FD">
+<span class="chip info">Root cause chains</span>
+<div style="flex: 1 1 480px; font-size: 16px; line-height: 1.5">58 of 61 boards with solder bridging show at least one root cause chain. The top 3 are below; a board can show more than one, so the counts can add up to more than 61.</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<section style="display: flex; flex-direction: column; gap: 16px" aria-label="Top root cause chains">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Top root cause chains</h2>
+<div style="font-size: 14px; color: #5B6169">Each board with solder bridging gets its root cause chains from the RCA model and the Failure Library. Ranked by how many boards show each chain.</div>
+</div>
+
+<article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#1</span>
+<span class="chip muted">Stage: reflow</span>
+
+
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<div class="node n-root">High peak reflow temperature<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Reflow oven</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-mech">Excess reflow spreading<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="big"><span class="v">44 of 61</span><span class="l">boards with solder bridging show this chain</span></div>
+<div class="big"><span class="v">38</span><span class="l">boards that passed AOI show this chain</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 15px">Built 02:00–02:40</span>
+<span style="font-size: 12px; color: #5B6169">Peak reflow temperature (°C) · 20-minute averages, spec band shaded</span>
+</div>
+<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Peak reflow temperature over the batch, with the window when this chain appeared" style="flex: 0 1 260px; max-width: 100%">
+<rect class="band" x="0" y="18" width="260" height="26" opacity="1"></rect>
+<rect class="near" x="0" y="0" width="260" height="0"></rect>
+<rect class="win" x="130" y="0" width="23" height="52"></rect>
+<line class="lim" x1="0" x2="260" y1="18" y2="18" opacity="1"></line>
+<line class="lim" x1="0" x2="260" y1="44" y2="44" opacity="1"></line>
+<polyline class="line" points="0,26 11,27 23,26 34,27 45,26 57,26 68,27 79,26 90,26 102,27 113,26 124,27 136,9 147,8 158,27 170,26 181,26 192,27 203,26 215,27 226,26 237,26 249,27 260,26"></polyline>
+<text x="0" y="63">22:00</text>
+<text x="260" y="63" text-anchor="end">05:40</text>
+</svg>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
+<div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Corrective action: </span>Restore the approved reflow recipe; lock recipe changes behind sign-off.</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a class="btn" href="rca-packet-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
+
+<button class="btn" type="button">Reject</button>
+<button class="btn primary" type="button">Confirm chain</button>
+
+</div>
+</div>
+</article>
+
+<article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#2</span>
+<span class="chip muted">Stage: printing</span>
+
+
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<div class="node n-root">Low squeegee angle<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-mech">Aperture overfill<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="big"><span class="v">14 of 61</span><span class="l">boards with solder bridging show this chain</span></div>
+<div class="big"><span class="v">7</span><span class="l">boards that passed AOI show this chain</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 15px">Built 23:10–00:20</span>
+<span style="font-size: 12px; color: #5B6169">Squeegee angle (°) · 20-minute averages, spec band shaded</span>
+</div>
+<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Squeegee angle over the batch, with the window when this chain appeared" style="flex: 0 1 260px; max-width: 100%">
+<rect class="band" x="0" y="8" width="260" height="28" opacity="1"></rect>
+<rect class="near" x="0" y="0" width="260" height="0"></rect>
+<rect class="win" x="39" y="0" width="34" height="52"></rect>
+<line class="lim" x1="0" x2="260" y1="8" y2="8" opacity="1"></line>
+<line class="lim" x1="0" x2="260" y1="36" y2="36" opacity="1"></line>
+<polyline class="line" points="0,21 11,22 23,21 34,23 45,43 57,44 68,42 79,21 90,21 102,22 113,21 124,23 136,22 147,22 158,23 170,21 181,21 192,22 203,21 215,23 226,22 237,22 249,23 260,21"></polyline>
+<text x="0" y="63">22:00</text>
+<text x="260" y="63" text-anchor="end">05:40</text>
+</svg>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
+<div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Corrective action: </span>Replace the squeegee blade; check angle, speed and pressure against the recipe.</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a class="btn" href="rca-packet-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
+
+<button class="btn" type="button">Reject</button>
+<button class="btn primary" type="button">Confirm chain</button>
+
+</div>
+</div>
+</article>
+
+<article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#3</span>
+<span class="chip muted">Stage: printing</span>
+
+
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<div class="node n-root">Low squeegee speed<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-mech">Aperture overfill<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="big"><span class="v">7 of 61</span><span class="l">boards with solder bridging show this chain</span></div>
+<div class="big"><span class="v">4</span><span class="l">boards that passed AOI show this chain</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 15px">Built 23:10–00:20</span>
+<span style="font-size: 12px; color: #5B6169">Squeegee speed (mm/s) · 20-minute averages, spec band shaded</span>
+</div>
+<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Squeegee speed over the batch, with the window when this chain appeared" style="flex: 0 1 260px; max-width: 100%">
+<rect class="band" x="0" y="8" width="260" height="31" opacity="1"></rect>
+<rect class="near" x="0" y="0" width="260" height="0"></rect>
+<rect class="win" x="39" y="0" width="34" height="52"></rect>
+<line class="lim" x1="0" x2="260" y1="8" y2="8" opacity="1"></line>
+<line class="lim" x1="0" x2="260" y1="39" y2="39" opacity="1"></line>
+<polyline class="line" points="0,23 11,24 23,22 34,25 45,43 57,44 68,42 79,23 90,23 102,24 113,22 124,25 136,24 147,23 158,25 170,23 181,23 192,24 203,22 215,25 226,24 237,23 249,25 260,23"></polyline>
+<text x="0" y="63">22:00</text>
+<text x="260" y="63" text-anchor="end">05:40</text>
+</svg>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
+<div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Corrective action: </span>Raise the speed to nominal (70 mm/s).</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a class="btn" href="rca-packet-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
+
+<button class="btn" type="button">Reject</button>
+<button class="btn primary" type="button">Confirm chain</button>
+
+</div>
+</div>
+</article>
+
+<article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#4</span>
+<span class="chip muted">Stage: printing</span>
+
+
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<div class="node n-root">High squeegee pressure<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-mech">Aperture overfill<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="big"><span class="v">7 of 61</span><span class="l">boards with solder bridging show this chain</span></div>
+<div class="big"><span class="v">3</span><span class="l">boards that passed AOI show this chain</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 15px">Built 23:10–00:20</span>
+<span style="font-size: 12px; color: #5B6169">Squeegee pressure (MPa) · 20-minute averages, spec band shaded</span>
+</div>
+<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Squeegee pressure over the batch, with the window when this chain appeared" style="flex: 0 1 260px; max-width: 100%">
+<rect class="band" x="0" y="20" width="260" height="24" opacity="1"></rect>
+<rect class="near" x="0" y="0" width="260" height="0"></rect>
+<rect class="win" x="39" y="0" width="34" height="52"></rect>
+<line class="lim" x1="0" x2="260" y1="20" y2="20" opacity="1"></line>
+<line class="lim" x1="0" x2="260" y1="44" y2="44" opacity="1"></line>
+<polyline class="line" points="0,32 11,32 23,28 34,32 45,12 57,8 68,16 79,32 90,32 102,32 113,28 124,32 136,32 147,32 158,36 170,32 181,32 192,32 203,28 215,32 226,32 237,32 249,36 260,32"></polyline>
+<text x="0" y="63">22:00</text>
+<text x="260" y="63" text-anchor="end">05:40</text>
+</svg>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
+<div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Corrective action: </span>Replace the squeegee blade; check angle, speed and pressure against the recipe.</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a class="btn" href="rca-packet-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
+
+<button class="btn" type="button">Reject</button>
+<button class="btn primary" type="button">Confirm chain</button>
+
+</div>
+</div>
+</article>
+
+<article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#5</span>
+<span class="chip muted">Stage: printing</span>
+<span class="chip warn">In spec · near LSL</span>
+
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<div class="node n-root">Low squeegee speed<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-mech">Aperture overfill<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="big"><span class="v">5 of 61</span><span class="l">boards with solder bridging show this chain</span></div>
+<div class="big"><span class="v">2</span><span class="l">boards that passed AOI show this chain</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 15px">Built 02:00–02:40</span>
+<span style="font-size: 12px; color: #5B6169">Squeegee speed (mm/s) · spec band green, near-LSL zone amber</span>
+</div>
+<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Squeegee speed over the batch, with the window when this chain appeared" style="flex: 0 1 260px; max-width: 100%">
+<rect class="band" x="0" y="8" width="260" height="36" opacity="1"></rect>
+<rect class="near" x="0" y="40" width="260" height="4"></rect>
+<rect class="win" x="130" y="0" width="23" height="52"></rect>
+<line class="lim" x1="0" x2="260" y1="8" y2="8" opacity="1"></line>
+<line class="lim" x1="0" x2="260" y1="44" y2="44" opacity="1"></line>
+<polyline class="line" points="0,25 11,27 23,24 34,27 45,26 57,25 68,28 79,25 90,25 102,27 113,24 124,27 136,41 147,41 158,28 170,25 181,25 192,27 203,24 215,27 226,26 237,25 249,28 260,25"></polyline>
+<text x="0" y="63">22:00</text>
+<text x="260" y="63" text-anchor="end">05:40</text>
+</svg>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
+<div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Corrective action: </span>Raise the speed to nominal (70 mm/s).</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a class="btn" href="rca-packet-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
+
+<button class="btn" type="button">Reject</button>
+<button class="btn primary" type="button">Confirm chain</button>
+
+</div>
+</div>
+</article>
+
+<article class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#6</span>
+<span class="chip muted">Stage: reflow</span>
+
+
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<div class="node n-root">High ambient temperature<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Line</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-mech">Excess reflow spreading<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
+<span class="arrow" aria-hidden="true">→</span>
+<div class="node n-def">Solder bridging<div style="font-size: 12px; font-weight: 400">Defect</div></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="big"><span class="v">2 of 61</span><span class="l">boards with solder bridging show this chain</span></div>
+<div class="big"><span class="v">1</span><span class="l">boards that passed AOI show this chain</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600; font-size: 15px">Built 02:00–02:40</span>
+<span style="font-size: 12px; color: #5B6169">Ambient temperature (°C) · 20-minute averages; limit [your limit]</span>
+</div>
+<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Ambient temperature over the batch, with the window when this chain appeared" style="flex: 0 1 260px; max-width: 100%">
+<rect class="band" x="0" y="0" width="260" height="0" opacity="0"></rect>
+<rect class="near" x="0" y="0" width="260" height="0"></rect>
+<rect class="win" x="130" y="0" width="23" height="52"></rect>
+<line class="lim" x1="0" x2="260" y1="0" y2="0" opacity="0"></line>
+<line class="lim" x1="0" x2="260" y1="0" y2="0" opacity="0"></line>
+<polyline class="line" points="0,41 11,43 23,40 34,43 45,42 57,41 68,44 79,41 90,41 102,43 113,40 124,43 136,10 147,8 158,44 170,41 181,41 192,43 203,40 215,43 226,42 237,41 249,44 260,41"></polyline>
+<text x="0" y="63">22:00</text>
+<text x="260" y="63" text-anchor="end">05:40</text>
+</svg>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
+<div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Corrective action: </span>Check HVAC on the line.</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a class="btn" href="rca-packet-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
+
+<button class="btn" type="button">Reject</button>
+<button class="btn primary" type="button">Confirm chain</button>
+
+</div>
+</div>
+</article>
+
+
+<a class="btn" style="display:inline-flex;align-items:center;text-decoration:none" href="rca-packet.html">Hide 3 more chains</a>
+
+</section>
+
+<section class="card" style="overflow: hidden" aria-label="No root cause chain found">
+<div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">No root cause chain found · 3 boards</h2>
+</div>
+<div style="font-size: 14px; color: #4A4F56">AOI found solder bridging, but the model predicts no defect, so no chain was assigned.</div>
+</div>
+<div style="display: flex; flex-direction: column">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0005451</a>
+<span class="mono" style="flex: 0 0 56px; color: #4A4F56">22:41</span>
+<span class="chip ok">Model prediction: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">AOI prediction: solder bridging</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0006244</a>
+<span class="mono" style="flex: 0 0 56px; color: #4A4F56">01:15</span>
+<span class="chip ok">Model prediction: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">AOI prediction: solder bridging</span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0007351</a>
+<span class="mono" style="flex: 0 0 56px; color: #4A4F56">05:02</span>
+<span class="chip ok">Model prediction: no defect</span>
+<span style="flex: 1 1 240px; color: #4A4F56">AOI prediction: solder bridging</span>
+</div>
+
+</div>
+<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED; font-size: 14px; color: #4A4F56">These boards are on the proposed hold list. Check the AOI images; if the defect is real, its cause is not among the model's inputs.</div>
+</section>
+
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Model vs inspection">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs AOI · solder bridging</h2>
+<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0003, by model prediction and AOI result.</div>
+</div>
+<span class="chip ok">Agreement 98%</span>
+</div>
+<div class="mx">
+<span></span><span class="h">AOI prediction: solder bridging</span><span class="h">AOI prediction: pass</span>
+<span class="h">Model prediction: solder bridging</span>
+<div class="c" style="background: #F5F8FD; border: 1px solid #B7CBEA"><span class="n">58</span><span class="t">Confirmed</span><span class="s">Both found solder bridging</span></div>
+<div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">45</span><span class="t">Proposed hold</span><span class="s">Passed AOI</span></div>
+<span class="h">Model prediction: no defect</span>
+<div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">3</span><span class="t">Proposed hold</span><span class="s">No root cause chain found</span></div>
+<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,454</span><span class="t">Agree: no defect</span><span class="s">&nbsp;</span></div>
+</div>
+</section>
+</div>
+
+<aside style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px" aria-label="Proposed hold list">
+
+<section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Proposed hold list</h2><div style="display: flex; flex-wrap: wrap; gap: 6px"><span class="chip crit">48 proposed hold</span></div></div>
+<div style="font-size: 13px; color: #5B6169">Boards where the RCA model and AOI disagree.</div>
+<div style="font-size: 14px; line-height: 1.5">48 boards proposed for hold: 45 passed AOI but the model predicts solder bridging, and 3 failed AOI but the model predicts no defect.</div>
+<a class="btn" href="proposed-hold-list.html">Open proposed hold list</a>
+</section>
+
+
+
+</aside>
+</div>
+</main>
+</div>
+</body>
+</html>

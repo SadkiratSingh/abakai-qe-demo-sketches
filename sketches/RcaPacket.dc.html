@@ -101,7 +101,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Top root cause chains</h2>
 <div style="font-size: 14px; color: #5B6169">Each board with {{c.defLower}} gets its root cause chains from the RCA model and the Failure Library. Ranked by how many boards show each chain.</div>
 </div>
-<sc-for list="{{c.top}}" as="h" hint-placeholder-count="3">
+<sc-for list="{{c.cards}}" as="h" hint-placeholder-count="3">
 <article class="card" style="{{h.cardStyle}}">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <span class="mono" style="width: 32px; height: 32px; border-radius: 8px; background: #16191D; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 14px">#{{h.rank}}</span>
@@ -148,22 +148,10 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 </div>
 </article>
 </sc-for>
-</section>
-
-<sc-if value="{{c.hasOther}}" hint-placeholder-val="{{ true }}">
-<details class="card" style="overflow: hidden">
-<summary style="cursor: pointer; padding: 18px 24px; font-size: 16px; font-weight: 600; min-height: 24px">Other chains · {{c.otherCount}}</summary>
-<div style="display: flex; flex-direction: column">
-<sc-for list="{{c.other}}" as="o" hint-placeholder-count="2">
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
-<span style="flex: 1 1 340px; font-weight: 600">{{o.chain}}</span>
-<span style="flex: 0 0 auto"><span class="mono">{{o.k}}</span> boards with {{c.defLower}} · <span class="mono">{{o.passed}}</span> boards that passed {{c.inspLower}}</span>
-<span style="flex: 0 0 auto; color: #4A4F56">{{o.when}}</span>
-</div>
-</sc-for>
-</div>
-</details>
+<sc-if value="{{c.hasMore}}" hint-placeholder-val="{{ true }}">
+<button class="btn" type="button" onClick="{{toggleOther}}" style="align-self: flex-start">{{c.toggleLabel}}</button>
 </sc-if>
+</section>
 
 <section class="card" style="overflow: hidden" aria-label="No root cause chain found">
 <div style="padding: 20px 24px 12px; display: flex; flex-direction: column; gap: 8px">
@@ -232,7 +220,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <sc-for list="{{p.boards}}" as="b" hint-placeholder-count="6">
 <button type="button" class="{{b.cls}}" onClick="{{b.pick}}"><span class="mono">{{b.id}}</span><span class="mono" style="color: #4A4F56">{{b.time}}</span><span style="color: #4A4F56; font-size: 13px">{{b.val}}</span><span></span></button>
 </sc-for>
-<div style="padding: 8px 12px; font-size: 13px; color: #5B6169">Showing 6 of {{p.k}} · sorted by build time</div>
+<div style="padding: 8px 12px; font-size: 13px; color: #5B6169">Showing {{p.shown}} of {{p.k}} · sorted by build time</div>
 </div>
 
 <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; border-top: 1px solid #E1E4E0; background: #FCFCFB">
@@ -275,7 +263,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { inv: '0142', tab: 'bridge', panel: -1, board: 4, confirmed: {} };
+    this.state = { inv: '0142', tab: 'bridge', panel: -1, board: 4, confirmed: {}, showOther: false };
   }
   // Small trend line for a chain card: parameter averages over the batch, spec band, near-limit zone and the window when the chain appeared.
   spark(s) {
@@ -306,6 +294,7 @@ class Component extends DCLogic {
       ev: (param, val, unit, spec) => `${param} ${val}${unit === '°' ? '' : ' '}${unit} (spec ${spec})`,
       interpTwo: (a, b) => `Top chain: ${a}. Second: ${b}.`,
       interpOne: (a) => `Top chain: ${a}. No other chain above the display threshold.`,
+      more: (n, ks, d) => `Show ${n} more chains (${ks.length > 1 ? ks.slice(0, -1).join(', ') + ' and ' + ks[ks.length - 1] : ks[0]} boards with ${d})`,
       noneWhy: (insp, d) => `${insp} found ${d}, but the model predicts no defect, so no chain was assigned.`,
       noneNext: (rec) => `These boards are on the proposed hold list. Check the ${rec}; if the defect is real, its cause is not among the model's inputs.`
     };
@@ -325,7 +314,8 @@ class Component extends DCLogic {
       angle: 'Replace the squeegee blade; check angle, speed and pressure against the recipe.',
       speed: 'Raise the speed to nominal (70 mm/s).',
       visc: 'Replace the paste; check paste age and floor life.',
-      rh: 'Control humidity; check paste exposure time.'
+      rh: 'Control humidity; check paste exposure time.',
+      ambient: 'Check HVAC on the line.'
     };
     const night = { t0: '22:00', t1: '05:40' }, day = { t0: '06:00', t1: '13:40' };
     const flat = (base, jit, win, wv) => Array.from({ length: 24 }, (_, i) => (win && i >= win[0] && i <= win[1]) ? wv[i - win[0]] : +(base + jit[i % jit.length]).toFixed(2));
@@ -336,6 +326,9 @@ class Component extends DCLogic {
       speed: { vals: flat(70, J.map(v => v * 4), [4, 6], [52.6, 51.9, 53.1]), lsl: 56, usl: 84, w0: 4, w1: 6, sub: 'Squeegee speed (mm/s) · 20-minute averages, spec band shaded' },
       visc: { vals: flat(206, J.map(v => v * 6), [17, 19], [238, 243, 240]), lsl: 180, usl: 220, w0: 17, w1: 19, sub: 'Paste viscosity (Pa·s) · 20-minute averages, spec band shaded' },
       rh: { vals: flat(46, J.map(v => v * 8), [17, 19], [56, 58, 55]), lsl: null, usl: null, w0: 17, w1: 19, sub: 'Ambient RH (%RH) · 20-minute averages; limit [your limit]' },
+      pressure: { vals: flat(0.30, J.map(v => v * 0.02), [4, 6], [0.35, 0.36, 0.34]), lsl: 0.27, usl: 0.33, w0: 4, w1: 6, sub: 'Squeegee pressure (MPa) · 20-minute averages, spec band shaded' },
+      speedNight: { vals: flat(70, J.map(v => v * 4), [12, 13], [58.4, 58.1]), lsl: 56, usl: 84, near: 58.8, w0: 12, w1: 13, sub: 'Squeegee speed (mm/s) · spec band green, near-LSL zone amber' },
+      ambient: { vals: flat(23.0, J, [12, 13], [28.3, 28.6]), lsl: null, usl: null, w0: 12, w1: 13, sub: 'Ambient temperature (°C) · 20-minute averages; limit [your limit]' },
       speedDay: { vals: flat(70.1, J, [13, 19], [57.9, 57.4, 57.6, 56.9, 57.8, 57.5, 58.1]), lsl: 56, usl: 84, near: 58.8, w0: 13, w1: 19, sub: 'Squeegee speed (mm/s) · spec band green, near-LSL zone amber' }
     };
     // A board row: [id, built, model risk, value of the chain's root cause, contribution %, second chain key, second value, second contribution %].
@@ -355,7 +348,14 @@ class Component extends DCLogic {
               { key: 'speed', k: 7, passed: 4, when: 'Built 23:10–00:20', spark: 'speed', fix: 'speed', panel: 'stg-B0003-P0152',
                 boards: [['PCB-0005598', '23:12', '12%', '52', 38, 'angle', '52.6', 48], ['PCB-0005655', '23:22', '10%', '51', 40, 'angle', '52.0', 47], ['PCB-0005702', '23:31', '14%', '51', 39, 'angle', '51.8', 46], ['PCB-0005738', '23:37', '13%', '52', 36, 'angle', '52.5', 50], ['PCB-0005810', '23:51', '9%', '53', 35, 'angle', '53.0', 51], ['PCB-0005851', '23:58', '11%', '53', 37, 'angle', '52.4', 49]] }
             ],
-            other: [['pressure', 7, 3, 'Built 23:10–00:20'], ['speedNear', 5, 2, 'Built 02:00–02:40'], ['ambient', 2, 1, 'Built 02:00–02:40']],
+            other: [
+              { key: 'pressure', k: 7, passed: 3, when: 'Built 23:10–00:20', spark: 'pressure', fix: 'angle', panel: 'stg-B0003-P0152',
+                boards: [['PCB-0005640', '23:19', '9%', '0.35', 36, 'angle', '52.2', 51], ['PCB-0005667', '23:24', '11%', '0.36', 37, 'angle', '52.0', 50], ['PCB-0005779', '23:46', '8%', '0.34', 33, 'angle', '52.9', 55], ['PCB-0005815', '23:52', '9%', '0.35', 34, 'angle', '52.6', 53], ['PCB-0005882', '00:00', '12%', '0.34', 36, 'angle', '52.8', 51], ['PCB-0005930', '00:08', '10%', '0.35', 35, 'angle', '53.1', 52]] },
+              { key: 'speedNear', k: 5, passed: 2, when: 'Built 02:00–02:40', spark: 'speedNight', fix: 'speed', inSpec: true, panel: 'stg-B0003-P0374',
+                boards: [['PCB-0006538', '02:12', '33%', '58.3', 11, 'reflow', '259.6', 79], ['PCB-0006549', '02:14', '30%', '58.5', 10, 'reflow', '259.0', 80], ['PCB-0006590', '02:22', '28%', '58.2', 12, 'reflow', '258.7', 77], ['PCB-0006612', '02:31', '34%', '58.1', 12, 'reflow', '259.1', 78], ['PCB-0006626', '02:34', '31%', '58.6', 9, 'reflow', '259.3', 81]] },
+              { key: 'ambient', k: 2, passed: 1, when: 'Built 02:00–02:40', spark: 'ambient', fix: 'ambient', panel: 'stg-B0003-P0374',
+                boards: [['PCB-0006561', '02:17', '29%', '28.2', 11, 'reflow', '259.4', 79], ['PCB-0006633', '02:36', '28%', '28.4', 13, 'reflow', '258.0', 74]] }
+            ],
             none: [['PCB-0005451', '22:41', '0.3%'], ['PCB-0006244', '01:15', '0.2%'], ['PCB-0007351', '05:02', '0.4%']]
           },
           open: {
@@ -396,7 +396,9 @@ class Component extends DCLogic {
     const tab = inv.defects[this.state.tab] ? this.state.tab : 'bridge';
     const d = inv.defects[tab];
     const chainText = key => T.chain(P[key].root + (P[key].status === 'In spec' ? ' (in spec)' : (P[key].status.indexOf('in spec') >= 0 ? ' (in spec, near LSL)' : '')), P[key].mech, d.title);
-    const top = d.top.map((h, i) => {
+    const all = d.top.concat(d.other);
+    const shown = this.state.showOther ? all : d.top;
+    const cards = shown.map((h, i) => {
       const p = P[h.key], conf = !!this.state.confirmed[tab + i], sp = S[h.spark];
       return {
         rank: i + 1, stage: 'Stage: ' + p.stage.toLowerCase(), inSpec: !!h.inSpec, confirmed: conf, open: !conf,
@@ -408,13 +410,13 @@ class Component extends DCLogic {
         confirm: () => this.setState({ confirmed: Object.assign({}, this.state.confirmed, { [tab + i]: true }) })
       };
     });
-    const panelOpen = this.state.panel >= 0 && this.state.panel < d.top.length;
+    const panelOpen = this.state.panel >= 0 && this.state.panel < all.length;
     let p = {}, bp = {};
     if (panelOpen) {
-      const h = d.top[this.state.panel], hp = P[h.key];
+      const h = all[this.state.panel], hp = P[h.key];
       const bi = Math.min(this.state.board, h.boards.length - 1);
       p = {
-        rank: this.state.panel + 1, chain: chainText(h.key), k: h.k, passed: h.passed,
+        rank: this.state.panel + 1, chain: chainText(h.key), k: h.k, passed: h.passed, shown: h.boards.length,
         boards: h.boards.map((b, i) => ({ id: b[0], time: b[1], pct: 'Model risk ' + b[2], val: b[3] + (hp.unit === '°' ? '' : ' ') + hp.unit, cls: i === bi ? 'brow on' : 'brow', pick: () => this.setState({ board: i }) }))
       };
       const b = h.boards[bi];
@@ -437,13 +439,13 @@ class Component extends DCLogic {
     const n = d.top.length;
     const c = Object.assign({}, d, {
       summary: d.one ? T.summaryOne(d.withChain, d.K, d.defLower) : T.summary(d.withChain, d.K, d.defLower, n),
-      top, hasOther: d.other.length > 0, otherCount: d.other.length,
-      other: d.other.map(o => ({ chain: chainText(o[0]), k: o[1], passed: o[2], when: o[3] })),
+      cards, hasMore: d.other.length > 0,
+      toggleLabel: this.state.showOther ? 'Hide ' + d.other.length + ' more chains' : T.more(d.other.length, d.other.map(o => o.k), d.defLower),
       none: d.none.map(b => ({ id: b[0], time: b[1], pct: 'Model risk ' + b[2] })),
       noneWhy: T.noneWhy(d.insp, d.defLower), noneNext: T.noneNext(d.record),
       containLine: T.contain(d.hold, d.inspLower, d.defLower, d.mx.unexpl), holdTotal: d.hold + d.mx.unexpl
     });
-    const last = panelOpen ? d.top[this.state.panel].boards.length - 1 : 0;
+    const last = panelOpen ? all[this.state.panel].boards.length - 1 : 0;
     return {
       inv: Object.assign({}, inv, inv.times), c, p, bp, panelOpen, panelClosed: !panelOpen,
       asideLabel: panelOpen ? 'Boards with this chain' : 'Proposed hold list',
@@ -452,6 +454,7 @@ class Component extends DCLogic {
       showBridge: () => this.setState({ tab: 'bridge', panel: -1 }),
       showOpen: () => this.setState({ tab: 'open', panel: -1 }),
       closePanel: () => this.setState({ panel: -1 }),
+      toggleOther: () => this.setState({ showOther: !this.state.showOther }),
       prevBoard: () => this.setState({ board: Math.max(0, this.state.board - 1) }),
       nextBoard: () => this.setState({ board: Math.min(last, this.state.board + 1) })
     };

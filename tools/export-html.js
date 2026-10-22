@@ -22,7 +22,8 @@ const NAMES = {
 // Pages to export: source, output name, title, optional state override.
 const PAGES = [
   { src: 'Main.dc.html', out: 'line-overview.html', label: '1 · Line overview', desc: 'Shift KPIs, excursion alerts, defects by hour, batch table' },
-  { src: 'RcaPacket.dc.html', out: 'rca-packet.html', label: '2 · Investigation: solder bridging', desc: 'Top 3 root cause chains with board counts, when they appeared, fix and confirm; model vs AOI', links: { 'h.view': 'rca-packet-boards.html' } },
+  { src: 'RcaPacket.dc.html', out: 'rca-packet.html', label: '2 · Investigation: solder bridging', desc: 'Top 3 root cause chains with board counts, when they appeared, fix and confirm; model vs AOI', links: { 'h.view': 'rca-packet-boards.html', toggleOther: 'rca-packet-all-chains.html' } },
+  { src: 'RcaPacket.dc.html', out: 'rca-packet-all-chains.html', label: '2 · Investigation: all chains', desc: 'Top 3 chains plus the 3 more chains shown', state: { showOther: true }, links: { 'h.view': 'rca-packet-boards.html', toggleOther: 'rca-packet.html' } },
   { src: 'RcaPacket.dc.html', out: 'rca-packet-boards.html', label: '2 · Investigation: boards with chain #1', desc: 'Board list and one board\'s RCA packet in the side panel', state: { panel: 0, board: 4 }, links: { closePanel: 'rca-packet.html', 'h.view': 'rca-packet-boards.html' } },
   { src: 'RcaPacket.dc.html', out: 'rca-packet-open-circuit.html', label: '2 · Investigation: open circuit', desc: 'Same screen with the open circuit tab selected', state: { tab: 'open' }, links: { 'h.view': 'rca-packet-open-circuit-boards.html' } },
   { src: 'RcaPacket.dc.html', out: 'rca-packet-open-circuit-boards.html', label: '2 · Investigation: open circuit boards', desc: 'Open circuit chain #1 with one board\'s RCA packet', state: { tab: 'open', panel: 0, board: 1 }, links: { closePanel: 'rca-packet-open-circuit.html', 'h.view': 'rca-packet-open-circuit-boards.html' } },
