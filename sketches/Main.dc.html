@@ -104,8 +104,8 @@ td{padding:14px 16px;border-bottom:1px solid #EEF0ED}
 <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 12px; align-items: end; height: 180px; border-bottom: 1px solid #C9CDD2; padding: 0 4px">
 <sc-for list="{{hours}}" as="h" hint-placeholder-count="8">
 <div style="display: flex; justify-content: center; align-items: flex-end; gap: 4px; height: 100%">
-<div style="width: 40%; max-width: 22px; background: #1A4F9C; border-radius: 3px 3px 0 0; height: {{h.bh}}" title="{{h.bt}}"></div>
-<div style="width: 40%; max-width: 22px; background: #E08A3C; border-radius: 3px 3px 0 0; height: {{h.oh}}" title="{{h.ot}}"></div>
+<div style="width: 40%; max-width: 22px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 2px" title="{{h.bt}}"><span class="mono" style="font-size: 11px; color: #1A4F9C; font-weight: 500">{{h.bn}}</span><div style="width: 100%; background: #1A4F9C; border-radius: 3px 3px 0 0; height: {{h.bh}}"></div></div>
+<div style="width: 40%; max-width: 22px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 2px" title="{{h.ot}}"><span class="mono" style="font-size: 11px; color: #A8561A; font-weight: 500">{{h.on}}</span><div style="width: 100%; background: #E08A3C; border-radius: 3px 3px 0 0; height: {{h.oh}}"></div></div>
 </div>
 </sc-for>
 </div>
@@ -141,8 +141,9 @@ class Component extends DCLogic {
     const max = 44;
     const hours = labels.map((l, i) => ({
       label: l,
-      bh: Math.max(2, Math.round(br[i] / max * 170)) + 'px',
-      oh: Math.max(2, Math.round(op[i] / max * 170)) + 'px',
+      bh: Math.max(2, Math.round(br[i] / max * 150)) + 'px',
+      oh: Math.max(2, Math.round(op[i] / max * 150)) + 'px',
+      bn: br[i] ? String(br[i]) : '', on: op[i] ? String(op[i]) : '',
       bt: l + ' · bridging ' + br[i],
       ot: l + ' · open circuit ' + op[i]
     }));

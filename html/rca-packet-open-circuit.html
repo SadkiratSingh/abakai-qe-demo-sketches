@@ -34,19 +34,27 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .n-def{background:#FDECEA;border:1px solid #F3C5C0;color:#7E160E}
 .arrow{color:#5B6169;font-size:18px}
 .big{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:#F4F5F3;border-radius:8px;flex:1 1 180px}
-.big .v{font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500}
-.big .l{font-size:13px;color:#4A4F56}
+.zc .v{font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500}
+.zc .l{font-size:13px;color:#4A4F56}
 .spark .band{fill:#E7F3EC}.spark .near{fill:#FDF0E3}.spark .win{fill:#16191D;opacity:.07}
 .spark .lim{stroke:#B42318;stroke-width:1;stroke-dasharray:4 3}
 .spark .line{fill:none;stroke:#1A4F9C;stroke-width:2;stroke-linejoin:round}
 .spark text{font-family:'IBM Plex Mono',monospace;font-size:10px;fill:#5B6169}
+.spark .lt{fill:#9B1C12;font-weight:500}.spark .pk{fill:#16191D;font-weight:500}
+.zc .band{fill:#E7F3EC}.zc .near{fill:#FDF0E3}.zc .win{fill:#16191D;opacity:.06}
+.zc .grid{stroke:#EEF0ED;stroke-width:1}.zc .axis{stroke:#C9CDD2;stroke-width:1}
+.zc .lim{stroke:#B42318;stroke-width:1.2;stroke-dasharray:5 4}
+.zc .line{fill:none;stroke:#1A4F9C;stroke-width:2;stroke-linejoin:round}
+.zc circle{fill:#fff;stroke:#1A4F9C;stroke-width:1.5}.zc circle:hover{fill:#1A4F9C}
+.zc text{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:#5B6169}
+.zc .lt{fill:#9B1C12;font-weight:500}.zc .pk{fill:#16191D;font-weight:600;font-size:12px}.zc .wl{fill:#16191D;font-weight:500}
 .mx{display:grid;grid-template-columns:minmax(120px,0.8fr) 1fr 1fr;gap:8px;font-size:13px}
 .mx .h{font-weight:600;color:#5B6169;padding:4px 8px;display:flex;align-items:center}
 .mx .c{border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
 .mx .n{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500}
 .mx .t{font-weight:600;font-size:14px}
 .mx .s{color:#4A4F56;font-size:12.5px}
-.seg{min-height:36px;padding:0 12px;border:1px solid #C9CDD2;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#4A4F56}
+.seg{min-height:36px;padding:0 12px;border:1px solid #C9CDD2;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#4A4F56;cursor:pointer}
 .seg.on{background:#16191D;border-color:#16191D;color:#fff}
 .seg:first-child{border-radius:8px 0 0 8px}.seg:last-child{border-radius:0 8px 8px 0;margin-left:-1px}
 .brow{display:grid;grid-template-columns:120px 52px 1fr auto;align-items:center;gap:10px;width:100%;min-height:40px;padding:6px 10px;border:0;border-bottom:1px solid #EEF0ED;background:#fff;font:14px 'IBM Plex Sans',sans-serif;color:#16191D;text-align:left;cursor:pointer}
@@ -123,17 +131,22 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 15px">Paste lot [paste lot] · built 03:40–04:30</span>
 <span style="font-size: 12px; color: #5B6169">Paste viscosity (Pa·s) · 20-minute averages, spec band shaded</span>
 </div>
-<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Paste viscosity over the batch, with the window when this chain appeared" style="flex: 0 1 260px; max-width: 100%">
-<rect class="band" x="0" y="21" width="260" height="23" opacity="1"></rect>
-<rect class="near" x="0" y="0" width="260" height="0"></rect>
-<rect class="win" x="186" y="0" width="34" height="52"></rect>
-<line class="lim" x1="0" x2="260" y1="21" y2="21" opacity="1"></line>
-<line class="lim" x1="0" x2="260" y1="44" y2="44" opacity="1"></line>
-<polyline class="line" points="0,28 11,29 23,28 34,30 45,29 57,29 68,30 79,28 90,28 102,29 113,28 124,30 136,29 147,29 158,30 170,28 181,28 192,11 203,8 215,10 226,29 237,29 249,30 260,28"></polyline>
-<text x="0" y="63">22:00</text>
-<text x="260" y="63" text-anchor="end">05:40</text>
+<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Paste viscosity over the batch, with the window when this chain appeared" style="flex: 0 1 300px; max-width: 100%">
+<rect class="band" x="0" y="35.6" width="300" height="25.6"></rect>
+<rect class="near" x="0" y="0" width="300" height="0"></rect>
+<rect class="win" x="215.2" y="4" width="39.1" height="62"></rect>
+<line class="lim" x1="0" x2="300" y1="35.6" y2="35.6" opacity="1"></line>
+<line class="lim" x1="0" x2="300" y1="61.2" y2="61.2" opacity="1"></line>
+<polyline class="line" points="0,43.8 13,44.9 26.1,43.4 39.1,45.3 52.2,44.5 65.2,44.1 78.3,45.7 91.3,43.8 104.3,43.8 117.4,44.9 130.4,43.4 143.5,45.3 156.5,44.5 169.6,44.1 182.6,45.7 195.7,43.8 208.7,43.8 221.7,24 234.8,20.8 247.8,22.8 260.9,44.5 273.9,44.1 287,45.7 300,43.8"></polyline>
+<text class="lt" x="298" y="31.6" text-anchor="end" opacity="1">USL 220</text>
+<text class="lt" x="298" y="73.2" text-anchor="end" opacity="1">LSL 180</text>
+<text class="pk" x="234.8" y="14.8" text-anchor="middle">243</text>
+<text x="0" y="82">22:00</text>
+<text x="300" y="82" text-anchor="end">05:40</text>
 </svg>
+<button class="btn sm" type="button">Zoom</button>
 </div>
+
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
 <div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Corrective action: </span>Replace the paste; check paste age and floor life.</div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
@@ -169,17 +182,22 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 15px">Built 03:40–04:30</span>
 <span style="font-size: 12px; color: #5B6169">Ambient RH (%RH) · 20-minute averages; limit [your limit]</span>
 </div>
-<svg class="spark" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Ambient RH over the batch, with the window when this chain appeared" style="flex: 0 1 260px; max-width: 100%">
-<rect class="band" x="0" y="0" width="260" height="0" opacity="0"></rect>
-<rect class="near" x="0" y="0" width="260" height="0"></rect>
-<rect class="win" x="186" y="0" width="34" height="52"></rect>
-<line class="lim" x1="0" x2="260" y1="0" y2="0" opacity="0"></line>
-<line class="lim" x1="0" x2="260" y1="0" y2="0" opacity="0"></line>
-<polyline class="line" points="0,34 11,40 23,32 34,42 45,38 57,36 68,44 79,34 90,34 102,40 113,32 124,42 136,38 147,36 158,44 170,34 181,34 192,13 203,8 215,16 226,38 237,36 249,44 260,34"></polyline>
-<text x="0" y="63">22:00</text>
-<text x="260" y="63" text-anchor="end">05:40</text>
+<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Ambient RH over the batch, with the window when this chain appeared" style="flex: 0 1 300px; max-width: 100%">
+<rect class="band" x="0" y="0" width="300" height="0"></rect>
+<rect class="near" x="0" y="0" width="300" height="0"></rect>
+<rect class="win" x="215.2" y="4" width="39.1" height="62"></rect>
+<line class="lim" x1="0" x2="300" y1="0" y2="0" opacity="0"></line>
+<line class="lim" x1="0" x2="300" y1="0" y2="0" opacity="0"></line>
+<polyline class="line" points="0,50 13,56.7 26.1,47.7 39.1,58.9 52.2,54.4 65.2,52.2 78.3,61.2 91.3,50 104.3,50 117.4,56.7 130.4,47.7 143.5,58.9 156.5,54.4 169.6,52.2 182.6,61.2 195.7,50 208.7,50 221.7,26.4 234.8,20.8 247.8,29.2 260.9,54.4 273.9,52.2 287,61.2 300,50"></polyline>
+<text class="lt" x="298" y="0" text-anchor="end" opacity="0"></text>
+<text class="lt" x="298" y="0" text-anchor="end" opacity="0"></text>
+<text class="pk" x="234.8" y="14.8" text-anchor="middle">58.0</text>
+<text x="0" y="82">22:00</text>
+<text x="300" y="82" text-anchor="end">05:40</text>
 </svg>
+<button class="btn sm" type="button">Zoom</button>
 </div>
+
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
 <div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Corrective action: </span>Control humidity; check paste exposure time.</div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">

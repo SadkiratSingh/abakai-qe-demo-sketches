@@ -103,6 +103,7 @@ All numbers are story data, not output from the backend or the model. Before a r
 - v1: the first full set of seven screens, commit `7abfa16` on branch `sketches-v1`.
 - v2 (branch `sketches-v2`): rule-based linking with unit rules, contributing state and measurements as evidence; squeegee wear added to the story.
 - v3 (branch `sketches-v3`): statistics only, no model output. Unexplained boards per defect, compared with batches with no excursion; near-limit investigation INV-0143 linked through near-limit rule variants.
+- v6.19: chain charts are labelled (USL and LSL values, the peak or lowest value in the window, start and end times) and have a Zoom button: a large chart with y-axis values and units, hourly times, labelled limits and window, a value per point on hover, and two ranges (whole shift, around the window). The line overview shows counts on the defects-by-hour bars.
 - v6.18: every chain uses the same card. The top 3 show by default; "Show 3 more chains (7, 5 and 2 boards with solder bridging)" reveals #4–#6 (high squeegee pressure, low squeegee speed in spec near LSL, high ambient temperature) in the same format, each with View boards and Confirm chain.
 - v6.17: stage chips on the investigation read "Stage: printing", "Stage: reflow", "Stage: material", "Stage: environment".
 - v6.16: "Most frequent root cause chains" is now "Top root cause chains" (investigation and line alerts).
