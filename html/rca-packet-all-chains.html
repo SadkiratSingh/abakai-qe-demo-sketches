@@ -39,7 +39,8 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .spark .band{fill:#E7F3EC}.spark .near{fill:#FDF0E3}.spark .win{fill:#16191D;opacity:.07}
 .spark .lim{stroke:#B42318;stroke-width:1;stroke-dasharray:4 3}
 .spark .line{fill:none;stroke:#1A4F9C;stroke-width:2;stroke-linejoin:round}
-.spark text{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:#4A4F56}
+.spark .lim{stroke-width:1.3}
+.cl{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A4F56;line-height:1}.cl.lt{color:#9B1C12;font-weight:500}.cl.pk{color:#16191D;font-weight:600}.cl.wl{color:#16191D;font-weight:500}.cl.lg{font-size:12px}
 .spark .lt{fill:#9B1C12;font-weight:500}.spark .pk{fill:#16191D;font-weight:500}
 .zc .band{fill:#E7F3EC}.zc .near{fill:#FDF0E3}.zc .win{fill:#16191D;opacity:.06}
 .zc .grid{stroke:#EEF0ED;stroke-width:1}.zc .axis{stroke:#C9CDD2;stroke-width:1}
@@ -131,19 +132,17 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 15px">Built 02:00–02:40</span>
 <span style="font-size: 12px; color: #5B6169">Peak reflow temperature (°C) · 20-minute averages, spec band shaded</span>
 </div>
-<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Peak reflow temperature over the batch, with the window when this chain appeared" style="flex: 0 0 300px; max-width: 100%">
+<div style="position: relative; flex: 0 0 300px; max-width: 100%">
+<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Peak reflow temperature over the batch, with the window when this chain appeared" style="display: block; width: 100%; height: auto">
 <rect class="band" x="0" y="32.2" width="300" height="29"></rect>
 <rect class="near" x="0" y="0" width="300" height="0"></rect>
 <rect class="win" x="150" y="4" width="26.1" height="62"></rect>
 <line class="lim" x1="0" x2="300" y1="32.2" y2="32.2" opacity="1"></line>
 <line class="lim" x1="0" x2="300" y1="61.2" y2="61.2" opacity="1"></line>
 <polyline class="line" points="0,40.9 13,41.7 26.1,40.6 39.1,42 52.2,41.4 65.2,41.1 78.3,42.3 91.3,40.9 104.3,40.9 117.4,41.7 130.4,40.6 143.5,42 156.5,21.7 169.6,20.8 182.6,42.3 195.7,40.9 208.7,40.9 221.7,41.7 234.8,40.6 247.8,42 260.9,41.4 273.9,41.1 287,42.3 300,40.9"></polyline>
-<text class="lt" x="298" y="28.200000000000003" text-anchor="end" opacity="1">USL 255</text>
-<text class="lt" x="298" y="73.2" text-anchor="end" opacity="1">LSL 245</text>
-<text class="pk" x="169.6" y="14.8" text-anchor="middle">258.9</text>
-<text x="0" y="82">22:00</text>
-<text x="300" y="82" text-anchor="end">05:40</text>
 </svg>
+<span class="cl lt" style="position: absolute; left: 99.33%; top: 33.57%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">USL 255</span><span class="cl lt" style="position: absolute; left: 99.33%; top: 87.14%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">LSL 245</span><span class="cl pk" style="position: absolute; left: 56.53%; top: 17.62%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">258.9</span><span class="cl " style="position: absolute; left: 0%; top: 97.62%; transform: translate(0%, -78%); white-space: nowrap; pointer-events: none">22:00</span><span class="cl " style="position: absolute; left: 100%; top: 97.62%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">05:40</span>
+</div>
 <a class="btn sm" href="rca-packet-zoom.html" style="display:inline-flex;align-items:center;text-decoration:none">Zoom</a>
 </div>
 
@@ -182,19 +181,17 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 15px">Built 23:10–00:20</span>
 <span style="font-size: 12px; color: #5B6169">Squeegee angle (°) · 20-minute averages, spec band shaded</span>
 </div>
-<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Squeegee angle over the batch, with the window when this chain appeared" style="flex: 0 0 300px; max-width: 100%">
+<div style="position: relative; flex: 0 0 300px; max-width: 100%">
+<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Squeegee angle over the batch, with the window when this chain appeared" style="display: block; width: 100%; height: auto">
 <rect class="band" x="0" y="20.8" width="300" height="31.3"></rect>
 <rect class="near" x="0" y="0" width="300" height="0"></rect>
 <rect class="win" x="45.7" y="4" width="39.1" height="62"></rect>
 <line class="lim" x1="0" x2="300" y1="20.8" y2="20.8" opacity="1"></line>
 <line class="lim" x1="0" x2="300" y1="52.1" y2="52.1" opacity="1"></line>
 <polyline class="line" points="0,35.8 13,36.8 26.1,35.5 39.1,37.1 52.2,60.2 65.2,61.2 78.3,59 91.3,35.8 104.3,35.8 117.4,36.8 130.4,35.5 143.5,37.1 156.5,36.5 169.6,36.2 182.6,37.4 195.7,35.8 208.7,35.8 221.7,36.8 234.8,35.5 247.8,37.1 260.9,36.5 273.9,36.2 287,37.4 300,35.8"></polyline>
-<text class="lt" x="298" y="16.8" text-anchor="end" opacity="1">USL 65.0</text>
-<text class="lt" x="298" y="64.1" text-anchor="end" opacity="1">LSL 55.0</text>
-<text class="pk" x="65.2" y="75.2" text-anchor="middle">52.1</text>
-<text x="0" y="82">22:00</text>
-<text x="300" y="82" text-anchor="end">05:40</text>
 </svg>
+<span class="cl lt" style="position: absolute; left: 99.33%; top: 20%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">USL 65.0</span><span class="cl lt" style="position: absolute; left: 99.33%; top: 76.31%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">LSL 55.0</span><span class="cl pk" style="position: absolute; left: 21.73%; top: 89.52%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">52.1</span><span class="cl " style="position: absolute; left: 0%; top: 97.62%; transform: translate(0%, -78%); white-space: nowrap; pointer-events: none">22:00</span><span class="cl " style="position: absolute; left: 100%; top: 97.62%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">05:40</span>
+</div>
 <a class="btn sm" href="rca-packet-zoom.html" style="display:inline-flex;align-items:center;text-decoration:none">Zoom</a>
 </div>
 
@@ -233,19 +230,17 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 15px">Built 23:10–00:20</span>
 <span style="font-size: 12px; color: #5B6169">Squeegee speed (mm/s) · 20-minute averages, spec band shaded</span>
 </div>
-<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Squeegee speed over the batch, with the window when this chain appeared" style="flex: 0 0 300px; max-width: 100%">
+<div style="position: relative; flex: 0 0 300px; max-width: 100%">
+<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Squeegee speed over the batch, with the window when this chain appeared" style="display: block; width: 100%; height: auto">
 <rect class="band" x="0" y="20.8" width="300" height="35.2"></rect>
 <rect class="near" x="0" y="0" width="300" height="0"></rect>
 <rect class="win" x="45.7" y="4" width="39.1" height="62"></rect>
 <line class="lim" x1="0" x2="300" y1="20.8" y2="20.8" opacity="1"></line>
 <line class="lim" x1="0" x2="300" y1="56" y2="56" opacity="1"></line>
 <polyline class="line" points="0,37.4 13,38.9 26.1,36.9 39.1,39.4 52.2,60.3 65.2,61.2 78.3,59.7 91.3,37.4 104.3,37.4 117.4,38.9 130.4,36.9 143.5,39.4 156.5,38.4 169.6,37.9 182.6,39.9 195.7,37.4 208.7,37.4 221.7,38.9 234.8,36.9 247.8,39.4 260.9,38.4 273.9,37.9 287,39.9 300,37.4"></polyline>
-<text class="lt" x="298" y="16.8" text-anchor="end" opacity="1">USL 84.0</text>
-<text class="lt" x="298" y="68" text-anchor="end" opacity="1">LSL 56.0</text>
-<text class="pk" x="65.2" y="75.2" text-anchor="middle">51.9</text>
-<text x="0" y="82">22:00</text>
-<text x="300" y="82" text-anchor="end">05:40</text>
 </svg>
+<span class="cl lt" style="position: absolute; left: 99.33%; top: 20%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">USL 84.0</span><span class="cl lt" style="position: absolute; left: 99.33%; top: 80.95%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">LSL 56.0</span><span class="cl pk" style="position: absolute; left: 21.73%; top: 89.52%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">51.9</span><span class="cl " style="position: absolute; left: 0%; top: 97.62%; transform: translate(0%, -78%); white-space: nowrap; pointer-events: none">22:00</span><span class="cl " style="position: absolute; left: 100%; top: 97.62%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">05:40</span>
+</div>
 <a class="btn sm" href="rca-packet-zoom.html" style="display:inline-flex;align-items:center;text-decoration:none">Zoom</a>
 </div>
 
@@ -284,19 +279,17 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 15px">Built 23:10–00:20</span>
 <span style="font-size: 12px; color: #5B6169">Squeegee pressure (MPa) · 20-minute averages, spec band shaded</span>
 </div>
-<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Squeegee pressure over the batch, with the window when this chain appeared" style="flex: 0 0 300px; max-width: 100%">
+<div style="position: relative; flex: 0 0 300px; max-width: 100%">
+<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Squeegee pressure over the batch, with the window when this chain appeared" style="display: block; width: 100%; height: auto">
 <rect class="band" x="0" y="34.3" width="300" height="26.900000000000006"></rect>
 <rect class="near" x="0" y="0" width="300" height="0"></rect>
 <rect class="win" x="45.7" y="4" width="39.1" height="62"></rect>
 <line class="lim" x1="0" x2="300" y1="34.3" y2="34.3" opacity="1"></line>
 <line class="lim" x1="0" x2="300" y1="61.2" y2="61.2" opacity="1"></line>
 <polyline class="line" points="0,47.7 13,47.7 26.1,43.2 39.1,47.7 52.2,25.3 65.2,20.8 78.3,29.8 91.3,47.7 104.3,47.7 117.4,47.7 130.4,43.2 143.5,47.7 156.5,47.7 169.6,47.7 182.6,52.2 195.7,47.7 208.7,47.7 221.7,47.7 234.8,43.2 247.8,47.7 260.9,47.7 273.9,47.7 287,52.2 300,47.7"></polyline>
-<text class="lt" x="298" y="30.299999999999997" text-anchor="end" opacity="1">USL 0.33</text>
-<text class="lt" x="298" y="73.2" text-anchor="end" opacity="1">LSL 0.27</text>
-<text class="pk" x="65.2" y="14.8" text-anchor="middle">0.36</text>
-<text x="0" y="82">22:00</text>
-<text x="300" y="82" text-anchor="end">05:40</text>
 </svg>
+<span class="cl lt" style="position: absolute; left: 99.33%; top: 36.07%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">USL 0.33</span><span class="cl lt" style="position: absolute; left: 99.33%; top: 87.14%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">LSL 0.27</span><span class="cl pk" style="position: absolute; left: 21.73%; top: 17.62%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">0.36</span><span class="cl " style="position: absolute; left: 0%; top: 97.62%; transform: translate(0%, -78%); white-space: nowrap; pointer-events: none">22:00</span><span class="cl " style="position: absolute; left: 100%; top: 97.62%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">05:40</span>
+</div>
 <a class="btn sm" href="rca-packet-zoom.html" style="display:inline-flex;align-items:center;text-decoration:none">Zoom</a>
 </div>
 
@@ -335,19 +328,17 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 15px">Built 02:00–02:40</span>
 <span style="font-size: 12px; color: #5B6169">Squeegee speed (mm/s) · spec band green, near-LSL zone amber</span>
 </div>
-<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Squeegee speed over the batch, with the window when this chain appeared" style="flex: 0 0 300px; max-width: 100%">
+<div style="position: relative; flex: 0 0 300px; max-width: 100%">
+<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Squeegee speed over the batch, with the window when this chain appeared" style="display: block; width: 100%; height: auto">
 <rect class="band" x="0" y="20.8" width="300" height="40.400000000000006"></rect>
 <rect class="near" x="0" y="57.1" width="300" height="4.100000000000001"></rect>
 <rect class="win" x="150" y="4" width="26.1" height="62"></rect>
 <line class="lim" x1="0" x2="300" y1="20.8" y2="20.8" opacity="1"></line>
 <line class="lim" x1="0" x2="300" y1="61.2" y2="61.2" opacity="1"></line>
 <polyline class="line" points="0,39.8 13,41.6 26.1,39.3 39.1,42.2 52.2,41 65.2,40.4 78.3,42.7 91.3,39.8 104.3,39.8 117.4,41.6 130.4,39.3 143.5,42.2 156.5,57.7 169.6,58.1 182.6,42.7 195.7,39.8 208.7,39.8 221.7,41.6 234.8,39.3 247.8,42.2 260.9,41 273.9,40.4 287,42.7 300,39.8"></polyline>
-<text class="lt" x="298" y="16.8" text-anchor="end" opacity="1">USL 84.0</text>
-<text class="lt" x="298" y="73.2" text-anchor="end" opacity="1">LSL 56.0</text>
-<text class="pk" x="169.6" y="72.1" text-anchor="middle">58.1</text>
-<text x="0" y="82">22:00</text>
-<text x="300" y="82" text-anchor="end">05:40</text>
 </svg>
+<span class="cl lt" style="position: absolute; left: 99.33%; top: 20%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">USL 84.0</span><span class="cl lt" style="position: absolute; left: 99.33%; top: 87.14%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">LSL 56.0</span><span class="cl pk" style="position: absolute; left: 56.53%; top: 85.83%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">58.1</span><span class="cl " style="position: absolute; left: 0%; top: 97.62%; transform: translate(0%, -78%); white-space: nowrap; pointer-events: none">22:00</span><span class="cl " style="position: absolute; left: 100%; top: 97.62%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">05:40</span>
+</div>
 <a class="btn sm" href="rca-packet-zoom.html" style="display:inline-flex;align-items:center;text-decoration:none">Zoom</a>
 </div>
 
@@ -386,19 +377,17 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 15px">Built 02:00–02:40</span>
 <span style="font-size: 12px; color: #5B6169">Ambient temperature (°C) · 20-minute averages; limit [your limit]</span>
 </div>
-<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Ambient temperature over the batch, with the window when this chain appeared" style="flex: 0 0 300px; max-width: 100%">
+<div style="position: relative; flex: 0 0 300px; max-width: 100%">
+<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Ambient temperature over the batch, with the window when this chain appeared" style="display: block; width: 100%; height: auto">
 <rect class="band" x="0" y="0" width="300" height="0"></rect>
 <rect class="near" x="0" y="0" width="300" height="0"></rect>
 <rect class="win" x="150" y="4" width="26.1" height="62"></rect>
 <line class="lim" x1="0" x2="300" y1="0" y2="0" opacity="0"></line>
 <line class="lim" x1="0" x2="300" y1="0" y2="0" opacity="0"></line>
 <polyline class="line" points="0,57.7 13,59.8 26.1,57.1 39.1,60.5 52.2,59.1 65.2,58.4 78.3,61.2 91.3,57.7 104.3,57.7 117.4,59.8 130.4,57.1 143.5,60.5 156.5,22.9 169.6,20.8 182.6,61.2 195.7,57.7 208.7,57.7 221.7,59.8 234.8,57.1 247.8,60.5 260.9,59.1 273.9,58.4 287,61.2 300,57.7"></polyline>
-<text class="lt" x="298" y="0" text-anchor="end" opacity="0"></text>
-<text class="lt" x="298" y="0" text-anchor="end" opacity="0"></text>
-<text class="pk" x="169.6" y="14.8" text-anchor="middle">28.6</text>
-<text x="0" y="82">22:00</text>
-<text x="300" y="82" text-anchor="end">05:40</text>
 </svg>
+<span class="cl pk" style="position: absolute; left: 56.53%; top: 17.62%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">28.6</span><span class="cl " style="position: absolute; left: 0%; top: 97.62%; transform: translate(0%, -78%); white-space: nowrap; pointer-events: none">22:00</span><span class="cl " style="position: absolute; left: 100%; top: 97.62%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">05:40</span>
+</div>
 <a class="btn sm" href="rca-packet-zoom.html" style="display:inline-flex;align-items:center;text-decoration:none">Zoom</a>
 </div>
 

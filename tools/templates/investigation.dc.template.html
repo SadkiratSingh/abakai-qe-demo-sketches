@@ -42,7 +42,8 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 .spark .band{fill:#E7F3EC}.spark .near{fill:#FDF0E3}.spark .win{fill:#16191D;opacity:.07}
 .spark .lim{stroke:#B42318;stroke-width:1;stroke-dasharray:4 3}
 .spark .line{fill:none;stroke:#1A4F9C;stroke-width:2;stroke-linejoin:round}
-.spark text{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:#4A4F56}
+.spark .lim{stroke-width:1.3}
+.cl{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A4F56;line-height:1}.cl.lt{color:#9B1C12;font-weight:500}.cl.pk{color:#16191D;font-weight:600}.cl.wl{color:#16191D;font-weight:500}.cl.lg{font-size:12px}
 .spark .lt{fill:#9B1C12;font-weight:500}.spark .pk{fill:#16191D;font-weight:500}
 .zc .band{fill:#E7F3EC}.zc .near{fill:#FDF0E3}.zc .win{fill:#16191D;opacity:.06}
 .zc .grid{stroke:#EEF0ED;stroke-width:1}.zc .axis{stroke:#C9CDD2;stroke-width:1}
@@ -133,19 +134,17 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 15px">{{h.when}}</span>
 <span style="font-size: 12px; color: #5B6169">{{h.sparkSub}}</span>
 </div>
-<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="{{h.sparkLabel}}" style="flex: 0 0 300px; max-width: 100%">
+<div style="position: relative; flex: 0 0 300px; max-width: 100%">
+<svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="{{h.sparkLabel}}" style="display: block; width: 100%; height: auto">
 <rect class="band" x="0" y="{{h.sp.bandY}}" width="300" height="{{h.sp.bandH}}"></rect>
 <rect class="near" x="0" y="{{h.sp.nearY}}" width="300" height="{{h.sp.nearH}}"></rect>
 <rect class="win" x="{{h.sp.winX}}" y="4" width="{{h.sp.winW}}" height="62"></rect>
 <line class="lim" x1="0" x2="300" y1="{{h.sp.uslY}}" y2="{{h.sp.uslY}}" opacity="{{h.sp.limOp}}"></line>
 <line class="lim" x1="0" x2="300" y1="{{h.sp.lslY}}" y2="{{h.sp.lslY}}" opacity="{{h.sp.limOp}}"></line>
 <polyline class="line" points="{{h.sp.points}}"></polyline>
-<text class="lt" x="298" y="{{h.sp.uslTy}}" text-anchor="end" opacity="{{h.sp.limOp}}">{{h.sp.uslT}}</text>
-<text class="lt" x="298" y="{{h.sp.lslTy}}" text-anchor="end" opacity="{{h.sp.limOp}}">{{h.sp.lslT}}</text>
-<text class="pk" x="{{h.sp.pkX}}" y="{{h.sp.pkY}}" text-anchor="{{h.sp.pkA}}">{{h.sp.pkT}}</text>
-<text x="0" y="82">{{h.sp.t0}}</text>
-<text x="300" y="82" text-anchor="end">{{h.sp.t1}}</text>
 </svg>
+<sc-for list="{{h.sp.labels}}" as="L" hint-placeholder-count="5"><span class="{{L.cls}}" style="position: absolute; left: {{L.left}}; top: {{L.top}}; transform: translate({{L.tx}}, -78%); white-space: nowrap; pointer-events: none">{{L.text}}</span></sc-for>
+</div>
 <button class="btn sm" type="button" onClick="{{h.zoom}}">{{h.zoomLabel}}</button>
 </div>
 <sc-if value="{{h.zoomed}}" hint-placeholder-val="{{ false }}">
@@ -154,58 +153,43 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <span style="font-weight: 600; font-size: 14px">{{h.bigTitle}}</span>
 <div style="display: flex"><button type="button" class="{{zoomAllCls}}" onClick="{{zoomAll}}">Whole shift</button><button type="button" class="{{zoomWinCls}}" onClick="{{zoomWin}}">Around {{h.win}}</button></div>
 </div>
-<svg class="zc" viewBox="0 0 760 290" width="100%" role="img" aria-label="{{h.sparkLabel}}">
+<div style="position: relative">
+<svg class="zc" viewBox="0 0 760 290" width="100%" style="display: block; height: auto" role="img" aria-label="{{h.sparkLabel}}">
 <rect class="band" x="{{h.bg.x0}}" y="{{h.bg.bandY}}" width="{{h.bg.pw}}" height="{{h.bg.bandH}}"></rect>
 <rect class="near" x="{{h.bg.x0}}" y="{{h.bg.nearY}}" width="{{h.bg.pw}}" height="{{h.bg.nearH}}"></rect>
-<line class="grid" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.y0y}}" y2="{{h.bg.y0y}}" opacity="{{h.bg.y0o}}"></line><text x="{{h.bg.yl}}" y="{{h.bg.y0ty}}" text-anchor="end">{{h.bg.y0t}}</text>
-<line class="grid" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.y1y}}" y2="{{h.bg.y1y}}" opacity="{{h.bg.y1o}}"></line><text x="{{h.bg.yl}}" y="{{h.bg.y1ty}}" text-anchor="end">{{h.bg.y1t}}</text>
-<line class="grid" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.y2y}}" y2="{{h.bg.y2y}}" opacity="{{h.bg.y2o}}"></line><text x="{{h.bg.yl}}" y="{{h.bg.y2ty}}" text-anchor="end">{{h.bg.y2t}}</text>
-<line class="grid" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.y3y}}" y2="{{h.bg.y3y}}" opacity="{{h.bg.y3o}}"></line><text x="{{h.bg.yl}}" y="{{h.bg.y3ty}}" text-anchor="end">{{h.bg.y3t}}</text>
-<line class="grid" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.y4y}}" y2="{{h.bg.y4y}}" opacity="{{h.bg.y4o}}"></line><text x="{{h.bg.yl}}" y="{{h.bg.y4ty}}" text-anchor="end">{{h.bg.y4t}}</text>
-<line class="grid" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.y5y}}" y2="{{h.bg.y5y}}" opacity="{{h.bg.y5o}}"></line><text x="{{h.bg.yl}}" y="{{h.bg.y5ty}}" text-anchor="end">{{h.bg.y5t}}</text>
-<rect class="win" x="{{h.bg.winX}}" y="22" width="{{h.bg.winW}}" height="{{h.bg.ph}}"></rect>
-<text class="wl" x="{{h.bg.winTx}}" y="16" text-anchor="middle">{{h.win}}</text>
+<line class="grid" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.y0y}}" y2="{{h.bg.y0y}}" opacity="{{h.bg.y0o}}"></line><line class="grid" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.y1y}}" y2="{{h.bg.y1y}}" opacity="{{h.bg.y1o}}"></line><line class="grid" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.y2y}}" y2="{{h.bg.y2y}}" opacity="{{h.bg.y2o}}"></line><line class="grid" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.y3y}}" y2="{{h.bg.y3y}}" opacity="{{h.bg.y3o}}"></line><line class="grid" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.y4y}}" y2="{{h.bg.y4y}}" opacity="{{h.bg.y4o}}"></line><line class="grid" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.y5y}}" y2="{{h.bg.y5y}}" opacity="{{h.bg.y5o}}"></line><rect class="win" x="{{h.bg.winX}}" y="22" width="{{h.bg.winW}}" height="{{h.bg.ph}}"></rect>
 <line class="lim" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.uslY}}" y2="{{h.bg.uslY}}" opacity="{{h.bg.limOp}}"></line>
 <line class="lim" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.lslY}}" y2="{{h.bg.lslY}}" opacity="{{h.bg.limOp}}"></line>
-<text class="lt" x="742" y="{{h.bg.uslTy}}" text-anchor="end" opacity="{{h.bg.limOp}}">{{h.bg.uslT}}</text>
-<text class="lt" x="742" y="{{h.bg.lslTy}}" text-anchor="end" opacity="{{h.bg.limOp}}">{{h.bg.lslT}}</text>
 <line class="axis" x1="{{h.bg.x0}}" x2="744" y1="{{h.bg.yb}}" y2="{{h.bg.yb}}"></line>
-<line class="axis" x1="{{h.bg.x0x}}" x2="{{h.bg.x0x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x0y2}}" opacity="{{h.bg.x0o}}"></line><text x="{{h.bg.x0x}}" y="{{h.bg.x0ty}}" text-anchor="middle">{{h.bg.x0t}}</text>
-<line class="axis" x1="{{h.bg.x1x}}" x2="{{h.bg.x1x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x1y2}}" opacity="{{h.bg.x1o}}"></line><text x="{{h.bg.x1x}}" y="{{h.bg.x1ty}}" text-anchor="middle">{{h.bg.x1t}}</text>
-<line class="axis" x1="{{h.bg.x2x}}" x2="{{h.bg.x2x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x2y2}}" opacity="{{h.bg.x2o}}"></line><text x="{{h.bg.x2x}}" y="{{h.bg.x2ty}}" text-anchor="middle">{{h.bg.x2t}}</text>
-<line class="axis" x1="{{h.bg.x3x}}" x2="{{h.bg.x3x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x3y2}}" opacity="{{h.bg.x3o}}"></line><text x="{{h.bg.x3x}}" y="{{h.bg.x3ty}}" text-anchor="middle">{{h.bg.x3t}}</text>
-<line class="axis" x1="{{h.bg.x4x}}" x2="{{h.bg.x4x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x4y2}}" opacity="{{h.bg.x4o}}"></line><text x="{{h.bg.x4x}}" y="{{h.bg.x4ty}}" text-anchor="middle">{{h.bg.x4t}}</text>
-<line class="axis" x1="{{h.bg.x5x}}" x2="{{h.bg.x5x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x5y2}}" opacity="{{h.bg.x5o}}"></line><text x="{{h.bg.x5x}}" y="{{h.bg.x5ty}}" text-anchor="middle">{{h.bg.x5t}}</text>
-<line class="axis" x1="{{h.bg.x6x}}" x2="{{h.bg.x6x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x6y2}}" opacity="{{h.bg.x6o}}"></line><text x="{{h.bg.x6x}}" y="{{h.bg.x6ty}}" text-anchor="middle">{{h.bg.x6t}}</text>
-<line class="axis" x1="{{h.bg.x7x}}" x2="{{h.bg.x7x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x7y2}}" opacity="{{h.bg.x7o}}"></line><text x="{{h.bg.x7x}}" y="{{h.bg.x7ty}}" text-anchor="middle">{{h.bg.x7t}}</text>
-<line class="axis" x1="{{h.bg.x8x}}" x2="{{h.bg.x8x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x8y2}}" opacity="{{h.bg.x8o}}"></line><text x="{{h.bg.x8x}}" y="{{h.bg.x8ty}}" text-anchor="middle">{{h.bg.x8t}}</text>
-<polyline class="line" points="{{h.bg.points}}"></polyline>
-<circle cx="{{h.bg.d0x}}" cy="{{h.bg.d0y}}" r="{{h.bg.d0r}}"><title>{{h.bg.d0tip}}</title></circle>
-<circle cx="{{h.bg.d1x}}" cy="{{h.bg.d1y}}" r="{{h.bg.d1r}}"><title>{{h.bg.d1tip}}</title></circle>
-<circle cx="{{h.bg.d2x}}" cy="{{h.bg.d2y}}" r="{{h.bg.d2r}}"><title>{{h.bg.d2tip}}</title></circle>
-<circle cx="{{h.bg.d3x}}" cy="{{h.bg.d3y}}" r="{{h.bg.d3r}}"><title>{{h.bg.d3tip}}</title></circle>
-<circle cx="{{h.bg.d4x}}" cy="{{h.bg.d4y}}" r="{{h.bg.d4r}}"><title>{{h.bg.d4tip}}</title></circle>
-<circle cx="{{h.bg.d5x}}" cy="{{h.bg.d5y}}" r="{{h.bg.d5r}}"><title>{{h.bg.d5tip}}</title></circle>
-<circle cx="{{h.bg.d6x}}" cy="{{h.bg.d6y}}" r="{{h.bg.d6r}}"><title>{{h.bg.d6tip}}</title></circle>
-<circle cx="{{h.bg.d7x}}" cy="{{h.bg.d7y}}" r="{{h.bg.d7r}}"><title>{{h.bg.d7tip}}</title></circle>
-<circle cx="{{h.bg.d8x}}" cy="{{h.bg.d8y}}" r="{{h.bg.d8r}}"><title>{{h.bg.d8tip}}</title></circle>
-<circle cx="{{h.bg.d9x}}" cy="{{h.bg.d9y}}" r="{{h.bg.d9r}}"><title>{{h.bg.d9tip}}</title></circle>
-<circle cx="{{h.bg.d10x}}" cy="{{h.bg.d10y}}" r="{{h.bg.d10r}}"><title>{{h.bg.d10tip}}</title></circle>
-<circle cx="{{h.bg.d11x}}" cy="{{h.bg.d11y}}" r="{{h.bg.d11r}}"><title>{{h.bg.d11tip}}</title></circle>
-<circle cx="{{h.bg.d12x}}" cy="{{h.bg.d12y}}" r="{{h.bg.d12r}}"><title>{{h.bg.d12tip}}</title></circle>
-<circle cx="{{h.bg.d13x}}" cy="{{h.bg.d13y}}" r="{{h.bg.d13r}}"><title>{{h.bg.d13tip}}</title></circle>
-<circle cx="{{h.bg.d14x}}" cy="{{h.bg.d14y}}" r="{{h.bg.d14r}}"><title>{{h.bg.d14tip}}</title></circle>
-<circle cx="{{h.bg.d15x}}" cy="{{h.bg.d15y}}" r="{{h.bg.d15r}}"><title>{{h.bg.d15tip}}</title></circle>
-<circle cx="{{h.bg.d16x}}" cy="{{h.bg.d16y}}" r="{{h.bg.d16r}}"><title>{{h.bg.d16tip}}</title></circle>
-<circle cx="{{h.bg.d17x}}" cy="{{h.bg.d17y}}" r="{{h.bg.d17r}}"><title>{{h.bg.d17tip}}</title></circle>
-<circle cx="{{h.bg.d18x}}" cy="{{h.bg.d18y}}" r="{{h.bg.d18r}}"><title>{{h.bg.d18tip}}</title></circle>
-<circle cx="{{h.bg.d19x}}" cy="{{h.bg.d19y}}" r="{{h.bg.d19r}}"><title>{{h.bg.d19tip}}</title></circle>
-<circle cx="{{h.bg.d20x}}" cy="{{h.bg.d20y}}" r="{{h.bg.d20r}}"><title>{{h.bg.d20tip}}</title></circle>
-<circle cx="{{h.bg.d21x}}" cy="{{h.bg.d21y}}" r="{{h.bg.d21r}}"><title>{{h.bg.d21tip}}</title></circle>
-<circle cx="{{h.bg.d22x}}" cy="{{h.bg.d22y}}" r="{{h.bg.d22r}}"><title>{{h.bg.d22tip}}</title></circle>
-<circle cx="{{h.bg.d23x}}" cy="{{h.bg.d23y}}" r="{{h.bg.d23r}}"><title>{{h.bg.d23tip}}</title></circle>
-<text class="pk" x="{{h.bg.pkX}}" y="{{h.bg.pkY}}" text-anchor="{{h.bg.pkA}}">{{h.bg.pkT}}</text>
+<line class="axis" x1="{{h.bg.x0x}}" x2="{{h.bg.x0x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x0y2}}" opacity="{{h.bg.x0o}}"></line><line class="axis" x1="{{h.bg.x1x}}" x2="{{h.bg.x1x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x1y2}}" opacity="{{h.bg.x1o}}"></line><line class="axis" x1="{{h.bg.x2x}}" x2="{{h.bg.x2x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x2y2}}" opacity="{{h.bg.x2o}}"></line><line class="axis" x1="{{h.bg.x3x}}" x2="{{h.bg.x3x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x3y2}}" opacity="{{h.bg.x3o}}"></line><line class="axis" x1="{{h.bg.x4x}}" x2="{{h.bg.x4x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x4y2}}" opacity="{{h.bg.x4o}}"></line><line class="axis" x1="{{h.bg.x5x}}" x2="{{h.bg.x5x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x5y2}}" opacity="{{h.bg.x5o}}"></line><line class="axis" x1="{{h.bg.x6x}}" x2="{{h.bg.x6x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x6y2}}" opacity="{{h.bg.x6o}}"></line><line class="axis" x1="{{h.bg.x7x}}" x2="{{h.bg.x7x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x7y2}}" opacity="{{h.bg.x7o}}"></line><line class="axis" x1="{{h.bg.x8x}}" x2="{{h.bg.x8x}}" y1="{{h.bg.yb}}" y2="{{h.bg.x8y2}}" opacity="{{h.bg.x8o}}"></line><polyline class="line" points="{{h.bg.points}}"></polyline>
+<circle cx="{{h.bg.d0x}}" cy="{{h.bg.d0y}}" r="{{h.bg.d0r}}"></circle>
+<circle cx="{{h.bg.d1x}}" cy="{{h.bg.d1y}}" r="{{h.bg.d1r}}"></circle>
+<circle cx="{{h.bg.d2x}}" cy="{{h.bg.d2y}}" r="{{h.bg.d2r}}"></circle>
+<circle cx="{{h.bg.d3x}}" cy="{{h.bg.d3y}}" r="{{h.bg.d3r}}"></circle>
+<circle cx="{{h.bg.d4x}}" cy="{{h.bg.d4y}}" r="{{h.bg.d4r}}"></circle>
+<circle cx="{{h.bg.d5x}}" cy="{{h.bg.d5y}}" r="{{h.bg.d5r}}"></circle>
+<circle cx="{{h.bg.d6x}}" cy="{{h.bg.d6y}}" r="{{h.bg.d6r}}"></circle>
+<circle cx="{{h.bg.d7x}}" cy="{{h.bg.d7y}}" r="{{h.bg.d7r}}"></circle>
+<circle cx="{{h.bg.d8x}}" cy="{{h.bg.d8y}}" r="{{h.bg.d8r}}"></circle>
+<circle cx="{{h.bg.d9x}}" cy="{{h.bg.d9y}}" r="{{h.bg.d9r}}"></circle>
+<circle cx="{{h.bg.d10x}}" cy="{{h.bg.d10y}}" r="{{h.bg.d10r}}"></circle>
+<circle cx="{{h.bg.d11x}}" cy="{{h.bg.d11y}}" r="{{h.bg.d11r}}"></circle>
+<circle cx="{{h.bg.d12x}}" cy="{{h.bg.d12y}}" r="{{h.bg.d12r}}"></circle>
+<circle cx="{{h.bg.d13x}}" cy="{{h.bg.d13y}}" r="{{h.bg.d13r}}"></circle>
+<circle cx="{{h.bg.d14x}}" cy="{{h.bg.d14y}}" r="{{h.bg.d14r}}"></circle>
+<circle cx="{{h.bg.d15x}}" cy="{{h.bg.d15y}}" r="{{h.bg.d15r}}"></circle>
+<circle cx="{{h.bg.d16x}}" cy="{{h.bg.d16y}}" r="{{h.bg.d16r}}"></circle>
+<circle cx="{{h.bg.d17x}}" cy="{{h.bg.d17y}}" r="{{h.bg.d17r}}"></circle>
+<circle cx="{{h.bg.d18x}}" cy="{{h.bg.d18y}}" r="{{h.bg.d18r}}"></circle>
+<circle cx="{{h.bg.d19x}}" cy="{{h.bg.d19y}}" r="{{h.bg.d19r}}"></circle>
+<circle cx="{{h.bg.d20x}}" cy="{{h.bg.d20y}}" r="{{h.bg.d20r}}"></circle>
+<circle cx="{{h.bg.d21x}}" cy="{{h.bg.d21y}}" r="{{h.bg.d21r}}"></circle>
+<circle cx="{{h.bg.d22x}}" cy="{{h.bg.d22y}}" r="{{h.bg.d22r}}"></circle>
+<circle cx="{{h.bg.d23x}}" cy="{{h.bg.d23y}}" r="{{h.bg.d23r}}"></circle>
 </svg>
+<sc-for list="{{h.bg.hov}}" as="D" hint-placeholder-count="24"><span title="{{D.tip}}" style="position: absolute; left: {{D.left}}; top: {{D.top}}; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span></sc-for>
+<sc-for list="{{h.bg.labels}}" as="L" hint-placeholder-count="5"><span class="{{L.cls}}" style="position: absolute; left: {{L.left}}; top: {{L.top}}; transform: translate({{L.tx}}, -78%); white-space: nowrap; pointer-events: none">{{L.text}}</span></sc-for>
+</div>
 <div style="font-size: 12px; color: #5B6169">{{h.bigNote}}</div>
 </div>
 </sc-if>
@@ -374,6 +358,18 @@ class Component extends DCLogic {
       yticks: o.big ? nice(y0, y1, 5).map(v => ({ y: Y(v), ty: Y(v) + 4, t: fmt(v) })) : [],
       xticks: o.big ? vis.map((v, n) => i0 + n).filter(i => (o.t0 + 20 * i) % 60 === 0 || (i1 - i0 < 12)).map(i => ({ x: X(i), y2: o.padT + ph + 5, ty: o.padT + ph + 18, t: time(i) })) : []
     };
+    const L = (x, y, text, a, cls) => ({ left: +(x / o.W * 100).toFixed(2) + '%', top: +(y / o.H * 100).toFixed(2) + '%', tx: a === 'end' ? '-100%' : (a === 'middle' ? '-50%' : '0%'), text, cls: 'cl ' + (cls || '') + (o.big ? ' lg' : '') });
+    g.labels = [];
+    g.hov = o.big ? g.dots.map(d => ({ left: +(d.x / o.W * 100).toFixed(2) + '%', top: +(d.y / o.H * 100).toFixed(2) + '%', tip: d.tip })) : [];
+    if (lim) { g.labels.push(L(o.W - 2, g.uslTy, g.uslT, 'end', 'lt'), L(o.W - 2, g.lslTy, g.lslT, 'end', 'lt')); }
+    g.labels.push(L(g.pkX, g.pkY, g.pkT, g.pkA, 'pk'));
+    if (o.big) {
+      g.yticks.forEach(t => g.labels.push(L(g.yl, t.ty, t.t, 'end')));
+      g.xticks.forEach(t => g.labels.push(L(t.x, t.ty, t.t, 'middle')));
+      g.labels.push(L(g.winTx, 16, o.win || '', 'middle', 'wl'));
+    } else {
+      g.labels.push(L(0, o.H - 2, g.t0, 'start'), L(o.W, o.H - 2, g.t1, 'end'));
+    }
     const slots = (arr, n, pre, keys, off) => { for (let k = 0; k < n; k++) { const v = arr[k]; keys.forEach(key => { g[pre + k + key] = v ? v[key] : off[key]; }); g[pre + k + 'o'] = v ? 1 : 0; } };
     slots(g.yticks, 6, 'y', ['y', 'ty', 't'], { y: 0, ty: 0, t: '' });
     slots(g.xticks, 9, 'x', ['x', 'y2', 'ty', 't'], { x: 0, y2: 0, ty: 0, t: '' });
@@ -510,7 +506,7 @@ class Component extends DCLogic {
         win: win(h.when),
         bigTitle: p.param + ' (' + p.unit + ') · 20-minute averages · hover a point for its value',
         bigNote: 'Shaded green: spec window' + (sp.near != null ? '; amber: near-LSL zone' : '') + '; grey: ' + win(h.when) + ', when this chain appeared.' + (sp.lsl == null ? ' Limit: [your limit].' : ''),
-        bg: zoomed ? this.chart(sp, Object.assign({ W: 760, H: 290, padL: 56, padR: 16, padT: 22, padB: 40, t0: t0m, low: low(p), unit: p.unit, big: true }, this.state.zr === 'win' ? { i0: Math.max(0, sp.w0 - 3), i1: Math.min(sp.vals.length - 1, sp.w1 + 3) } : { i0: 0, i1: sp.vals.length - 1 })) : {},
+        bg: zoomed ? this.chart(sp, Object.assign({ W: 760, H: 290, padL: 56, padR: 16, padT: 22, padB: 40, t0: t0m, low: low(p), unit: p.unit, big: true, win: win(h.when) }, this.state.zr === 'win' ? { i0: Math.max(0, sp.w0 - 3), i1: Math.min(sp.vals.length - 1, sp.w1 + 3) } : { i0: 0, i1: sp.vals.length - 1 })) : {},
         action: FIX[h.fix],
         cardStyle: 'padding: 24px; display: flex; flex-direction: column; gap: 16px' + (this.state.panel === i ? '; border-color: #1A4F9C; box-shadow: inset 4px 0 0 #1A4F9C' : ''),
         view: () => this.setState({ panel: i, board: 0 }),
