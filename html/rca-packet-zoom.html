@@ -8,68 +8,68 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:'IBM Plex Sans',sans-serif;color:#16191D;background:#F4F5F3}
+body{margin:0;font-family:'IBM Plex Sans',sans-serif;color:#142236;background:#F4F8FA}
 a{color:#1F6674}a:hover{color:#0F2B52}
-.top{display:flex;flex-wrap:wrap;align-items:center;gap:24px;padding:10px 32px;background:#fff;border-bottom:1px solid #E1E4E0}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:24px;padding:10px 32px;background:#fff;border-bottom:1px solid #E2EAF0}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}.brand img{display:block}
-.prod{margin-left:4px;padding-left:12px;border-left:1px solid #E1E4E0;font-weight:600;font-size:15px;color:#0F2B52}
+.prod{margin-left:4px;padding-left:12px;border-left:1px solid #E2EAF0;font-weight:600;font-size:15px;color:#0F2B52}
 .nav{display:flex;flex-wrap:wrap;gap:4px}
-.nav a{color:#4A4F56;text-decoration:none;font-size:14px;padding:12px 14px;border-radius:6px}
+.nav a{color:#435163;text-decoration:none;font-size:14px;padding:12px 14px;border-radius:6px}
 .nav a:hover{color:#0F2B52;background:#EEF2F6}
 .nav a.on{color:#0F2B52;background:#EEF2F6;font-weight:600;box-shadow:inset 0 -3px 0 #C37841}
 .wrap{max-width:1280px;margin:0 auto;padding:32px}
-.card{background:#fff;border:1px solid #E1E4E0;border-radius:10px}
+.card{background:#fff;border:1px solid #E2EAF0;border-radius:14px;box-shadow:0 1px 2px rgba(15,43,82,.04),0 6px 18px rgba(15,43,82,.06)}
 .mono{font-family:'IBM Plex Mono',monospace}
-.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5B6169;font-weight:600}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#1F6674;font-weight:600}
 .chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
-.crit{background:#FDECEA;color:#9B1C12}.warn{background:#FDF0E3;color:#8A3505}.ok{background:#E7F3EC;color:#1D6B3F}.info{background:#E3F0F2;color:#1F6674}.muted{background:#EEF0ED;color:#4A4F56}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;text-decoration:none;border:1px solid #C9CDD2;background:#fff;color:#16191D;cursor:pointer;box-sizing:border-box}
+.crit{background:#FDECEA;color:#9B1C12}.warn{background:#FDF0E3;color:#8A3505}.ok{background:#E7F3EC;color:#1D6B3F}.info{background:#E3F0F2;color:#1F6674}.muted{background:#EDF2F6;color:#435163}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;text-decoration:none;border:1px solid #C7D2DD;background:#fff;color:#142236;cursor:pointer;box-sizing:border-box}
 .btn.primary{background:#0F2B52;border-color:#0F2B52;color:#fff}
 .btn.primary:hover{background:#0A1F3D;color:#fff}
 .btn.sm{min-height:36px;padding:0 12px;font-size:13px}
-.tab{min-height:48px;padding:0 20px;border:0;border-bottom:3px solid transparent;background:none;font:600 15px 'IBM Plex Sans',sans-serif;color:#5B6169;cursor:pointer}
-.tab.on{color:#16191D;border-bottom-color:#0F2B52}
+.tab{min-height:48px;padding:0 20px;border:0;border-bottom:3px solid transparent;background:none;font:600 15px 'IBM Plex Sans',sans-serif;color:#5A6878;cursor:pointer}
+.tab.on{color:#0F2B52;border-bottom-color:#1F6674}
 .node{padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600;line-height:1.3}
-.n-root{background:#F4F5F3;border:1px solid #C9CDD2}
-.n-mech{background:#E3F0F2;border:1px solid #BBD8DD;color:#0A1F3D}
+.n-root{background:#F2F6F9;border:1px solid #C7D2DD}
+.n-mech{background:#E3F0F2;border:1px solid #9FCAD1;color:#1F6674}
 .n-def{background:#FDECEA;border:1px solid #F3C5C0;color:#7E160E}
-.arrow{color:#5B6169;font-size:18px}
-.big{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:#F4F5F3;border-radius:8px;flex:1 1 180px}
+.arrow{color:#5A6878;font-size:18px}
+.big{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:#EFF6F8;border-radius:8px;flex:1 1 180px}
 .zc .v{font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:500}
-.zc .l{font-size:13px;color:#4A4F56}
-.spark .band{fill:#E7F3EC}.spark .near{fill:#FDF0E3}.spark .win{fill:#16191D;opacity:.07}
+.zc .l{font-size:13px;color:#435163}
+.spark .band{fill:#E7F3EC}.spark .near{fill:#FDF0E3}.spark .win{fill:#142236;opacity:.07}
 .spark .lim{stroke:#B42318;stroke-width:1;stroke-dasharray:4 3}
 .spark .line{fill:none;stroke:#0F2B52;stroke-width:2;stroke-linejoin:round}
 .spark .lim{stroke-width:1.3}
-.cl{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A4F56;line-height:1}.cl.lt{color:#9B1C12;font-weight:500}.cl.pk{color:#16191D;font-weight:600}.cl.wl{color:#16191D;font-weight:500}.cl.lg{font-size:12px}
-.spark .lt{fill:#9B1C12;font-weight:500}.spark .pk{fill:#16191D;font-weight:500}
-.zc .band{fill:#E7F3EC}.zc .near{fill:#FDF0E3}.zc .win{fill:#16191D;opacity:.06}
-.zc .grid{stroke:#EEF0ED;stroke-width:1}.zc .axis{stroke:#C9CDD2;stroke-width:1}
+.cl{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#435163;line-height:1}.cl.lt{color:#9B1C12;font-weight:500}.cl.pk{color:#142236;font-weight:600}.cl.wl{color:#142236;font-weight:500}.cl.lg{font-size:12px}
+.spark .lt{fill:#9B1C12;font-weight:500}.spark .pk{fill:#142236;font-weight:500}
+.zc .band{fill:#E7F3EC}.zc .near{fill:#FDF0E3}.zc .win{fill:#142236;opacity:.06}
+.zc .grid{stroke:#EDF2F6;stroke-width:1}.zc .axis{stroke:#C7D2DD;stroke-width:1}
 .zc .lim{stroke:#B42318;stroke-width:1.2;stroke-dasharray:5 4}
 .zc .line{fill:none;stroke:#0F2B52;stroke-width:2;stroke-linejoin:round}
 .zc circle{fill:#fff;stroke:#0F2B52;stroke-width:1.5}.zc circle:hover{fill:#0F2B52}
-.zc text{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:#5B6169}
-.zc .lt{fill:#9B1C12;font-weight:500}.zc .pk{fill:#16191D;font-weight:600;font-size:12px}.zc .wl{fill:#16191D;font-weight:500}
+.zc text{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:#5A6878}
+.zc .lt{fill:#9B1C12;font-weight:500}.zc .pk{fill:#142236;font-weight:600;font-size:12px}.zc .wl{fill:#142236;font-weight:500}
 .mx{display:grid;grid-template-columns:minmax(120px,0.8fr) 1fr 1fr;gap:8px;font-size:13px}
-.mx .h{font-weight:600;color:#5B6169;padding:4px 8px;display:flex;align-items:center}
+.mx .h{font-weight:600;color:#5A6878;padding:4px 8px;display:flex;align-items:center}
 .mx .c{border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
 .mx .n{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500}
 .mx .t{font-weight:600;font-size:14px}
-.mx .s{color:#4A4F56;font-size:12.5px}
-.seg{min-height:36px;padding:0 12px;border:1px solid #C9CDD2;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#4A4F56;cursor:pointer}
-.stf{min-height:36px;padding:0 14px;border:1px solid #C9CDD2;border-radius:999px;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#4A4F56;cursor:pointer}.stf.on{background:#0F2B52;border-color:#0F2B52;color:#fff}
-.seg.on{background:#0F2B52;border-color:#0F2B52;color:#fff}
+.mx .s{color:#435163;font-size:12.5px}
+.seg{min-height:36px;padding:0 12px;border:1px solid #C7D2DD;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#435163;cursor:pointer}
+.stf{min-height:36px;padding:0 14px;border:1px solid #C7D2DD;border-radius:999px;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#435163;cursor:pointer}.stf.on{background:#1F6674;border-color:#1F6674;color:#fff}
+.seg.on{background:#1F6674;border-color:#1F6674;color:#fff}
 .seg:first-child{border-radius:8px 0 0 8px}.seg:last-child{border-radius:0 8px 8px 0;margin-left:-1px}
-.brow{display:grid;grid-template-columns:120px 52px 1fr auto;align-items:center;gap:10px;width:100%;min-height:40px;padding:6px 10px;border:0;border-bottom:1px solid #EEF0ED;background:#fff;font:14px 'IBM Plex Sans',sans-serif;color:#16191D;text-align:left;cursor:pointer}
+.brow{display:grid;grid-template-columns:120px 52px 1fr auto;align-items:center;gap:10px;width:100%;min-height:40px;padding:6px 10px;border:0;border-bottom:1px solid #EDF2F6;background:#fff;font:14px 'IBM Plex Sans',sans-serif;color:#142236;text-align:left;cursor:pointer}
 .brow.on{background:#F1F7F8;box-shadow:inset 3px 0 0 #0F2B52}
-.pchain{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid #E1E4E0;border-radius:8px}
-.cbar{height:8px;border-radius:4px;background:#EEF0ED;overflow:hidden;flex:1 1 120px}
+.pchain{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid #E2EAF0;border-radius:8px}
+.cbar{height:8px;border-radius:4px;background:#EDF2F6;overflow:hidden;flex:1 1 120px}
 .cbar div{height:100%;background:#B42318;border-radius:4px}
 .kv{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px}
 </style>
 </head>
 <body>
-<div style="min-height: 100vh; background: #F4F5F3">
+<div style="min-height: 100vh; background: linear-gradient(180deg,#E9F3F6 0,#F4F8FA 360px)">
 <header class="top">
 <a class="brand" href="line-overview.html" aria-label="Abakai RCA Studio"><img src="data:image/png;base64,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" alt style="height: 36px"><img src="data:image/png;base64,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" alt="Abakai" style="height: 14px"><span class="prod">RCA Studio</span></a>
 <nav class="nav" aria-label="Main">
@@ -91,7 +91,7 @@ a{color:#1F6674}a:hover{color:#0F2B52}
 </div>
 
 
-<div aria-label="Defect" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E1E4E0">
+<div aria-label="Defect" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E2EAF0">
 <a class="tab on" href="rca-packet.html" style="display:inline-flex;align-items:center;text-decoration:none">Solder bridging · 61 boards</a>
 <a class="tab" href="rca-packet-open-circuit.html" style="display:inline-flex;align-items:center;text-decoration:none">Open circuit · 31 boards</a>
 </div>
@@ -107,10 +107,10 @@ a{color:#1F6674}a:hover{color:#0F2B52}
 <section style="display: flex; flex-direction: column; gap: 16px" aria-label="Top root cause chains">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Top root cause chains</h2>
-<div style="font-size: 14px; color: #5B6169">Each board with solder bridging gets its root cause chains from the RCA model and the Failure Library. Ranked by how many boards show each chain.</div>
+<div style="font-size: 14px; color: #5A6878">Each board with solder bridging gets its root cause chains from the RCA model and the Failure Library. Ranked by how many boards show each chain.</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px" role="group" aria-label="Filter chains by stage">
-<span style="font-size: 13px; font-weight: 600; color: #5B6169; margin-right: 4px">Stage</span>
+<span style="font-size: 13px; font-weight: 600; color: #5A6878; margin-right: 4px">Stage</span>
 <a class="stf on" href="rca-packet.html" style="display:inline-flex;align-items:center;text-decoration:none">All · 6</a>
 <a class="stf" href="rca-packet-stage-printing.html" style="display:inline-flex;align-items:center;text-decoration:none">Printing · 4</a>
 <button type="button" class="stf">Reflow · 2</button>
@@ -125,7 +125,7 @@ a{color:#1F6674}a:hover{color:#0F2B52}
 <span class="chip ok">Confirmed by Priya S.</span>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
-<div class="node n-root">High peak reflow temperature<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Reflow oven</div></div>
+<div class="node n-root">High peak reflow temperature<div style="font-size: 12px; font-weight: 400; color: #5A6878">Root cause · Reflow oven</div></div>
 <span class="arrow" aria-hidden="true">→</span>
 <div class="node n-mech">Excess reflow spreading<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
 <span class="arrow" aria-hidden="true">→</span>
@@ -135,10 +135,10 @@ a{color:#1F6674}a:hover{color:#0F2B52}
 <div class="big"><span class="v">44 of 61</span><span class="l">boards with solder bridging show this chain</span></div>
 <div class="big"><span class="v">38</span><span class="l">boards that passed AOI show this chain</span></div>
 </div>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EDF2F6; border-radius: 8px">
 <div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
 <span style="font-weight: 600; font-size: 15px">Built 02:00–02:40</span>
-<span style="font-size: 12px; color: #5B6169">Peak reflow temperature (°C) · 20-minute averages, spec band shaded</span>
+<span style="font-size: 12px; color: #5A6878">Peak reflow temperature (°C) · 20-minute averages, spec band shaded</span>
 </div>
 <div style="position: relative; flex: 0 0 300px; max-width: 100%">
 <svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Peak reflow temperature over the batch, with the window when this chain appeared" style="display: block; width: 100%; height: auto">
@@ -196,10 +196,10 @@ a{color:#1F6674}a:hover{color:#0F2B52}
 <span title="22:00 · 252 °C" style="position: absolute; left: 7.37%; top: 46.66%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="22:20 · 251.7 °C" style="position: absolute; left: 11.3%; top: 48.03%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="22:40 · 252.1 °C" style="position: absolute; left: 15.24%; top: 46.21%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="23:00 · 251.6 °C" style="position: absolute; left: 19.17%; top: 48.48%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="23:20 · 251.8 °C" style="position: absolute; left: 23.12%; top: 47.59%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="23:40 · 251.9 °C" style="position: absolute; left: 27.05%; top: 47.14%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="00:00 · 251.5 °C" style="position: absolute; left: 30.99%; top: 48.97%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="00:20 · 252 °C" style="position: absolute; left: 34.92%; top: 46.66%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="00:40 · 252 °C" style="position: absolute; left: 38.86%; top: 46.66%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="01:00 · 251.7 °C" style="position: absolute; left: 42.79%; top: 48.03%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="01:20 · 252.1 °C" style="position: absolute; left: 46.72%; top: 46.21%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="01:40 · 251.6 °C" style="position: absolute; left: 50.66%; top: 48.48%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="02:00 · 258.6 °C" style="position: absolute; left: 54.61%; top: 16.55%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="02:20 · 258.9 °C" style="position: absolute; left: 58.54%; top: 15.21%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="02:40 · 251.5 °C" style="position: absolute; left: 62.47%; top: 48.97%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="03:00 · 252 °C" style="position: absolute; left: 66.41%; top: 46.66%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="03:20 · 252 °C" style="position: absolute; left: 70.34%; top: 46.66%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="03:40 · 251.7 °C" style="position: absolute; left: 74.28%; top: 48.03%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="04:00 · 252.1 °C" style="position: absolute; left: 78.21%; top: 46.21%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="04:20 · 251.6 °C" style="position: absolute; left: 82.14%; top: 48.48%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="04:40 · 251.8 °C" style="position: absolute; left: 86.09%; top: 47.59%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="05:00 · 251.9 °C" style="position: absolute; left: 90.03%; top: 47.14%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="05:20 · 251.5 °C" style="position: absolute; left: 93.96%; top: 48.97%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span><span title="05:40 · 252 °C" style="position: absolute; left: 97.89%; top: 46.66%; width: 16px; height: 16px; transform: translate(-50%, -50%); border-radius: 50%; cursor: default"></span>
 <span class="cl lt lg" style="position: absolute; left: 99.74%; top: 31.62%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">USL 255 °C</span><span class="cl lt lg" style="position: absolute; left: 99.74%; top: 82.72%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">LSL 245 °C</span><span class="cl pk lg" style="position: absolute; left: 58.54%; top: 13.14%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">258.9 °C</span><span class="cl  lg" style="position: absolute; left: 6.58%; top: 79.97%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">245</span><span class="cl  lg" style="position: absolute; left: 6.58%; top: 57.17%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">250</span><span class="cl  lg" style="position: absolute; left: 6.58%; top: 34.38%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">255</span><span class="cl  lg" style="position: absolute; left: 6.58%; top: 11.55%; transform: translate(-100%, -78%); white-space: nowrap; pointer-events: none">260</span><span class="cl  lg" style="position: absolute; left: 7.37%; top: 92.41%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">22:00</span><span class="cl  lg" style="position: absolute; left: 19.17%; top: 92.41%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">23:00</span><span class="cl  lg" style="position: absolute; left: 30.99%; top: 92.41%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">00:00</span><span class="cl  lg" style="position: absolute; left: 42.79%; top: 92.41%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">01:00</span><span class="cl  lg" style="position: absolute; left: 54.61%; top: 92.41%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">02:00</span><span class="cl  lg" style="position: absolute; left: 66.41%; top: 92.41%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">03:00</span><span class="cl  lg" style="position: absolute; left: 78.21%; top: 92.41%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">04:00</span><span class="cl  lg" style="position: absolute; left: 90.03%; top: 92.41%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">05:00</span><span class="cl wl lg" style="position: absolute; left: 56.57%; top: 5.52%; transform: translate(-50%, -78%); white-space: nowrap; pointer-events: none">02:00–02:40</span>
 </div>
-<div style="font-size: 12px; color: #5B6169">Shaded green: spec window; grey: 02:00–02:40, when this chain appeared.</div>
+<div style="font-size: 12px; color: #5A6878">Shaded green: spec window; grey: 02:00–02:40, when this chain appeared.</div>
 </div>
 
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EDF2F6">
 <div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Corrective action: </span>Restore the approved reflow recipe; lock recipe changes behind sign-off.</div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <a class="btn" href="rca-packet-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
@@ -218,7 +218,7 @@ a{color:#1F6674}a:hover{color:#0F2B52}
 
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
-<div class="node n-root">Low squeegee angle<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
+<div class="node n-root">Low squeegee angle<div style="font-size: 12px; font-weight: 400; color: #5A6878">Root cause · Solder printer</div></div>
 <span class="arrow" aria-hidden="true">→</span>
 <div class="node n-mech">Aperture overfill<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
 <span class="arrow" aria-hidden="true">→</span>
@@ -228,10 +228,10 @@ a{color:#1F6674}a:hover{color:#0F2B52}
 <div class="big"><span class="v">14 of 61</span><span class="l">boards with solder bridging show this chain</span></div>
 <div class="big"><span class="v">7</span><span class="l">boards that passed AOI show this chain</span></div>
 </div>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EDF2F6; border-radius: 8px">
 <div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
 <span style="font-weight: 600; font-size: 15px">Built 23:10–00:20</span>
-<span style="font-size: 12px; color: #5B6169">Squeegee angle (°) · 20-minute averages, spec band shaded</span>
+<span style="font-size: 12px; color: #5A6878">Squeegee angle (°) · 20-minute averages, spec band shaded</span>
 </div>
 <div style="position: relative; flex: 0 0 300px; max-width: 100%">
 <svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Squeegee angle over the batch, with the window when this chain appeared" style="display: block; width: 100%; height: auto">
@@ -247,7 +247,7 @@ a{color:#1F6674}a:hover{color:#0F2B52}
 <a class="btn sm" href="rca-packet.html" style="display:inline-flex;align-items:center;text-decoration:none">Zoom</a>
 </div>
 
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EDF2F6">
 <div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Corrective action: </span>Replace the squeegee blade; check angle, speed and pressure against the recipe.</div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <a class="btn" href="rca-packet-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
@@ -269,7 +269,7 @@ a{color:#1F6674}a:hover{color:#0F2B52}
 
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
-<div class="node n-root">Low squeegee speed<div style="font-size: 12px; font-weight: 400; color: #5B6169">Root cause · Solder printer</div></div>
+<div class="node n-root">Low squeegee speed<div style="font-size: 12px; font-weight: 400; color: #5A6878">Root cause · Solder printer</div></div>
 <span class="arrow" aria-hidden="true">→</span>
 <div class="node n-mech">Aperture overfill<div style="font-size: 12px; font-weight: 400">Mechanism</div></div>
 <span class="arrow" aria-hidden="true">→</span>
@@ -279,10 +279,10 @@ a{color:#1F6674}a:hover{color:#0F2B52}
 <div class="big"><span class="v">7 of 61</span><span class="l">boards with solder bridging show this chain</span></div>
 <div class="big"><span class="v">4</span><span class="l">boards that passed AOI show this chain</span></div>
 </div>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EEF0ED; border-radius: 8px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 14px; border: 1px solid #EDF2F6; border-radius: 8px">
 <div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
 <span style="font-weight: 600; font-size: 15px">Built 23:10–00:20</span>
-<span style="font-size: 12px; color: #5B6169">Squeegee speed (mm/s) · 20-minute averages, spec band shaded</span>
+<span style="font-size: 12px; color: #5A6878">Squeegee speed (mm/s) · 20-minute averages, spec band shaded</span>
 </div>
 <div style="position: relative; flex: 0 0 300px; max-width: 100%">
 <svg class="spark" viewBox="0 0 300 84" width="300" height="84" role="img" aria-label="Squeegee speed over the batch, with the window when this chain appeared" style="display: block; width: 100%; height: auto">
@@ -298,7 +298,7 @@ a{color:#1F6674}a:hover{color:#0F2B52}
 <a class="btn sm" href="rca-packet.html" style="display:inline-flex;align-items:center;text-decoration:none">Zoom</a>
 </div>
 
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EEF0ED">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid #EDF2F6">
 <div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Corrective action: </span>Raise the speed to nominal (70 mm/s).</div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <a class="btn" href="rca-packet-boards.html" style="display:inline-flex;align-items:center;text-decoration:none">View boards</a>
@@ -321,40 +321,40 @@ a{color:#1F6674}a:hover{color:#0F2B52}
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">No root cause chain found · 3 boards</h2>
 </div>
-<div style="font-size: 14px; color: #4A4F56">AOI found solder bridging, but the model predicts no defect, so no chain was assigned.</div>
+<div style="font-size: 14px; color: #435163">AOI found solder bridging, but the model predicts no defect, so no chain was assigned.</div>
 </div>
 <div style="display: flex; flex-direction: column">
 
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EDF2F6; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0005451</a>
-<span class="mono" style="flex: 0 0 56px; color: #4A4F56">22:41</span>
+<span class="mono" style="flex: 0 0 56px; color: #435163">22:41</span>
 <span class="chip ok">Model prediction: no defect</span>
-<span style="flex: 1 1 240px; color: #4A4F56">AOI prediction: solder bridging</span>
+<span style="flex: 1 1 240px; color: #435163">AOI prediction: solder bridging</span>
 </div>
 
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EDF2F6; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0006244</a>
-<span class="mono" style="flex: 0 0 56px; color: #4A4F56">01:15</span>
+<span class="mono" style="flex: 0 0 56px; color: #435163">01:15</span>
 <span class="chip ok">Model prediction: no defect</span>
-<span style="flex: 1 1 240px; color: #4A4F56">AOI prediction: solder bridging</span>
+<span style="flex: 1 1 240px; color: #435163">AOI prediction: solder bridging</span>
 </div>
 
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EEF0ED; font-size: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 24px; border-top: 1px solid #EDF2F6; font-size: 14px">
 <a class="mono" href="board-detail.html" style="flex: 0 0 120px">PCB-0007351</a>
-<span class="mono" style="flex: 0 0 56px; color: #4A4F56">05:02</span>
+<span class="mono" style="flex: 0 0 56px; color: #435163">05:02</span>
 <span class="chip ok">Model prediction: no defect</span>
-<span style="flex: 1 1 240px; color: #4A4F56">AOI prediction: solder bridging</span>
+<span style="flex: 1 1 240px; color: #435163">AOI prediction: solder bridging</span>
 </div>
 
 </div>
-<div style="padding: 14px 24px 20px; border-top: 1px solid #EEF0ED; font-size: 14px; color: #4A4F56">These boards are on the proposed hold list. Check the AOI images; if the defect is real, its cause is not among the model's inputs.</div>
+<div style="padding: 14px 24px 20px; border-top: 1px solid #EDF2F6; font-size: 14px; color: #435163">These boards are on the proposed hold list. Check the AOI images; if the defect is real, its cause is not among the model's inputs.</div>
 </section>
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px" aria-label="Model vs inspection">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Model vs AOI · solder bridging</h2>
-<div style="font-size: 14px; color: #5B6169">All 2,560 boards in stg-B0003, by model prediction and AOI result.</div>
+<div style="font-size: 14px; color: #5A6878">All 2,560 boards in stg-B0003, by model prediction and AOI result.</div>
 </div>
 <span class="chip ok">Agreement 98%</span>
 </div>
@@ -365,7 +365,7 @@ a{color:#1F6674}a:hover{color:#0F2B52}
 <div class="c" style="background: #FFF8F7; border: 1px solid #F3C5C0"><span class="n">45</span><span class="t">Proposed hold</span><span class="s">Passed AOI</span></div>
 <span class="h">Model prediction: no defect</span>
 <div class="c" style="background: #FFFAF4; border: 1px solid #F1D3B5"><span class="n">3</span><span class="t">Proposed hold</span><span class="s">No root cause chain found</span></div>
-<div class="c" style="background: #F4F5F3; border: 1px solid #E1E4E0"><span class="n">2,454</span><span class="t">Agree: no defect</span><span class="s">&nbsp;</span></div>
+<div class="c" style="background: #F2F6F9; border: 1px solid #E2EAF0"><span class="n">2,454</span><span class="t">Agree: no defect</span><span class="s">&nbsp;</span></div>
 </div>
 </section>
 </div>
@@ -374,7 +374,7 @@ a{color:#1F6674}a:hover{color:#0F2B52}
 
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; border-color: #F3C5C0">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 18px; font-weight: 600">Proposed hold list</h2><div style="display: flex; flex-wrap: wrap; gap: 6px"><span class="chip crit">48 proposed hold</span></div></div>
-<div style="font-size: 13px; color: #5B6169">Boards where the RCA model and AOI disagree.</div>
+<div style="font-size: 13px; color: #5A6878">Boards where the RCA model and AOI disagree.</div>
 <div style="font-size: 14px; line-height: 1.5">48 boards proposed for hold: 45 passed AOI but the model predicts solder bridging, and 3 failed AOI but the model predicts no defect.</div>
 <a class="btn" href="proposed-hold-list.html">Open proposed hold list</a>
 </section>
