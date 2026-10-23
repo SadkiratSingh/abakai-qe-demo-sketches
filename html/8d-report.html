@@ -62,9 +62,10 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <a href="rca-packet.html" style="font-size: 14px; text-decoration: none">← INV-0142 root cause analysis</a>
-<div class="eyebrow">8D-0142-A · Solder bridging · CTRL-BRD-A · stg-B0003 · Customer: [customer]</div>
+<div class="eyebrow">8D-0142 · Solder bridging · CTRL-BRD-A · stg-B0003 · Customer: [customer]</div>
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">8D report: solder bridging</h1>
-<div style="font-size: 14px; color: #4A4F56">Created automatically from INV-0142 on 15 Oct 2026, 06:05 · last updated 06:42</div>
+<div style="font-size: 15px; color: #4A4F56">Root cause chain: High peak reflow temperature → Excess reflow spreading → Solder bridging (chain #1 in INV-0142)</div>
+<div style="font-size: 14px; color: #4A4F56">Created from INV-0142 on 15 Oct 2026, 06:42 · last updated 06:50</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <button class="btn" type="button">Send for review</button>
@@ -73,10 +74,6 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 </div>
 </div>
 
-<div aria-label="8D reports for INV-0142" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E1E4E0">
-<a class="tab on" href="8d-report.html" style="display:inline-flex;align-items:center;text-decoration:none">8D-0142-A · Solder bridging</a>
-<a class="tab" href="8d-report-open-circuit.html" style="display:inline-flex;align-items:center;text-decoration:none">8D-0142-B · Open circuit</a>
-</div>
 
 
 
@@ -100,19 +97,15 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 
 <a class="step" href="#d8"><span>D8 Closure</span><span class="chip muted">Not started</span></a>
 
-<div style="margin-top: 8px; padding: 12px; font-size: 13px; color: #5B6169; line-height: 1.5; border-top: 1px solid #EEF0ED">4 of 8 steps filled from the investigation. Steps update as chains are confirmed and data comes in.</div>
+<div style="margin-top: 8px; padding: 12px; font-size: 13px; color: #5B6169; line-height: 1.5; border-top: 1px solid #EEF0ED">3 of 8 steps filled from the investigation. Steps update as data comes in.</div>
 </nav>
 <section class="card" style="padding: 18px 20px; display: flex; flex-direction: column; gap: 10px" aria-label="Updates">
 <h2 style="margin: 0; font-size: 15px; font-weight: 600">Updates</h2>
 <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
 
-<li style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #EEF0ED; font-size: 13px; line-height: 1.45"><span class="mono" style="color: #5B6169; flex: none">06:05</span><span>Created from INV-0142: D2, D3 and D7 filled.</span></li>
+<li style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #EEF0ED; font-size: 13px; line-height: 1.45"><span class="mono" style="color: #5B6169; flex: none">06:42</span><span>Created from INV-0142 for chain #1, confirmed by Priya S.: D2, D4 and D7 filled.</span></li>
 
-<li style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #EEF0ED; font-size: 13px; line-height: 1.45"><span class="mono" style="color: #5B6169; flex: none">06:20</span><span>D3: 48 boards added from the proposed hold list.</span></li>
-
-<li style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #EEF0ED; font-size: 13px; line-height: 1.45"><span class="mono" style="color: #5B6169; flex: none">06:42</span><span>D4 and D5: chain #1 confirmed by Priya S.</span></li>
-
-<li style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #EEF0ED; font-size: 13px; line-height: 1.45"><span class="mono" style="color: #5B6169; flex: none">Next</span><span>D4 and D5 update when chains #2 and #3 are confirmed or rejected.</span></li>
+<li style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #EEF0ED; font-size: 13px; line-height: 1.45"><span class="mono" style="color: #5B6169; flex: none">06:50</span><span>D3: 38 boards added from the proposed hold list.</span></li>
 
 </ol>
 </section>
@@ -128,8 +121,6 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 
 <tr><td>Reflow process engineer</td><td><span style="color: #8A3505">[add name]</span></td></tr>
 
-<tr><td>Printing process engineer</td><td><span style="color: #8A3505">[add name]</span></td></tr>
-
 <tr><td>Line 2 supervisor</td><td><span style="color: #8A3505">[add name]</span></td></tr>
 
 </tbody>
@@ -138,7 +129,7 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 
 <section id="d2" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D2 · Problem description</h2><span class="chip ok">Auto-filled</span></div>
-<div class="field" style="display: flex; flex-direction: column; gap: 8px"><span>On the night shift of 15 Oct 2026, 61 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 had solder bridging at AOI.</span><span>44 of them were built 02:00–02:40 and 14 during 23:10–00:20. The other two batches on line 2 that night, stg-B0001 and stg-B0002, had 3 and 2 boards with solder bridging, which is normal for this line.</span><span>The same batch also had 31 boards with open circuit, covered in 8D-0142-B.</span></div>
+<div class="field" style="display: flex; flex-direction: column; gap: 8px"><span>On the night shift of 15 Oct 2026, 61 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 had solder bridging at AOI.</span><span>44 of them were built 02:00–02:40, when the peak reflow temperature was above spec. This report covers those boards.</span><span>The other two batches on line 2 that night, stg-B0001 and stg-B0002, had 3 and 2 boards with solder bridging, which is normal for this line.</span></div>
 <span class="src">From INV-0142 and AOI results</span>
 </section>
 
@@ -148,11 +139,11 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 <thead><tr><th>Boards</th><th>Where</th><th>Action</th><th>Status</th></tr></thead>
 <tbody>
 
-<tr><td>61 boards with solder bridging at AOI</td><td style="color: #4A4F56">Post-AOI inspection</td><td>Rework or scrap per MRB</td><td><span class="chip info">Waiting for MRB</span></td></tr>
+<tr><td>44 boards with solder bridging at AOI, built 02:00–02:40</td><td style="color: #4A4F56">Post-AOI inspection</td><td>Rework or scrap per MRB</td><td><span class="chip info">Waiting for MRB</span></td></tr>
 
-<tr><td>48 boards on the proposed hold list: 45 passed AOI but the model predicts solder bridging; 3 failed AOI but the model predicts no defect</td><td style="color: #4A4F56">Post-AOI inspection</td><td>Hold; re-inspect the 45 with X-ray and check the AOI images of the 3</td><td><span class="chip warn">Needs decision</span></td></tr>
+<tr><td>38 boards on the proposed hold list: passed AOI, but the model predicts solder bridging, built 02:00–02:40</td><td style="color: #4A4F56">Post-AOI inspection</td><td>Hold; confirm with X-ray, then rework</td><td><span class="chip warn">Needs decision</span></td></tr>
 
-<tr><td>Other batches through line 2 during 23:10–00:20 and 02:00–02:40</td><td style="color: #4A4F56">–</td><td>None found</td><td><span class="chip ok">Checked</span></td></tr>
+<tr><td>Other batches through line 2 during 02:00–02:40</td><td style="color: #4A4F56">–</td><td>None found</td><td><span class="chip ok">Checked</span></td></tr>
 
 </tbody>
 </table>
@@ -160,26 +151,16 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 </section>
 
 <section id="d4" class="card sec">
-<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D4 · Root cause</h2><span class="chip ok">1 of 3 chains confirmed</span></div>
-<div class="eyebrow">Occurrence · confirmed root cause chains</div>
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D4 · Root cause</h2><span class="chip ok">Confirmed</span></div>
+<div class="eyebrow">Occurrence · confirmed root cause chain</div>
 
 <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border: 1px solid #B7CBEA; border-radius: 8px; background: #F5F8FD">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><div class="node n-root">High peak reflow temperature</div><span style="color: #5B6169">→</span><div class="node n-mech">Excess reflow spreading</div><span style="color: #5B6169">→</span><div class="node n-def">Solder bridging</div><span class="chip ok" style="margin-left: auto">Confirmed by Priya S.</span></div>
 <div style="font-size: 14px; color: #4A4F56">44 of 61 boards with solder bridging, built 02:00–02:40. Peak reflow temperature 257.9–259.8 °C (spec 245–255 °C).</div>
 </div>
 
-<div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border: 1px solid #E1E4E0; border-radius: 8px; background: #fff">
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><div class="node n-root">Low squeegee angle</div><span style="color: #5B6169">→</span><div class="node n-mech">Aperture overfill</div><span style="color: #5B6169">→</span><div class="node n-def">Solder bridging</div><span class="chip muted" style="margin-left: auto">Not confirmed yet</span></div>
-<div style="font-size: 14px; color: #4A4F56">14 of 61 boards, built 23:10–00:20. Added here when confirmed in INV-0142.</div>
-</div>
-
-<div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border: 1px solid #E1E4E0; border-radius: 8px; background: #fff">
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><div class="node n-root">Low squeegee speed</div><span style="color: #5B6169">→</span><div class="node n-mech">Aperture overfill</div><span style="color: #5B6169">→</span><div class="node n-def">Solder bridging</div><span class="chip muted" style="margin-left: auto">Not confirmed yet</span></div>
-<div style="font-size: 14px; color: #4A4F56">7 of 61 boards, built 23:10–00:20. Added here when confirmed in INV-0142.</div>
-</div>
-
 <div class="eyebrow" style="margin-top: 4px">Escape · why inspection did not catch it</div>
-<div class="field">45 boards passed AOI although the model predicts solder bridging: 38 built 02:00–02:40 and 7 built 23:10–00:20. Bridges under the QFN may not be visible to AOI.</div>
+<div class="field">38 boards built 02:00–02:40 passed AOI although the model predicts solder bridging. Bridges under the QFN may not be visible to AOI.</div>
 <div class="need">Add: why the oven ran on the wrong profile for 40 minutes without an alarm.</div>
 </section>
 
@@ -191,22 +172,20 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 
 <tr style><td>Restore the approved reflow recipe; lock recipe changes behind sign-off.</td><td style="color: #4A4F56">Chain #1</td><td style="color: #8A3505">[add owner]</td><td style="color: #8A3505">[add date]</td></tr>
 
-<tr style="color: #8A9097"><td>Replace the squeegee blade; check angle, speed and pressure against the recipe.</td><td style="color: #4A4F56">Chain #2, when confirmed</td><td style="color: #8A3505"></td><td style="color: #8A3505"></td></tr>
-
 </tbody>
 </table>
-<span class="src">Corrective actions from the Failure Library for each confirmed chain</span>
+<span class="src">Corrective action from the Failure Library for the confirmed chain</span>
 </section>
 
 <section id="d6" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D6 · Verification</h2><span class="chip muted">Waiting for data</span></div>
-<div class="wait">After the D5 actions are done: chain #1 on new boards from line 2, and agreement between the model and AOI on the next [N] panels.</div>
+<div class="wait">After the D5 action is done: no high peak reflow temperature on new boards from line 2, and agreement between the model and AOI on the next [N] panels.</div>
 </section>
 
 <section id="d7" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D7 · Prevention</h2><span class="chip ok">Auto-filled</span></div>
 <ul class="field" style="margin: 0; padding-left: 32px; display: flex; flex-direction: column; gap: 6px">
-<li>Add a peak reflow temperature USL alarm on line 2.</li><li>Failure Library: chain #1 recorded for CTRL-BRD-A; high peak reflow temperature has now been confirmed in 5 investigations.</li>
+<li>Add a peak reflow temperature USL alarm on line 2.</li><li>Failure Library: high peak reflow temperature has now been confirmed in 5 investigations for CTRL-BRD-A.</li>
 </ul>
 </section>
 

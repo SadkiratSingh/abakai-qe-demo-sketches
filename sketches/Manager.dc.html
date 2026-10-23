@@ -121,7 +121,7 @@ class Component extends DCLogic {
       ['INV-0135', 'stg-I0092', 'Solder bridging', 'IO-BRD-B · Line 2', 'Wei C.', '9 d', 'High peak reflow temperature'],
       ['INV-0131', 'stg-C0198', 'Open circuit', 'PWR-BRD-C · Line 1', 'Marco L.', '12 d', 'High paste viscosity']
     ];
-    const eight = { 'INV-0142': '8D-0142-A, -B', 'INV-0139': '8D-0139-A', 'INV-0137': '8D-0137-A', 'INV-0135': '8D-0135-A', 'INV-0131': '8D-0131-A' };
+    const eight = { 'INV-0142': '8D-0142', 'INV-0139': '8D-0139', 'INV-0137': '8D-0137', 'INV-0135': '8D-0135', 'INV-0131': '8D-0131' };
     const invs = inv.map(r => ({ href: 'RcaPacket.dc.html', eightD: eight[r[0]] || '', id: r[0], batch: r[1], defects: r[2], prod: r[3], owner: r[4], age: r[5], causes: r[6] }));
     return { causes, invs };
   }

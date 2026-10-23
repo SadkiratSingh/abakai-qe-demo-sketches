@@ -66,6 +66,7 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 <a href="RcaPacket.dc.html" style="font-size: 14px; text-decoration: none">← INV-0142 root cause analysis</a>
 <div class="eyebrow">{{r.id}} · {{r.defect}} · CTRL-BRD-A · stg-B0003 · Customer: [customer]</div>
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">8D report: {{r.defectLower}}</h1>
+<div style="font-size: 15px; color: #4A4F56">Root cause chain: {{r.chainLine}}</div>
 <div style="font-size: 14px; color: #4A4F56">{{r.created}}</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
@@ -75,10 +76,6 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 </div>
 </div>
 
-<div role="tablist" aria-label="8D reports for INV-0142" style="display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid #E1E4E0">
-<button role="tab" class="{{tabA}}" aria-selected="{{isA}}" onClick="{{showSB}}">8D-0142-A · Solder bridging</button>
-<button role="tab" class="{{tabB}}" aria-selected="{{isB}}" onClick="{{showOC}}">8D-0142-B · Open circuit</button>
-</div>
 
 <sc-if value="{{exp}}" hint-placeholder-val="{{ false }}">
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px; border-color: #1A4F9C; box-shadow: 0 8px 24px rgba(22,25,29,.10)" aria-label="Export to customer template">
@@ -161,7 +158,7 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 
 <section id="d4" class="card sec">
 <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><h2>D4 · Root cause</h2><span class="{{r.d4cls}}">{{r.d4status}}</span></div>
-<div class="eyebrow">Occurrence · confirmed root cause chains</div>
+<div class="eyebrow">Occurrence · confirmed root cause chain</div>
 <sc-for list="{{r.chains}}" as="x" hint-placeholder-count="2">
 <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border: 1px solid {{x.border}}; border-radius: 8px; background: {{x.bg}}">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><div class="node n-root">{{x.root}}</div><span style="color: #5B6169">→</span><div class="node n-mech">{{x.mech}}</div><span style="color: #5B6169">→</span><div class="node n-def">{{r.defect}}</div><span class="{{x.cls}}" style="margin-left: auto">{{x.status}}</span></div>
@@ -183,7 +180,7 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 </sc-for>
 </tbody>
 </table>
-<span class="src">Corrective actions from the Failure Library for each confirmed chain</span>
+<span class="src">Corrective action from the Failure Library for the confirmed chain</span>
 </section>
 
 <section id="d6" class="card sec">
@@ -211,7 +208,7 @@ select{min-height:44px;padding:0 12px;border:1px solid #C9CDD2;border-radius:8px
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { d: 'a', exp: false };
+    this.state = { exp: false };
   }
   renderVals() {
     const S = {
@@ -221,91 +218,45 @@ class Component extends DCLogic {
     const steps = st => [['D1 Team', '#d1'], ['D2 Problem', '#d2'], ['D3 Containment', '#d3'], ['D4 Root cause', '#d4'], ['D5 Corrective action', '#d5'], ['D6 Verification', '#d6'], ['D7 Prevention', '#d7'], ['D8 Closure', '#d8']]
       .map((s, i) => ({ name: s[0], href: s[1], status: S[st[i]][0], cls: S[st[i]][1] }));
     const F = (field, from, st) => ({ field, from, status: { r: 'Ready', n: 'Needs input', d: 'Needs decision', w: 'Waiting for data', x: 'Not started' }[st], cls: st === 'r' ? 'chip ok' : (st === 'n' || st === 'd' ? 'chip warn' : 'chip muted') });
-    const R = {
-      a: {
-        id: '8D-0142-A', defect: 'Solder bridging', defectLower: 'solder bridging', insp: 'AOI',
-        created: 'Created automatically from INV-0142 on 15 Oct 2026, 06:05 · last updated 06:42',
+    const r = {
+        id: '8D-0142', defect: 'Solder bridging', defectLower: 'solder bridging', insp: 'AOI',
+        chainLine: 'High peak reflow temperature → Excess reflow spreading → Solder bridging (chain #1 in INV-0142)',
+        created: 'Created from INV-0142 on 15 Oct 2026, 06:42 · last updated 06:50',
         steps: steps(['need', 'ok', 'dec', 'ok', 'need', 'wait', 'ok', 'none']),
-        progress: '4 of 8 steps filled from the investigation. Steps update as chains are confirmed and data comes in.',
+        progress: '3 of 8 steps filled from the investigation. Steps update as data comes in.',
         log: [
-          { t: '06:05', e: 'Created from INV-0142: D2, D3 and D7 filled.' },
-          { t: '06:20', e: 'D3: 48 boards added from the proposed hold list.' },
-          { t: '06:42', e: 'D4 and D5: chain #1 confirmed by Priya S.' },
-          { t: 'Next', e: 'D4 and D5 update when chains #2 and #3 are confirmed or rejected.' }
+          { t: '06:42', e: 'Created from INV-0142 for chain #1, confirmed by Priya S.: D2, D4 and D7 filled.' },
+          { t: '06:50', e: 'D3: 38 boards added from the proposed hold list.' }
         ],
-        team: ['Reflow process engineer', 'Printing process engineer', 'Line 2 supervisor'],
-        problem: ['On the night shift of 15 Oct 2026, 61 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 had solder bridging at AOI.', '44 of them were built 02:00–02:40 and 14 during 23:10–00:20. The other two batches on line 2 that night, stg-B0001 and stg-B0002, had 3 and 2 boards with solder bridging, which is normal for this line.', 'The same batch also had 31 boards with open circuit, covered in 8D-0142-B.'],
+        team: ['Reflow process engineer', 'Line 2 supervisor'],
+        problem: ['On the night shift of 15 Oct 2026, 61 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 had solder bridging at AOI.', '44 of them were built 02:00–02:40, when the peak reflow temperature was above spec. This report covers those boards.', 'The other two batches on line 2 that night, stg-B0001 and stg-B0002, had 3 and 2 boards with solder bridging, which is normal for this line.'],
         contain: [
-          { what: '61 boards with solder bridging at AOI', where: 'Post-AOI inspection', action: 'Rework or scrap per MRB', status: 'Waiting for MRB', cls: 'chip info' },
-          { what: '48 boards on the proposed hold list: 45 passed AOI but the model predicts solder bridging; 3 failed AOI but the model predicts no defect', where: 'Post-AOI inspection', action: 'Hold; re-inspect the 45 with X-ray and check the AOI images of the 3', status: 'Needs decision', cls: 'chip warn' },
-          { what: 'Other batches through line 2 during 23:10–00:20 and 02:00–02:40', where: '–', action: 'None found', status: 'Checked', cls: 'chip ok' }
+          { what: '44 boards with solder bridging at AOI, built 02:00–02:40', where: 'Post-AOI inspection', action: 'Rework or scrap per MRB', status: 'Waiting for MRB', cls: 'chip info' },
+          { what: '38 boards on the proposed hold list: passed AOI, but the model predicts solder bridging, built 02:00–02:40', where: 'Post-AOI inspection', action: 'Hold; confirm with X-ray, then rework', status: 'Needs decision', cls: 'chip warn' },
+          { what: 'Other batches through line 2 during 02:00–02:40', where: '–', action: 'None found', status: 'Checked', cls: 'chip ok' }
         ],
-        d4status: '1 of 3 chains confirmed', d4cls: 'chip ok',
+        d4status: 'Confirmed', d4cls: 'chip ok',
         chains: [
-          { root: 'High peak reflow temperature', mech: 'Excess reflow spreading', status: 'Confirmed by Priya S.', cls: 'chip ok', border: '#B7CBEA', bg: '#F5F8FD', detail: '44 of 61 boards with solder bridging, built 02:00–02:40. Peak reflow temperature 257.9–259.8 °C (spec 245–255 °C).' },
-          { root: 'Low squeegee angle', mech: 'Aperture overfill', status: 'Not confirmed yet', cls: 'chip muted', border: '#E1E4E0', bg: '#fff', detail: '14 of 61 boards, built 23:10–00:20. Added here when confirmed in INV-0142.' },
-          { root: 'Low squeegee speed', mech: 'Aperture overfill', status: 'Not confirmed yet', cls: 'chip muted', border: '#E1E4E0', bg: '#fff', detail: '7 of 61 boards, built 23:10–00:20. Added here when confirmed in INV-0142.' }
+          { root: 'High peak reflow temperature', mech: 'Excess reflow spreading', status: 'Confirmed by Priya S.', cls: 'chip ok', border: '#B7CBEA', bg: '#F5F8FD', detail: '44 of 61 boards with solder bridging, built 02:00–02:40. Peak reflow temperature 257.9–259.8 °C (spec 245–255 °C).' }
         ],
-        escape: '45 boards passed AOI although the model predicts solder bridging: 38 built 02:00–02:40 and 7 built 23:10–00:20. Bridges under the QFN may not be visible to AOI.',
+        escape: '38 boards built 02:00–02:40 passed AOI although the model predicts solder bridging. Bridges under the QFN may not be visible to AOI.',
         escapeNeed: 'Add: why the oven ran on the wrong profile for 40 minutes without an alarm.',
         d5status: 'Needs input', d5cls: 'chip warn',
         actions: [
-          { action: 'Restore the approved reflow recipe; lock recipe changes behind sign-off.', for: 'Chain #1', owner: '[add owner]', due: '[add date]', style: '' },
-          { action: 'Replace the squeegee blade; check angle, speed and pressure against the recipe.', for: 'Chain #2, when confirmed', owner: '', due: '', style: 'color: #8A9097' }
+          { action: 'Restore the approved reflow recipe; lock recipe changes behind sign-off.', for: 'Chain #1', owner: '[add owner]', due: '[add date]', style: '' }
         ],
-        verify: 'After the D5 actions are done: chain #1 on new boards from line 2, and agreement between the model and AOI on the next [N] panels.',
+        verify: 'After the D5 action is done: no high peak reflow temperature on new boards from line 2, and agreement between the model and AOI on the next [N] panels.',
         d7status: 'Auto-filled', d7cls: 'chip ok',
-        prevent: ['Add a peak reflow temperature USL alarm on line 2.', 'Failure Library: chain #1 recorded for CTRL-BRD-A; high peak reflow temperature has now been confirmed in 5 investigations.'],
-        expSummary: '5 of 9 template fields ready.',
+        prevent: ['Add a peak reflow temperature USL alarm on line 2.', 'Failure Library: high peak reflow temperature has now been confirmed in 5 investigations for CTRL-BRD-A.'],
+        expSummary: '4 of 9 template fields ready.',
         map: [
           F('Team members', 'D1 Team', 'n'), F('Problem description', 'D2 Problem', 'r'), F('Containment actions and quantities', 'D3 Containment', 'd'),
-          F('Root cause: occurrence', 'D4 confirmed chains (1 of 3)', 'r'), F('Root cause: non-detection', 'D4 escape', 'r'), F('Permanent corrective actions', 'D5 Corrective action', 'n'),
+          F('Root cause: occurrence', 'D4 confirmed chain', 'r'), F('Root cause: non-detection', 'D4 escape', 'r'), F('Permanent corrective actions', 'D5 Corrective action', 'n'),
           F('Verification of effectiveness', 'D6 Verification', 'w'), F('Preventive actions', 'D7 Prevention', 'r'), F('Approval and closure', 'D8 Closure', 'x')
         ]
-      },
-      b: {
-        id: '8D-0142-B', defect: 'Open circuit', defectLower: 'open circuit', insp: 'electrical test',
-        created: 'Created automatically from INV-0142 on 15 Oct 2026, 06:05 · last updated 06:20',
-        steps: steps(['need', 'ok', 'dec', 'pend', 'pend', 'wait', 'ok', 'none']),
-        progress: '3 of 8 steps filled from the investigation. D4 and D5 fill in when a chain is confirmed in INV-0142.',
-        log: [
-          { t: '06:05', e: 'Created from INV-0142: D2, D3 and D7 filled.' },
-          { t: '06:20', e: 'D3: 33 boards added from the proposed hold list.' },
-          { t: 'Next', e: 'D4 and D5 update when chain #1 (high paste viscosity) is confirmed.' }
-        ],
-        team: ['Printing process engineer', 'Materials engineer', 'Line 2 supervisor'],
-        problem: ['On the night shift of 15 Oct 2026, 31 of 2,560 CTRL-BRD-A boards from batch stg-B0003 on SMT line 2 failed electrical test with open circuit.', '28 of them were built 03:40–04:30, all with paste lot [paste lot]. The other two batches on line 2 that night, stg-B0001 and stg-B0002, had 2 and 1 boards with open circuit, which is normal for this line.', 'The same batch also had 61 boards with solder bridging, covered in 8D-0142-A.'],
-        contain: [
-          { what: '31 boards with open circuit at electrical test', where: 'Post-electrical test inspection', action: 'Rework or scrap per MRB', status: 'Waiting for MRB', cls: 'chip info' },
-          { what: '33 boards on the proposed hold list: 30 passed electrical test but the model predicts open circuit; 3 failed electrical test but the model predicts no defect', where: 'Post-electrical test inspection', action: 'Hold; re-inspect the 30 and check the test logs of the 3', status: 'Needs decision', cls: 'chip warn' },
-          { what: 'Paste lot [paste lot] still on the line', where: 'Solder printer, line 2', action: 'Quarantine the lot', status: 'Needs decision', cls: 'chip warn' }
-        ],
-        d4status: 'Waiting for a confirmed chain', d4cls: 'chip muted',
-        chains: [
-          { root: 'High paste viscosity', mech: 'Poor paste transfer', status: 'Not confirmed yet', cls: 'chip muted', border: '#E1E4E0', bg: '#fff', detail: '28 of 31 boards with open circuit, built 03:40–04:30, paste lot [paste lot]. Added here when confirmed in INV-0142.' }
-        ],
-        escape: '30 boards passed electrical test although the model predicts open circuit, all built 03:40–04:30.',
-        escapeNeed: 'Add: why paste outside its viscosity spec reached the printer.',
-        d5status: 'Waiting for a confirmed chain', d5cls: 'chip muted',
-        actions: [
-          { action: 'Replace the paste; check paste age and floor life.', for: 'Chain #1, when confirmed', owner: '', due: '', style: 'color: #8A9097' }
-        ],
-        verify: 'After the D5 actions are done: chain #1 on new boards from line 2, and agreement between the model and electrical test on the next [N] panels.',
-        d7status: 'Auto-filled', d7cls: 'chip ok',
-        prevent: ['Check paste viscosity at incoming inspection for every lot.', 'Failure Library: high paste viscosity has been confirmed in 4 investigations.'],
-        expSummary: '3 of 9 template fields ready.',
-        map: [
-          F('Team members', 'D1 Team', 'n'), F('Problem description', 'D2 Problem', 'r'), F('Containment actions and quantities', 'D3 Containment', 'd'),
-          F('Root cause: occurrence', 'D4 confirmed chains (0 of 1)', 'w'), F('Root cause: non-detection', 'D4 escape', 'r'), F('Permanent corrective actions', 'D5 Corrective action', 'w'),
-          F('Verification of effectiveness', 'D6 Verification', 'w'), F('Preventive actions', 'D7 Prevention', 'r'), F('Approval and closure', 'D8 Closure', 'x')
-        ]
-      }
     };
-    const d = this.state.d;
     return {
-      r: R[d], exp: !!this.state.exp,
-      isA: d === 'a', isB: d === 'b', tabA: d === 'a' ? 'tab on' : 'tab', tabB: d === 'b' ? 'tab on' : 'tab',
-      showSB: () => this.setState({ d: 'a' }), showOC: () => this.setState({ d: 'b' }),
+      r, exp: !!this.state.exp,
       openExport: () => this.setState({ exp: true }), closeExport: () => this.setState({ exp: false })
     };
   }

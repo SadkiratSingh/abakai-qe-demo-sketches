@@ -89,7 +89,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <h1 style="margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">{{inv.title}}</h1>
 <sc-if value="{{inv.hasSub}}" hint-placeholder-val="{{ false }}"><div style="font-size: 15px; color: #4A4F56">{{inv.sub}}</div></sc-if>
 </div>
-<div style="display: flex; flex-wrap: wrap; gap: 8px"><a class="btn" href="Containment.dc.html">Proposed hold list</a><a class="btn primary" href="Report8D.dc.html">{{c.eightD}}</a></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><a class="btn" href="Containment.dc.html">Proposed hold list</a><sc-if value="{{c.has8D}}" hint-placeholder-val="{{ true }}"><a class="btn primary" href="Report8D.dc.html">{{c.eightD}}</a></sc-if></div>
 </div>
 
 <sc-if value="{{inv.hasTabs}}" hint-placeholder-val="{{ true }}">
@@ -205,6 +205,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 <div style="font-size: 14px; flex: 1 1 300px"><span style="font-weight: 600">Corrective action: </span>{{h.action}}</div>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <button class="btn" type="button" onClick="{{h.view}}">View boards</button>
+<sc-if value="{{h.has8D}}" hint-placeholder-val="{{ false }}"><a class="btn" href="Report8D.dc.html">{{c.eightD}}</a></sc-if>
 <sc-if value="{{h.open}}" hint-placeholder-val="{{ true }}">
 <button class="btn" type="button">Reject</button>
 <button class="btn primary" type="button" onClick="{{h.confirm}}">Confirm chain</button>
@@ -328,7 +329,7 @@ a{color:#1A4F9C}a:hover{color:#123A73}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { inv: '__INV__', tab: 'bridge', panel: -1, board: 4, confirmed: {}, showOther: false, zoom: -1, zr: 'all', stage: 'all' };
+    this.state = { inv: '__INV__', tab: 'bridge', panel: -1, board: 4, confirmed: { bridge0: true }, showOther: false, zoom: -1, zr: 'all', stage: 'all' };
   }
   // Small trend line for a chain card: parameter averages over the batch, spec band, near-limit zone and the window when the chain appeared.
   // Chart geometry for a parameter trend: 20-minute averages, spec band, near-limit zone, the window when the chain appeared,
@@ -439,7 +440,7 @@ class Component extends DCLogic {
         back: 'Line overview', backHref: 'Main.dc.html', batch: 'stg-B0003', hasTabs: true, times: night, assessed: '15 Oct 2026 06:05', date: '15 Oct',
         defects: {
           bridge: {
-            title: 'Solder bridging', defLower: 'solder bridging', eightD: '8D report · 8D-0142-A', loc: 'post-AOI inspection', K: 61, withChain: 58, insp: 'AOI', inspLower: 'AOI', record: 'AOI images', agree: '98%',
+            title: 'Solder bridging', defLower: 'solder bridging', eightD: '8D report · 8D-0142', loc: 'post-AOI inspection', K: 61, withChain: 58, insp: 'AOI', inspLower: 'AOI', record: 'AOI images', agree: '98%',
             mx: { conf: 58, hidden: 45, unexpl: 3, good: '2,454' }, hold: 45,
             top: [
               { key: 'reflow', k: 44, passed: 38, when: 'Built 02:00–02:40', spark: 'reflow', fix: 'reflow', panel: 'stg-B0003-P0374',
@@ -460,7 +461,7 @@ class Component extends DCLogic {
             none: [['PCB-0005451', '22:41', '0.3%'], ['PCB-0006244', '01:15', '0.2%'], ['PCB-0007351', '05:02', '0.4%']]
           },
           open: {
-            title: 'Open circuit', defLower: 'open circuit', eightD: '8D report · 8D-0142-B', loc: 'post-electrical test inspection', K: 31, withChain: 28, insp: 'Electrical test', inspLower: 'electrical test', record: 'electrical test logs', agree: '99%',
+            title: 'Open circuit', defLower: 'open circuit', loc: 'post-electrical test inspection', K: 31, withChain: 28, insp: 'Electrical test', inspLower: 'electrical test', record: 'electrical test logs', agree: '99%',
             mx: { conf: 28, hidden: 30, unexpl: 3, good: '2,499' }, hold: 30,
             top: [
               { key: 'visc', k: 28, passed: 30, when: 'Paste lot [paste lot] · built 03:40–04:30', spark: 'visc', fix: 'visc', panel: 'stg-B0003-P0462', support: 'Paste volume per aperture 0.033 mm³ (spec 0.036–0.044 mm³), below LSL. Supports poor paste transfer.',
@@ -512,7 +513,7 @@ class Component extends DCLogic {
     const cards = shown.map(({ h, i }) => {
       const p = P[h.key], conf = !!this.state.confirmed[tab + i], sp = S[h.spark], zoomed = this.state.zoom === i;
       return {
-        rank: i + 1, stage: 'Stage: ' + p.stage.toLowerCase(), cat: '5M+E: ' + p.cat.toLowerCase(), inSpec: !!h.inSpec, confirmed: conf, open: !conf,
+        rank: i + 1, has8D: !!d.eightD && tab === 'bridge' && i === 0, stage: 'Stage: ' + p.stage.toLowerCase(), cat: '5M+E: ' + p.cat.toLowerCase(), inSpec: !!h.inSpec, confirmed: conf, open: !conf,
         root: p.root, mech: p.mech, equip: p.equip, k: h.k, passed: h.passed, when: h.when,
         sparkSub: sp.sub, sparkLabel: p.param + ' over the batch, with the window when this chain appeared',
         sp: this.chart(sp, { W: 300, H: 84, padL: 0, padR: 0, padT: 16, padB: 18, i0: 0, i1: sp.vals.length - 1, t0: t0m, low: low(p), unit: p.unit }),
@@ -557,7 +558,7 @@ class Component extends DCLogic {
     const n = d.top.length;
     const c = Object.assign({}, d, {
       summary: d.one ? T.summaryOne(d.withChain, d.K, d.defLower) : T.summary(d.withChain, d.K, d.defLower, n),
-      cards, hasMore: stg === 'all' && d.other.length > 0,
+      has8D: !!d.eightD, cards, hasMore: stg === 'all' && d.other.length > 0,
       toggleLabel: this.state.showOther ? 'Hide ' + d.other.length + ' more chains' : T.more(d.other.length, d.other.map(o => o.k), d.defLower),
       none: d.none.map(b => ({ id: b[0], time: b[1], pct: 'Model risk ' + b[2] })),
       noneWhy: T.noneWhy(d.insp, d.defLower), noneNext: T.noneNext(d.record),
