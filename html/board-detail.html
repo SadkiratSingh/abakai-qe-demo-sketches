@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Board detail · RCA Studio</title>
+<title>Board detail: proposed hold · RCA Studio</title>
 <!-- Static export of sketches/Board.dc.html. Regenerate from the sketches; do not edit by hand. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
@@ -36,6 +36,10 @@ td{padding:14px 16px;border-bottom:1px solid #EDF2F6;white-space:nowrap}
 .n-def{background:#FDECEA;border:1px solid #F3C5C0;color:#7E160E}
 .kv{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #EDF2F6;font-size:14px}
 .kv span:first-child{color:#5A6878}
+.pchain{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid #E2EAF0;border-radius:8px;background:#fff}
+.cbar{height:8px;border-radius:4px;background:#EDF2F6;overflow:hidden;flex:1 1 120px}
+.cbar div{height:100%;background:#B42318;border-radius:4px}
+.pk{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;font-size:14px;color:#435163}.pk b{color:#142236;font-weight:600}
 .attr2{display:grid;grid-template-columns:minmax(200px,1.4fr) 1fr 1fr 52px;align-items:center;gap:8px 0;font-size:13px}
 .attr2 .half{height:10px;background:#F2F6F9;display:flex}
 .attr2 .neg{justify-content:flex-end;border-right:1px solid #8794A3;border-radius:5px 0 0 5px}
@@ -93,7 +97,21 @@ td{padding:14px 16px;border-bottom:1px solid #EDF2F6;white-space:nowrap}
 <span aria-hidden="true" style="color: #5A6878">→</span>
 <div class="node n-def">Solder bridging</div>
 </div>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 14px"><span class="chip info">Top chain · same as chain #1 of INV-0142</span><span style="color: #435163">Reflow mechanism: excess reflow spreading · Printing mechanism: none</span></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 14px"><span class="chip info">Top chain · same as chain #1 of INV-0142</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; background: #FAFCFD; border: 1px solid #E2EAF0; border-radius: 10px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div class="pk"><span>Printing mechanism: <b>none</b></span></div><div class="pk"><span>Reflow mechanism: <b>excess reflow spreading</b></span></div>
+</div>
+<div class="eyebrow">Root cause chains on this board</div>
+
+<div class="pchain">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px"><span class="mono" style="font-weight: 500">#1</span><span style="font-weight: 600; font-size: 14px; flex: 1 1 260px">High peak reflow temperature → Excess reflow spreading → Solder bridging</span><span class="chip muted">Stage: reflow</span><span class="chip muted">5M+E: method</span></div>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 13px"><span style="color: #435163; white-space: nowrap">Contribution</span><div class="cbar"><div style="width: 84%"></div></div><span class="mono">84%</span></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 13px; color: #435163"><span>Peak reflow temperature 259.4 °C (spec 245–255 °C)</span><span class="chip crit">Above USL</span></div>
+</div>
+
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Interpretation: </span>Top chain: reflow spreading from peak reflow temperature above USL. No other chain above the display threshold.</div>
+</div>
 <div class="eyebrow">Contribution by parameter</div>
 <div class="attr2">
 
@@ -241,13 +259,38 @@ td{padding:14px 16px;border-bottom:1px solid #EDF2F6;white-space:nowrap}
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px" aria-label="Same panel">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Same panel, stg-B0003-P0374</h2>
-<div style="font-size: 14px; color: #5A6878">Boards printed and reflowed together. One already failed AOI with bridging.</div>
+<div style="font-size: 14px; color: #5A6878">Boards printed and reflowed together.</div>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
-<div style="padding: 14px; border: 1px solid #F3C5C0; background: #FFF8F7; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 1 · PCB-0006612</span><span class="chip crit" style="align-self: flex-start">Solder bridging at AOI</span></div>
-<div style="padding: 14px; border: 1px solid #F1D3B5; background: #FFFAF4; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 2 · PCB-0006613</span><span class="chip warn" style="align-self: flex-start">Proposed hold</span></div>
-<div style="padding: 14px; border: 1px solid #F1D3B5; background: #FFFAF4; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 3 · PCB-0006614</span><span class="chip warn" style="align-self: flex-start">Proposed hold</span></div>
-<div style="padding: 14px; border: 2px solid #142236; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px; font-weight: 500">Slot 4 · PCB-0006615</span><span style="font-size: 13px; color: #435163">This board</span></div>
+
+<div style="padding: 14px; border-radius: 8px; display: flex; flex-direction: column; gap: 6px; border: 1px solid #F3C5C0; background: #FFF8F7">
+<a class="mono" href="board-detail-agree.html" style="font-size: 13px">Slot 1 · PCB-0006612</a>
+
+
+<span class="chip crit" style="align-self: flex-start">Solder bridging at AOI</span>
+</div>
+
+<div style="padding: 14px; border-radius: 8px; display: flex; flex-direction: column; gap: 6px; border: 1px solid #F1D3B5; background: #FFFAF4">
+
+<span class="mono" style="font-size: 13px">Slot 2 · PCB-0006613</span>
+
+<span class="chip warn" style="align-self: flex-start">Proposed hold</span>
+</div>
+
+<div style="padding: 14px; border-radius: 8px; display: flex; flex-direction: column; gap: 6px; border: 1px solid #F1D3B5; background: #FFFAF4">
+
+<span class="mono" style="font-size: 13px">Slot 3 · PCB-0006614</span>
+
+<span class="chip warn" style="align-self: flex-start">Proposed hold</span>
+</div>
+
+<div style="padding: 14px; border-radius: 8px; display: flex; flex-direction: column; gap: 6px; border: 2px solid #0F2B52; background: #fff">
+
+
+<span class="mono" style="font-size: 13px; font-weight: 500">Slot 4 · PCB-0006615 · this board</span>
+
+</div>
+
 </div>
 </section>
 </div>

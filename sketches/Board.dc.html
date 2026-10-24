@@ -39,6 +39,10 @@ td{padding:14px 16px;border-bottom:1px solid #EDF2F6;white-space:nowrap}
 .n-def{background:#FDECEA;border:1px solid #F3C5C0;color:#7E160E}
 .kv{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #EDF2F6;font-size:14px}
 .kv span:first-child{color:#5A6878}
+.pchain{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid #E2EAF0;border-radius:8px;background:#fff}
+.cbar{height:8px;border-radius:4px;background:#EDF2F6;overflow:hidden;flex:1 1 120px}
+.cbar div{height:100%;background:#B42318;border-radius:4px}
+.pk{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;font-size:14px;color:#435163}.pk b{color:#142236;font-weight:600}
 .attr2{display:grid;grid-template-columns:minmax(200px,1.4fr) 1fr 1fr 52px;align-items:center;gap:8px 0;font-size:13px}
 .attr2 .half{height:10px;background:#F2F6F9;display:flex}
 .attr2 .neg{justify-content:flex-end;border-right:1px solid #8794A3;border-radius:5px 0 0 5px}
@@ -59,25 +63,25 @@ td{padding:14px 16px;border-bottom:1px solid #EDF2F6;white-space:nowrap}
 </nav>
 <form role="search" style="margin-left: auto; display: flex; gap: 8px; align-items: center">
 <label for="serial" style="font-size: 13px; color: #5A6878">Board serial</label>
-<input id="serial" type="search" value="PCB-0006615" style="min-height: 40px; width: 180px; padding: 0 12px; border-radius: 8px; border: 1px solid #C7D2DD; background: #fff; color: #142236; font: 14px 'IBM Plex Mono', monospace">
+<input id="serial" type="search" value="{{b.id}}" style="min-height: 40px; width: 180px; padding: 0 12px; border-radius: 8px; border: 1px solid #C7D2DD; background: #fff; color: #142236; font: 14px 'IBM Plex Mono', monospace">
 </form>
 </header>
 <main class="wrap" style="display: flex; flex-direction: column; gap: 24px">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
 <div style="display: flex; flex-direction: column; gap: 8px">
-<a href="Containment.dc.html" style="font-size: 14px; text-decoration: none">← Proposed hold list · stg-B0003</a>
-<div class="eyebrow">CTRL-BRD-A · stg-B0003-P0374 · slot 4 · built 02:31, 15 Oct 2026</div>
+<a href="{{b.backHref}}" style="font-size: 14px; text-decoration: none">{{b.backText}}</a>
+<div class="eyebrow">CTRL-BRD-A · stg-B0003-P0374 · slot {{b.slot}} · built {{b.built}}, 15 Oct 2026</div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
-<h1 class="mono" style="margin: 0; font-size: 30px; font-weight: 500; letter-spacing: -0.01em">PCB-0006615</h1>
-<span class="chip crit">Proposed hold</span>
+<h1 class="mono" style="margin: 0; font-size: 30px; font-weight: 500; letter-spacing: -0.01em">{{b.id}}</h1>
+<span class="chip crit">{{b.statusChip}}</span>
 <span class="chip muted">Post-AOI inspection</span>
 </div>
 </div>
 </div>
 
-<section class="card" style="padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #F1D3B5; background: #FFFAF4">
-<span class="chip crit">Proposed hold</span>
-<div style="flex: 1 1 520px; font-size: 16px; line-height: 1.5">Passed AOI and electrical test, but the model predicts solder bridging. Peak reflow temperature was above USL (259.4 °C, spec 245–255 °C). Built 02:31, during 02:00–02:40: same root cause chain as chain #1 of INV-0142.</div>
+<section class="card" style="{{b.bannerStyle}}">
+<span class="{{b.bannerCls}}">{{b.bannerChip}}</span>
+<div style="flex: 1 1 520px; font-size: 16px; line-height: 1.5">{{b.banner}}</div>
 <a href="RcaPacket.dc.html" style="font-size: 14px; font-weight: 600">See batch analysis</a>
 </section>
 
@@ -86,7 +90,7 @@ td{padding:14px 16px;border-bottom:1px solid #EDF2F6;white-space:nowrap}
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px" aria-label="Why this board was flagged">
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">RCA packet</h2>
-<div style="display: flex; align-items: center; gap: 8px; font-size: 14px"><span style="color: #5A6878">Model prediction:</span><span class="chip crit">Solder bridging</span><span style="color: #5A6878">AOI prediction:</span><span class="chip ok">Pass</span></div>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 14px"><span style="color: #5A6878">Model prediction:</span><span class="chip crit">Solder bridging</span><span style="color: #5A6878">AOI prediction:</span><span class="{{b.aoiCls}}">{{b.aoi}}</span></div>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
 <div class="node n-root">High peak reflow temperature</div>
@@ -95,7 +99,21 @@ td{padding:14px 16px;border-bottom:1px solid #EDF2F6;white-space:nowrap}
 <span aria-hidden="true" style="color: #5A6878">→</span>
 <div class="node n-def">Solder bridging</div>
 </div>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 14px"><span class="chip info">Top chain · same as chain #1 of INV-0142</span><span style="color: #435163">Reflow mechanism: excess reflow spreading · Printing mechanism: none</span></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 14px"><span class="chip info">Top chain · same as chain #1 of INV-0142</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; background: #FAFCFD; border: 1px solid #E2EAF0; border-radius: 10px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<sc-for list="{{b.mechs}}" as="m" hint-placeholder-count="2"><div class="pk"><span>{{m.side}} mechanism: <b>{{m.name}}</b></span></div></sc-for>
+</div>
+<div class="eyebrow">Root cause chains on this board</div>
+<sc-for list="{{b.chains}}" as="x" hint-placeholder-count="2">
+<div class="pchain">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px"><span class="mono" style="font-weight: 500">#{{x.n}}</span><span style="font-weight: 600; font-size: 14px; flex: 1 1 260px">{{x.chain}}</span><span class="chip muted">{{x.stage}}</span><span class="chip muted">{{x.cat}}</span></div>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 13px"><span style="color: #435163; white-space: nowrap">Contribution</span><div class="cbar"><div style="width: {{x.contrib}}"></div></div><span class="mono">{{x.contrib}}</span></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 13px; color: #435163"><span>{{x.ev}}</span><span class="{{x.cls}}">{{x.status}}</span></div>
+</div>
+</sc-for>
+<div style="font-size: 14px; line-height: 1.5"><span style="font-weight: 600">Interpretation: </span>{{b.interp}}</div>
+</div>
 <div class="eyebrow">Contribution by parameter</div>
 <div class="attr2">
 <sc-for list="{{attrs}}" as="a" hint-placeholder-count="5">
@@ -105,8 +123,8 @@ td{padding:14px 16px;border-bottom:1px solid #EDF2F6;white-space:nowrap}
 <span class="mono" style="text-align: right">{{a.pct}}</span>
 </sc-for>
 </div>
-<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #F1F7F8; border: 1px solid #BBD8DD; border-radius: 8px"><span style="font-weight: 600">What-if: </span>with peak reflow temperature at nominal (250 °C), the model would predict no defect for this board.</div>
-<div style="font-size: 13px; color: #5A6878; line-height: 1.5; padding-top: 10px; border-top: 1px solid #EDF2F6">Contribution shows how much each parameter pushed the model towards predicting solder bridging for this board, compared with a typical in-spec board. Bars to the right raised it; bars to the left lowered it. Bridges under the QFN may not be visible to AOI.<br>Assessed 15 Oct 2026 06:05 · RCA model v2.0 · display threshold τ = 0.60</div>
+<div style="font-size: 14px; line-height: 1.5; padding: 12px 14px; background: #F1F7F8; border: 1px solid #BBD8DD; border-radius: 8px"><span style="font-weight: 600">What-if: </span>{{b.whatif}}</div>
+<div style="font-size: 13px; color: #5A6878; line-height: 1.5; padding-top: 10px; border-top: 1px solid #EDF2F6">Contribution shows how much each parameter pushed the model towards predicting solder bridging for this board, compared with a typical in-spec board. Bars to the right raised it; bars to the left lowered it.{{b.footExtra}}<br>Assessed 15 Oct 2026 06:05 · RCA model v2.0 · display threshold τ = 0.60</div>
 </section>
 
 <section class="card" style="overflow: hidden" aria-label="Parameter fingerprint">
@@ -143,13 +161,17 @@ td{padding:14px 16px;border-bottom:1px solid #EDF2F6;white-space:nowrap}
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px" aria-label="Same panel">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Same panel, stg-B0003-P0374</h2>
-<div style="font-size: 14px; color: #5A6878">Boards printed and reflowed together. One already failed AOI with bridging.</div>
+<div style="font-size: 14px; color: #5A6878">Boards printed and reflowed together.</div>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
-<div style="padding: 14px; border: 1px solid #F3C5C0; background: #FFF8F7; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 1 · PCB-0006612</span><span class="chip crit" style="align-self: flex-start">Solder bridging at AOI</span></div>
-<div style="padding: 14px; border: 1px solid #F1D3B5; background: #FFFAF4; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 2 · PCB-0006613</span><span class="chip warn" style="align-self: flex-start">Proposed hold</span></div>
-<div style="padding: 14px; border: 1px solid #F1D3B5; background: #FFFAF4; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px">Slot 3 · PCB-0006614</span><span class="chip warn" style="align-self: flex-start">Proposed hold</span></div>
-<div style="padding: 14px; border: 2px solid #142236; border-radius: 8px; display: flex; flex-direction: column; gap: 6px"><span class="mono" style="font-size: 13px; font-weight: 500">Slot 4 · PCB-0006615</span><span style="font-size: 13px; color: #435163">This board</span></div>
+<sc-for list="{{b.slots}}" as="s" hint-placeholder-count="4">
+<div style="{{s.style}}">
+<sc-if value="{{s.link}}" hint-placeholder-val="{{ true }}"><a class="mono" href="{{s.href}}" style="font-size: 13px">Slot {{s.n}} · {{s.id}}</a></sc-if>
+<sc-if value="{{s.plain}}" hint-placeholder-val="{{ false }}"><span class="mono" style="font-size: 13px">Slot {{s.n}} · {{s.id}}</span></sc-if>
+<sc-if value="{{s.self}}" hint-placeholder-val="{{ false }}"><span class="mono" style="font-size: 13px; font-weight: 500">Slot {{s.n}} · {{s.id}} · this board</span></sc-if>
+<sc-if value="{{s.hasChip}}" hint-placeholder-val="{{ true }}"><span class="{{s.cls}}" style="align-self: flex-start">{{s.chip}}</span></sc-if>
+</div>
+</sc-for>
 </div>
 </section>
 </div>
@@ -157,7 +179,7 @@ td{padding:14px 16px;border-bottom:1px solid #EDF2F6;white-space:nowrap}
 <aside style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 24px" aria-label="Decision and history">
 <section class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Disposition</h2>
-<div style="font-size: 14px; line-height: 1.5; padding: 12px; background: #F1F7F8; border: 1px solid #BBD8DD; border-radius: 8px"><span style="font-weight: 600">Suggested: </span>rework. Confirm the bridges under the QFN with X-ray first, then check joint fillets.</div>
+<div style="font-size: 14px; line-height: 1.5; padding: 12px; background: #F1F7F8; border: 1px solid #BBD8DD; border-radius: 8px"><span style="font-weight: 600">Suggested: </span>{{b.suggest}}</div>
 <div role="group" aria-label="Decision" style="display: flex; flex-direction: column; gap: 8px">
 <button type="button" class="{{reCls}}" onClick="{{pickRe}}">Rework</button>
 <button type="button" class="{{relCls}}" onClick="{{pickRel}}">Release</button>
@@ -198,15 +220,14 @@ td{padding:14px 16px;border-bottom:1px solid #EDF2F6;white-space:nowrap}
 </main>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1480}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1950}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { pick: null };
+    this.state = { pick: null, which: 'hold' };
   }
   renderVals() {
     const A = (name, val, v) => ({ name, val, pct: (v > 0 ? '+' : '−') + Math.abs(v) + '%', pos: v > 0 ? (v / 84 * 100) + '%' : '0%', neg: v < 0 ? (-v / 84 * 100) + '%' : '0%' });
-    const attrs = [A('Peak reflow temperature', '259.4 °C', 84), A('Squeegee speed', '71 mm/s', 4), A('Ambient temperature', '22.8 °C', 3), A('Stencil thickness', '100.4 µm', 1), A('Paste viscosity', '207 Pa·s', -2)];
     const P = (name, val, spec, v, lsl, usl, norm, unit) => {
       const span = usl - lsl;
       const pos = x => Math.max(2, Math.min(98, 25 + (x - lsl) / span * 50)) + '%';
@@ -214,26 +235,84 @@ class Component extends DCLogic {
       const nom = (lsl + usl) / 2, near = !out && Math.abs(v - nom) >= 0.8 * span / 2;
       return { name, val: val + ' ' + unit, spec, x: pos(v), normX: pos(norm), dot: out ? '#B42318' : (near ? '#C4620F' : '#1D6B3F'), cls: out ? 'chip crit' : (near ? 'chip warn' : 'chip ok'), state: out ? (v > usl ? 'Above USL' : 'Below LSL') : (near ? (v > nom ? 'Near USL' : 'Near LSL') : 'In spec') };
     };
-    const params = [
-      P('Peak reflow temperature', '259.4', '245–255 °C', 259.4, 245, 255, 251.8, '°C'),
-      P('Paste viscosity', '207', '180–220 Pa·s', 207, 180, 220, 206, 'Pa·s'),
-      P('Paste volume per aperture', '0.0391', '0.036–0.044 mm³', 0.0391, 0.036, 0.044, 0.0399, 'mm³'),
-      P('Stencil thickness', '100.4', '95–105 µm', 100.4, 95, 105, 100.4, 'µm'),
-      P('Squeegee speed', '71', '56–84 mm/s', 71, 56, 84, 70, 'mm/s'),
-      P('Ambient temperature', '22.8', '[your limit]', 22.8, 18, 28, 22.6, '°C')
-    ];
-    const history = [
-      { t: '02:29', e: 'Printed · SPI', s: 'Pass', cls: 'chip ok' },
-      { t: '02:30', e: 'Components placed', s: 'Pass', cls: 'chip ok' },
-      { t: '02:31', e: 'Reflow · peak 259.4 °C', s: 'Above USL', cls: 'chip crit' },
-      { t: '02:38', e: 'AOI', s: 'Pass', cls: 'chip ok' },
-      { t: '02:55', e: 'Electrical test', s: 'Pass', cls: 'chip ok' },
-      { t: '06:12', e: 'Added to the proposed hold list by INV-0142', s: 'Proposed hold', cls: 'chip warn' }
-    ];
+    // Root causes shown in the packet (same facts as the investigation screen)
+    const RC = {
+      reflow: { chain: 'High peak reflow temperature → Excess reflow spreading → Solder bridging', stage: 'Stage: reflow', cat: '5M+E: method', param: 'Peak reflow temperature', unit: '°C', spec: '245–255 °C', status: 'Above USL', cls: 'chip crit', short: 'reflow spreading from peak reflow temperature above USL' },
+      speedNear: { chain: 'Low squeegee speed (in spec, near LSL) → Aperture overfill → Solder bridging', stage: 'Stage: printing', cat: '5M+E: method', param: 'Squeegee speed', unit: 'mm/s', spec: '56–84 mm/s', status: 'Near LSL · in spec', cls: 'chip warn', short: 'aperture overfill from squeegee speed near LSL, in spec' }
+    };
+    const chains = list => list.map((c, i) => { const r = RC[c[0]]; return { n: i + 1, chain: r.chain, stage: r.stage, cat: r.cat, contrib: c[2] + '%', ev: r.param + ' ' + c[1] + ' ' + r.unit + ' (spec ' + r.spec + ')', status: r.status, cls: r.cls }; });
+    const interp = list => list.length > 1 ? 'Top chain: ' + RC[list[0][0]].short + '. Second: ' + RC[list[1][0]].short + '.' : 'Top chain: ' + RC[list[0][0]].short + '. No other chain above the display threshold.';
+    const box = 'padding: 14px; border-radius: 8px; display: flex; flex-direction: column; gap: 6px; ';
+    const crit = box + 'border: 1px solid #F3C5C0; background: #FFF8F7', warn = box + 'border: 1px solid #F1D3B5; background: #FFFAF4', self = box + 'border: 2px solid #0F2B52; background: #fff';
+    const slot = (n, id, chip, cls, style, href, isSelf) => ({ n, id, chip, cls, hasChip: !!chip, style: isSelf ? self : style, link: !isSelf && !!href, plain: !isSelf && !href, self: !!isSelf, href: href || '' });
+    const hc = [['reflow', '259.4', 84]];
+    const ac = [['reflow', '259.1', 78], ['speedNear', '58.1', 12]];
+    const B = {
+      hold: {
+        id: 'PCB-0006615', slot: 4, built: '02:31', backHref: 'Containment.dc.html', backText: '← Proposed hold list · stg-B0003',
+        statusChip: 'Proposed hold', bannerChip: 'Proposed hold', bannerCls: 'chip crit',
+        bannerStyle: 'padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #F1D3B5; background: #FFFAF4',
+        banner: 'Passed AOI and electrical test, but the model predicts solder bridging. Peak reflow temperature was above USL (259.4 °C, spec 245–255 °C). Built 02:31, during 02:00–02:40: same root cause chain as chain #1 of INV-0142.',
+        aoi: 'Pass', aoiCls: 'chip ok',
+        mechs: [{ side: 'Printing', name: 'none' }, { side: 'Reflow', name: 'excess reflow spreading' }],
+        chains: chains(hc), interp: interp(hc),
+        attrs: [A('Peak reflow temperature', '259.4 °C', 84), A('Squeegee speed', '71 mm/s', 4), A('Ambient temperature', '22.8 °C', 3), A('Stencil thickness', '100.4 µm', 1), A('Paste viscosity', '207 Pa·s', -2)],
+        whatif: 'with peak reflow temperature at nominal (250 °C), the model would predict no defect for this board.',
+        footExtra: ' Bridges under the QFN may not be visible to AOI.',
+        params: [
+          P('Peak reflow temperature', '259.4', '245–255 °C', 259.4, 245, 255, 251.8, '°C'),
+          P('Paste viscosity', '207', '180–220 Pa·s', 207, 180, 220, 206, 'Pa·s'),
+          P('Paste volume per aperture', '0.0391', '0.036–0.044 mm³', 0.0391, 0.036, 0.044, 0.0399, 'mm³'),
+          P('Stencil thickness', '100.4', '95–105 µm', 100.4, 95, 105, 100.4, 'µm'),
+          P('Squeegee speed', '71', '56–84 mm/s', 71, 56, 84, 70, 'mm/s'),
+          P('Ambient temperature', '22.8', '[your limit]', 22.8, 18, 28, 22.6, '°C')
+        ],
+        slots: [slot(1, 'PCB-0006612', 'Solder bridging at AOI', 'chip crit', crit, 'BoardAgree.dc.html'), slot(2, 'PCB-0006613', 'Proposed hold', 'chip warn', warn), slot(3, 'PCB-0006614', 'Proposed hold', 'chip warn', warn), slot(4, 'PCB-0006615', '', '', '', '', true)],
+        suggest: 'rework. Confirm the bridges under the QFN with X-ray first, then check joint fillets.',
+        history: [
+          { t: '02:29', e: 'Printed · SPI', s: 'Pass', cls: 'chip ok' },
+          { t: '02:30', e: 'Components placed', s: 'Pass', cls: 'chip ok' },
+          { t: '02:31', e: 'Reflow · peak 259.4 °C', s: 'Above USL', cls: 'chip crit' },
+          { t: '02:38', e: 'AOI', s: 'Pass', cls: 'chip ok' },
+          { t: '02:55', e: 'Electrical test', s: 'Pass', cls: 'chip ok' },
+          { t: '06:12', e: 'Added to the proposed hold list by INV-0142', s: 'Proposed hold', cls: 'chip warn' }
+        ]
+      },
+      agree: {
+        id: 'PCB-0006612', slot: 1, built: '02:31', backHref: 'RcaPacket.dc.html', backText: '← INV-0142 · boards with chain #1',
+        statusChip: 'Solder bridging at AOI', bannerChip: 'Model and AOI agree', bannerCls: 'chip info',
+        bannerStyle: 'padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-color: #BBD8DD; background: #F1F7F8',
+        banner: 'Failed AOI with solder bridging, and the model predicts solder bridging too. Peak reflow temperature was above USL (259.1 °C, spec 245–255 °C). Built 02:31, during 02:00–02:40: one of the 44 boards behind chain #1 of INV-0142.',
+        aoi: 'Solder bridging', aoiCls: 'chip crit',
+        mechs: [{ side: 'Printing', name: 'aperture overfill' }, { side: 'Reflow', name: 'excess reflow spreading' }],
+        chains: chains(ac), interp: interp(ac),
+        attrs: [A('Peak reflow temperature', '259.1 °C', 78), A('Squeegee speed', '58.1 mm/s', 12), A('Ambient temperature', '23.0 °C', 3), A('Stencil thickness', '100.2 µm', 1), A('Paste viscosity', '205 Pa·s', -2)],
+        whatif: 'with peak reflow temperature at nominal (250 °C), the model would predict no defect for this board; squeegee speed alone stays below the display threshold.',
+        footExtra: '',
+        params: [
+          P('Peak reflow temperature', '259.1', '245–255 °C', 259.1, 245, 255, 251.8, '°C'),
+          P('Paste viscosity', '205', '180–220 Pa·s', 205, 180, 220, 206, 'Pa·s'),
+          P('Paste volume per aperture', '0.0402', '0.036–0.044 mm³', 0.0402, 0.036, 0.044, 0.0399, 'mm³'),
+          P('Stencil thickness', '100.2', '95–105 µm', 100.2, 95, 105, 100.4, 'µm'),
+          P('Squeegee speed', '58.1', '56–84 mm/s', 58.1, 56, 84, 70, 'mm/s'),
+          P('Ambient temperature', '23.0', '[your limit]', 23.0, 18, 28, 22.6, '°C')
+        ],
+        slots: [slot(1, 'PCB-0006612', 'Solder bridging at AOI', 'chip crit', '', '', true), slot(2, 'PCB-0006613', 'Proposed hold', 'chip warn', warn), slot(3, 'PCB-0006614', 'Proposed hold', 'chip warn', warn), slot(4, 'PCB-0006615', 'Proposed hold', 'chip warn', warn, 'Board.dc.html')],
+        suggest: 'rework. The bridge is confirmed at AOI; rework, then re-run AOI.',
+        history: [
+          { t: '02:29', e: 'Printed · SPI', s: 'Pass', cls: 'chip ok' },
+          { t: '02:30', e: 'Components placed', s: 'Pass', cls: 'chip ok' },
+          { t: '02:31', e: 'Reflow · peak 259.1 °C', s: 'Above USL', cls: 'chip crit' },
+          { t: '02:38', e: 'AOI', s: 'Solder bridging', cls: 'chip crit' },
+          { t: '06:05', e: 'Matched to root cause chain #1 of INV-0142', s: 'Chain #1', cls: 'chip info' }
+        ]
+      }
+    };
+    const b = B[this.state.which] || B.hold;
     const pick = this.state.pick;
     const cls = (k, base) => 'btn' + (base ? ' ' + base : '') + (pick === k ? ' sel' : '');
     return {
-      attrs, params, history,
+      b, attrs: b.attrs, params: b.params, history: b.history,
       hasPick: !!pick,
       reCls: cls('re', 'primary'), relCls: cls('rel', ''), scrCls: cls('scr', 'danger'),
       pickRe: () => this.setState({ pick: 're' }),
